@@ -1,0 +1,14 @@
+.column {
+	max-width: 87%;
+	margin-top: 0px;
+	margin-bottom:7em;
+}
+
+.card{
+	height:340px;
+}
+
+#imgcss{
+	width:100%; 
+	height:250px
+}

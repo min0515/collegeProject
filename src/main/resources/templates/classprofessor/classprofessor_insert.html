@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/lms_layout">
+<head>
+</head>
+<body layout:fragment="content">
+	<form class="ui large form" method="POST" action="tbclassInsertRow" >
+		<div class="ui grid" style="margin-top: 5px; margin-bottom: 200px">
+			<div class="four wide column"></div>
+			<div class="eight wide column">
+				<h3 style="text-align: center;">수업등록</h3>
+
+				<div class="fluid ui labeled input">
+					<div class="ui label" style="width: 100px">수업번호</div>
+					<input type="text" name="class_no" id="class_no"
+						placeholder="수업번호" required="required">
+						<input type="hidden" class="confirmynfig" value="n">						
+					<button type="button" class="btn tbproconfig" style="width: 15%;">검색</button>
+				</div>
+				<div class="fluid ui labeled input" style="margin-top: 10px">
+					<div class="ui label" style="width: 100px">교수번호</div>
+					<input type="text" name="professor_no" id="professor_no" th:value="${professor.professor_no}" readonly="readonly">
+				</div>
+				<div class="fluid ui labeled input" style="margin-top: 10px">
+					<div class="ui label" style="width: 100px">학과번호</div>
+					<input type="text" name="department_no"  id="department_no" th:value="${professor.department_no}" readonly="readonly">
+				</div>
+				<p></p>
+			</div>
+			<div class="four wide column"></div>
+
+			<div class="sixteen wide column center aligned">
+				<button class="ui black button " type="submit">저장</button>
+				<button class="ui black basic button" type="button"
+					onclick="history.back(-1)">취소</button>
+			</div>
+
+			<div class="ui small modal professrClassNoConfirmyy">
+				<i class="close icon"></i>
+				<div class="header">수업번호중복확인</div>
+				<div class="image content">
+					<div class="ui">
+						<i class="exclamation icon"></i>
+					</div>
+					<div class="description">
+						<div class="ui header"></div>
+					</div>
+				</div>
+				<div class="actions">
+					<div class="ui positive left labeled icon button">
+						확인 <i class="checkmark icon"></i>
+					</div>
+					<div class="ui black deny button">닫기</div>
+				</div>
+			</div>
+
+		</div>
+	<div class="ui classyo search tinyabc modal">
+						<div class="header">수업검색</div>
+						<div class="scrolling content">
+							<div class="ui labeled input fluid" style="margin-bottom: 10px;">
+								<div class="ui label">선택</div>
+								<input type="text" id="classnnModalInput" placeholder="수업번호"
+									readonly="readonly">
+							</div>
+							<div>
+								<table id="classnoExample" class="display nowrap"
+									style="text-align: center;">
+									<thead>
+										<tr>
+											<th><h3>수업번호</h3></th>
+											<th><h3>수업이름</h3></th>
+											<th><h3>학과번호</h3></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="classpro : ${classpro}"
+											style="cursor: pointer;">
+											<td th:text="${classpro.class_no}"
+												th:value="${classpro.class_no}" id="classnoSelect"></td>
+											<td th:text="${classpro.class_name}"
+												th:value="${classpro.class_name}" id="classnoSelaect"></td>
+											<td th:text="${classpro.department_no}"
+											th:value="${classpro.department_no}" id="classnoSelaect"></td>												
+										</tr>
+										
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="actions" style="text-align:  center;">
+							<button type ="button" style="width: 20%;display: block;" class="ui primary cancel button deaprtno">중복확인</button>
+							<button type="button" style="width: 20%;display: none;" class="ui primary cancel buttonokay ">확인</button>
+							<button type="button" style="width: 20%; margin-right: 40px"
+								id="departmentSearchCancelBtn" class="ui cancel button">취소</button>
+						</div>
+					</div>
+		<div class="ui small modal professrClass_NoabcConfirmyy">
+				<i class="close icon"></i>
+				<div class="header">수업번호중복확인</div>
+				<div class="image content">
+					<div class="ui">
+						<i class="exclamation icon"></i>
+					</div>
+					<div class="description">
+						<div class="ui header"></div>
+					</div>
+				</div>
+				<div class="actions">
+					<div class="ui positive left labeled icon button" id="cccbbbb">
+						확인 <i class="checkmark icon"></i>
+					</div>
+					<div class="ui black deny button">닫기</div>
+				</div>
+			</div>
+
+	</form>
+</body>
+</html>

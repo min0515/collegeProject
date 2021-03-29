@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.lang}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/shopping_layout">
+<head>
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/shopping.css}">
+</th:block>
+	<script src="/js/aiappproject.js"></script>	
+	<script
+		src="https://cdn.tiny.cloud/1/1in9hzsqug5gwpl0vwku0rsdmw8w2equelp9j08kmfa49lxw/tinymce/5/tinymce.min.js"
+		referrerpolicy="origin"></script>
+</head>
+<body>
+<div layout:fragment="content">
+<form class="ui large form" method="POST" name="fileForm" action="goodsWriteSave" enctype="multipart/form-data"  data-parsley-validate="true">
+	<div class="ui grid center aligned">
+		<div class="five wide column">
+		
+			<div class="field center aligned" style="margin-top:30px">
+				<h3> 상품 입력 </h3>
+			</div>
+		
+			
+			<div class="field">
+				<div class="fluid ui left icon input">
+					<i class="file outline icon"></i>
+					<input type="text" name="g_title" placeholder="굿즈 이름을 입력하세요.">
+				</div>
+			</div>
+			
+			
+			<div class="field">
+				<div class="fluid ui left icon input">
+					<i class="won sign icon"></i>
+					<input type="text" name="g_price" placeholder="굿즈 가격을 입력하세요.">
+				</div>
+			</div>
+
+
+			<div class="field">
+					    <div id="fileUpload" class="dragAndDropDiv">파일 첨부</div>
+        <input type="file" name="fileUpload" id="fileUpload" style="display:none;" multiple/>
+
+			<div class="field">
+                <div class="fluid ui left icon input" style="height:150px">
+                     <textarea rows="8" placeholder="내용" name="g_content"></textarea>
+                </div>
+            </div>
+			
+			<div class="field" style="margin-top:70px">
+				<span><button type="submit" class="ui primary basic button" style="width:48%">저장</button></span>
+				<span><button type="button" class="ui negative basic button" onclick="location.href='index'" style="width:48%">취소</button></span>
+			</div>
+			
+		</div>
+		<div class="five wide column">
+		</div>
+		
+		<div class="ui modal">
+			<div class="header">Header</div>
+			<div class="image content">
+				<img class="image">
+				<div class="description">
+					<p></p>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	</div>
+</form>		
+</div>
+</body>
+</html>
+

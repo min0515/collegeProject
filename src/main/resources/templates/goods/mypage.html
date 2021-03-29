@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.lang}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/shopping_layout">
+<head>
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/shopping.css}">
+</th:block>
+<script src="/js/aiappproject.js"></script>
+<script
+	src="https://cdn.tiny.cloud/1/1in9hzsqug5gwpl0vwku0rsdmw8w2equelp9j08kmfa49lxw/tinymce/5/tinymce.min.js"
+	referrerpolicy="origin"></script>
+</head>
+<body>
+	<div class="ui four column grid left aligned" style="background-color:#F5F6F7" >
+		<div class="one wide column" style="background-color:#F5F6F7">
+			<div> </div>
+		</div>
+		<div class="three wide column" style="margin-top:50px; background-color:#F5F6F7">
+			<div id=mypageMenu>주문조회</div>
+			<div id=mypageMenu>위시 리스트</div>
+			<div id=mypageMenu>취소/교환/반품</div>
+			<div id=mypageMenu>쿠폰</div>
+			<div id=mypageMenu>1:1 문의</div>
+			<div id=mypageMenu>정보 수정</div>
+			<div id=mypageMenu>회원탈퇴</div>
+		</div>
+		<div class="ten wide column" style="background-color:#F5F6F7; margin-top:50px;">
+			<div id="mypageInfoBox">
+						<div id="boxtitle">주문상품정보</div>
+						<div class="ui ten wide column grid left aligned">
+							<div class="ui four wide column grid left aligned">
+								<div>누구누구님 안녕하세요</div>
+								<div>누적 구매금액: 0원</div>
+							</div>
+							<div class="ui five wide column grid left aligned">
+							</div>
+						</div>
+					</div>
+						
+					<div>주문번호: 2021032205123 <button>주문서</button></div> 
+					<div id="mypageListBox">
+						<div class="ui ten wide column grid left aligned">
+							<div class="ui four wide column grid left aligned">
+									
+							<div>사진 어쩌고</div>
+							</div>
+							<div class="ui five wide column grid left aligned">
+							</div>
+						</div>
+					</div>
+		
+			
+		
+			
+		</div>
+	</div>
+</body>
+</html>
+

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.lang}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/shopping_layout">
+<head>
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/shopping.css}">
+</th:block>
+<th:block layout:fragment="script">
+	<script type="text/javascript" th:src="@{/js/shopping.js}"></script>
+</th:block>
+<script src="/js/aiappproject.js"></script>
+<script
+	src="https://cdn.tiny.cloud/1/1in9hzsqug5gwpl0vwku0rsdmw8w2equelp9j08kmfa49lxw/tinymce/5/tinymce.min.js"
+	referrerpolicy="origin"></script>
+</head>
+<body>
+	<div layout:fragment="content">
+		<form class="ui large form" id="goodsDetailform" method="POST"
+			enctype="multipart/form-data" data-parsley-validate="true"
+			style="background-color: #F3F3F3; margin-top: 15px;">
+			<div class="ui sixteen wide column grid center aligned"
+				style="background-color: #FFFFFF;">
+				<div class="one wide column"></div>
+				<div class="six wide column">
+					<!-- 						<div class="fluid ui input" style="width: 500px; margin-top: 50px"> -->
+					<!-- 							<img th:src="${goods.g_attach}"> -->
+					<!-- Swiper -->
+					<div class="fluid ui swiper-container"
+						style="width: 500px; height: 500px">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide" style="width: 500px; height: 500px">
+								<img th:src="${goods.g_attach}" style="width: 500px">
+							</div>
+							<div class="swiper-slide" style="width: 500px; height: 500px">
+								<img src="images/xjawmffj2.png"
+									style="width: 500px; height: 500px">
+							</div>
+						</div>
+						<!-- Add Pagination -->
+						<div class="swiper-pagination"></div>
+						<!-- Add Arrows -->
+						<div class="swiper-button-next"></div>
+						<div class="swiper-button-prev"></div>
+					</div>
+				</div>
+
+				<div class="one wide column"></div>
+				<div class="six wide column"
+					style="height: 550px; text-align: left;">
+					<div th:text="${goods.g_seq}"
+						style="font-size: 25px; font: bold; margin-bottom: 25px; margin-top: 50px;"></div>
+					<input type="hidden" name="g_seq" th:value="${goods.g_seq}">
+					<div th:text="${goods.g_title}" id="goodstitleDetail"
+						style="font-size: 25px; font: bold; margin-bottom: 25px; margin-top: 50px;"></div>
+					<div th:text="${goods.g_price}+원"
+						style="font-size: 18px; margin-bottom: 20px"></div>
+					<hr align="left">
+					<div th:text="${goods.g_content}"
+						style="font-size: 14px; margin-top: 20px; margin-bottom: 20px"></div>
+					<div class="ui segment" style="background-color: #F8F8F8;">
+						<p>수량</p>
+						<hr align="left">
+						<Input type="number" id="qtyInputProdetail" name="qty" value="1"
+							style="width: 100px;" /><span th:text="${goods.g_price}+원"
+							style="display: right; font-size: 18px; float: right;"></span>
+					</div>
+					<input type="hidden" id="priceHiddenDetail"
+						th:value="${goods.g_price}" name="price">
+					<div style="margin-top: 30px; margin-bottom: 30px;">
+						<span id="detailTotalQty" th:text="상품금액"></span><span
+							id="goodsDetailTotalPrice" th:text="${goods.g_price}+원"
+							style="text-align: center; font-size: 18px; float: right;"></span>
+					</div>
+					<button class="ui button"
+						th:href="@{goodsDelivery(g_seq=${goods.g_seq})}">Follow</button>
+					<div class="ui vertical animated button" tabindex="0"
+						style="background-color: #FFFFFF; border: 1px solid;">
+						<div class="visible content">장바구니</div>
+						<div class="hidden content" id="detailCartGo">
+							<i class="shopping cart icon"></i>
+						</div>
+					</div>
+					<div class="ui animated fade button" tabindex="0"
+						style="background-color: #FFFFFF; border: 1px solid;">
+						<div class="visible content">찜하기</div>
+						<div class="hidden content">
+							<i class="heart icon"></i>
+						</div>
+					</div>
+				</div>
+				<div class="ui mini goodsdetailCart modal">
+					<div class="content">
+						<p>장바구니에 담겼습니다 장바구니로 이동하시겠습니까?</p>
+					</div>
+					<div class="actions">
+						<div class="ui primary button" id="cartGoBtn">예</div>
+						<div class="ui cancel button">아니요</div>
+					</div>
+				</div>
+			</div>
+			<div class="ui sixteen wide column">
+				<div class="ui five wide column" style="text-align: center;">
+					<div class="ui three item menu">
+						<a class="item flex"> 상품설명 </a> <a class="item active"> 후기 </a> <a
+							class="item"> Q&A </a>
+					</div>
+				</div>
+				<div class="ui five wide column" style="text-align: center;">
+					<div>안녕하세요 네이버 웨일 입니다😊 오늘은 벌써 2월 2일! 1월은 어디 가고 벌써 2월이 되었어요!
+
+
+
+						벌써 2021년의 12분의 1이 지나갔다니… 새해에는 코XX가 종식될 줄 알았는데 아직도 남아서 저희를 괴롭히네요..
+
+						(이제 좀 사라져라 ☹) 밖에 나가서 노는 것도 어렵고, 친구들도 보기 어려운 요즘. 이럴 때에는 정기적으로 귀여운
+						친구들을 봐줘야 해요! (오늘의 귀여움 충전하기!) 그래서 오늘도 준비한, 매일웨일해 체크인 이벤트의 최종 굿즈
+						제작기! 여태까지 귀여운 굿즈들을 많이 소개 드렸는데요? 벌써 오늘은 그 마지막 시간이랍니다! (저만 아쉬운 기분 드는
+						거 아니죠?) 대망의 마지막 굿즈 제작기 주인공은? 귀여움을 두배로 장착한 웨일의 핫앤쿨 텀블러입니다! 자 그럼
+						지금부터, 2020년 12월 20일 종료된 매일웨일해 체크인 이벤트의 찐 웨일러들의 굿즈! 웨일 텀블러 제작기를
+						공개합니다! 투표 초반부터 많은 분들의 압도적인 지지를 얻은 웨일 텀블러! 그 이유는 사진 한 장으로도 설명이 되는 것
+						같은데요? 귀여운 여름 웨일 옆에 귀여운 겨울 웨일이 뙇!!! 귀여운 여름과 겨울의 웨일이를 만들기 위해서 몇 번이나
+						샘플을 인쇄하고 또 인쇄했는데요! 웨일 팀이 많은 시간을 투자하고 투자해 가장 예쁜 버전의 텀블러를 선정했답니다!
+
+						(웨일팀의 피, 땀, 눈물이 담겼음요ㅠ) 우여곡절 끝에 탄생하게 된, 최종 웨일 텀블러! 여기서 끝이 아닙니다! 좀 더
+						나은 그립감과, 웨일러 만의 ‘멋’을 위하여 웨일이 텀블러 슬리브까지 제작했답니다! (웨일러들 행복 = 웨일 행복)
+
+
+
+
+						짜-잔 귀여운 웨일 텀블러 완성! (약간 고급 재질. 느낌 알지?) 뒷면과 앞면 모두에 귀여운 웨일이 있어서 귀여움이
+						두 배 라구요!!! ​(광광) 웨일러들의 노오오오력과 사랑이 담긴 굿즈! 얼른 받아 보실 수 있도록, 2월 1주차에
+						발송 예정이랍니다. 😉 최고의 완성도를 갖추느라고 발송일이 약~간 지연되었지만, 마음씨 좋은 웨일러들이 이해해 주실
+						것이라고 믿어오! (그쳐..? 그쳐? 이해해줘서 고마워오) 설마 매일웨일해 체크인 이벤트에 참여했는데, 당첨자 결과
+						확인을 깜빡하신 것은 아니겠죠? 이제 웨일 선물이 곧 집 앞으로 도착할 텐데, 아직 당첨되었는지 확인 해보시지 못했다면
+
+						지금 바로 당첨자인지 확인해 보세요! 당첨자 확인은 ‘네이버웨일 공식 블로그’에서 바로 확인 가능해요! 아래 링크
+						클릭하고 네이버 웨일 공식 블로그에서 최종 당첨자를 확인해 봅시다! 네이버 웨일 : 네이버 블로그 Why We
+						Whale #WWW blog.naver.com 귀여운 텀블러 이외에도 귀여운 굿즈 또 하나 준비했는데! 혹시 보고 싶은
+						사람 있나요~? (저요 저요 저요!!!!!!!) 뉴트로가 유행인 거 아시죠? 요즘 필름 카메라로 사진 찍고 인화해서
+						다꾸 하는게 또 대세라구~! 그래서 준비한 웨일 필름카메라를 공개합니다!!! 영롱한 민트 색상 카메라에, 웨일 필름까지
+						진짜 너무 귀엽죠,, (누가 이런거 보여주면 좋아할 줄 알아?? 안녕하세요 누가입니다.) ​ 필름 카메라로 사진 안
+						찍고 그냥 내 방 책상 위에만 올려 놓아도 너무 예쁠 것 같구.. 사진 찍어서 다꾸하면 더 예쁠 것 같죠 후하후하
+
+
+
+						출시하면 갖고 싶은 사람?!! (댓글로 당근을 달아주세오!) 또 빠질 수 없는, 네이버 인스타그램의 이벤트 소개!
+
+
+
+
+
+
+						펜로즈 계단에 갇힌 웨일이 보이시나요?! (ㄴ(O_O)ㄱ?!!!) 바로 정각병에 걸려서 할 일을 자꾸만 미루는
+						중이래요! 정각에 해야지 – 3분 지났네?! - 30분부터 해야지 – 앗 31분이네!!! - 정각부터 해야지… 공감되는
+						상황 아닌가요?! (지금 내가 그래..) 그런 웨일을 구출해줄 웨일 스토어의 다양한 일정 관리 ㅎㅈㅇ! 바로
+						‘ㅎㅈㅇ’는 무엇인지 맞춰 주시면 됩니다! 정답을 맞혀주신 웨일러 20명에게는, 도미노피자 슈퍼디럭스(오리지널)L +
+						콜라1.25L를 선물 할 거라고 해요!! 정답은 웨일 인스타그램에(꼭!) 달아 주시면 참여 끝이랍니다~!
+
+
+
+
+
+
+
+
+						내일(2/3,수)까지 참여 가능하다고 하니 지금 바로 참여하세요! ​ 2020년, 성황리에 종료 된 네이버 웨일
+
+						매일웨일해 체크인 이벤트! 지난 12월 28일 웨일 공식 블로그에서 최종 당첨자 발표를 마쳤는데요? 당첨되었는지
+						확인해보지 않으셨다면, 아래 링크에 접속해서 당첨자 명단을 꼭! 확인해보세요! 매일웨일해 체크-인 이벤트 최종 당첨자
+						발표! 안녕하세요 네이버 웨일 입니다😊 여러분, 오늘은 새해까지 얼마 남지 않은, 12월 28일입니다! 모두
+						새해... blog.naver.com 웨일러 여러분들이 직접 투표해 선정된 한정판 웨일굿즈가 당첨자분들의 소중한 정보를
+						기다리고 있어요! 당첨자 여러분들은 각자의 메일 함을 꼭꼭!! 확인한 후에 경품 수령을 위한 정보 기입 부탁드려요! ​
+
+						이외에도 다양한 채널에서 여러분들과 소통하고 있는 웨일! ​ 다른 채널들에서는 어떤 콘텐츠들이 올라와 있는지 스-윽
+						방문해 보시는 건 어떨까요? 😊 ​ ▼아래 아이콘을 클릭하면 각 채널로 이동합니다! ▼ [출처] 네이버 웨일 2월
+						1주차 SNS 콘텐츠 소개 “마지막 굿즈, 핫&쿨 웨일 텀블러 제작기!”|작성자 웨일 팀</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+	<!-- Initialize Swiper -->
+	<script>
+    var swiper = new Swiper('.swiper-container', {
+      slidesPerView: 1,
+      spaceBetween: 30,
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  </script>
+</body>
+</html>

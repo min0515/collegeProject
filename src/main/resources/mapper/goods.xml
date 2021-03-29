@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kakao.kitkat.dao.GoodsDao">
+
+	<select id="goodsSelectOne"
+		resultType="com.kakao.kitkat.entities.Goods">
+		select * from goods where g_seq=#{g_seq}
+	</select>
+
+	<insert id="goodsInsertRow">
+		insert into goods (g_seq, g_title, g_price,
+		g_content, g_attach, g_sellyn
+		) values ( (SELECT ifnull(MAX(g_seq)+1,
+		1) FROM goods goods_alias),
+		#{g_title}, #{g_price}, #{g_content},
+		#{g_attach}, 0
+		)
+	</insert>
+
+	<update id="updateRow">
+		update goods set g_title=#{g_title},
+		g_content=#{g_content} where g_seq = #{g_seq};
+	</update>
+
+	<!-- <delete id="deleteRow"> -->
+	<!-- delete from board where b_seq=#{b_seq} -->
+	<!-- </delete> -->
+
+
+	<!-- <update id="updateRow"> -->
+	<!-- update board set name=#{name},password=#{password},phone1=#{phone1}, -->
+	<!-- phone2=#{phone2},phone3=#{phone3},photo=#{photo} -->
+	<!-- where b_seq = #{b_seq} -->
+	<!-- </update> -->
+
+	<!-- <select id="goodsSelectAll" resultType="com.naver.dgkim1007.entities.Board"> -->
+	<!-- select * from board -->
+	<!-- </select> -->
+
+	<!-- <update id="updateAjax"> -->
+	<!-- update board set memlevel=#{memlevel} -->
+	<!-- where b_seq = #{b_seq} -->
+	<!-- </update> -->
+
+	<!-- <delete id="deleteAjax"> -->
+	<!-- </delete> -->
+
+	<select id="goodsSelectPageList"
+		resultType="com.kakao.kitkat.entities.Goods">
+		select * from goods order by g_seq desc
+		limit
+		#{startrow},#{endrow}
+	</select>
+
+	<select id="goodsSelectCount" resultType="Integer">
+		select count(*) from
+		goods where b_title like CONCAT('%',#{find},'%')
+		or b_name like
+		CONCAT('%',#{find},'%') or b_content like CONCAT('%',#{find},'%')
+	</select>
+
+	<select id="goodsFindList"
+		resultType="com.kakao.kitkat.entities.Goods">
+		select * from goods where b_title like
+		CONCAT('%',#{find},'%')
+		or b_name like CONCAT('%',#{find},'%') or
+		b_content like CONCAT('%',#{find},'%')
+		order by b_ref desc, b_step asc
+		limit #{startrow},#{endrow}
+	</select>
+	<select id="goodsSelectCountFirst" resultType="Integer">
+		select count(*)
+		from goods
+	</select>
+	<!-- <select id="goodsSelectMaxStep" resultType="Integer"> -->
+	<!-- select ifnull(max(b_step) + 1,1) from board where b_ref = #{b_ref} -->
+
+	<!-- </select> -->
+
+	<insert id="cartInsertRow">
+		insert into tb_cart (member_id, g_seq,
+		price,qty,totalprice
+		)
+		values (#{member_id},
+		#{g_seq},
+		#{price},#{qty},#{totalprice}
+		)
+	</insert>
+
+	<update id="cartUpdateRow">
+		update tb_cart set qty=qty + #{qty}, totalprice
+		=totalprice + #{totalprice}
+		where g_seq = #{g_seq} and member_id=#{member_id}
+	</update>
+	
+	<select id="myGoodsCartCount" resultType="Integer">
+		select count(*) from tb_cart where member_id=#{member_id}
+	</select>
+	
+	<select id="myGoodsCartSelect" resultType="com.kakao.kitkat.entities.Tb_cart">
+		select a.g_seq,a.price,a.qty,a.totalprice,b.g_title,b.g_delivery,b.g_attach 
+		from tb_cart a join goods b on a.g_seq=b.g_seq where member_id=#{member_id}
+	</select>
+
+
+
+
+</mapper>

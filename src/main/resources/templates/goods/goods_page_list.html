@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.lang}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/shopping_layout">
+<head>
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/shopping.css}">
+</th:block>
+<script src="/js/aiappproject.js"></script>
+<script
+	src="https://cdn.tiny.cloud/1/1in9hzsqug5gwpl0vwku0rsdmw8w2equelp9j08kmfa49lxw/tinymce/5/tinymce.min.js"
+	referrerpolicy="origin"></script>
+</head>
+<body>
+	<div layout:fragment="content">
+		<form class="ui large form" action="findListBoard"
+			name="findListformname" method="POST" enctype="multipart/form-data"
+			data-parsley-validate="true" style="background-color: #F3F3F3; margin-top:15px;">
+			<div class="ui grid center aligned">
+				<div class="twelve wide column" >
+					<div class="field center aligned" style="margin-top: 30px;">
+
+
+
+
+
+						<div class="ui four cards">
+							<div class="ui card" th:each="goods : ${goodses}" style="text-align: center">
+								<div class="ui slide right reveal image" >
+									<div class="visible content">
+										<img class="ui fluid image" th:src="${goods.g_attach}" style="width: 300px">
+									</div>
+									<div class="hidden content">
+										<img class="ui fluid image" src="images/zntus2.png" style="width: 300px">
+									</div>
+								</div>
+								<div class="content">
+									<a class="header" th:href="@{goodsDetail2(g_seq=${goods.g_seq})}"> 
+										<span th:text="${goods.g_title}"></span></a>
+										<span class="date" th:text="${goods.g_price}+원"></span>
+								</div>
+								<div class="extra content">
+									<a th:href="@{goodsDelivery(g_seq=${goods.g_seq})}"> <i class="won sign icon" ></i> 구매하기
+									</a>
+									<div>
+										<i class="shopping bag icon"></i> 장바구니
+									</div>
+									
+								</div>
+							</div>
+						</div>
+
+
+
+
+						<div class="field" style="margin-top: 10px">
+							<span th:each="page : ${pages}"> <a
+								th:href="@{goodsPageSelect(page=${page})}">[<span
+									th:text="${page}"></span>]
+							</a>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
+

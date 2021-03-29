@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.lang}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout">
+<head>
+	<script src="/js/aiappproject.js"></script>	
+	<script
+		src="https://cdn.tiny.cloud/1/1in9hzsqug5gwpl0vwku0rsdmw8w2equelp9j08kmfa49lxw/tinymce/5/tinymce.min.js"
+		referrerpolicy="origin"></script>
+</head>
+ <body>
+<div layout:fragment="content">
+<form class="ui large form" action="findListBoard" name="findListformname" method="POST" enctype="multipart/form-data"
+            data-parsley-validate="true">
+	<div class="ui grid center aligned">
+		<div class="twelve wide column">
+			<div class="field center aligned" style="margin-top:30px;">
+				<h3>학과 게시판</h3>
+			</div>
+			<div class="fluid" style="text-align:right;">
+				<span ><a href="boardWrite" style="color: #000000; font-size: 8px">글 작성</a></span>
+			</div>
+			<div class="field center aligned" style="margin:0 auto; margin-top:10px;">
+				<table class="ui celled table">
+					<thead>
+						<tr style="text-align:center ">
+						<th>글번호</th>
+						<th>작성자</th>
+						<th>제목</th>
+						<th>첨부파일</th>
+						<th>조회수</th>
+					</tr>
+					</thead>
+					<tbody>
+						<tr th:each="board : ${boards}" style="text-align:center">
+							<td th:text="${board.b_seq}"></td>
+							<td th:text="${board.b_name}"></td>
+							<td>
+								<span th:if="${board.b_step gt 0}">
+									<img src="/images/reply.png" style="width:20px; height:20px;">
+								</span>
+								<a th:href="@{boardDetail(b_seq=${board.b_seq})}"><span th:text="${board.b_title}"></span></a>
+							</td>
+							<td style="padding: 10px; text-align:center;">
+								<span th:if="${board.b_attach != null}">
+									<a th:href="@{fileDownload(b_attach=${board.b_attach})}"><i class="paperclip icon"></i></a>
+								</span>
+							</td>
+							<td th:text="${board.b_hit}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</form>		
+</div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/lms_layout">
+
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/reservation.css}">
+</th:block>
+<th:block layout:fragment="script">
+	<script type="text/javascript" th:src="@{/js/reservation.js}"></script>
+</th:block>
+<body layout:fragment="content">
+	<div class="ui middle aligned center aligned grid">
+		<div class="column" style="margin-bottom:300px;">
+			<div class="field" style="margin-bottom: 50px">
+				<h1 class="ui  left aligned header">
+					<strong style="margin-left: 4%;">내 예약</strong>
+				</h1>
+			</div>
+			<div class="ui secondary segment grid" style="padding: 2% 7% 1% 7%;">
+				<i class="massive hand point right outline black icon"
+					style="float: left;"></i>
+				<div class="ui text left aligned container"
+					style="margin-left: 3% !important; float: right;">
+					<h3 class="ui header">
+						<strong>주의사항 및 안내</strong>
+					</h3>
+					<ul>
+						<li>퇴실 시 예약 종료를 해주시기바랍니다.</li>
+						<li>중앙 도서관을 제외한 열람실에서는 노트북사용을 금지합니다</li>
+						<li>한 사람 당 한 자리 예약이 원칙이며 대리예약 적발 시 강제 퇴실 조치합니다.</li>
+					</ul>
+				</div>
+
+			</div>
+			<div class="field" style="padding-right:92%; margin-top:2%;">
+				<span style="font-size:17px;"><strong>전체</strong></span>
+				<span style="font-size:17px; color:#0064CD;"><strong th:text="${myReservationCount}"></strong></span>
+				<span style="font-size:17px;"><strong>건</strong></span>
+			</div>
+			<table id="myReservationTable" style="text-align: center; font-size:16px;"
+				class="ui fixed table">
+				<thead>
+					<tr>
+						<th>장소번호</th>
+						<th>예약장소</th>
+						<th>좌석번호</th>
+						<th>예약종료</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="myReservation : ${myReservations}">
+						<td th:text="${myReservation.room_no}"></td>
+						<td th:text="${myReservation.room_name}"></td>
+						<td th:text="${myReservation.seq}"></td>
+						<td style="color: blue; font-size: 15px;">
+							<button class="ui blue basic button" id="myReservationCancelBtn">퇴실</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="ui mini myReservationCancel modal">
+				<div class="header">퇴실</div>
+				<div class="content">
+					<p>퇴실하시겠습니까?</p>
+				</div>
+				<div class="actions">
+					<div class="ui primary button" id="myReservationCancelOkBtn">확인</div>
+					<div class="ui cancel button">취소</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>
