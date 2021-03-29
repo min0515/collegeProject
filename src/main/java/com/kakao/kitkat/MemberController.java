@@ -75,6 +75,8 @@ public class MemberController {
 		}
 
 	}
+	
+	
 
 	@RequestMapping(value = "/professorLoginUp", method = RequestMethod.POST)
 	public String loginUp(@ModelAttribute Tb_professor tb_professor, HttpSession session) {
@@ -105,6 +107,11 @@ public class MemberController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(HttpSession session) {
 		return "login/login2";
+	}
+	
+	@RequestMapping(value = "/schoolLogin", method = RequestMethod.GET)
+	public String schoolLogin(HttpSession session) {
+		return "login/login3";
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
