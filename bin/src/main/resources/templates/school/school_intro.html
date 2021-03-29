@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/school_layout">
+<div layout:fragment="school_content">
+	<form class="ui large form" method="POST" action="boardUpdateSave"
+		enctype="multipart/form-data" data-parsley-validate="true">
+		<img src="images/schoolboardbanner.png" style="width: 100%">
+		<div class="ui equal width center aligned padded grid">
+			<div class="row">
+				<div class="white column">
+					<div style="font-size: 40px; padding: 30px 0px">교육목표</div>
+				</div>
+
+				<div class="white column"></div>
+			</div>
+			<hr style="width: 70%; size: 10px; color: gray;">
+			<div class="white row">
+
+				<div id="schoolintrotitle" class="white six wide column"
+					style="text-align: center;">교시</div>
+				<div class="white column" style="text-align: left;">
+					<img src="images/schoolmotor.png" style="width: 600px">
+				</div>
+			</div>
+			<hr style="width: 70%; size: 10px; color: gray;">
+			<div class="white row">
+				<div id="schoolintrotitle" class="white six wide column">교육목적
+				</div>
+				<div class="white column" style="text-align: left;">본교는 성실,
+					인화, 창조의 정신으로 심오한 자바 학문의 이론과 응용을 연구하고 가르치며 이를 통해 인류사회를 선도할 인재를 양성하고
+					사회혁신을 이끌 산학협력을 발전시켜 국가 및 인류의 발전과 번영에 기여하는 것을 목적으로 한다.</div>
+			</div>
+			<hr style="width: 70%; size: 10px; color: gray;">
+			<div class="white row">
+				<div id="schoolintrotitle" class="white six wide column">교육목표
+				</div>
+				<div class="white column" style="text-align: left;">
+					본교는 다음과 같은 인재양성을 통하여 「기본이 강한 글로컬 리더」를 배출하는 것으로 목표로 한다.
+					<div class="ui list">
+						<div class="item">
+							<i class="caret square right outline icon"></i> 바른 인성과 높은 윤리의식을
+							갖추고 공동체 발전을 위하여 소통하고 화합하는 도덕적 사회인 양성
+						</div>
+						<div class="item">
+							<i class="caret square right outline icon"></i> 실용적 전문 지식과 융합적
+							사고를 바탕으로 미래사회의 새로운 가치를 창출하는 창의적 지식인 양성
+						</div>
+						<div class="item">
+							<i class="caret square right outline icon"></i> 글로벌 마인드와 진취적 기상으로
+							지역을 넘어 세계로 나가는 도전적 세계인 양성
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<hr style="width: 70%; size: 10px; color: gray;">
+			<div class="white row">
+				<div id="schoolintrotitle" class="white six wide column">인재상</div>
+				<div class="white column" style="text-align: left;">본교는 성실,
+					인화, 창조의 정신으로 심오한 자바 학문의 이론과 응용을 연구하고 가르치며 이를 통해 인류사회를 선도할 인재를 양성하고
+					사회혁신을 이끌 산학협력을 발전시켜 국가 및 인류의 발전과 번영에 기여하는 것을 목적으로 한다.</div>
+			</div>
+		</div>
+
+	</form>
+</div>
+</html>
+

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/lms_layout">
+
+<title>join</title>
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/class.css}">
+</th:block>
+<th:block layout:fragment="script">
+	<script type="text/javascript" th:src="@{/js/class.js}"></script>
+</th:block>
+<body layout:fragment="content">
+	<th:block th:replace="fragments/classLeftMenu"></th:block>
+	<div class="ui middle aligned center aligned grid">
+		<div class="column">
+			<h2 class="ui header">
+				<strong>강의평작성</strong>
+			</h2>
+			<form class="ui large from" id="classReviewInsert"
+				action="classReviewInsert" Method="post">
+				<div class="ui stacked segment" style="padding: 30px;">
+					<div class="field">
+						<div class="ui fluid labeled input">
+							<div class="ui label">강의번호</div>
+							<input type="text" id="class_no" name="class_no"
+								th:value="${tb_class.class_no}" readonly>
+							<div class="ui label">수업이름</div>
+							<input type="text" th:value="${tb_class.class_name}" readonly>
+						</div>
+					</div>
+					<div class="field">
+						<div class="ui star rating"></div>
+					</div>
+					<div class="field">
+						<div class="fluid ui input">
+							<textarea rows="8" cols="150" placeholder="review" name="review"
+								id="review"></textarea>
+						</div>
+					</div>
+					<div class="field" style="margin-top: 20px">
+						<span><button type="button" id="classReviewInsertBtn"
+								class="ui primary basic button" style="width: 48%">저장</button></span> <span><button
+								type="button" class="ui negative  basic button"
+								onclick="location.href='classCancel'" style="width: 48%">취소</button></span>
+					</div>
+				</div>
+			</form>
+			<div class="ui classReviewLogin mini modal">
+				<div class="classReviewLogin header">로그인</div>
+				<div class="classReviewLogin content">
+					<p>로그인 세션이 만료되었습니다. 다시 로그인 해주세요</p>
+				</div>
+				<div class="actions">
+					<div class="ui primary button" onclick="location.href='login'">로그인 하러가기</div>
+					<div class="ui cancel button">취소</div>
+				</div>
+			</div>
+			<div class="ui classReviewAlready mini modal">
+				<div class="classReviewAlready header">로그인</div>
+				<div class="classReviewAlready content">
+					<p>이 강의에 대한 수강평을 이미 작성하였습니다</p>
+				</div>
+				<div class="actions">
+					<div class="ui primary button" onclick="location.href='login'">수강평 삭제하러가기</div>
+					<div class="ui cancel button">취소</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

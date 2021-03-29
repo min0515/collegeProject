@@ -29,10 +29,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kakao.kitkat.dao.BoardDao;
-import com.kakao.kitkat.dao.SchoolQnaBoardDao;
 import com.kakao.kitkat.entities.Board;
 import com.kakao.kitkat.entities.BoardPaging;
-import com.kakao.kitkat.entities.SchoolQnaBoard;
 
 @Controller
 public class BoardController {
@@ -41,20 +39,20 @@ public class BoardController {
 	@Autowired
 	Board board;
 	@Autowired
-	SchoolQnaBoard schoolQnaBoard;
-	@Autowired
 	BoardPaging boardpaging;
 
 	public static String find;
-	
+
 	@RequestMapping(value = "/schoolDepBoardWrite", method = RequestMethod.GET)
 	public String boardWrite(Locale locale, Model model) {
 		return "board/school_dep_board_write";
 	}
+
 	@RequestMapping(value = "/schoolQnaBoardWrite", method = RequestMethod.GET)
 	public String schoolQnaBoardWrite(Locale locale, Model model) {
 		return "board/school_qna_board_write";
 	}
+
 	@RequestMapping(value = "/schoolFreeBoardWrite", method = RequestMethod.GET)
 	public String schoolFreeBoardWrite(Locale locale, Model model) {
 		return "board/school_free_board_write";
@@ -97,37 +95,6 @@ public class BoardController {
 
 		return "index";
 	}
-	@RequestMapping(value = "/schoolQnABoardWriteSave", method = RequestMethod.POST)
-	public String schoolQnABoardWriteSave(Model model, @ModelAttribute SchoolQnaBoard school_qna_board,
-			@RequestParam("b_attachfile") MultipartFile b_attachfile, HttpServletRequest request) throws Exception {
-		String filename = b_attachfile.getOriginalFilename();
-		String path = "F:/SPRINGBOOTSOURCE/eyeconspringboot (1)/src/main/resources/static/uploadattachs/";
-		String realpath = "/uploadattachs/";
-		if (!filename.equals("")) {
-			byte bytes[] = b_attachfile.getBytes();
-			try {
-				BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(path + filename));
-				output.write(bytes);
-				output.flush();
-				output.close();
-				school_qna_board.setSchool_qna_attach(realpath + filename);
-
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-		}
-		String ip = getIp(request);
-		school_qna_board.setSchool_qna_inputip(ip);
-		SimpleDateFormat df = new SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm:ss");
-		Date date = new Date();
-		String today = df.format(date);
-//		school_qna_board..setSchool_qna_inputtime(today);
-		SchoolQnaBoardDao dao = sqlSession.getMapper(SchoolQnaBoardDao.class);
-		dao.schoolQnaBoardInsertRow(school_qna_board);
-
-		return "board/school_qna_board_list";
-	}
-	
 
 	@RequestMapping(value = "/boardDetail", method = RequestMethod.GET)
 	public String boardDetail(Model model, @RequestParam int b_seq, HttpSession session) throws Exception {
@@ -189,8 +156,7 @@ public class BoardController {
 
 		return "index";
 	}
-	
-	
+
 	@RequestMapping(value = "/infiniteScroll", method = RequestMethod.GET)
 	public String infiniteScroll(Locale locale, Model model) throws Exception {
 		BoardDao dao = sqlSession.getMapper(BoardDao.class);
@@ -258,7 +224,7 @@ public class BoardController {
 		model.addAttribute("pages", pages);
 		return "board/board_page_list";
 	}
-	
+
 	@RequestMapping(value = "/boardFreeList", method = RequestMethod.GET)
 	public String boardFreeList(Locale locale, Model model) throws Exception {
 		BoardDao dao = sqlSession.getMapper(BoardDao.class);
@@ -292,7 +258,7 @@ public class BoardController {
 		model.addAttribute("pages", pages);
 		return "board/board_free_list";
 	}
-	
+
 	@RequestMapping(value = "/schoolQnaBoardList", method = RequestMethod.GET)
 	public String schoolQnaBoardList(Locale locale, Model model) throws Exception {
 		BoardDao dao = sqlSession.getMapper(BoardDao.class);

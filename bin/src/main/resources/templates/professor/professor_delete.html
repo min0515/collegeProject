@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${session.lang}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+      layout:decorator="layout/lms_layout">
+<head>
+</head>
+<body layout:fragment="content">
+ <form class="ui large form" id="deleteprofessorform" action="professorDeleteSave" >
+  <div class="ui grid" style="margin-top: 5px; margin-bottom: 200px">
+			<div class="four wide column"></div>
+			<div class="ten wide column">
+				<h3 style="text-align: center;">수정</h3>
+				
+				<div class="fluid ui labeled input">
+					<div class="ui label" style="width: 100px">교수번호</div>
+					<input type="text" name="professor_no" th:value="${professor.professor_no}" placeholder="교수번호" readonly="readonly">
+				</div>
+
+				<div class="fluid ui labeled input" style="margin-top: 10px">
+					<div class="ui label" style="width: 100px">교수이름</div>
+					<input type="text" name="professor_name" th:value="${professor.professor_name}" id="professor_name" 
+						readonly="readonly">
+				</div>
+				<div class="fluid ui labeled input" style="margin-top: 10px">
+					<div class="ui label" style="width: 100px">주민번호</div>
+					<input type="text" name="professor_ssn" th:value="${professor.professor_ssn}" id="professor_ssn" 
+					readonly="readonly"	>
+				</div>
+				<div class="fluid ui labeled input" style="margin-top: 10px">
+					<div class="ui label" style="width: 100px" >집주소</div>
+					<input type="text" name="professor_address" th:value="${professor.professor_address}" id="addr1"  >
+					<button type="button" class="btn btn-primary" style="width: 15%;" onclick="zipcodeFind()">검색</button>
+				</div>
+				<div class="fluid ui labeled input" style="margin-top: 10px">
+				<div class="ui label" style="width: 100px">학과번호</div>
+				<input type="text" name="department_no" th:value="${professor.department_no}" id="department_no" >
+					</div>
+				
+					
+				<p></p>
+					<p></p>
+
+				<div class="two wide column"></div>
+
+				<div class="sixteen wide column " style="text-align: center;">
+					<button class="ui black button professorDeletebbtn" type="submit">삭제</button>
+					<button class="ui black basic button" type="button"
+						onclick="location.href='index'">취소</button>
+				</div>
+			</div>
+		</div>
+      	<div class="ui small modal professrDeletefy">
+				<i class="close icon"></i>
+				<div class="header">삭제되었습니다.</div>
+				<div class="actions">
+					<div class="ui positive left labeled icon button">
+						확인 <i class="checkmark icon"></i>
+					</div>
+				</div>
+			</div>
+        
+            
+       
+</form>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kakao.kitkat.dao.SchoolQnaBoardDao">
+
+	<select id="schoolQnaBoardSelectOne"
+		resultType="com.kakao.kitkat.entities.SchoolQnaBoard">
+		select * from school_qna_board where b_seq=#{b_seq}
+	</select>
+
+	<insert id="schoolQnaBoardInsertRow">
+		insert into school_qna_board (
+		school_qna_seq,
+		school_qna_ref,
+		school_qna_step,
+		school_qna_commentid,
+		school_qna_commentpw,
+		school_qna_commentcontent,
+		school_qna_commentnumber,
+		school_qna_name,
+		school_qna_title,
+		school_qna_content,
+		school_qna_hit,
+		school_qna_attach,
+		school_qna_inputtime,
+		school_qna_inputip
+		)values ( (SELECT ifnull(MAX(school_qna_seq)+1, 1) FROM school_qna_board school_qna_board_alias), (SELECT
+		ifnull(MAX(school_qna_seq)+1, 1) FROM school_qna_board school_qna_board_alias), 0, 0, 0, 0, #{school_qna_name},
+		#{school_qna_name}, #{school_qna_title}, #{school_qna_content}, 0,
+		#{school_qna_attach},#{school_qna_inputtime},#{school_qna_inputip})
+	</insert>
+
+	<!-- <update id="updateRow"> -->
+	<!-- update Board set b_title=#{b_title}, b_content=#{b_content} where b_seq 
+		= #{b_seq}; -->
+	<!-- </update> -->
+
+
+	<!-- <insert id = "insertReplyRow"> -->
+	<!-- insert into Board (b_seq, b_ref, b_step, b_email, b_name, b_title, 
+		b_content, b_hit, b_attach, -->
+	<!-- b_inputtime,b_inputip) -->
+	<!-- values ( -->
+	<!-- (SELECT ifnull(MAX(b_seq)+1, 1) FROM board board_alias), -->
+	<!-- #{b_ref}, (select ifnull(max(b_step) + 1,1) from board board_max where 
+		b_ref = #{b_ref}), -->
+	<!-- #{b_email}, #{b_name}, #{b_title}, #{b_content}, -->
+	<!-- 0, #{b_attach},#{b_inputtime},#{b_inputip}) -->
+	<!-- </insert> -->
+
+	<!-- <update id="addHit"> -->
+	<!-- update board set b_hit = b_hit + 1 where b_seq=#{b_seq} -->
+	<!-- </update> -->
+
+	<!-- <delete id="deleteRow"> -->
+	<!-- delete from board where b_seq=#{b_seq} -->
+	<!-- </delete> -->
+
+
+	<!-- <update id="updateRow"> update board set name=#{name},password=#{password},phone1=#{phone1}, 
+		phone2=#{phone2},phone3=#{phone3},photo=#{photo} where b_seq = #{b_seq} </update> 
+		<select id="selectAll" resultType="com.naver.dgkim1007.entities.Board"> select 
+		* from board </select> <update id="updateAjax"> update board set memlevel=#{memlevel} 
+		where b_seq = #{b_seq} </update> <delete id="deleteAjax"> </delete> -->
+
+	<!-- <select id="selectPageList" -->
+	<!-- resultType="com.kakao.kitkat.entities.Board"> -->
+	<!-- select * from board order by b_ref desc, b_step asc -->
+	<!-- limit #{startrow},#{endrow} -->
+	<!-- </select> -->
+
+	<!-- <select id="selectCount" resultType="Integer"> -->
+	<!-- select count(*) from board -->
+	<!-- where b_title like CONCAT('%',#{find},'%') -->
+	<!-- or b_name like -->
+	<!-- CONCAT('%',#{find},'%') or b_content like CONCAT('%',#{find},'%') -->
+	<!-- </select> -->
+
+	<!-- <select id="findListBoard" -->
+	<!-- resultType="com.kakao.kitkat.entities.Board"> -->
+	<!-- select * from board where b_title like -->
+	<!-- CONCAT('%',#{find},'%') -->
+	<!-- or b_name like CONCAT('%',#{find},'%') or -->
+	<!-- b_content like CONCAT('%',#{find},'%') -->
+	<!-- order by b_ref desc, b_step asc -->
+	<!-- limit #{startrow},#{endrow} -->
+	<!-- </select> -->
+	<!-- <select id="selectCountFirst" resultType="Integer"> -->
+	<!-- select count(*) from -->
+	<!-- board -->
+	<!-- </select> -->
+	<!-- <select id="selectMaxStep" resultType="Integer"> -->
+	<!-- select ifnull(max(b_step) -->
+	<!-- + 1,1) from board where b_ref = #{b_ref} -->
+
+	<!-- </select> -->
+
+
+
+
+
+</mapper>

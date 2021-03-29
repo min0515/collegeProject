@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body th:fragment="header">
+	<div class="ui text container" style="padding: 0 120px;">
+		<div class="header item">
+			<a class="link" href="home">Home</a>
+		</div>
+		<div th:if="${session.sessionMember_id} == null" class="header item">
+			<a class="link" href="login">Login</a>
+		</div>
+		<div class="header item">Board</div>
+		<div class="header item">Member</div>
+		<div class="ui pointing dropdown link item">
+			<span class="header item" style="padding: 0px;">수강정보</span> <i
+				class="dropdown icon"></i>
+			<div class="menu">
+				<div class="item">
+					<a class="link" href="classInsert">강의등록</a>
+				</div>
+				<div class="item">
+					<a class="link" href="classAdminListGo">강의관리</a>
+				</div>
+				<div class="item">
+					<a class="link" href="classRegistrationAdminPageGo">수강신청관리</a>
+				</div>
+				<div class="item">
+					<a class="link" href="classRegistrationGo">수강신청</a>
+				</div>
+				<div class="item">
+					<a class="link" href="ClassPreRegistrationGo">수강바구니</a>
+				</div>
+				<div class="item">
+					<a class="link" href="myclassFinalList">수강이력조회</a>
+				</div>
+				<div class="item">
+					<a class="link" href="classSearchList">강의조회</a>
+				</div>
+				<div class="item">
+					<a class="link" href="classSearchListGo">수강신청안내</a>
+				</div>
+			</div>
+		</div>
+		<div class="ui pointing dropdown link item">
+			<span class="header item" style="padding: 0px;">예약</span> <i
+				class="dropdown icon"></i>
+			<div class="menu">
+				<div class="item">
+					<a class="link" href="reservationPageGo">도서관 예약</a>
+				</div>
+				<div class="item">
+					<a class="link" href="spaceReservationPageGo">스터디룸 에약</a>
+				</div>
+				<div class="item">
+					<a class="link" href="myReservationPageGo">내 예약</a>
+				</div>
+			</div>
+			</div>
+			<div class="ui pointing dropdown link item">
+			<span class="header item" style="padding: 0px;">교수</span> <i class="dropdown icon"></i>
+			<div class="menu">
+				<div class="item">
+					<a class="link" href="professorjoin">교수등록</a>
+				</div>
+				<div class="item">
+					<a class="link" href="professorlist">교수리스트</a>
+				</div>
+				<div class="item">
+					<a class="link" th:href="tbclassprojoin">교수수업등록</a>
+				</div>
+			</div>
+		</div>
+		</div>
+		<div th:unless="${session.sessionMember_id==null}">
+		<div class="ui cards">
+			<div class="card">
+				<div class="content">
+					<img class="left floated mini ui image" src="/images/ggom.png">
+					<div class="header">
+						<span th:text="${session.sessionProfessor_name}"></span><span>
+							교수님 반가워요!</span>
+					</div>
+					<div class="description">좋은하루되세요!</div>
+				</div>
+				<div class="tab_box_wrap">
+					<div class="ui four buttons">
+						<div class="ui basic green button" onclick="location.href='professorUpdate'" style="width: 25%">정보수정</div>
+						<div class="ui basic red button" onclick="location.href='tbclassupdateRow'"style="width: 25%">수업수정</div>
+						<div class="ui basic blue button" id="proclassUpdatePage" onclick="location.href='gradesearch'"style="width: 25%">학생조회</div>
+						<div class="ui basic black button" id="proclassUpdatePage" onclick="location.href='logout'"style="width: 25%">로그아웃</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	<div th:unless="${session.sessionStudent_no==null}">
+		<div class="ui simple dropdown item">
+			<i class="dropdown icon"></i>
+			<div class="menu">
+				<div class="item">
+					<a class="link" href="logout">Logout</a>
+				</div>
+				<div class="item">
+					<a class="link" th:text="${session.sessionStudent_name}"></a>
+				</div>
+				<div class="item">
+					<a class="link" th:text="${session.sessionAbsence_yn}"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

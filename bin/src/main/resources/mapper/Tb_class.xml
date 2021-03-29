@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kakao.kitkat.dao.Tb_classDao">
+
+	<insert id="insertRow">
+		insert into tb_class (class_no, department_no,
+		class_name,class_type,maxcapacity)
+		values(#{class_no},#{department_no},#{class_name},#{class_type},#{maxcapacity})
+	</insert>
+
+	<select id="selectOne"
+		resultType="com.kakao.kitkat.entities.Tb_class">
+		select * from tb_class where class_no=#{class_no}
+	</select>
+
+	<select id="selectClass"
+		resultType="com.kakao.kitkat.entities.Tb_class">
+		select * from tb_class where department_no=#{department_no}
+	</select>
+
+	<select id="departmentSelectAll"
+		resultType="com.kakao.kitkat.entities.Tb_department">
+		select department_no,department_name from tb_department
+	</select>
+
+	<update id="updateRow">
+		update tb_class set
+		department_no=#{department_no},class_name=#{class_name},
+		class_type=#{class_type},maxcapacity=#{maxcapacity}
+		where class_no =
+		#{class_no}
+	</update>
+	<update id="classProfessorUpdateRow">
+		update tb_class_professor set
+		professor_no=#{professor_no}
+		where class_no = #{class_no} order by
+		class_no asc limit 1
+	</update>
+
+	<select id="selectAll"
+		resultType="com.kakao.kitkat.entities.Tb_class">
+		select * from tb_class ORDER BY class_no asc limit 50;
+	</select>
+
+	<delete id="deleteAjax">
+		delete from tb_class where class_no=#{class_no}
+	</delete>
+
+	<select id="professorSelectAll"
+		resultType="com.kakao.kitkat.entities.Tb_professor">
+		select professor_no,professor_name from tb_professor
+	</select>
+
+	<select id="professorSelectOne"
+		resultType="com.kakao.kitkat.entities.Tb_professor">
+		select * from tb_professor where
+		professor_no=#{professor_no}
+	</select>
+
+	<insert id="professorInsertRow">
+		insert into tb_class_professor
+		(class_no,professor_no)
+		values(#{class_no},#{professor_no})
+	</insert>
+
+	<delete id="professorDeleteAjax">
+		delete from tb_class_professor where
+		class_no=#{class_no}
+	</delete>
+
+	<select id="professorSelectOneLimit"
+		resultType="com.kakao.kitkat.entities.Tb_class_professor">
+		select * from tb_class_professor where class_no=#{class_no}
+		ORDER BY class_no asc limit 1
+	</select>
+
+	<!-- 학생용 xml -->
+	<select id="selectFindClass"
+		resultType="com.kakao.kitkat.entities.Tb_class">
+		select * from tb_class where class_type like
+		concat('%',#{class_type},'%')
+		and credit like #{credit}
+		and class_name
+		like concat('%',#{class_name},'%')
+		and department_no like
+		concat('%',#{department_no},'%');
+	</select>
+
+	<select id="selectFindClassEmpty" resultType="Integer">
+		select count(*)
+		from tb_class where class_type like
+		concat('%',#{class_type},'%')
+		and
+		credit like #{credit}
+		and class_name like concat('%',#{class_name},'%')
+		and department_no like concat('%',#{department_no},'%');
+
+	</select>
+
+	<!-- 수강신청 -->
+	<update id="ClassCapacityUpdateRow">
+		update tb_class set
+		nowcapacity=nowcapacity - 1
+		where
+		class_no = #{class_no}
+	</update>
+
+	<insert id="NewClassStudentInsert">
+		insert into tb_grade
+		(term_no,student_no,class_no,point)
+		values(#{term_no},#{student_no},#{class_no},#{point})
+	</insert>
+
+	<select id="selectMyClassList"
+		resultType="com.kakao.kitkat.entities.Tb_class">
+		select
+		a.term_no,b.class_no,b.class_name,b.class_type,b.credit
+		from tb_grade a
+		join tb_class b on a.class_no=b.class_no
+		where student_no=#{student_no}
+		and term_no=#{term_no}
+	</select>
+
+	<delete id="MyClassDeleteAjax">
+		delete from tb_grade where
+		class_no=#{class_no} and
+		student_no=#{student_no} and term_no=#{term_no}
+	</delete>
+
+
+	<update id="MyClassCapacityUpdateRow">
+		update tb_class set
+		nowcapacity=nowcapacity + 1
+		where
+		class_no = #{class_no}
+	</update>
+
+	<update id="StudentNowcreditUpdateRow">
+		update tb_student set
+		nowcredit=nowcredit - #{credit}
+		where
+		student_no = #{student_no}
+	</update>
+
+	<update id="StudentNowcreditCancelUpdateRow">
+		update tb_student set
+		nowcredit=nowcredit + #{credit}
+		where
+		student_no = #{student_no}
+	</update>
+
+
+	<!-- 수강바구니 -->
+
+	<select id="studentCreditSelectOne"
+		resultType="com.kakao.kitkat.entities.Tb_student">
+		select * from tb_student where student_no=#{student_no}
+	</select>
+
+	<!-- 수강신청 관리 -->
+	<!-- 수강바구니 start -->
+	<update id="preRegistrationStartUpdate">
+		update tb_registration set
+		preregistrationyn="y"
+	</update>
+
+	<update id="preRegistrationStartClassUpdate">
+		update tb_class set
+		nowcapacity="0";
+	</update>
+
+	<update id="preRegistrationStartStudentUpdate">
+		update tb_student set
+		nowcredit=maxcredit;
+	</update>
+
+	<!-- 수강바구니 end -->
+	<update id="preRegistrationEndUpdate">
+		update tb_registration set
+		preregistrationyn="n"
+	</update>
+
+	<delete id="preRegistrationEndGradeDelete1">
+		delete from tb_grade where class_no in (select
+		class_no from tb_class
+		where maxcapacity <![CDATA[ < ]]>
+		nowcapacity) and term_no=#{term_no};
+	</delete>
+
+	<update id="preRegistrationEndCapacityUpdate1">
+		update tb_class set nowcapacity = maxcapacity where class_no in
+		(select class_no from (select class_no from tb_class where maxcapacity <![CDATA[ < ]]>
+		nowcapacity) a);
+	</update>
+
+	<update id="preRegistrationEndCapacityUpdate2">
+		update tb_class set nowcapacity = maxcapacity-nowcapacity where
+		class_no in
+		(select class_no from (select class_no from tb_class where
+		maxcapacity <![CDATA[ > ]]>
+		nowcapacity) a);
+	</update>
+
+	<select id="SelectPreRegistrationEndCreditList"
+		resultType="com.kakao.kitkat.entities.Tb_class">
+		select b.student_no,a.credit,c.nowcredit
+		from tb_class a join tb_grade
+		b on a.class_no=b.class_no join tb_student c
+		on
+		b.student_no=c.student_no
+		where maxcapacity <![CDATA[ < ]]>
+		nowcapacity and term_no=#{term_no}
+	</select>
+
+	<update id="preRegistrationEndCreditUpdate1">
+		update tb_student set nowcredit = nowcredit +
+		#{credit} where student_no=#{student_no}
+	</update>
+
+	<!-- 수강신청 start -->
+	<update id="registrationStartUpdate">
+		update tb_registration set
+		registrationyn="y"
+	</update>
+
+	<!-- 수강신청 End -->
+	<update id="registrationEndUpdate">
+		update tb_registration set
+		registrationyn="n"
+	</update>
+
+	<update id="registrationEndCapacityUpdate">
+		update tb_class set
+		nowcapacity = maxcapacity -
+		nowcapacity
+	</update>
+
+	<update id="registrationEndCreditUpdate">
+		update tb_student set
+		nowcredit = maxcredit -
+		nowcredit
+	</update>
+
+	<select id="studentClassSearchListView"
+		resultType="com.kakao.kitkat.entities.Tb_class">
+		select a.class_no,a.class_name,a.class_type,b.point from
+		tb_class a
+		join tb_grade b on a.class_no = b.class_no
+		where
+		term_no=#{term_no} and student_no=#{student_no}
+	</select>
+	<!-- 강의평 -->
+	<insert id="classReviewinsertRow">
+		insert into tb_classreview
+		(term_no,class_no,student_no,review)
+		values(#{term_no},#{class_no},#{student_no},#{review})
+	</insert>
+
+	<select id="classReviewCountSelect" resultType="Integer">
+		select count(*)
+		from tb_classreview
+		where term_no=#{term_no} and
+		student_no=#{student_no} and class_no=#{class_no}
+	</select>
+
+	<select id="classReviewListSelect"
+		resultType="com.kakao.kitkat.entities.Tb_classreview">
+		select
+		a.term_no,a.class_no,a.student_no,a.review,a.rating,b.student_name
+		from
+		tb_classreview a join tb_student b on a.student_no=b.student_no
+		where
+		class_no=#{class_no}
+	</select>
+
+
+
+</mapper>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.lang}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/shopping_layout">
+<head>
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/shopping.css}">
+</th:block>
+</head>
+<body>
+<div layout:fragment="content">
+<form class="ui large form" method="POST" name="fileForm" action="goodsWriteSave" enctype="multipart/form-data"  data-parsley-validate="true">
+	<div class="ui sixteen wide column grid">
+	<div class="ui four wide column grid left aligned" ></div>
+	<div class="ui six wide column grid">
+	<div id="aboutusTitle" >Professional Skin care for your hands and feet</div>
+<div id="aboutusContent"> All professional mani/pedi services start and finish with skincare products this should make these products the perfect upset tools. but with all the generic products out there it’s hard to make your services stand out if you want to give your clients better services you need better mama/pedi products.
+Personal choice is the most important decision a brand can never make.</div>
+</div>
+	<div class="ui six wide column grid"></div>
+</div>
+<div class="ui sixteen wide column grid">
+<div class="ui twelve wide column grid">
+<img src="images/dog2.jpg" style="width:1100px; margin-top:20px;">
+</div>
+<div class="ui three wide column grid" style="margin-top:100px">
+<div id="aboutusTitle">Only — Make. Benefits</div>
+<div id="aboutusContent">Sign up is very simple and you can get a lot of
+benefits when you sign up. but with all the generic products out there it’s hard to make your services stand out.</div>
+<img src="images/smile2.PNG" style="width:75px; margin-top:10px;">
+<img src="images/picture.PNG" style="width:75px">
+<img src="images/gift.PNG" style="width:75px">
+</div>
+</div>
+<div class="ui six wide column grid center aligned">
+<div id="aboutusTitle">Say hello!</div>
+</div>
+<div class="ui six wide column grid center aligned">
+<div id="aboutusContent" style="margin-bottom:200px">Sign up is very simple and you can get a lot of</div>
+</div>
+
+</form>		
+</div>
+
+
+<div class="ui inverted vertical footer segment">
+		<th:block th:replace="fragments/footer"></th:block>
+	</div>
+</body>
+</html>
+

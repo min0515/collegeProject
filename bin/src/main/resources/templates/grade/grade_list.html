@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${session.lang}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+      layout:decorator="layout/lms_layout">
+<head>
+<title>Home</title>
+</head>
+<body layout:fragment="content">
+	<form name="formname" method="POST" action="gradesearchlist">
+	<div class="ui icon message" id="successmessage" style="display: none">
+			<i class="notched circle loading icon"></i>
+			<div class="content">
+				<div class="header" id="resultmessage"></div>
+			</div>
+		</div>
+		<div class="fluid fifteen wide column ">
+			<table id="studentyo" class="display nowrap" style="text-align: center;">
+				<thead>
+					<tr>
+						<th>학기</th>
+						<th>학생번호</th>
+						<th>점수</th>
+						<th>옵션</th>
+					</tr>
+				</thead>
+				<tr th:each="item:${ma}">
+					<td th:text="${item.term_no}" ></td>
+					<td th:text="${item.student_no}" th:value="${item.student_no}" ></td>
+                   	<td><input type="number" min="0" max="4.5" step="0.5"
+                            th:value="${item.point}" onkeyup="imsi(this)" ></td>
+					<td><i class="edit outline icon primary" id="pointeditbtn"
+						style="cursor: pointer"></i></td>
+                 </tr>
+			</table>
+		</div>
+	</form>
+</body>
+</html>

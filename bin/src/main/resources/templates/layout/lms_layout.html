@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head th:replace="fragments/lms_config :: lms_config">
+</head>
+<body>
+	<div class="ui borderless main menu">
+		<th:block th:replace="fragments/lms_header"></th:block>
+	</div>
+	<div class="container">
+		<div class="content">
+			<div layout:fragment="content"></div>
+		</div>
+	</div>
+	<div class="ui inverted vertical footer segment">
+		<th:block th:replace="fragments/footer"></th:block>
+	</div>
+</body>
+</html>
