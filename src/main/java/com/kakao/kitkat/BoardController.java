@@ -95,10 +95,6 @@ public class BoardController {
 
 		return "index";
 	}
-<<<<<<< HEAD
-	
-=======
->>>>>>> branch 'master' of https://github.com/min0515/collegeProject.git
 
 	@RequestMapping(value = "/boardDetail", method = RequestMethod.GET)
 	public String boardDetail(Model model, @RequestParam int b_seq, HttpSession session) throws Exception {
@@ -262,9 +258,6 @@ public class BoardController {
 		model.addAttribute("pages", pages);
 		return "board/board_free_list";
 	}
-<<<<<<< HEAD
-	
-=======
 
 	@RequestMapping(value = "/schoolQnaBoardList", method = RequestMethod.GET)
 	public String schoolQnaBoardList(Locale locale, Model model) throws Exception {
@@ -299,7 +292,6 @@ public class BoardController {
 		model.addAttribute("pages", pages);
 		return "board/school_qna_board_list";
 	}
->>>>>>> branch 'master' of https://github.com/min0515/collegeProject.git
 
 	@RequestMapping(value = "/findListBoard", method = RequestMethod.POST)
 	public String findListBoard(Locale locale, Model model, @RequestParam String find) throws Exception {
