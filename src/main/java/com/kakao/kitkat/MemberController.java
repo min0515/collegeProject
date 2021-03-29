@@ -97,14 +97,105 @@ public class MemberController {
 
 	}
 
+	@RequestMapping(value = "/studentLoginUp2", method = RequestMethod.POST)
+	public String studentLoginUp2(Model model, @ModelAttribute Tb_student tb_student, HttpSession session) {
+		MemberDao dao = sqlSession.getMapper(MemberDao.class);
+		Tb_student data = dao.selectOne(tb_student.getStudent_no());
+		if (data == null) {
+			return "login/login2";
+		} else {
+			boolean passchk = BCrypt.checkpw(tb_student.getStudent_pw(), data.getStudent_pw());
+			if (passchk) {
+				session.setAttribute("sessionMember_id", data.getStudent_no());
+				session.setAttribute("sessionStudent_name", data.getStudent_name());
+				session.setAttribute("sessionDepartment_no", data.getDepartment_no());
+				session.setAttribute("sessionAbsence_yn", data.getAbsence_yn());
+				return "index2";
+			} else {
+				return "login/login2";
+			}
+
+		}
+
+	}
+
+	@RequestMapping(value = "/professorLoginUp2", method = RequestMethod.POST)
+	public String professorLoginUp2(@ModelAttribute Tb_professor tb_professor, HttpSession session) {
+		MemberDao dao = sqlSession.getMapper(MemberDao.class);
+		Tb_professor data = dao.professorSelectOne(tb_professor.getProfessor_no());
+		if (data == null) {
+			return "login/login2";
+		} else {
+			boolean passchk = BCrypt.checkpw(tb_professor.getProfessor_pw(), data.getProfessor_pw());
+			if (passchk) {
+				session.setAttribute("sessionMember_id", data.getProfessor_no());
+				session.setAttribute("sessionProfessor_name", data.getProfessor_name());
+				session.setAttribute("sessionDepartment_no", data.getDepartment_no());
+				return "index2";
+			} else {
+				return "login/login2";
+			}
+
+		}
+
+	}
+
+	@RequestMapping(value = "/studentLoginUp3", method = RequestMethod.POST)
+	public String studentLoginUp3(Model model, @ModelAttribute Tb_student tb_student, HttpSession session) {
+		MemberDao dao = sqlSession.getMapper(MemberDao.class);
+		Tb_student data = dao.selectOne(tb_student.getStudent_no());
+		if (data == null) {
+			return "login/login3";
+		} else {
+			boolean passchk = BCrypt.checkpw(tb_student.getStudent_pw(), data.getStudent_pw());
+			if (passchk) {
+				session.setAttribute("sessionMember_id", data.getStudent_no());
+				session.setAttribute("sessionStudent_name", data.getStudent_name());
+				session.setAttribute("sessionDepartment_no", data.getDepartment_no());
+				session.setAttribute("sessionAbsence_yn", data.getAbsence_yn());
+				return "school_index";
+			} else {
+				return "login/login3";
+			}
+
+		}
+
+	}
+
+	@RequestMapping(value = "/professorLoginUp3", method = RequestMethod.POST)
+	public String professorLoginUp3(@ModelAttribute Tb_professor tb_professor, HttpSession session) {
+		MemberDao dao = sqlSession.getMapper(MemberDao.class);
+		Tb_professor data = dao.professorSelectOne(tb_professor.getProfessor_no());
+		if (data == null) {
+			return "login/login3";
+		} else {
+			boolean passchk = BCrypt.checkpw(tb_professor.getProfessor_pw(), data.getProfessor_pw());
+			if (passchk) {
+				session.setAttribute("sessionMember_id", data.getProfessor_no());
+				session.setAttribute("sessionProfessor_name", data.getProfessor_name());
+				session.setAttribute("sessionDepartment_no", data.getDepartment_no());
+				return "school_index";
+			} else {
+				return "login/login3";
+			}
+
+		}
+
+	}
+
 	@RequestMapping(value = "/shoppingLogin", method = RequestMethod.GET)
 	public String shoppingLogin(HttpSession session) {
-		return "login/login";
+		return "login/login2";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(HttpSession session) {
-		return "login/login2";
+		return "login/login";
+	}
+
+	@RequestMapping(value = "/schoolLogin", method = RequestMethod.GET)
+	public String login3(HttpSession session) {
+		return "login/login3";
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
