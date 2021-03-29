@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kakao.kitkat.dao.OrdersDao">
+	<select id="ordersSelectOne"
+		resultType="com.kakao.kitkat.entities.Orders">
+		select *from orders where member_id=#{member_id} and orders_seq = (select max(orders_seq) from orders);
+	</select>
+	<insert id="goodsInsertRow">
+		insert into goods (g_seq, g_title, g_price, g_content, g_attach, g_sellyn
+		) values ( (SELECT ifnull(MAX(g_seq)+1, 1) FROM goods goods_alias),
+		#{g_title}, #{g_price}, #{g_content}, #{g_attach}, 0
+		)
+	</insert>
+
+	<insert id="goodsInsertItem">
+		insert into goods (g_seq, g_title, g_price, g_content, g_attach,
+		g_sellyn,g_qty,g_total,g_delivery
+		) values ( (SELECT ifnull(MAX(g_seq)+1, 1) FROM goods goods_alias),
+		#{g_title}, #{g_price}, #{g_content}, #{g_attach}, 0
+		,#{g_qty},#{g_qty}*#{g_price}+#{g_delivery},#{g_delivery})
+	</insert>
+	<update id="updateRow">
+		update goods set g_title=#{g_title},
+		g_content=#{g_content} where g_seq = #{g_seq};
+	</update>
+	<select id="contactMaxNum" resultType="Integer">
+		select
+		ifnull(max(substring(orders_contact,10,2))+1, 1) from orders;
+	</select>
+	<insert id="OrderssAdd">
+		insert into
+		orders(orders_seq,member_id,orders_name,orders_contact,orders_zipcode,orders_address,g_title,orders_qty,g_price
+		,g_delivery,g_total,orders_pay,orders_delivery)
+		values(
+		(SELECT
+		ifnull(MAX(orders_seq)+1, 1) FROM orders
+		orders_alias),#{member_id},#{orders_name},#{orders_contact},#{orders_zipcode},#{orders_address},#{g_title},#{orders_qty},#{orders_qty}*#{g_price},#{g_delivery},#{orders_qty}*#{g_price}+#{g_delivery},#{orders_pay},#{orders_delivery}
+		)
+	</insert>
+
+</mapper>

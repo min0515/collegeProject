@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/lms_layout">
+<head>
+<meta charset="UTF-8">
+<title data-th-text="title"></title>
+<style type="text/css">
+
+</style>
+</head>
+<!--     <div layout:fragment="content"> -->
+<!--         <h1>index page...<i class="france flag"></i></h1>	 -->
+<!-- 		<h1 th:text="#{main.content}"></h1>		 -->
+<!--     </div> -->
+
+<body layout:fragment="content">
+	<form id="formId" method="POST" action="gradesearchlist">
+	
+		<fieldset >
+			<legend>학생검색:</legend>
+			<div class="ui container center aligned">
+				<div class="ui icon input">
+				<label for="yyyy">검색년도:
+				<select class="ui dropdown" name="yyyy" id="yyyy">
+					<option th:each="yyyy : ${yyyys}" th:selected="${yyyy eq thisyyyy}" th:value="${yyyy}" th:text="${yyyy}"></option>
+					
+				</select></label>
+				<label for="mm">검색학기:
+				<select class="ui dropdown" name="mm" id="mm">
+					<option th:each="mm : ${mms}" th:selected="${mm}" th:value="${mm}" th:text="${mm}"></option>
+					
+				</select></label>
+				</div>
+				<p></p>
+				<div class="ui icon input">
+				<label for="class_no">수업이름:
+				<select class="ui dropdown" name="class_no" id="class_no">
+					<option th:each="item : ${clase}"  th:value="${item.class_no}" th:text="${item.class_name}"></option>
+					
+				</select></label>
+				
+				</div><br>
+				<p></p>
+				<div class="ui grid center aligned">
+						<div class="two wide column">
+						<button type="submit"
+							class="fluid ui primary button; positive ui button taxa" id="balanceserachbtn" onclick="location.href='gradesearchlist'" >검색</button>
+					</div>		
+					
+					<div class="two wide column">
+						<button type="button" class="fluid ui negative button"
+							onclick="history.back(-1)">취소</button>
+					</div>
+					
+				</div>
+				
+			</div>
+			 <div class="ui mini modal xb">
+               <i class="close icon"></i>
+               <div class="header">삭제</div>
+               <div class="image content">
+                  <div class="ui">
+                     <i class="exclamation icon"></i>
+                  </div>
+                  <div class="description">
+                     <div class="ui header">삭제하시겠습니까?</div>
+                  </div>
+               </div>
+               <div class="actions">
+                  <div class="ui black deny button" id="delok">삭제</div>
+                  <div class="ui positive icon button" id="delcle">취소</div>
+               </div>
+            </div>
+			
+		</fieldset>
+	</form>
+</body>
+
+
+</html>

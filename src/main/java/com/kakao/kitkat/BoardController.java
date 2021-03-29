@@ -29,10 +29,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kakao.kitkat.dao.BoardDao;
-import com.kakao.kitkat.dao.SchoolQnaBoardDao;
 import com.kakao.kitkat.entities.Board;
 import com.kakao.kitkat.entities.BoardPaging;
-import com.kakao.kitkat.entities.SchoolQnaBoard;
 
 @Controller
 public class BoardController {
@@ -40,8 +38,6 @@ public class BoardController {
 	private SqlSession sqlSession;
 	@Autowired
 	Board board;
-	@Autowired
-	SchoolQnaBoard schoolQnaBoard;
 	@Autowired
 	BoardPaging boardpaging;
 
@@ -96,36 +92,6 @@ public class BoardController {
 		dao.insertRow(board);
 
 		return "index";
-	}
-	@RequestMapping(value = "/schoolQnABoardWriteSave", method = RequestMethod.POST)
-	public String schoolQnABoardWriteSave(Model model, @ModelAttribute SchoolQnaBoard school_qna_board,
-			@RequestParam("b_attachfile") MultipartFile b_attachfile, HttpServletRequest request) throws Exception {
-		String filename = b_attachfile.getOriginalFilename();
-		String path = "F:/SPRINGBOOTSOURCE/eyeconspringboot (1)/src/main/resources/static/uploadattachs/";
-		String realpath = "/uploadattachs/";
-		if (!filename.equals("")) {
-			byte bytes[] = b_attachfile.getBytes();
-			try {
-				BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(path + filename));
-				output.write(bytes);
-				output.flush();
-				output.close();
-				school_qna_board.setSchool_qna_attach(realpath + filename);
-
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-		}
-		String ip = getIp(request);
-		school_qna_board.setSchool_qna_inputip(ip);
-		SimpleDateFormat df = new SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm:ss");
-		Date date = new Date();
-		String today = df.format(date);
-//		school_qna_board..setSchool_qna_inputtime(today);
-		SchoolQnaBoardDao dao = sqlSession.getMapper(SchoolQnaBoardDao.class);
-		dao.schoolQnaBoardInsertRow(school_qna_board);
-
-		return "board/school_qna_board_list";
 	}
 	
 
@@ -293,39 +259,6 @@ public class BoardController {
 		return "board/board_free_list";
 	}
 	
-	@RequestMapping(value = "/schoolQnaBoardList", method = RequestMethod.GET)
-	public String schoolQnaBoardList(Locale locale, Model model) throws Exception {
-		BoardDao dao = sqlSession.getMapper(BoardDao.class);
-		int pagesize = 10;
-		int page = 1;
-		int startrow = (page - 1) * pagesize;
-		int endrow = 10;
-
-		boardpaging.setFind(this.find);
-		if (boardpaging.getFind() == null) {
-			boardpaging.setFind("");
-		}
-
-		boardpaging.setStartrow(startrow);
-		boardpaging.setEndrow(endrow);
-		int rowcount = dao.selectCountFirst(boardpaging);
-		int absPage = 1;
-
-		if (rowcount % pagesize == 0) {
-			absPage = 0;
-		}
-		int pagecount = rowcount / pagesize + absPage;
-		int pages[] = new int[pagecount];
-		for (int i = 0; i < pagecount; i++) {
-			pages[i] = i + 1;
-		}
-
-		ArrayList<Board> boards = dao.selectPageList(boardpaging);
-
-		model.addAttribute("boards", boards);
-		model.addAttribute("pages", pages);
-		return "board/school_qna_board_list";
-	}
 
 	@RequestMapping(value = "/findListBoard", method = RequestMethod.POST)
 	public String findListBoard(Locale locale, Model model, @RequestParam String find) throws Exception {

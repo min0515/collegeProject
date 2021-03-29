@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:fragment="shopping_config">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title layout:title-pattern="$LAYOUT_TITLE : $CONTENT_TITLE"></title>
+<meta name="keywords" content="Home" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<link rel="stylesheet" th:href="@{/css/aiappproject.css}">
+<link rel="stylesheet" th:href="@{/css/jquery.dataTables.css}">
+<link rel="stylesheet" th:href="@{/css/semantic.min.css}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/swiper/swiper-bundle.css" />
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<!-- Content Page의 CSS fragment 삽입 -->
+<th:block layout:fragment="css"></th:block>
+<!--       -->
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript" th:src="@{/js/jquery-3.5.1.min.js}"></script>
+<script
+	src="https://cdn.tiny.cloud/1/1in9hzsqug5gwpl0vwku0rsdmw8w2equelp9j08kmfa49lxw/tinymce/5/tinymce.min.js"
+	referrerpolicy="origin"></script>
+<script type="text/javascript" th:src="@{/js/jquery.dataTables.js}"></script>
+<script type="text/javascript" th:src="@{/js/shopping.js}"></script>
+<script type="text/javascript" th:src="@{/js/aiappproject.js}"></script>
+<script type="text/javascript" th:src="@{/js/professor.js}"></script>
+<script th:src="@{/js/semantic.min.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<!-- Content Page의 script fragment 삽입 -->
+<th:block layout:fragment="script"></th:block>
+</head>
+</html>

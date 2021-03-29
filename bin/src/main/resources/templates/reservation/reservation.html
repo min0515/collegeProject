@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/lms_layout">
+
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/reservation.css}">
+</th:block>
+<th:block layout:fragment="script">
+	<script type="text/javascript" th:src="@{/js/reservation.js}"></script>
+</th:block>
+<body layout:fragment="content">
+	<div class="ui middle aligned center aligned grid">
+		<div class="column">
+			<div class="field" style="margin-bottom: 50px">
+				<h1 class="ui  left aligned header">
+					<strong style="margin-left:4%;">예약 서비스</strong>
+				</h1>
+				<div class="ui section divider" style="margin-top:15px;"></div>
+			</div>
+			<div class="field" style="margin-bottom: 50px">
+				<div class="ui three item menu">
+					<a class="item active" id="libraryBtn"><strong>중앙 도서관</strong></a>
+					<a class="item" id="studyroomBtn"><strong>제 1열람실</strong></a> <a
+						class="item" id="studyroomBtn2"><strong>제 2열람실</strong></a>
+				</div>
+			</div>
+			<div class="field" id="library">
+				<!-- Swiper -->
+				<div class="swiper-container" style="float: left; width: 50%;">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<img src="/images/library1.png"
+								style="width: 100%; height: 400px; border-radius: 10px 100px / 120px;">
+						</div>
+						<div class="swiper-slide">
+							<img src="/images/library5.png"
+								style="width: 100%; height: 400px; border-radius: 10px 100px / 120px;">
+						</div>
+						<div class="swiper-slide">
+							<img src="/images/library2.png"
+								style="width: 100%; height: 400px; border-radius: 10px 100px / 120px;">
+						</div>
+						<div class="swiper-slide">
+							<img src="/images/library3.png"
+								style="width: 100%; height: 400px; border-radius: 10px 100px / 120px; ">
+						</div>
+						<div class="swiper-slide">
+							<img src="/images/library4.png"
+								style="width: 100%; height: 400px; border-radius: 10px 100px / 120px;">
+						</div>
+						<div class="swiper-slide">
+							<img src="/images/library.png"
+								style="width: 100%; height: 400px; border-radius: 10px 100px / 120px;">
+						</div>
+					</div>
+					<!-- Add Pagination -->
+					<div class="swiper-pagination"></div>
+					<!-- Add Arrows -->
+					<div class="swiper-button-next"></div>
+					<div class="swiper-button-prev"></div>
+				</div>
+				<div class="ui text container"
+					style="padding: 15px; width: 48%; height: 400px; float: right;">
+					<h3 class="ui dividing header">
+						<strong>중앙도서관</strong>
+					</h3>
+					<p>국립중앙도서관은 국가 지식정보자원의 보고로서 1945년 개관한 이래, 국내에서 발행된 출판물과 각종
+						지식정보를 망라적으로 수집하고 이를 체계적으로 정리하여 제공하고 있습니다.</p>
+					<p>또한 변화하는 시대에 맞춰 종이 매체에서 온라인 자료에 이르기까지 풍부한 장서를 구축하고 있으며, 다양한
+						국민의 수요에 맞춰 누구나 손쉽게 자료를 이용할 수 있도록 지식문화유산 이용 서비스의 고도화 실현을 위해 노력하고
+						있습니다.</p>
+					<p>국립중앙도서관은 '지식정보가 국가 발전의 중요한 자원'이라는 신념을 가지고 개개인의 창의성으로 이루어 낸
+						지적성취가 오늘날의 첨단지식 정보와 어우러져 '살아 있는 정보'로 활용되도록 더욱더 노력하겠습니다.</p>
+					<div class="field">
+						<h2 class="ui dividing header"
+							style="height: 66px; padding: 10px;">
+							<button class="ui black button" style="width:30%" id="libraryReservationGoBtn">자리예약</button>
+						</h2>
+					</div>
+				</div>
+			</div>
+			<div class="field" id="studyroom" style="display: none;">
+				<div class="field" style="float: left; width: 50%;">
+					<img src="/images/library2-2.png"
+						style="width: 100%; height: 400px; border-radius: 10px 100px / 120px;">
+				</div>
+				<div class="ui text container"
+					style="padding: 15px; width: 48%; height: 400px; float: right;">
+					<h3 class="ui dividing header">
+						<strong>제 1 열람실</strong>
+					</h3>
+					<p>국립중앙도서관은 국가 지식정보자원의 보고로서 1945년 개관한 이래, 국내에서 발행된 출판물과 각종
+						지식정보를 망라적으로 수집하고 이를 체계적으로 정리하여 제공하고 있습니다.</p>
+					<p>또한 변화하는 시대에 맞춰 종이 매체에서 온라인 자료에 이르기까지 풍부한 장서를 구축하고 있으며, 다양한
+						국민의 수요에 맞춰 누구나 손쉽게 자료를 이용할 수 있도록 지식문화유산 이용 서비스의 고도화 실현을 위해 노력하고
+						있습니다.</p>
+					<p>국립중앙도서관은 '지식정보가 국가 발전의 중요한 자원'이라는 신념을 가지고 개개인의 창의성으로 이루어 낸
+						지적성취가 오늘날의 첨단지식 정보와 어우러져 '살아 있는 정보'로 활용되도록 더욱더 노력하겠습니다.</p>
+					<div class="field">
+						<h2 class="ui dividing header"
+							style="height: 66px; padding: 10px;">
+							<button class="ui black button" style="width:30%" id="studyroomReservationGoBtn">자리예약</button>
+						</h2>
+					</div>
+				</div>
+			</div>
+			<div class="field" id="studyroom2" style="display: none;">
+				<div class="field" style="float: left; width: 50%;">
+					<img src="/images/library2-1.png"
+						style="width: 100%; height: 400px; border-radius: 10px 100px / 120px;">
+				</div>
+				<div class="ui text container"
+					style="padding: 15px; width: 48%; height: 400px; float: right;">
+					<h3 class="ui dividing header">
+						<strong>제 2 열람실</strong>
+					</h3>
+					<p>국립중앙도서관은 국가 지식정보자원의 보고로서 1945년 개관한 이래, 국내에서 발행된 출판물과 각종
+						지식정보를 망라적으로 수집하고 이를 체계적으로 정리하여 제공하고 있습니다.</p>
+					<p>또한 변화하는 시대에 맞춰 종이 매체에서 온라인 자료에 이르기까지 풍부한 장서를 구축하고 있으며, 다양한
+						국민의 수요에 맞춰 누구나 손쉽게 자료를 이용할 수 있도록 지식문화유산 이용 서비스의 고도화 실현을 위해 노력하고
+						있습니다.</p>
+					<p>국립중앙도서관은 '지식정보가 국가 발전의 중요한 자원'이라는 신념을 가지고 개개인의 창의성으로 이루어 낸
+						지적성취가 오늘날의 첨단지식 정보와 어우러져 '살아 있는 정보'로 활용되도록 더욱더 노력하겠습니다.</p>
+					<div class="field">
+						<h2 class="ui dividing header"
+							style="height: 66px; padding: 10px;">
+							<button class="ui black button" style="width:30%" id="studyroom2ReservationGoBtn">자리예약</button>
+						</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="ui libraryReservation tiny modal">
+		<div class="header">자리예약</div>
+		<div class="scrolling content">
+			<div class="ui center aligned inverted divided grid">
+				<div class="column" id="reservationColumn" style="margin: 0px;">
+					<h3 class="ui dividing header">
+						<strong>창가</strong>
+					</h3>
+					<span th:each="seq : ${seqs}">
+						<button th:if="${seq.reservationYn == 'n'}"
+							class="ui blue basic button" th:text="${seq.seq}"
+							th:value="${seq.seq}" style="width: 11%; margin:1%;" id="reservationPickBtn"></button>
+						<button th:unless="${seq.reservationYn == 'n'}"
+							class="ui gray basic button" th:text="${seq.seq}"
+							th:value="${seq.seq}" style="width: 11%; margin:1%;"></button>
+					</span> <input type="hidden" id="hiddenRoom_no">
+				</div>
+			</div>
+		</div>
+		<div class="actions">
+			<button class="ui primary button" style="width: 40%;"
+				id="reservationFinalBtn">예약</button>
+			<button class="ui cancel button"
+				style="width: 40%; margin-right: 9%;">취소</button>
+		</div>
+	</div>
+	<div class="ui mini alreadyReservation modal">
+		<div class="header">예약된 자리 존재</div>
+		<div class="content">
+			<p>한 사람당 한자리만 예약 할 수 있습니다.</p>
+		</div>
+		<div class="actions">
+			<div class="ui cancel button">확인</div>
+		</div>
+	</div>
+	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+	<!-- Initialize Swiper -->
+	<script>
+    var swiper = new Swiper('.swiper-container', {
+      slidesPerView: 1,
+      spaceBetween: 30,
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  </script>
+</body>
+</html>

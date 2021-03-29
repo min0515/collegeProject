@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:with="lang=${#locale.language}" th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+
+<head th:replace="fragments/shopping_config :: shopping_config">
+</head>
+<body>
+	<div class="sixteen column row ui grid center aligned"
+		style="background-color: #FFFFFF;">
+		<div class="three wide column"
+			style="text-align: left; display: left; margin: 0 auto;">
+			<button class="ui button"
+				style="background-color: #FFFFFF; margin-left: 20px;"
+				onclick="location.href='manageOrder';">관리페이지</button>
+		</div>
+		<div class="ten wide column">
+			<img src="images/javacollegelogo (3).png" style="width: 200px;">
+		</div>
+		<div class="three wide right align column"
+			style="text-align: right; display: right; margin: 0 auto;">
+			<button class="ui button" onclick="location.href='shoppingLogin';" style="background-color: #FFFFFF;">로그인</button>
+			<button class="ui button" style="background-color: #FFFFFF;">정보수정</button>
+		</div>
+	</div>
+	<div class="ui borderless main menu" style=" margin:0; background-color:#000000;">
+		<th:block th:replace="fragments/shopping_header"></th:block>
+	</div>
+	<div class="container">
+		<div class="content">
+			<div layout:fragment="content"></div>
+		</div>
+	</div>
+</body>
+</html>

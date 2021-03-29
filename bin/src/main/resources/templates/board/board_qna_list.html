@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/school_layout">
+<div layout:fragment="school_content">
+	<form class="ui large form" action="findListBoard"
+		name="findListformname" method="POST" enctype="multipart/form-data"
+		data-parsley-validate="true">
+		<img src="images/schoolboardbanner.png" style="width: 100%">
+		<div class="ui grid center aligned">
+			<div class="twelve wide column">
+				<div class="block">
+					<div class="field center aligned" style="margin-top: 30px;">
+						<h3>질문 게시판</h3>
+						<h4>자바인은 물론 예비자바인도 게시글을 작성할 수 있습니다.</h4>
+					</div>
+				</div>
+				<div class="fluid" style="text-align: right;">
+					<span><a href="schoolQnaBoardWrite"
+						style="color: #000000; font-size: 8px">글 작성</a></span>
+				</div>
+				<div class="field center aligned" style="margin-bottom:20px">
+					<table class="ui celled table">
+						<thead>
+							<tr style="text-align: center">
+								<th>글번호</th>
+								<th>작성자</th>
+								<th>제목</th>
+								<th>조회수</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="block" th:each="schoolqnaboard : ${schoolqnaboards}"
+								style="text-align: center">
+								<td th:text="${schoolqnaboard.school_qna_seq}"></td>
+								<td th:text="${schoolqnaboard.school_qna_name}"></td>
+								<td><span th:if="${schoolqnaboard.school_qna_step gt 0}"> <img
+										src="/images/reply.png" style="width: 20px; height: 20px;">
+								</span> <a th:href="@{boardDetail(b_seq=${schoolqnaboard.school_qna_seq})}"><span
+										th:text="${schoolqnaboard.school_qna_title}"></span></a></td>
+								<td th:text="${schoolqnaboard.school_qna_hit}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+</html>
+
+

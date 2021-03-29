@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout">
+
+<title>join</title>
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/member.css}">
+</th:block>
+<th:block layout:fragment="script"></th:block>
+
+<body layout:fragment="content">
+	<div class="ui middle aligned center aligned grid">
+		<div class="column">
+			<h2 class="ui header">
+				<strong>join</strong>
+			</h2>
+			<form class="ui large from" action="memberinsertsave" Method="post">
+				<div class="ui stacked segment">
+					<div class="field">
+						<div class="fluid ui left icon input">
+							<input type="email" placeholder="email..." name="email"> <i
+								class="mail icon"></i>
+						</div>
+					</div>
+
+					<div class="field">
+						<div class="fluid ui left icon input">
+							<input type="text" placeholder="name..." name="name"> <i
+								class="id card outline icon"></i>
+						</div>
+					</div>
+					<div class="field">
+						<div class="fluid ui left icon input">
+							<input type="password" placeholder="password..." name="password"> <i
+								class="lock icon"></i>
+						</div>
+					</div>
+					<div class="field">
+						<div class="fluid ui left icon input">
+							<input type="text" placeholder="010" name ="phone1"> 
+							<input type="text" placeholder="phone" name ="phone2"> 
+							<input type="text" placeholder="phone" name ="phone3"> 
+							<i class="mobile alternate icon"></i>
+						</div>
+					</div>
+					<div class="field" style="margin-top: 20px">
+						<span><button type="submit" class="ui primary basic button" style="width: 48%">저장</button></span> 
+						<span><button type="button" class="ui negative  basic button" style="width: 48%">취소</button></span>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
