@@ -79,40 +79,6 @@ public class GoodsController {
 		return "goods/board_qna";
 	}
 
-//	@RequestMapping(value = "/goodsManageList", method = RequestMethod.GET)
-//	public String goodsManageList(Locale locale, Model model) throws Exception {
-//		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
-//		int pagesize = 10;
-//		int page = 1;
-//		int startrow = (page - 1) * pagesize;
-//		int endrow = 10;
-//
-//		goodspaging.setFind(this.find);
-//		if (goodspaging.getFind() == null) {
-//			goodspaging.setFind("");
-//		}
-//
-//		goodspaging.setStartrow(startrow);
-//		goodspaging.setEndrow(endrow);
-//		int rowcount = dao.goodsSelectCountFirst(goodspaging);
-//		int absPage = 1;
-//
-//		if (rowcount % pagesize == 0) {
-//			absPage = 0;
-//		}
-//		int pagecount = rowcount / pagesize + absPage;
-//		int pages[] = new int[pagecount];
-//		for (int i = 0; i < pagecount; i++) {
-//			pages[i] = i + 1;
-//		}
-//
-//		ArrayList<Goods> goodses = dao.goodsSelectPageList(goodspaging);
-//
-//		model.addAttribute("goodses", goodses);
-//		model.addAttribute("pages", pages);
-//		return "goods/goods_page_list";
-//	}
-
 	@RequestMapping(value = "/qnaWrite", method = RequestMethod.GET)
 	public String boardWrite(Locale locale, Model model) {
 		return "goods/qna_write";
@@ -220,7 +186,6 @@ public class GoodsController {
 	public String delivery(Model model, @RequestParam int g_seq, HttpSession session) throws Exception {
 		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
 		goods = dao.goodsSelectOne(g_seq);
-		System.out.println(g_seq);
 		model.addAttribute("goods", goods);
 		return "goods/payment";
 	}
