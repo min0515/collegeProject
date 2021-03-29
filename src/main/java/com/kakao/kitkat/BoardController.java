@@ -42,15 +42,17 @@ public class BoardController {
 	BoardPaging boardpaging;
 
 	public static String find;
-	
+
 	@RequestMapping(value = "/schoolDepBoardWrite", method = RequestMethod.GET)
 	public String boardWrite(Locale locale, Model model) {
 		return "board/school_dep_board_write";
 	}
+
 	@RequestMapping(value = "/schoolQnaBoardWrite", method = RequestMethod.GET)
 	public String schoolQnaBoardWrite(Locale locale, Model model) {
 		return "board/school_qna_board_write";
 	}
+
 	@RequestMapping(value = "/schoolFreeBoardWrite", method = RequestMethod.GET)
 	public String schoolFreeBoardWrite(Locale locale, Model model) {
 		return "board/school_free_board_write";
@@ -93,7 +95,10 @@ public class BoardController {
 
 		return "index";
 	}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> branch 'master' of https://github.com/min0515/collegeProject.git
 
 	@RequestMapping(value = "/boardDetail", method = RequestMethod.GET)
 	public String boardDetail(Model model, @RequestParam int b_seq, HttpSession session) throws Exception {
@@ -155,8 +160,7 @@ public class BoardController {
 
 		return "index";
 	}
-	
-	
+
 	@RequestMapping(value = "/infiniteScroll", method = RequestMethod.GET)
 	public String infiniteScroll(Locale locale, Model model) throws Exception {
 		BoardDao dao = sqlSession.getMapper(BoardDao.class);
@@ -224,7 +228,7 @@ public class BoardController {
 		model.addAttribute("pages", pages);
 		return "board/board_page_list";
 	}
-	
+
 	@RequestMapping(value = "/boardFreeList", method = RequestMethod.GET)
 	public String boardFreeList(Locale locale, Model model) throws Exception {
 		BoardDao dao = sqlSession.getMapper(BoardDao.class);
@@ -258,7 +262,44 @@ public class BoardController {
 		model.addAttribute("pages", pages);
 		return "board/board_free_list";
 	}
+<<<<<<< HEAD
 	
+=======
+
+	@RequestMapping(value = "/schoolQnaBoardList", method = RequestMethod.GET)
+	public String schoolQnaBoardList(Locale locale, Model model) throws Exception {
+		BoardDao dao = sqlSession.getMapper(BoardDao.class);
+		int pagesize = 10;
+		int page = 1;
+		int startrow = (page - 1) * pagesize;
+		int endrow = 10;
+
+		boardpaging.setFind(this.find);
+		if (boardpaging.getFind() == null) {
+			boardpaging.setFind("");
+		}
+
+		boardpaging.setStartrow(startrow);
+		boardpaging.setEndrow(endrow);
+		int rowcount = dao.selectCountFirst(boardpaging);
+		int absPage = 1;
+
+		if (rowcount % pagesize == 0) {
+			absPage = 0;
+		}
+		int pagecount = rowcount / pagesize + absPage;
+		int pages[] = new int[pagecount];
+		for (int i = 0; i < pagecount; i++) {
+			pages[i] = i + 1;
+		}
+
+		ArrayList<Board> boards = dao.selectPageList(boardpaging);
+
+		model.addAttribute("boards", boards);
+		model.addAttribute("pages", pages);
+		return "board/school_qna_board_list";
+	}
+>>>>>>> branch 'master' of https://github.com/min0515/collegeProject.git
 
 	@RequestMapping(value = "/findListBoard", method = RequestMethod.POST)
 	public String findListBoard(Locale locale, Model model, @RequestParam String find) throws Exception {
