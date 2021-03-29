@@ -21,7 +21,7 @@ function test01() {
 	document.getElementById("phone2").value = $("#phone1").val();
 };
 // 검색시 주소 뛰우기
-function zipcodeFind() {
+function zipcodeFindB() {
 
 	new daum.Postcode({
 
