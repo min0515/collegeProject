@@ -200,11 +200,6 @@ public class MemberController {
 		return "login/login3";
 	}
 	
-	@RequestMapping(value = "/schoolLogin", method = RequestMethod.GET)
-	public String schoolLogin(HttpSession session) {
-		return "login/login3";
-	}
-
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session, Locale locale) {
 		session.invalidate();

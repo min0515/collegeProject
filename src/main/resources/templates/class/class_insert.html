@@ -2,18 +2,61 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout/lms_layout">
-
-<title>join</title>
-<th:block layout:fragment="css">
-	<link rel="stylesheet" th:href="@{/css/class.css}">
-</th:block>
-<th:block layout:fragment="script">
-	<script type="text/javascript" th:src="@{/js/class.js}"></script>
-</th:block>
-<body layout:fragment="content">
-	<th:block th:replace="fragments/classLeftMenu"></th:block>
-	<div class="ui middle aligned center aligned grid">
-		<div class="column">
+<head>
+<title>index</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="ui four column grid left aligned"
+			style="background-color: #F5F6F7">
+			<div></div>
+			<div class="three wide column"
+				style="margin-top: 50px; background-color: #F5F6F7">
+				<div class="ui vertical menu" style="margin-bottom: 20px;">
+					<a class="item" href="schoolMain"> 자바대학교 홈페이지 </a> <a class="item"
+						href="shoppingAboutus"> <i class="grid layout icon"></i>
+						자바대학교 쇼핑몰
+					</a> <a class="item" href="professorLoginUp"> 자바대학교 LMS </a>
+					<div class="ui dropdown item">
+						수강정보 <i class="dropdown icon"></i>
+						<div class="menu">
+							<a class="item" href="classInsert"><i class="edit icon"></i>
+								강의등록</a> <a class="item" href="classAdminListGo"><i
+								class="globe icon"></i> 강의관리</a> <a class="item"
+								href="classRegistrationAdminPageGo"><i class="globe icon"></i>
+								수강신청관리</a> <a class="item" href="classRegistrationGo"><i
+								class="globe icon"></i> 수강신청</a> <a class="item"
+								href="ClassPreRegistrationGo"><i class="globe icon"></i>
+								수강바구니</a> <a class="item" href="myclassFinalList"><i
+								class="globe icon"></i> 수강이력조회</a> <a class="item"
+								href="classSearchList"><i class="globe icon"></i> 강의조회</a> <a
+								class="item" href="classSearchListGo"><i
+								class="settings icon"></i> 수강신청안내</a>
+						</div>
+					</div>
+					<div class="ui dropdown item">
+						예약 <i class="dropdown icon"></i>
+						<div class="menu">
+							<a class="item" href="reservationPageGo"><i class="edit icon"></i>
+								도서관 예약</a> <a class="item" href="spaceReservationPageGo"><i
+								class="globe icon"></i> 스터디룸 예약</a> <a class="item"
+								href="myReservationPageGo"><i class="globe icon"></i> 내 예약</a>
+						</div>
+					</div>
+					<div class="ui dropdown item">
+						교수 <i class="dropdown icon"></i>
+						<div class="menu">
+							<a class="item" href="professorjoin"><i class="edit icon"></i>
+								교수 등록</a> <a class="item" href="professorlist"><i
+								class="globe icon"></i> 교수 리스트</a> <a class="item"
+								th:href="tbclassprojoin"><i class="globe icon"></i> 교수 수업등록</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 컨텐트 -->	
+			<div class="ten wide column center aligned"
+				style="background-color: #F5F6F7; padding:60px 0px">
 			<h2 class="ui header">
 				<strong>강의등록</strong>
 			</h2>
@@ -160,6 +203,7 @@
 				</div>
 			</form>
 		</div>
+	</div>
 	</div>
 </body>
 </html>
