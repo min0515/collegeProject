@@ -19,8 +19,10 @@
 		</div>
 		<div class="three wide right align column"
 			style="text-align: right; display: right; margin: 0 auto;">
-			<button class="ui button" onclick="location.href='shoppingLogin';" style="background-color: #FFFFFF;">로그인</button>
-			<button class="ui button" style="background-color: #FFFFFF;">정보수정</button>
+
+			<button class="ui button" th:if="${session.sessionMember_id==null}" onclick="location.href='shoppingLogin';" style="background-color: #FFFFFF;">로그인</button>
+			<button class="ui button" th:unless="${session.sessionMember_id==null}" onclick="location.href='logout';"style="background-color: #FFFFFF;">로그아웃</button>
+			<button class="ui button" th:unless="${session.sessionMember_id==null}" onclick="location.href='memberUpdate';"style="background-color: #FFFFFF;">정보수정</button>
 		</div>
 	</div>
 	<div class="ui borderless main menu" style=" margin:0; background-color:#000000;">
@@ -31,5 +33,6 @@
 			<div layout:fragment="content"></div>
 		</div>
 	</div>
+	
 </body>
 </html>

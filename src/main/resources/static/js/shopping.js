@@ -217,4 +217,33 @@ $(document).ready(function() {
 		$("#Complete").submit();
 		
 	});
+	
+	$("#goodinfobtn").click(function(){
+		$('#goodinfobtn').attr('class', 'item active');
+		$('#goodreviewbtn').attr('class', 'item');
+		$('#goodqnabtn').attr('class', 'item');
+		$('#goodsinfo').css('display', 'block');
+		$('#goodsreview').css('display', 'none');
+		$('#goodsqna').css('display', 'none');
+	});
+	
+	$("#goodreviewbtn").click(function(){
+		$('#goodinfobtn').attr('class', 'item');
+		$('#goodreviewbtn').attr('class', 'item active');
+		$('#goodqnabtn').attr('class', 'item');
+		$('#goodsinfo').css('display', 'none');
+		$('#goodsreview').css('display', 'block');
+		$('#goodsqna').css('display', 'none');
+	});
+	
+	$("#goodqnabtn").click(function(){
+		$('#goodinfobtn').attr('class', 'item');
+		$('#goodreviewbtn').attr('class', 'item');
+		$('#goodqnabtn').attr('class', 'item active');
+		$('#goodsinfo').css('display', 'none');
+		$('#goodsreview').css('display', 'none');
+		$('#goodsqna').css('display', 'block');
+	});
+	
+	
 });

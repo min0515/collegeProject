@@ -12,6 +12,8 @@ public class Tb_student {
 	private int maxcredit;
 	private int nowcredit;
 	private String entrance_date;
+	private String student_address;
+	private String memlevel;
 
 	public String getStudent_no() {
 		return student_no;
@@ -76,5 +78,23 @@ public class Tb_student {
 	public void setStudent_pw(String student_pw) {
 		this.student_pw = student_pw;
 	}
+
+	public String getStudent_address() {
+		return student_address;
+	}
+
+	public void setStudent_address(String student_address) {
+		this.student_address = student_address;
+	}
+
+	public String getMemlevel() {
+		return memlevel;
+	}
+
+	public void setMemlevel(String memlevel) {
+		this.memlevel = memlevel;
+	}
+	
+	
 
 }

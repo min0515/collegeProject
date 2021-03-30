@@ -11,6 +11,7 @@ public class Tb_professor {
 	private String department_no;
 	private String professor_pw;
 	private String department_name;
+	private String memlevel;
 
 	public String getProfessor_no() {
 		return professor_no;
@@ -67,5 +68,15 @@ public class Tb_professor {
 	public void setDepartment_name(String department_name) {
 		this.department_name = department_name;
 	}
+
+	public String getMemlevel() {
+		return memlevel;
+	}
+
+	public void setMemlevel(String memlevel) {
+		this.memlevel = memlevel;
+	}
+	
+	
 
 }
