@@ -118,7 +118,24 @@ $(document).ready(function() {
 		var deliveryVal = Number(td.eq(6).children().val());
 		var totalPriceVal = Number(td.eq(7).children().val()) * qty;
 		var result = deliveryVal + totalPriceVal;
+		var g_seq = td.eq(9).children().val();
 		if ($(input).is(":checked") == true) {
+			$.ajax({
+				type: 'POST',
+				data: { g_seq: g_seq },
+				datatype: 'json',
+				url: 'cartProductCheckYnAjax',
+				success: function(data) {
+					if (data == "login") {
+						location.href = 'shoppingLogin'
+					}else{
+						
+					}
+				},
+				error: function(xhr, status, error) {
+					alert('ajax error' + xhr.status);
+				}
+			});
 			$('#productPrice').text(Number($('#productPriceVal').val()) + totalPriceVal);
 			var productPriceRe = $('#productPrice').text().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 			$('#productPrice').text(productPriceRe)
@@ -135,6 +152,20 @@ $(document).ready(function() {
 			$('#finalPriceVal').val(Number($('#finalPriceVal').val()) + result);
 
 		} else {
+			$.ajax({
+				type: 'POST',
+				data: { g_seq: g_seq },
+				datatype: 'json',
+				url: 'cartProductNonCheckYnAjax',
+				success: function(data) {
+					if (data == "login") {
+						location.href = 'shoppingLogin'
+					}
+				},
+				error: function(xhr, status, error) {
+					alert('ajax error' + xhr.status);
+				}
+			});
 			$('#productPrice').text(Number($('#productPriceVal').val()) - totalPriceVal);
 			var productPriceRe = $('#productPrice').text().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 			$('#productPrice').text(productPriceRe)
@@ -184,6 +215,7 @@ $(document).ready(function() {
 			$(".chBox").prop("checked", false);
 		}
 	});
+
 	//	$('#g_qty').on('change', function() {
 	//		var price = $('#g_pricehidden').val();
 	//		var qty = Number($(this).val());
@@ -217,5 +249,11 @@ $(document).ready(function() {
 		$("#Complete").submit();
 
 	});
+
+
+	$('#cartPayment').on('click', function() {
+		location.href = 'cartPaymentGo'
+	});
+
 
 });

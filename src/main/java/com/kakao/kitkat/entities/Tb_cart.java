@@ -5,13 +5,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class Tb_cart {
 	private String member_id;
-	private String g_seq;
+	private int g_seq;
 	private int qty;
 	private int price;
 	private int totalprice;
 	private String g_title;
 	private int g_delivery;
 	private String g_attach;
+	private String checkYn;
+	private int deliveryTotalPrice;
 
 	public String getMember_id() {
 		return member_id;
@@ -45,11 +47,11 @@ public class Tb_cart {
 		this.totalprice = totalprice;
 	}
 
-	public String getG_seq() {
+	public int getG_seq() {
 		return g_seq;
 	}
 
-	public void setG_seq(String g_seq) {
+	public void setG_seq(int g_seq) {
 		this.g_seq = g_seq;
 	}
 
@@ -75,6 +77,22 @@ public class Tb_cart {
 
 	public void setG_attach(String g_attach) {
 		this.g_attach = g_attach;
+	}
+
+	public String getCheckYn() {
+		return checkYn;
+	}
+
+	public void setCheckYn(String checkYn) {
+		this.checkYn = checkYn;
+	}
+
+	public int getDeliveryTotalPrice() {
+		return deliveryTotalPrice;
+	}
+
+	public void setDeliveryTotalPrice(int deliveryTotalPrice) {
+		this.deliveryTotalPrice = deliveryTotalPrice;
 	}
 
 }

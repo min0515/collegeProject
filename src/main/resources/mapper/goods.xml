@@ -92,16 +92,45 @@
 	<update id="cartUpdateRow">
 		update tb_cart set qty=qty + #{qty}, totalprice
 		=totalprice + #{totalprice}
-		where g_seq = #{g_seq} and member_id=#{member_id}
+		where g_seq = #{g_seq} and
+		member_id=#{member_id}
 	</update>
-	
+
 	<select id="myGoodsCartCount" resultType="Integer">
-		select count(*) from tb_cart where member_id=#{member_id}
+		select count(*) from
+		tb_cart where member_id=#{member_id}
 	</select>
-	
-	<select id="myGoodsCartSelect" resultType="com.kakao.kitkat.entities.Tb_cart">
-		select a.g_seq,a.price,a.qty,a.totalprice,b.g_title,b.g_delivery,b.g_attach 
-		from tb_cart a join goods b on a.g_seq=b.g_seq where member_id=#{member_id}
+
+	<select id="myGoodsCartSelect"
+		resultType="com.kakao.kitkat.entities.Tb_cart">
+		select
+		a.g_seq,a.checkYn,a.price,a.qty,a.totalprice,b.g_title,b.g_delivery,b.g_attach
+		from tb_cart a join goods b on a.g_seq=b.g_seq where
+		member_id=#{member_id}
+	</select>
+
+	<update id="cartCheckUpdateRow">
+		update tb_cart set
+		checkYn = #{checkYn}
+		where g_seq =
+		#{g_seq} and
+		member_id=#{member_id}
+	</update>
+
+	<select id="myGoodsCartCheckedSelect"
+		resultType="com.kakao.kitkat.entities.Tb_cart">
+		select
+		sum(totalprice) totalprice,sum(b.g_delivery)
+		deliveryTotalPrice
+		from tb_cart a join goods b on a.g_seq=b.g_seq where
+		member_id=#{member_id} and checkYn='y'
+	</select>
+
+	<select id="myGoodsCartCheckedPaymentSelect"
+		resultType="com.kakao.kitkat.entities.Tb_cart">
+		select a.g_seq,a.checkYn,a.price,a.qty,a.totalprice,b.g_title,b.g_delivery,b.g_attach
+		from tb_cart a join goods b on a.g_seq=b.g_seq where
+		member_id=#{member_id} and checkYn='y'
 	</select>
 
 
