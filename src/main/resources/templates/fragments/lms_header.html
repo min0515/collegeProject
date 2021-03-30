@@ -11,8 +11,11 @@
 
 			<div class="ui inline dropdown" style="margin-top: 5px;">
 				<img class="left floated mini ui image" src="/images/ggom.png">
-				<span style="color: white;"
+				<span style="color: white;" th:if="${session.sessionProfessor_name} !=null"
 					th:text="${session.sessionProfessor_name}"></span><i
+					class="dropdown icon"></i>
+				<span style="color: white;" th:if="${session.sessionStudent_name} !=null"
+					th:text="${session.sessionStudent_name}"></span><i
 					class="dropdown icon"></i>
 				<div class="menu">
 					<div class="item" onclick="location.href='professorUpdate'">

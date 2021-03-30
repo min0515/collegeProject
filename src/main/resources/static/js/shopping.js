@@ -61,7 +61,7 @@ function zipcodeFindB() {
 			// 우편번호와 주소 정보를 해당 필드에 넣는다.
 
 			document.getElementById('zipcode').value = data.zonecode; //5자리 새우편번호 사용
-			
+
 			document.getElementById('addr1').value = fullAddr;
 
 			// 커서를 상세주소 필드로 이동한다.
@@ -78,9 +78,9 @@ $(document).ready(function() {
 	$('#qtyInputProdetail').on('change', function() {
 		var qty = $('#qtyInputProdetail').val();
 		var price = $('#priceHiddenDetail').val();
-		var result =String(price*qty);
+		var result = String(price * qty);
 		var finalresult = result.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-		$('#goodsDetailTotalPrice').text(finalresult+'원');
+		$('#goodsDetailTotalPrice').text(finalresult + '원');
 		$('#detailTotalQty').text("상품금액(" + qty + "개)");
 	});
 
@@ -116,9 +116,26 @@ $(document).ready(function() {
 		var input = td.eq(0).children().children();
 		var qty = td.eq(3).children().val();
 		var deliveryVal = Number(td.eq(6).children().val());
-		var totalPriceVal = Number(td.eq(7).children().val())*qty;
+		var totalPriceVal = Number(td.eq(7).children().val()) * qty;
 		var result = deliveryVal + totalPriceVal;
+		var g_seq = td.eq(9).children().val();
 		if ($(input).is(":checked") == true) {
+			$.ajax({
+				type: 'POST',
+				data: { g_seq: g_seq },
+				datatype: 'json',
+				url: 'cartProductCheckYnAjax',
+				success: function(data) {
+					if (data == "login") {
+						location.href = 'shoppingLogin'
+					}else{
+						
+					}
+				},
+				error: function(xhr, status, error) {
+					alert('ajax error' + xhr.status);
+				}
+			});
 			$('#productPrice').text(Number($('#productPriceVal').val()) + totalPriceVal);
 			var productPriceRe = $('#productPrice').text().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 			$('#productPrice').text(productPriceRe)
@@ -135,6 +152,20 @@ $(document).ready(function() {
 			$('#finalPriceVal').val(Number($('#finalPriceVal').val()) + result);
 
 		} else {
+			$.ajax({
+				type: 'POST',
+				data: { g_seq: g_seq },
+				datatype: 'json',
+				url: 'cartProductNonCheckYnAjax',
+				success: function(data) {
+					if (data == "login") {
+						location.href = 'shoppingLogin'
+					}
+				},
+				error: function(xhr, status, error) {
+					alert('ajax error' + xhr.status);
+				}
+			});
 			$('#productPrice').text(Number($('#productPriceVal').val()) - totalPriceVal);
 			var productPriceRe = $('#productPrice').text().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 			$('#productPrice').text(productPriceRe)
@@ -151,9 +182,9 @@ $(document).ready(function() {
 			$('#finalPriceVal').val(Number($('#finalPriceVal').val()) - result);
 		}
 	});
-	
-	
-	
+
+
+
 	$("#myCartTable").on('change', '#qtyInputProdetail', 'td', function() {
 		var row = $(this).closest('tr');
 		var td = row.children();
@@ -162,7 +193,7 @@ $(document).ready(function() {
 		var input = td.eq(0).children().children();
 		var totalPriceVal = Number(td.eq(7).children().val());
 		if ($(input).is(":checked") == true) {
-			$('#productPriceVal').val(Number($('#productPriceVal').val()) - beforeQty*totalPriceVal + qty*totalPriceVal);
+			$('#productPriceVal').val(Number($('#productPriceVal').val()) - beforeQty * totalPriceVal + qty * totalPriceVal);
 			$('#productPrice').text(Number($('#productPriceVal').val()));
 			var productPriceRe = $('#productPrice').text().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 			$('#productPrice').text(productPriceRe)
@@ -184,37 +215,43 @@ $(document).ready(function() {
 			$(".chBox").prop("checked", false);
 		}
 	});
-//	$('#g_qty').on('change', function() {
-//		var price = $('#g_pricehidden').val();
-//		var qty = Number($(this).val());
-//		var result =String(price*qty); 
-//		var commaresult = result.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-//		var delivery = $('#g_delivery').val();
-//		var commafinalresult =String(price*qty + Number(delivery));
-//		var finalResult = commafinalresult.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-//		$('#final_price').text(commaresult+'원');
-//		$('#total_money').text(finalResult+'원');
-//		$('#countupdown').text("총결제금액("+qty+")개");
-//	})
-	
-	$('#shoppingPaiging').on('click',function(){
+
+	//	$('#g_qty').on('change', function() {
+	//		var price = $('#g_pricehidden').val();
+	//		var qty = Number($(this).val());
+	//		var result =String(price*qty); 
+	//		var commaresult = result.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	//		var delivery = $('#g_delivery').val();
+	//		var commafinalresult =String(price*qty + Number(delivery));
+	//		var finalResult = commafinalresult.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	//		$('#final_price').text(commaresult+'원');
+	//		$('#total_money').text(finalResult+'원');
+	//		$('#countupdown').text("총결제금액("+qty+")개");
+	//	})
+
+	$('#shoppingPaiging').on('click', function() {
 		var g_seq = $('#hiddeng_seq').val()
 		var qty = $('#qtyInputProdetail').val();
 		var price = $('#priceHiddenDetail').val();
-		var result =String(price*qty); 
+		var result = String(price * qty);
 		var commaresult = result.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		var delivery = $('#g_delivery').val();
-		var commafinalresult =String(price*qty + Number(delivery));
+		var commafinalresult = String(price * qty + Number(delivery));
 		var finalResult = commafinalresult.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		$('#final_price').text(commaresult+'원');
-		$('#total_money').text(finalResult+'원');
-		$('#countupdown').text("총결제금액("+qty+")개");
-		document.location.href="goodsDelivery?g_seq="+g_seq+"&qty="+qty;
+		$('#final_price').text(commaresult + '원');
+		$('#total_money').text(finalResult + '원');
+		$('#countupdown').text("총결제금액(" + qty + ")개");
+		document.location.href = "goodsDelivery?g_seq=" + g_seq + "&qty=" + qty;
 	});
-	
+
 	$('#completebtn').on('click', function() {
 		$("#Complete").attr("action", "paymentComplete");
 		$("#Complete").submit();
-		
+
 	});
+
+	$('#cartPayment').on('click', function() {
+		location.href = 'cartPaymentGo'
+	});
+
 });

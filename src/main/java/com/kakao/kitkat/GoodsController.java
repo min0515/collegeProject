@@ -48,6 +48,9 @@ public class GoodsController {
 	GoodsPaging goodspaging;
 	public static String find;
 
+	@Autowired
+	Tb_cart tb_cart;
+
 	@RequestMapping(value = "/qnaBoardWriteSave", method = RequestMethod.POST)
 	public String qnaBoardWriteSave(Model model, @ModelAttribute Board board,
 			@RequestParam("b_attachfile") MultipartFile b_attachfile, HttpServletRequest request) throws Exception {
@@ -251,7 +254,6 @@ public class GoodsController {
 			tb_cart.setMember_id(member_id);
 			tb_cart.setTotalprice(tb_cart.getPrice() * tb_cart.getQty());
 			try {
-				System.out.println(tb_cart.getQty());
 				dao.cartInsertRow(tb_cart);
 				return "y";
 			} catch (Exception e) {
@@ -272,9 +274,69 @@ public class GoodsController {
 		} else {
 			int mycartcount = dao.myGoodsCartCount(member_id);
 			ArrayList<Tb_cart> myProducts = dao.myGoodsCartSelect(member_id);
+			Tb_cart cartprice = dao.myGoodsCartCheckedSelect(member_id);
 			model.addAttribute("mycartcount", mycartcount);
 			model.addAttribute("myProducts", myProducts);
+			if (cartprice == null) {
+				tb_cart.setDeliveryTotalPrice(0);
+				tb_cart.setTotalprice(0);
+				model.addAttribute("cartprice", tb_cart);
+			} else {
+				model.addAttribute("cartprice", cartprice);
+			}
 			return "goods/goods_cart";
+		}
+
+	}
+
+	@RequestMapping(value = "/cartPaymentGo", method = RequestMethod.GET)
+	public String cartPaymentGo(Locale locale, Model model, HttpSession session) throws Exception {
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+		String member_id = (String) session.getAttribute("sessionMember_id");
+		if (member_id == null) {
+			return "login/login2";
+		} else {
+			ArrayList<Tb_cart> cartPayments = dao.myGoodsCartCheckedPaymentSelect(member_id);
+			model.addAttribute("cartPayments", cartPayments);
+			return "goods/payment_cart";
+		}
+
+	}
+
+	@RequestMapping(value = "/cartProductCheckYnAjax", method = RequestMethod.POST)
+	@ResponseBody
+	public String cartProductCheckYnAjax(Model model, @RequestParam int g_seq, HttpSession session) throws Exception {
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+		String member_id = (String) session.getAttribute("sessionMember_id");
+		System.out.println(member_id);
+		tb_cart.setMember_id(member_id);
+		tb_cart.setG_seq(g_seq);
+		tb_cart.setCheckYn("y");
+		if (member_id == null) {
+			return "login";
+		} else {
+			dao.cartCheckUpdateRow(tb_cart);
+			return "y";
+
+		}
+
+	}
+
+	@RequestMapping(value = "/cartProductNonCheckYnAjax", method = RequestMethod.POST)
+	@ResponseBody
+	public String cartProductNonCheckYnAjax(Model model, @RequestParam int g_seq, HttpSession session)
+			throws Exception {
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+		String member_id = (String) session.getAttribute("sessionMember_id");
+		tb_cart.setMember_id(member_id);
+		tb_cart.setG_seq(g_seq);
+		tb_cart.setCheckYn("n");
+		if (member_id == null) {
+			return "login";
+		} else {
+			dao.cartCheckUpdateRow(tb_cart);
+			return "y";
+
 		}
 
 	}
