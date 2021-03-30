@@ -4,7 +4,6 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -146,7 +145,6 @@ public class GoodsController {
 		orders.setMember_id(professor_no);
 		dao2.OrderssAdd(orders);
 		Orders ord = dao2.ordersSelectOne(professor_no);
-		System.out.println(ord.getG_total());
 		model.addAttribute("ord", ord);
 		return "goods/payment_complete";
 	}
@@ -228,9 +226,6 @@ public class GoodsController {
 			} catch (IllegalStateException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		}
 		SimpleDateFormat df = new SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm:ss");
@@ -308,7 +303,6 @@ public class GoodsController {
 	public String cartProductCheckYnAjax(Model model, @RequestParam int g_seq, HttpSession session) throws Exception {
 		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
 		String member_id = (String) session.getAttribute("sessionMember_id");
-		System.out.println(member_id);
 		tb_cart.setMember_id(member_id);
 		tb_cart.setG_seq(g_seq);
 		tb_cart.setCheckYn("y");

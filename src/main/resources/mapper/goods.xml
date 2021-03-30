@@ -23,7 +23,7 @@
 		update goods set g_title=#{g_title},
 		g_content=#{g_content} where g_seq = #{g_seq};
 	</update>
-
+	
 	<!-- <delete id="deleteRow"> -->
 	<!-- delete from board where b_seq=#{b_seq} -->
 	<!-- </delete> -->
