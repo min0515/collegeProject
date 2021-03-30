@@ -26,11 +26,6 @@ public class SchoolController {
 		return "school_index";
 	}
 
-	@RequestMapping(value = "/loginSelection", method = RequestMethod.GET)
-	public String loginSelection(Model model) throws Exception {
-		return "login/login_selection";
-	}
-
 	@RequestMapping(value = "/schoolIntro", method = RequestMethod.GET)
 	public String schoolIntro(Model model) throws Exception {
 		return "school/school_intro";

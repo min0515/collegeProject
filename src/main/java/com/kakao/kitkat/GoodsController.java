@@ -243,7 +243,7 @@ public class GoodsController {
 		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
 		String member_id = (String) session.getAttribute("sessionMember_id");
 		if (member_id == null) {
-			return "login/login";
+			return "login/login2";
 		} else {
 			tb_cart.setMember_id(member_id);
 			tb_cart.setTotalprice(tb_cart.getPrice() * tb_cart.getQty());
@@ -264,7 +264,7 @@ public class GoodsController {
 		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
 		String member_id = (String) session.getAttribute("sessionMember_id");
 		if (member_id == null) {
-			return "login/login";
+			return "login/login2";
 		} else {
 			int mycartcount = dao.myGoodsCartCount(member_id);
 			ArrayList<Tb_cart> myProducts = dao.myGoodsCartSelect(member_id);
