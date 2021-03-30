@@ -272,7 +272,9 @@
 		where
 		class_no=#{class_no}
 	</select>
-
-
+	
+	<select id="sessionRegistration" resultType="com.kakao.kitkat.entities.Tb_registration">
+		select * from tb_registration
+	</select>
 
 </mapper>

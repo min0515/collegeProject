@@ -24,10 +24,10 @@
 				<div class="item">
 					<a class="link" href="classRegistrationAdminPageGo">수강신청관리</a>
 				</div>
-				<div class="item">
+				<div th:if="${session.sessionRegistration}=='y'" class="item">
 					<a class="link" href="classRegistrationGo">수강신청</a>
 				</div>
-				<div class="item">
+				<div th:if="${session.sessionPreRegistration}=='y'" class="item">
 					<a class="link" href="ClassPreRegistrationGo">수강바구니</a>
 				</div>
 				<div class="item">
@@ -51,7 +51,7 @@
 				<div class="item">
 					<a class="link" href="spaceReservationPageGo">스터디룸 에약</a>
 				</div>
-				<div class="item">
+				<div th:if="${session.sessionMember_id} != null" class="item">
 					<a class="link" href="myReservationPageGo">내 예약</a>
 				</div>
 			</div>

@@ -9,6 +9,7 @@ import com.kakao.kitkat.entities.Tb_classreview;
 import com.kakao.kitkat.entities.Tb_department;
 import com.kakao.kitkat.entities.Tb_grade;
 import com.kakao.kitkat.entities.Tb_professor;
+import com.kakao.kitkat.entities.Tb_registration;
 import com.kakao.kitkat.entities.Tb_student;
 
 public interface Tb_classDao {
@@ -98,5 +99,7 @@ public interface Tb_classDao {
 	public int classReviewCountSelect(Tb_classreview tb_classreview);
 
 	public ArrayList<Tb_classreview> classReviewListSelect(String class_no);
+
+	public Tb_registration sessionRegistration() throws Exception;
 
 }
