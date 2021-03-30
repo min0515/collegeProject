@@ -84,7 +84,7 @@ $(document).ready(function() {
 		$('#detailTotalQty').text("상품금액(" + qty + "개)");
 	});
 
-	$('#detailCartGo').on('click', function() {
+	$('#detailCartGo').off().on('click', function() {
 		var tb_cart = $('#goodsDetailform').serialize();
 		$.ajax({
 			type: 'POST',
@@ -110,7 +110,7 @@ $(document).ready(function() {
 		location.href = "goodsCartGo";
 	});
 
-	$("#myCartTable").on('change', '#checkmycart', 'td', function() {
+	$("#myCartTable").off().on('change', '#checkmycart', 'td', function() {
 		var row = $(this).closest('tr');
 		var td = row.children();
 		var input = td.eq(0).children().children();

@@ -55,11 +55,11 @@
 							<td style="width: 10%;"
 								th:text="${#numbers.formatDecimal(myProduct.g_deilvery, 0, 'COMMA', 0, 'POINT')}+원"></td>
 							<td style="width: 10%;"
-								th:text="${#numbers.formatDecimal(myProduct.totalprice, 0, 'COMMA', 0, 'POINT')}+원"></td>
+								th:text="${#numbers.formatDecimal(myProduct.price, 0, 'COMMA', 0, 'POINT')}+원"></td>
 							<td style="display: none;"><input type="hidden"
 								th:value="${myProduct.g_deilvery}"></td>
 							<td style="display: none;"><input type="hidden"
-								th:value="${myProduct.totalprice}"></td>
+								th:value="${myProduct.price}"></td>
 							<td style="display: none;"><input type="hidden" th:value="${myProduct.qty}"></td>
 						</tr>
 					</tbody>

@@ -251,6 +251,7 @@ public class GoodsController {
 			tb_cart.setMember_id(member_id);
 			tb_cart.setTotalprice(tb_cart.getPrice() * tb_cart.getQty());
 			try {
+				System.out.println(tb_cart.getQty());
 				dao.cartInsertRow(tb_cart);
 				return "y";
 			} catch (Exception e) {

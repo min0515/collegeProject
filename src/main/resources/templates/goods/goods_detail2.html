@@ -63,7 +63,7 @@
 					<div class="ui segment" style="background-color: #F8F8F8;">
 						<p>수량</p>
 						<hr align="left">
-						<Input type="number" min="1" max="99" id="qtyInputProdetail" name="qty" value="1"
+						<Input type="number" min="0" max="99" id="qtyInputProdetail" name="qty" value="1"
 							style="width: 100px;" /><span th:text="${#numbers.formatDecimal(goods.g_price, 0, 'COMMA', 0, 'POINT')}+원"
 							style="display: right; font-size: 18px; float: right;"></span>
 					</div>
