@@ -7,203 +7,159 @@
 </head>
 <body>
 	<div layout:fragment="content">
-		<div class="ui four column grid left aligned"
-			style="background-color: #F5F6F7">
-			<div></div>
-			<div class="three wide column"
-				style="margin-top: 50px; background-color: #F5F6F7">
-				<div class="ui vertical menu" style="margin-bottom: 20px;">
-					<a class="item" href="schoolMain"> 자바대학교 홈페이지 </a> <a class="item"
-						href="shoppingAboutus"> <i class="grid layout icon"></i>
-						자바대학교 쇼핑몰
-					</a> <a class="item" href="professorLoginUp"> 자바대학교 LMS </a>
-					<div class="ui dropdown item">
-						수강정보 <i class="dropdown icon"></i>
-						<div class="menu">
-							<a class="item" href="classInsert"><i class="edit icon"></i>
-								강의등록</a> <a class="item" href="classAdminListGo"><i
-								class="globe icon"></i> 강의관리</a> <a class="item"
-								href="classRegistrationAdminPageGo"><i class="globe icon"></i>
-								수강신청관리</a> <a class="item" href="classRegistrationGo"><i
-								class="globe icon"></i> 수강신청</a> <a class="item"
-								href="ClassPreRegistrationGo"><i class="globe icon"></i>
-								수강바구니</a> <a class="item" href="myclassFinalList"><i
-								class="globe icon"></i> 수강이력조회</a> <a class="item"
-								href="classSearchList"><i class="globe icon"></i> 강의조회</a> <a
-								class="item" href="classSearchListGo"><i
-								class="settings icon"></i> 수강신청안내</a>
-						</div>
-					</div>
-					<div class="ui dropdown item">
-						예약 <i class="dropdown icon"></i>
-						<div class="menu">
-							<a class="item" href="reservationPageGo"><i class="edit icon"></i>
-								도서관 예약</a> <a class="item" href="spaceReservationPageGo"><i
-								class="globe icon"></i> 스터디룸 예약</a> <a class="item"
-								href="myReservationPageGo"><i class="globe icon"></i> 내 예약</a>
-						</div>
-					</div>
-					<div class="ui dropdown item">
-						교수 <i class="dropdown icon"></i>
-						<div class="menu">
-							<a class="item" href="professorjoin"><i class="edit icon"></i>
-								교수 등록</a> <a class="item" href="professorlist"><i
-								class="globe icon"></i> 교수 리스트</a> <a class="item"
-								th:href="tbclassprojoin"><i class="globe icon"></i> 교수 수업등록</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- 컨텐트 -->	
 			<div class="ten wide column center aligned"
-				style="background-color: #F5F6F7; padding:60px 0px">
-			<h2 class="ui header">
-				<strong>강의등록</strong>
-			</h2>
-			<form class="ui large from" action="classInsertSave" Method="post">
-				<div class="ui stacked segment">
-					<div class="field">
-						<div class="ui fluid labeled input">
-							<div class="ui label">강의번호</div>
-							<input type="text" id="class_no" name="class_no"
-								placeholder="C로 시작하는 7자리" required>
-							<button class="ui grey basic button" type="button"
-								id="classNumConfirm">중복검사</button>
+				style="background-color: #F5F6F7; padding: 60px 0px">
+				<h2 class="ui header">
+					<strong>강의등록</strong>
+				</h2>
+				<form class="ui large from" action="classInsertSave" Method="post">
+					<div class="ui stacked segment">
+						<div class="field">
+							<div class="ui fluid labeled input">
+								<div class="ui label">강의번호</div>
+								<input type="text" id="class_no" name="class_no"
+									placeholder="C로 시작하는 7자리" required>
+								<button class="ui grey basic button" type="button"
+									id="classNumConfirm">중복검사</button>
+							</div>
 						</div>
-					</div>
-					<div class="field">
-						<div class="ui fluid labeled input">
-							<div class="ui label">학과번호</div>
-							<input type="hidden" name="department_no" id="department_no">
-							<input type="text" name="department_name" id="department_name" readonly="readonly" required>
-							<button class="ui grey basic button" type="button"
-								id="departmentSearchInsert">학과검색</button>
+						<div class="field">
+							<div class="ui fluid labeled input">
+								<div class="ui label">학과번호</div>
+								<input type="hidden" name="department_no" id="department_no">
+								<input type="text" name="department_name" id="department_name"
+									readonly="readonly" required>
+								<button class="ui grey basic button" type="button"
+									id="departmentSearchInsert">학과검색</button>
+							</div>
 						</div>
-					</div>
-					<div class="field">
-						<div class="ui fluid labeled input">
-							<div class="ui label">수업이름</div>
-							<input type="text" name="class_name" required>
+						<div class="field">
+							<div class="ui fluid labeled input">
+								<div class="ui label">수업이름</div>
+								<input type="text" name="class_name" required>
+							</div>
 						</div>
-					</div>
-					<div class="field">
-						<div class="ui fluid labeled input">
-							<div class="ui label">담당교수</div>
-							<input type="hidden" name="professor_no" id="professor_no">
-							<input type="text" name="professor_name" id="professor_name" readonly="readonly">
-							<button class="ui grey basic button" type="button"
-								id="professorSearchInsert">교수검색</button>
-						</div>
-					</div>
-					<div class="field">
-						<div class="ui fluid labeled input">
-							<div class="ui label">학과정원</div>
-							<input type="text" name="maxcapacity" required>
-						</div>
-					</div>
-					<div class="field">
-						<select class="ui selection fluid dropdown" style="height: 43px"
-							name="class_type">
-							<option th:text="전공필수" th:value="전공필수"></option>
-							<option th:text="전공선택" th:value="전공선택"></option>
-						</select>
-					</div>
-					<div class="field" style="margin-top: 20px">
-						<span><button type="submit" class="ui primary basic button"
-								style="width: 48%">저장</button></span> <span><button
-								type="button" class="ui negative  basic button"
-								onclick="location.href='classCancel'" style="width: 48%">취소</button></span>
-					</div>
-
-
-					<!-- 중복검사 모달 -->
-					<div class="ui mini classNumconfirm modal">
-						<div class="header">중복검사</div>
-						<div class="classmodal content">
-							<p></p>
-						</div>
-						<div class="actions">
-							<div class="ui cancel button">확인</div>
-						</div>
-					</div>
-
-					<!-- 학과,수업검색 모달 -->
-					<div class="ui department search tiny modal">
-						<div class="header">학과검색</div>
-						<div class="scrolling content">
-							<div class="ui labeled input fluid" style="margin-bottom: 10px;">
-								<div class="ui label">선택</div>
-								<input type="text" id="departmentModalInput" placeholder="학과번호"
+						<div class="field">
+							<div class="ui fluid labeled input">
+								<div class="ui label">담당교수</div>
+								<input type="hidden" name="professor_no" id="professor_no">
+								<input type="text" name="professor_name" id="professor_name"
 									readonly="readonly">
-							</div>
-							<div>
-								<table id="departmentExample" class="display nowrap"
-									style="text-align: center;">
-									<thead>
-										<tr>
-											<th><h3>학과번호</h3></th>
-											<th><h3>학과이름</h3></th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr th:each="department : ${departments}"
-											style="cursor: pointer;">
-											<td th:text="${department.department_no}"
-												th:value="${department.department_no}" id="departmentSelect"></td>
-											<td th:text="${department.department_name}"
-												id="departmentSelect"></td>
-										</tr>
-									</tbody>
-								</table>
+								<button class="ui grey basic button" type="button"
+									id="professorSearchInsert">교수검색</button>
 							</div>
 						</div>
-						<div class="actions">
-							<button style="width: 40%;" class="ui primary cancel button">확인</button>
-							<button style="width: 40%; margin-right: 40px"
-								id="departmentSearchCancelBtn" class="ui cancel button">취소</button>
+						<div class="field">
+							<div class="ui fluid labeled input">
+								<div class="ui label">학과정원</div>
+								<input type="text" name="maxcapacity" required>
+							</div>
 						</div>
-					</div>
+						<div class="field">
+							<select class="ui selection fluid dropdown" style="height: 43px"
+								name="class_type">
+								<option th:text="전공필수" th:value="전공필수"></option>
+								<option th:text="전공선택" th:value="전공선택"></option>
+							</select>
+						</div>
+						<div class="field" style="margin-top: 20px">
+							<span><button type="submit"
+									class="ui primary basic button" style="width: 48%">저장</button></span>
+							<span><button type="button"
+									class="ui negative  basic button"
+									onclick="location.href='classCancel'" style="width: 48%">취소</button></span>
+						</div>
 
-					<!-- 교수검색 모달 -->
-					<div class="ui professor search tiny modal">
-						<div class="header">교수검색</div>
-						<div class="scrolling content">
-							<div class="ui labeled input fluid" style="margin-bottom: 10px;">
-								<button class="ui button" id="selectProfessor">선택</button>
-								<input type="text" id="professorModalInput" placeholder="학과번호"
-									readonly="readonly">
+
+						<!-- 중복검사 모달 -->
+						<div class="ui mini classNumconfirm modal">
+							<div class="header">중복검사</div>
+							<div class="classmodal content">
+								<p></p>
 							</div>
-							<div>
-								<table id="professorExample" class="display nowrap"
-									style="text-align: center;">
-									<thead>
-										<tr>
-											<th><h3>교수번호</h3></th>
-											<th><h3>교수이름</h3></th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr th:each="professor : ${professors}"
-											style="cursor: pointer;">
-											<td th:text="${professor.professor_no}"
-												th:value="${professor.professor_no}" id="professorSelect"></td>
-											<td th:text="${professor.professor_name}"
-												id="professorSelect"></td>
-										</tr>
-									</tbody>
-								</table>
+							<div class="actions">
+								<div class="ui cancel button">확인</div>
 							</div>
 						</div>
-						<div class="actions">
-							<button style="width: 40%;" class="ui primary cancel button">확인</button>
-							<button style="width: 40%; margin-right: 40px"
-								id="professorSearchCancelBtn" class="ui cancel button">취소</button>
+
+						<!-- 학과,수업검색 모달 -->
+						<div class="ui department search tiny modal">
+							<div class="header">학과검색</div>
+							<div class="scrolling content">
+								<div class="ui labeled input fluid" style="margin-bottom: 10px;">
+									<div class="ui label">선택</div>
+									<input type="text" id="departmentModalInput" placeholder="학과번호"
+										readonly="readonly">
+								</div>
+								<div>
+									<table id="departmentExample" class="display nowrap"
+										style="text-align: center;">
+										<thead>
+											<tr>
+												<th><h3>학과번호</h3></th>
+												<th><h3>학과이름</h3></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="department : ${departments}"
+												style="cursor: pointer;">
+												<td th:text="${department.department_no}"
+													th:value="${department.department_no}"
+													id="departmentSelect"></td>
+												<td th:text="${department.department_name}"
+													id="departmentSelect"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="actions">
+								<button style="width: 40%;" class="ui primary cancel button">확인</button>
+								<button style="width: 40%; margin-right: 40px"
+									id="departmentSearchCancelBtn" class="ui cancel button">취소</button>
+							</div>
+						</div>
+
+						<!-- 교수검색 모달 -->
+						<div class="ui professor search tiny modal">
+							<div class="header">교수검색</div>
+							<div class="scrolling content">
+								<div class="ui labeled input fluid" style="margin-bottom: 10px;">
+									<button class="ui button" id="selectProfessor">선택</button>
+									<input type="text" id="professorModalInput" placeholder="학과번호"
+										readonly="readonly">
+								</div>
+								<div>
+									<table id="professorExample" class="display nowrap"
+										style="text-align: center;">
+										<thead>
+											<tr>
+												<th><h3>교수번호</h3></th>
+												<th><h3>교수이름</h3></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="professor : ${professors}"
+												style="cursor: pointer;">
+												<td th:text="${professor.professor_no}"
+													th:value="${professor.professor_no}" id="professorSelect"></td>
+												<td th:text="${professor.professor_name}"
+													id="professorSelect"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="actions">
+								<button style="width: 40%;" class="ui primary cancel button">확인</button>
+								<button style="width: 40%; margin-right: 40px"
+									id="professorSearchCancelBtn" class="ui cancel button">취소</button>
+							</div>
 						</div>
 					</div>
-				</div>
-			</form>
+				</form>
+			</div>
 		</div>
-	</div>
 	</div>
 </body>
 </html>

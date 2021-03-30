@@ -2,16 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout/lms_layout">
-
-<th:block layout:fragment="css">
-	<link rel="stylesheet" th:href="@{/css/class.css}">
-</th:block>
+<head>
+<title>index</title>
 <th:block layout:fragment="script">
 	<script type="text/javascript" th:src="@{/js/class.js}"></script>
 </th:block>
-<body layout:fragment="content">
-	<div class="ui middle aligned center aligned grid">
-		<div class="column" style="height: 600px !important;">
+</head>
+<body>
+	<div layout:fragment="content">
+			<div class="five wide column center aligned" style="background-color: #F5F6F7; padding:60px 0px">
 			<h2 class="ui header">
 				<strong>강의관리</strong>
 			</h2>
@@ -51,7 +50,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<div class="ui mini classDelete modal">
+			<div class="ui mini classDelete modal">오후 12:33 2021-03-30
 				<div class="classmodal header">강의삭제</div>
 				<div class="classmodal content">
 					<p>삭제 하시겠습니까?</p>
@@ -70,6 +69,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 </body>
 </html>

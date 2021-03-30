@@ -5,14 +5,23 @@
 <head th:replace="fragments/lms_config :: lms_config">
 </head>
 <body>
-<div class="ui borderless main menu" style=" margin:0; background-color:#17a2b8;">
+<!-- 메뉴바 -->
+	<div class="ui borderless main menu"
+		style="margin: 0; background-color: #17a2b8; padding: 30px">
 		<th:block th:replace="fragments/lms_header"></th:block>
 	</div>
-	<div class="container">
-		<div class="content">
-			<div layout:fragment="content"></div>
+<!-- 왼쪽메뉴 -->
+	<div class="ui sixteen column grid" style="background-color: #F5F6F7">
+			<th:block th:replace="fragments/classLeftMenu"></th:block>
+		
+<!-- 내용 -->
+		<div class=" ui ten column grid center aligned  container">
+			<div class="content">
+				<div layout:fragment="content"></div>
+			</div>
 		</div>
 	</div>
+<!-- 푸터 -->
 	<div class="ui inverted vertical footer segment">
 		<th:block th:replace="fragments/footer"></th:block>
 	</div>
