@@ -39,10 +39,11 @@
 								<div class="content">
 									<a class="header" th:href="@{goodsDetail2(g_seq=${goods.g_seq})}"> 
 										<span th:text="${goods.g_title}"></span></a>
-										<span class="date" th:text="${goods.g_price}+원"></span>
+										<span class="date" th:text="${#numbers.formatDecimal(goods.g_price, 0, 'COMMA', 0, 'POINT')}+원"></span>
 								</div>
 								<div class="extra content">
-									<a th:href="@{goodsDelivery(g_seq=${goods.g_seq})}"> <i class="won sign icon" ></i> 구매하기
+<!-- 								th:href="@{goodsDelivery(g_seq=${goods.g_seq})}" -->
+									<a > <i class="won sign icon" ></i> 구매하기
 									</a>
 									<div>
 										<i class="shopping bag icon"></i> 장바구니
