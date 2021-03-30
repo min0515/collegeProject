@@ -2,19 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout/lms_layout">
-
-<th:block layout:fragment="css">
-	<link rel="stylesheet" th:href="@{/css/class.css}">
-</th:block>
 <th:block layout:fragment="script">
 	<script type="text/javascript" th:src="@{/js/class.js}"></script>
 </th:block>
 <body layout:fragment="content">
 	<div class="ui middle aligned center aligned grid">
 		<div class="column" style="max-width: 85% !important;">
+		<h2 class="ui header">
+				<strong>수강 바구니</strong>
+			</h2>
 			<form class="ui large form" id="classBasketFindForm" Method="post">
 				<div class="ui stacked segment" id="segmentSearch">
 					<div class="field">
+					
 						<div class="ui labeled input fluid searchInput">
 							<div class="ui label">이수구분</div>
 							<input type="hidden" name="beforeClassType"> <select
