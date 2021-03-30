@@ -50,4 +50,5 @@
 	<select id="alreadySpaceSelectOne" resultType="Integer">
 		select count(*) from tb_reservation where student_no=#{student_no} and seq = 0
 	</select>
+	
 </mapper>

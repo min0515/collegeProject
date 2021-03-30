@@ -2,6 +2,23 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head></head>
 <body th:fragment="header">
+<div style="color:white; font-size:20px; font-weight:bold;margin-top:6px; margin-left:10px;" onclick="location.href='professorLoginUp';">자바대학교 학사관리시스템</div>
+	<div th:unless="${session.sessionMember_id==null}">
+		<div class="ui text right aligned container" style=" position: absolute;
+        right: 10px;">
+
+			<div class="ui inline dropdown" style="margin-top:5px;">
+				<img class="left floated mini ui image" src="/images/ggom.png">
+				<span style="color:white;"th:text="${session.sessionProfessor_name}"></span><i class="dropdown icon" ></i>
+				<div class="menu">
+					<div class="item" onclick="location.href='professorUpdate'">
+						정보수정</div>
+					<div class="item" onclick="location.href='tbclassupdateRow'">
+						수업수정</div>
+					<div class="item" id="proclassUpdatePage"
+						onclick="location.href='gradesearch'">학생조회</div>
+					<div class="item" id="proclassUpdatePage"
+						onclick="location.href='logout'">로그아웃</div>
 	<div class="ui text container" style="padding: 0 120px;">
 		<div class="header item">
 			<a class="link" href="home">Home</a>
@@ -24,10 +41,10 @@
 				<div class="item">
 					<a class="link" href="classRegistrationAdminPageGo">수강신청관리</a>
 				</div>
-				<div class="item">
+				<div th:if="${session.sessionRegistration}=='y'" class="item">
 					<a class="link" href="classRegistrationGo">수강신청</a>
 				</div>
-				<div class="item">
+				<div th:if="${session.sessionPreRegistration}=='y'" class="item">
 					<a class="link" href="ClassPreRegistrationGo">수강바구니</a>
 				</div>
 				<div class="item">
@@ -51,7 +68,7 @@
 				<div class="item">
 					<a class="link" href="spaceReservationPageGo">스터디룸 에약</a>
 				</div>
-				<div class="item">
+				<div th:if="${session.sessionMember_id} != null" class="item">
 					<a class="link" href="myReservationPageGo">내 예약</a>
 				</div>
 			</div>

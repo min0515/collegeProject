@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kakao.kitkat.dao.MemberDao;
+import com.kakao.kitkat.dao.Tb_classDao;
 import com.kakao.kitkat.entities.Member;
 import com.kakao.kitkat.entities.Tb_professor;
+import com.kakao.kitkat.entities.Tb_registration;
 import com.kakao.kitkat.entities.Tb_student;
 
 @Controller
@@ -55,9 +57,15 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/studentLoginUp", method = RequestMethod.POST)
-	public String loginUp(Model model, @ModelAttribute Tb_student tb_student, HttpSession session) {
+	public String loginUp(Model model, @ModelAttribute Tb_student tb_student, HttpSession session) throws Exception {
+		Tb_classDao dao1 = sqlSession.getMapper(Tb_classDao.class);
+		Tb_registration tb_registration = dao1.sessionRegistration();
+		session.setAttribute("sessionPreregistrationyn", tb_registration.getPreregistrationyn());
+		session.setAttribute("sessionRegistrationyn", tb_registration.getRegistrationyn());
+
 		MemberDao dao = sqlSession.getMapper(MemberDao.class);
 		Tb_student data = dao.selectOne(tb_student.getStudent_no());
+
 		if (data == null) {
 			return "login/login";
 		} else {
@@ -75,11 +83,19 @@ public class MemberController {
 		}
 
 	}
+	
+	
 
 	@RequestMapping(value = "/professorLoginUp", method = RequestMethod.POST)
-	public String loginUp(@ModelAttribute Tb_professor tb_professor, HttpSession session) {
+	public String loginUp(@ModelAttribute Tb_professor tb_professor, HttpSession session) throws Exception {
+		Tb_classDao dao1 = sqlSession.getMapper(Tb_classDao.class);
+		Tb_registration tb_registration = dao1.sessionRegistration();
+		session.setAttribute("sessionPreregistrationyn", tb_registration.getPreregistrationyn());
+		session.setAttribute("sessionRegistrationyn", tb_registration.getRegistrationyn());
+
 		MemberDao dao = sqlSession.getMapper(MemberDao.class);
 		Tb_professor data = dao.professorSelectOne(tb_professor.getProfessor_no());
+
 		if (data == null) {
 			return "login/login";
 		} else {
@@ -197,7 +213,7 @@ public class MemberController {
 	public String login3(HttpSession session) {
 		return "login/login3";
 	}
-
+	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session, Locale locale) {
 		session.invalidate();
