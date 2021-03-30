@@ -2,209 +2,230 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout/lms_layout">
-
 <th:block layout:fragment="css">
 	<link rel="stylesheet" th:href="@{/css/reservation.css}">
 </th:block>
 <th:block layout:fragment="script">
 	<script type="text/javascript" th:src="@{/js/reservation.js}"></script>
 </th:block>
-<body layout:fragment="content">
-	<div class="ui middle aligned center aligned grid">
-		<div class="column" id="studyroomReservationColumn"
-			style="padding: 1% 6% 1% 6%;">
-			<div class="field" style="margin-bottom: 50px">
-				<h1 class="ui  left aligned header">
-					<strong style="margin-left: 4%;">studyroom</strong>
-				</h1>
-			</div>
-			<div class="ui special cards">
-				<div class="card">
-					<div class="blurring dimmable image">
-						<div class="ui dimmer">
-							<div class="content">
-								<div class="center">
-									<input type="hidden" th:value="101">
-									<div th:if="${YnList[0] == 'n'}" class="ui inverted button" id="studyroomReservationBtn">예약</div>
-									<div th:unless="${YnList[0] == 'n'}" class="ui inverted button">예약불가</div>
+<body>
+	<div layout:fragment="content">
+			<div class="ten wide column center aligned"
+				style="background-color: #F5F6F7; padding: 60px 0px">
+				<div class="column">
+					<div class="column" id="studyroomReservationColumn"
+						style="padding: 1% 6% 1% 6%;">
+						<div class="field" style="margin-bottom: 50px">
+							<h1 class="ui  left aligned header">
+								<strong style="margin-left: 4%;">studyroom</strong>
+							</h1>
+						</div>
+						<div class="ui special cards">
+							<div class="card">
+								<div class="blurring dimmable image">
+									<div class="ui dimmer">
+										<div class="content">
+											<div class="center">
+												<input type="hidden" th:value="101">
+												<div th:if="${YnList[0] == 'n'}" class="ui inverted button"
+													id="studyroomReservationBtn">예약</div>
+												<div th:unless="${YnList[0] == 'n'}"
+													class="ui inverted button">예약불가</div>
+											</div>
+										</div>
+									</div>
+									<img id="imgcss" src="images/studyroom1.png">
+								</div>
+								<div class="content">
+									<a class="header">studyroom 1</a>
+								</div>
+								<div class="extra content">
+									<a> <i class="users icon"></i> 최대인원 8명
+									</a>
+								</div>
+							</div>
+							<div class="card" style="margin-top: 3%; margin-bottom: 0;">
+								<div class="blurring dimmable image">
+									<div class="ui dimmer">
+										<div class="content">
+											<div class="center">
+												<input type="hidden" th:value="102">
+												<div th:if="${YnList[1] == 'n'}" class="ui inverted button"
+													id="studyroomReservationBtn">예약</div>
+												<div th:unless="${YnList[1] == 'n'}"
+													class="ui inverted button">예약불가</div>
+											</div>
+										</div>
+									</div>
+									<img id="imgcss" src="images/studyroom2.png">
+								</div>
+								<div class="content">
+									<a class="header">studyroom 2</a>
+								</div>
+								<div class="extra content">
+									<a> <i class="users icon"></i> 최대인원 8명
+									</a>
+								</div>
+							</div>
+							<div class="card">
+								<div class="blurring dimmable image">
+									<div class="ui dimmer">
+										<div class="content">
+											<div class="center">
+												<input type="hidden" th:value="103">
+												<div th:if="${YnList[2] == 'n'}" class="ui inverted button"
+													id="studyroomReservationBtn">예약</div>
+												<div th:unless="${YnList[2] == 'n'}"
+													class="ui inverted button">예약불가</div>
+											</div>
+										</div>
+									</div>
+									<img id="imgcss" src="images/studyroom3.png">
+								</div>
+								<div class="content">
+									<a class="header">studyroom 3</a>
+								</div>
+								<div class="extra content">
+									<a> <i class="users icon"></i> 최대인원 8명
+									</a>
+								</div>
+							</div>
+							<div class="card" style="margin-top: 3%; margin-bottom: 0;">
+								<div class="blurring dimmable image">
+									<div class="ui dimmer">
+										<div class="content">
+											<div class="center">
+												<input type="hidden" th:value="104">
+												<div th:if="${YnList[3] == 'n'}" class="ui inverted button"
+													id="studyroomReservationBtn">예약</div>
+												<div th:unless="${YnList[3] == 'n'}"
+													class="ui inverted button">예약불가</div>
+											</div>
+										</div>
+									</div>
+									<img id="imgcss" src="images/studyroom4.png">
+								</div>
+								<div class="content">
+									<a class="header">studyroom 4</a>
+								</div>
+								<div class="extra content">
+									<a> <i class="users icon"></i> 최대인원 12명
+									</a>
+								</div>
+							</div>
+							<div class="card">
+								<div class="blurring dimmable image">
+									<div class="ui dimmer">
+										<div class="content">
+											<div class="center">
+												<input type="hidden" th:value="105">
+												<div th:if="${YnList[4] == 'n'}" class="ui inverted button"
+													id="studyroomReservationBtn">예약</div>
+												<div th:unless="${YnList[4] == 'n'}"
+													class="ui inverted button">예약불가</div>
+											</div>
+										</div>
+									</div>
+									<img id="imgcss" src="images/studyroom5.png">
+								</div>
+								<div class="content">
+									<a class="header">studyroom 5</a>
+								</div>
+								<div class="extra content">
+									<a> <i class="users icon"></i> 최대인원 4명
+									</a>
+								</div>
+							</div>
+							<div class="card" style="margin-top: 3%; margin-bottom: 0;">
+								<div class="blurring dimmable image">
+									<div class="ui dimmer">
+										<div class="content">
+											<div class="center">
+												<input type="hidden" th:value="106">
+												<div th:if="${YnList[5] == 'n'}" class="ui inverted button"
+													id="studyroomReservationBtn">예약</div>
+												<div th:unless="${YnList[5] == 'n'}"
+													class="ui inverted button">예약불가</div>
+											</div>
+										</div>
+									</div>
+									<img id="imgcss" src="images/studyroom6.png">
+								</div>
+								<div class="content">
+									<a class="header">studyroom 6</a>
+								</div>
+								<div class="extra content">
+									<a> <i class="users icon"></i> 최대인원 4명
+									</a>
+								</div>
+							</div>
+							<div class="card">
+								<div class="blurring dimmable image">
+									<div class="ui dimmer">
+										<div class="content">
+											<div class="center">
+												<input type="hidden" th:value="107">
+												<div th:if="${YnList[6] == 'n'}" class="ui inverted button"
+													id="studyroomReservationBtn">예약</div>
+												<div th:unless="${YnList[6] == 'n'}"
+													class="ui inverted button">예약불가</div>
+											</div>
+										</div>
+									</div>
+									<img id="imgcss" src="images/studyroom7.png">
+								</div>
+								<div class="content">
+									<a class="header">studyroom 7</a>
+								</div>
+								<div class="extra content">
+									<a> <i class="users icon"></i> 최대인원 4명
+									</a>
+								</div>
+							</div>
+							<div class="card" style="margin-top: 3%; margin-bottom: 0;">
+								<div class="blurring dimmable image">
+									<div class="ui dimmer">
+										<div class="content">
+											<div class="center">
+												<input type="hidden" id="room" th:value="108">
+												<div th:if="${YnList[7] == 'n'}" class="ui inverted button"
+													id="studyroomReservationBtn">예약</div>
+												<div th:unless="${YnList[7] == 'n'}"
+													class="ui inverted button">예약불가</div>
+											</div>
+										</div>
+									</div>
+									<img id="imgcss" src="images/studyroom8.png">
+								</div>
+								<div class="content">
+									<a class="header">studyroom 8</a>
+								</div>
+								<div class="extra content">
+									<a> <i class="users icon"></i> 최대인원 4명
+									</a>
 								</div>
 							</div>
 						</div>
-						<img id="imgcss" src="images/studyroom1.png">
-					</div>
-					<div class="content">
-						<a class="header">studyroom 1</a>
-					</div>
-					<div class="extra content">
-						<a> <i class="users icon"></i> 최대인원 8명
-						</a>
-					</div>
-				</div>
-				<div class="card" style="margin-top: 3%; margin-bottom: 0;">
-					<div class="blurring dimmable image">
-						<div class="ui dimmer">
+						<div class="ui mini spaceReservation modal">
+							<div class="header">예약</div>
 							<div class="content">
-								<div class="center">
-									<input type="hidden" th:value="102">
-									<div th:if="${YnList[1] == 'n'}" class="ui inverted button" id="studyroomReservationBtn">예약</div>
-									<div th:unless="${YnList[1] == 'n'}" class="ui inverted button">예약불가</div>
-								</div>
+								<p>예약하시겠습니까?</p>
+							</div>
+							<div class="actions">
+								<div class="ui primary button" id="spaceReservationBtn">예약</div>
+								<div class="ui cancel red button">취소</div>
 							</div>
 						</div>
-						<img id="imgcss" src="images/studyroom2.png">
-					</div>
-					<div class="content">
-						<a class="header">studyroom 2</a>
-					</div>
-					<div class="extra content">
-						<a> <i class="users icon"></i> 최대인원 8명
-						</a>
-					</div>
-				</div>
-				<div class="card">
-					<div class="blurring dimmable image">
-						<div class="ui dimmer">
+						<div class="ui mini spaceReservationAlready modal">
+							<div class="header">예약</div>
 							<div class="content">
-								<div class="center">
-									<input type="hidden" th:value="103">
-									<div th:if="${YnList[2] == 'n'}" class="ui inverted button" id="studyroomReservationBtn">예약</div>
-									<div th:unless="${YnList[2] == 'n'}" class="ui inverted button">예약불가</div>
-								</div>
+								<p>이미 예약한 스터디룸이 있습니다</p>
+							</div>
+							<div class="actions">
+								<div class="ui cancel button">확인</div>
 							</div>
 						</div>
-						<img id="imgcss" src="images/studyroom3.png">
 					</div>
-					<div class="content">
-						<a class="header">studyroom 3</a>
-					</div>
-					<div class="extra content">
-						<a> <i class="users icon"></i> 최대인원 8명
-						</a>
-					</div>
-				</div>
-				<div class="card" style="margin-top: 3%; margin-bottom: 0;">
-					<div class="blurring dimmable image">
-						<div class="ui dimmer">
-							<div class="content">
-								<div class="center">
-									<input type="hidden" th:value="104">
-									<div th:if="${YnList[3] == 'n'}" class="ui inverted button" id="studyroomReservationBtn">예약</div>
-									<div th:unless="${YnList[3] == 'n'}" class="ui inverted button">예약불가</div>
-								</div>
-							</div>
-						</div>
-						<img id="imgcss" src="images/studyroom4.png">
-					</div>
-					<div class="content">
-						<a class="header">studyroom 4</a>
-					</div>
-					<div class="extra content">
-						<a> <i class="users icon"></i> 최대인원 12명
-						</a>
-					</div>
-				</div>
-				<div class="card">
-					<div class="blurring dimmable image">
-						<div class="ui dimmer">
-							<div class="content">
-								<div class="center">
-									<input type="hidden" th:value="105">
-									<div th:if="${YnList[4] == 'n'}" class="ui inverted button" id="studyroomReservationBtn">예약</div>
-									<div th:unless="${YnList[4] == 'n'}" class="ui inverted button">예약불가</div>
-								</div>
-							</div>
-						</div>
-						<img id="imgcss" src="images/studyroom5.png">
-					</div>
-					<div class="content">
-						<a class="header">studyroom 5</a>
-					</div>
-					<div class="extra content">
-						<a> <i class="users icon"></i> 최대인원 4명
-						</a>
-					</div>
-				</div>
-				<div class="card" style="margin-top: 3%; margin-bottom: 0;">
-					<div class="blurring dimmable image">
-						<div class="ui dimmer">
-							<div class="content">
-								<div class="center">
-									<input type="hidden" th:value="106">
-									<div th:if="${YnList[5] == 'n'}" class="ui inverted button" id="studyroomReservationBtn">예약</div>
-									<div th:unless="${YnList[5] == 'n'}" class="ui inverted button">예약불가</div>
-								</div>
-							</div>
-						</div>
-						<img id="imgcss" src="images/studyroom6.png">
-					</div>
-					<div class="content">
-						<a class="header">studyroom 6</a>
-					</div>
-					<div class="extra content">
-						<a> <i class="users icon"></i> 최대인원 4명
-						</a>
-					</div>
-				</div>
-				<div class="card">
-					<div class="blurring dimmable image">
-						<div class="ui dimmer">
-							<div class="content">
-								<div class="center">
-									<input type="hidden" th:value="107">
-									<div th:if="${YnList[6] == 'n'}" class="ui inverted button" id="studyroomReservationBtn">예약</div>
-									<div th:unless="${YnList[6] == 'n'}" class="ui inverted button">예약불가</div>
-								</div>
-							</div>
-						</div>
-						<img id="imgcss" src="images/studyroom7.png">
-					</div>
-					<div class="content">
-						<a class="header">studyroom 7</a>
-					</div>
-					<div class="extra content">
-						<a> <i class="users icon"></i> 최대인원 4명
-						</a>
-					</div>
-				</div>
-				<div class="card" style="margin-top: 3%; margin-bottom: 0;">
-					<div class="blurring dimmable image">
-						<div class="ui dimmer">
-							<div class="content">
-								<div class="center">
-									<input type="hidden" id="room" th:value="108">
-									<div th:if="${YnList[7] == 'n'}" class="ui inverted button" id="studyroomReservationBtn">예약</div>
-									<div th:unless="${YnList[7] == 'n'}" class="ui inverted button">예약불가</div>
-								</div>
-							</div>
-						</div>
-						<img id="imgcss" src="images/studyroom8.png">
-					</div>
-					<div class="content">
-						<a class="header">studyroom 8</a>
-					</div>
-					<div class="extra content">
-						<a> <i class="users icon"></i> 최대인원 4명
-						</a>
-					</div>
-				</div>
-			</div>
-			<div class="ui mini spaceReservation modal">
-				<div class="header">예약</div>
-				<div class="content">
-					<p>예약하시겠습니까?</p>
-				</div>
-				<div class="actions">
-					<div class="ui primary button" id="spaceReservationBtn">예약</div>
-					<div class="ui cancel red button">취소</div>
-				</div>
-			</div>
-			<div class="ui mini spaceReservationAlready modal">
-				<div class="header">예약</div>
-				<div class="content">
-					<p>이미 예약한 스터디룸이 있습니다</p>
-				</div>
-				<div class="actions">
-					<div class="ui cancel button">확인</div>
 				</div>
 			</div>
 		</div>
