@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.lang}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/shopping_layout">
+<head>
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/shopping.css}">
+</th:block>
+</head>
+<body>
+<div layout:fragment="content">
+		<div class="ui grid center aligned middle aligned">
+			<form class="ui large form" method="POST" action="MemberUpdateSave"
+				style="background-color: #ffffff; margin: 110px;">
+				<div class="column" style="width: 600px">
+					<div class="field">
+						<h3>학생수정</h3>
+					</div>
+					<div class="field">
+						<div class="ui labeled input">
+							<div class="ui label">학번</div>
+							<input type="text" name="student_no" id="code" th:value="${student.student_no}" placeholder="학번" readonly>
+						</div>
+					</div>
+					<div class="field">
+						<div class="ui labeled input">
+							<div class="ui label">학과</div>
+							<input type="text" name="department_no" th:value="${student.department_no}" placeholder="학과" readonly>
+						</div>
+					</div>
+					<div class="field">
+						<div class="ui labeled input">
+							<div class="ui label">학생이름</div>
+							<input type="text" name="student_name" th:value="${student.student_name}" placeholder="학생이름" readonly>
+						</div>
+					</div>
+					<div class="field">
+						<div class="ui labeled input">
+							<div class="ui label">주소</div>
+							<input type="text" name="student_address" th:value="${student.student_address}" placeholder="주소">
+						</div>
+					</div>
+					<div class="field">
+						<div class="ui labeled input">
+							<div class="ui label">입학일</div>
+							<input type="text" name="entdate" th:value="${student.entrance_date}" placeholder="입학일" readonly>
+						</div>
+					</div>
+					<div class="field">
+						<div class="ui labeled input">
+							<div class="ui label">비밀번호</div>
+							<input type="password" name="password" th:value="${student.student_pw}" placeholder="학생비밀번호">
+						</div>
+					</div>
+					
+					
+					<div class="field" style="margin-top: 20px">
+						<span><button type="submit" class="ui primary basic button"
+								style="width: 48%">저장</button></span> <span><button
+								type="button" class="ui negative  basic button"
+								onclick="location.href='index'" style="width: 48%">취소</button></span>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
+
