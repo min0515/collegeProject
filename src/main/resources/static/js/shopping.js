@@ -1,20 +1,3 @@
-function comma(num){
-    var len, point, str;  
-       
-    num = num + "";  
-    point = num.length % 3 ;
-    len = num.length;  
-   
-    str = num.substring(0, point);  
-    while (point < len) {  
-        if (str != "") str += ",";  
-        str += num.substring(point, point + 3);  
-        point += 3;  
-    }  
-     
-    return str;
- 
-}
 
 function test01() {
 	document.getElementById("name2").value = $("#name1").val();
@@ -95,8 +78,9 @@ $(document).ready(function() {
 	$('#qtyInputProdetail').on('change', function() {
 		var qty = $('#qtyInputProdetail').val();
 		var price = $('#priceHiddenDetail').val();
-		var result = price * qty;
-		$('#goodsDetailTotalPrice').text(result + "원");
+		var result =String(price*qty);
+		var finalresult = result.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+		$('#goodsDetailTotalPrice').text(finalresult+'원');
 		$('#detailTotalQty').text("상품금액(" + qty + "개)");
 	});
 
@@ -200,9 +184,23 @@ $(document).ready(function() {
 			$(".chBox").prop("checked", false);
 		}
 	});
-	$('#g_qty').on('change', function() {
-		var price = $('#g_pricehidden').val();
-		var qty = Number($(this).val());
+//	$('#g_qty').on('change', function() {
+//		var price = $('#g_pricehidden').val();
+//		var qty = Number($(this).val());
+//		var result =String(price*qty); 
+//		var commaresult = result.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+//		var delivery = $('#g_delivery').val();
+//		var commafinalresult =String(price*qty + Number(delivery));
+//		var finalResult = commafinalresult.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+//		$('#final_price').text(commaresult+'원');
+//		$('#total_money').text(finalResult+'원');
+//		$('#countupdown').text("총결제금액("+qty+")개");
+//	})
+	
+	$('#shoppingPaiging').on('click',function(){
+		var g_seq = $('#hiddeng_seq').val()
+		var qty = $('#qtyInputProdetail').val();
+		var price = $('#priceHiddenDetail').val();
 		var result =String(price*qty); 
 		var commaresult = result.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		var delivery = $('#g_delivery').val();
@@ -211,15 +209,12 @@ $(document).ready(function() {
 		$('#final_price').text(commaresult+'원');
 		$('#total_money').text(finalResult+'원');
 		$('#countupdown').text("총결제금액("+qty+")개");
-	})
+		document.location.href="goodsDelivery?g_seq="+g_seq+"&qty="+qty;
+	});
+	
 	$('#completebtn').on('click', function() {
 		$("#Complete").attr("action", "paymentComplete");
 		$("#Complete").submit();
 		
 	});
-	
-	
-	
-
-
 });

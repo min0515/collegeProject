@@ -134,7 +134,7 @@ public class GoodsController {
 		OrdersDao dao2 = sqlSession.getMapper(OrdersDao.class);
 		orders.setOrders_address(orders_address1 + "-" + orders_address2);
 		orders.setG_title(goods.getG_title());
-		orders.setG_price(goods.getG_price());
+//		orders.setG_price(goods.getG_price());
 		String pattern = "yyyyMMdd";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 		String date = simpleDateFormat.format(new Date());
@@ -183,9 +183,12 @@ public class GoodsController {
 	}
 
 	@RequestMapping(value = "/goodsDelivery", method = RequestMethod.GET)
-	public String delivery(Model model, @RequestParam int g_seq, HttpSession session) throws Exception {
+	public String goodsDelivery(Model model, @RequestParam int g_seq, @RequestParam int qty, HttpSession session)
+			throws Exception {
 		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
 		goods = dao.goodsSelectOne(g_seq);
+		goods.setG_qty(qty);
+		goods.setG_total(goods.getG_price() * qty);
 		model.addAttribute("goods", goods);
 		return "goods/payment";
 	}

@@ -52,10 +52,10 @@
 					style="height: 550px; text-align: left;">
 					<div th:text="${goods.g_seq}"
 						style="font-size: 25px; font: bold; margin-bottom: 25px; margin-top: 50px;"></div>
-					<input type="hidden" name="g_seq" th:value="${goods.g_seq}">
+					<input type="hidden" name="g_seq" id="hiddeng_seq" th:value="${goods.g_seq}">
 					<div th:text="${goods.g_title}" id="goodstitleDetail"
 						style="font-size: 25px; font: bold; margin-bottom: 25px; margin-top: 50px;"></div>
-					<div th:text="${goods.g_price}+원"
+					<div th:text="${#numbers.formatDecimal(goods.g_price, 0, 'COMMA', 0, 'POINT')}+원"
 						style="font-size: 18px; margin-bottom: 20px"></div>
 					<hr align="left">
 					<div th:text="${goods.g_content}"
@@ -63,15 +63,15 @@
 					<div class="ui segment" style="background-color: #F8F8F8;">
 						<p>수량</p>
 						<hr align="left">
-						<Input type="number" id="qtyInputProdetail" name="qty" value="1"
-							style="width: 100px;" /><span th:text="${goods.g_price}+원"
+						<Input type="number" min="1" max="99" id="qtyInputProdetail" name="qty" value="1"
+							style="width: 100px;" /><span th:text="${#numbers.formatDecimal(goods.g_price, 0, 'COMMA', 0, 'POINT')}+원"
 							style="display: right; font-size: 18px; float: right;"></span>
 					</div>
 					<input type="hidden" id="priceHiddenDetail"
 						th:value="${goods.g_price}" name="price">
 					<div style="margin-top: 30px; margin-bottom: 30px;">
 						<span id="detailTotalQty" th:text="상품금액"></span><span
-							id="goodsDetailTotalPrice" th:text="${goods.g_price}+원"
+							id="goodsDetailTotalPrice" th:text="${#numbers.formatDecimal(goods.g_price, 0, 'COMMA', 0, 'POINT')}+원"
 							style="text-align: center; font-size: 18px; float: right;"></span>
 					</div>
 					<button class="ui button" type="button"

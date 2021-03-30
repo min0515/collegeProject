@@ -4,7 +4,9 @@ import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -315,4 +318,22 @@ public class ProfessorController {
 		}
 	}
 
+	@RequestMapping(value = "/classNoItemDeleteAjax", method = RequestMethod.POST)
+	@ResponseBody
+	public String classNoItemDeleteAjax(@RequestBody List<Map<String, Object>> classNojson, HttpSession session)
+			throws Exception {
+		Tb_classprofessorDao dao = sqlSession.getMapper(Tb_classprofessorDao.class);
+		String professor_no = (String) session.getAttribute("sessionMember_id");
+		tb_classpro.setProfessor_no(professor_no);
+		for (Map class_nos : classNojson) {
+			String class_no = (String) class_nos.get("a");
+			tb_classpro.setClass_no(class_no);
+			dao.professorclassDelete(tb_classpro);
+		}
+		/*
+		 * for (int i = 0; i < classNojson.size(); i++) { System.out.println(
+		 * classNojson.); }
+		 */
+		return "y";
+	}
 }
