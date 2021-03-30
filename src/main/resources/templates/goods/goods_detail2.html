@@ -74,8 +74,8 @@
 							id="goodsDetailTotalPrice" th:text="${goods.g_price}+원"
 							style="text-align: center; font-size: 18px; float: right;"></span>
 					</div>
-					<button class="ui button"
-						th:href="@{goodsDelivery(g_seq=${goods.g_seq})}">Follow</button>
+					<button class="ui button" type="button"
+						id="shoppingPaiging">Follow</button>
 					<div class="ui vertical animated button" tabindex="0"
 						style="background-color: #FFFFFF; border: 1px solid;">
 						<div class="visible content">장바구니</div>
