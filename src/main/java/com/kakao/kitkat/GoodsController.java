@@ -143,7 +143,6 @@ public class GoodsController {
 		orders.setMember_id(professor_no);
 		dao2.OrderssAdd(orders);
 		Orders ord = dao2.ordersSelectOne(professor_no);
-		System.out.println(ord.getG_total());
 		model.addAttribute("ord", ord);
 		return "goods/payment_complete";
 	}
