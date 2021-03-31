@@ -15,8 +15,8 @@
 </head>
 <body>
 	<div layout:fragment="content">
-		<form class="ui large form" id="Complete" method="post"
-			action="paymentComplete" enctype="multipart/form-data"
+		<form class="ui large form" id="Complete"  method="post"
+			action="cartPaymentGoYo" enctype="multipart/form-data"
 			data-parsley-validate="true" style="background-color: #F3F3F3">
 			<div class="ui one wide column grid center aligned"
 				style="margin-top: 15px;">
@@ -25,7 +25,7 @@
 			<div class="ui sixteen wide column grid center aligned">
 				<div class="ui one wide column grid center aligned"></div>
 				<div class="ui six wide column grid left aligned">
-					<div id="box1" style="height:300px;">
+					<div id="box1" style="height: 300px;">
 						<div id="boxtitle">주문상품정보</div>
 						<div class="ui ten wide column grid left aligned"
 							style="padding: 2%;">
@@ -37,14 +37,18 @@
 										<th></th>
 										<th>배송비</th>
 										<th>가격</th>
+										<th>수량</th>
 									</tr>
 								</thead>
 								<tbody style="font-size: 18px;">
 									<tr th:each="cartPayment : ${cartPayments}">
-										<td style="width: 20%; height:100px;"><img
+										<td style="width: 20%; height: 100px;"><img
 											th:src="${cartPayment.g_attach}"
 											style="width: 90%; height: 100%;"></td>
 										<td th:text="${cartPayment.g_title}"></td>
+										<td th:text="${cartPayment.g_delivery}"></td>
+										<td th:text="${cartPayment.price}"></td>
+										<td th:text="${cartPayment.qty}"></td>
 									</tr>
 								</tbody>
 							</table>
@@ -72,6 +76,7 @@
 						</div>
 						<div class="segment">
 							<div class="field" style="margin-top: 5px;">
+								<input type="hidden" name="g_title">
 								<input type="text" name="orders_name" id="name2"
 									placeholder="수령인" style="width: 245px"> <input
 									type="text" name="last-name" id="phone2" placeholder="연락처"
@@ -107,21 +112,20 @@
 				<div class="ui four wide column grid left aligned">
 					<div id="box2">
 						<div id="boxtitle">최종 결제금액</div>
-						<!-- <div style="float: right;" id="final_price"
-							th:text="${#numbers.formatDecimal(goods.g_total, 0, 'COMMA', 0, 'POINT')}+원"
-							th:value="${goods.g_total}"></div> -->
-						<div
-							style="font-size: 13px; width: 100%; word-break: break-all; word-wrap: break-word; color: gray;">
-							상품가격</div>
+ 						<div style="float: right;" id="final_price"
+ 							th:text="${#numbers.formatDecimal(cartprice.totalprice, 0, 'COMMA', 0, 'POINT')}+원"
+ 							th:value="${cartprice.totalprice}"></div> 
+ 						<div style="font-size: 13px; width:100%; word-break:break-all;word-wrap:break-word; color: gray;">배송비</div>
 						<div style="float: right;">2,500원</div>
 						<div
 							style="font-size: 13px; width: 100%; word-break: break-all; word-wrap: break-word; color: gray;">배송비</div>
 						<hr align="left">
-						<!-- <div style="float: right;"id="total_money"  th:text="${#numbers.formatDecimal(goods.g_total+goods.g_delivery, 0, 'COMMA', 0, 'POINT')}+원" ></div>
-						<div style="font-size: 15px;" id="countupdown" th:text="|총결제금액(${goods.g_qty})개|"></div>
-						<input type="hidden" th:value="${goods.g_qty}" name="orders_qty"> -->
-
-
+						<div style="float: right;"id="total_money"  th:text="${#numbers.formatDecimal(cartprice.totalprice+2500, 0, 'COMMA', 0, 'POINT')}+원" ></div> 
+ 						<div style="font-size: 15px;" id="countupdown" th:text="|총결제금액(${cartprice.qty})개|"></div> 
+ 						<input type="hidden" th:value="${cartprice.qty}" id="orderqty" name="orders_qty">
+ 						<input type="hidden" th:value="${cartprice.totalprice}" id="ordertotal" name="totalprice"> 
+ 						<input type="hidden" th:value="${cartprice.qty}" id="orderqty" name="orders_qty"> 
+ 						<input type="hidden" th:value="${cartprice.qty}" id="orderqty" name="orders_qty">  
 					</div>
 					<div id="box2" style="height: 100px;">
 						<div id="boxtitle">결제방법</div>
@@ -142,12 +146,13 @@
 						</div>
 
 					</div>
-					<button class="fluid black ui button" id="completebtn"
-						style="width: 300px; color: white; height: 80px" type="button">결제하기</button>
+					<button class="fluid black ui button" id="ddddbtn"
+						style="width: 300px; color: white; height: 80px" type="submit">결제하기</button>
 				</div>
 			</div>
 			<div class="ui three wide column grid center aligned"></div>
 		</form>
 	</div>
 </body>
+
 </html>

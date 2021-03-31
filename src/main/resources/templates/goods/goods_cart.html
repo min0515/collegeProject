@@ -113,8 +113,18 @@
 						가기</button>
 				</div>
 			</div>
+			<div class="ui paymentGo mini modal">
+				<div class="header">선택된 상품없음</div>
+				<div class="content">
+					<p>선택된 상품이 없습니다</p>
+				</div>
+				<div class="actions">
+					<div class="ui primary cancel button">확인</div>
+				</div>
+			</div>
 		</div>
 	</div>
+
 	<div class="ui mini modal prodelete">
 		<i class="close icon"></i>
 		<div class="header">상품삭제</div>
@@ -125,5 +135,14 @@
 		</div>
 		
 	</div>
+	<script>
+	window.onpageshow = function(event) {
+		if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+			// Back Forward Cache로 브라우저가 로딩될 경우 혹은 브라우저 뒤로가기 했을 경우
+			 location.href="goodsCartGo"
+        }
+	}
+	</script>
 </body>
+
 </html>

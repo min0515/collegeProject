@@ -12,4 +12,6 @@ public interface OrdersDao {
 
 	public int OrderssAdd(Orders Orders) throws Exception;
 
+	public int OrderssAdd2(Orders Orders) throws Exception;
+
 }
