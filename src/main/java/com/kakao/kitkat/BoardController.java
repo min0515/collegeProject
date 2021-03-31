@@ -29,8 +29,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kakao.kitkat.dao.BoardDao;
+import com.kakao.kitkat.dao.CommentDao;
 import com.kakao.kitkat.entities.Board;
 import com.kakao.kitkat.entities.BoardPaging;
+import com.kakao.kitkat.entities.Comment;
 
 @Controller
 public class BoardController {
@@ -39,14 +41,17 @@ public class BoardController {
 	@Autowired
 	Board board;
 	@Autowired
+	Comment comment;
+	@Autowired
 	BoardPaging boardpaging;
 
 	public static String find;
-	
+
 	@RequestMapping(value = "/boardWrite", method = RequestMethod.GET)
 	public String boardWrite(Locale locale, Model model) {
 		return "board/board_write";
 	}
+
 	@RequestMapping(value = "/boardDelete", method = RequestMethod.GET)
 	public String boardDelete(@RequestParam int b_seq) throws Exception {
 		BoardDao dao = sqlSession.getMapper(BoardDao.class);
@@ -85,15 +90,22 @@ public class BoardController {
 		return "redirect:boardPageList";
 	}
 
+	@RequestMapping(value = "/boardCommentSave", method = RequestMethod.POST)
+	public String boardCommentSave(Model model, @ModelAttribute Comment comment) throws Exception {
+		CommentDao dao = sqlSession.getMapper(CommentDao.class);
+		dao.insertCommentRow(comment);
+		return "index";
+	}
+
 	@RequestMapping(value = "/boardDetail", method = RequestMethod.GET)
 	public String boardDetail(Model model, @RequestParam int b_seq, HttpSession session) throws Exception {
 		BoardDao dao = sqlSession.getMapper(BoardDao.class);
 		board = dao.selectOne(b_seq);
-//		String cursession = (String) session.getAttribute("sessionemail");
-//		if (cursession.equals(board.getB_studentno())) {
-//			dao.addHit(b_seq);
-//		}
-//
+//	      String cursession = (String) session.getAttribute("sessionemail");
+//	      if (cursession.equals(board.getB_studentno())) {
+//	         dao.addHit(b_seq);
+//	      }
+		//
 		model.addAttribute("board", board);
 		return "board/board_detail";
 	}

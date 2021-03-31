@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kakao.kitkat.dao.CommentDao">
+
+	
+	<select id="selectCommentOne" resultType="com.kakao.kitkat.entities.Comment">
+		select * from comment where b_seq=#{b_seq}
+	</select>
+	
+   <insert id = "insertCommentRow">
+   	insert into comment (b_seq, comment_step, comment_name, comment_inputtime, comment_content)
+   	values ((SELECT ifnull(MAX(b_seq)+1, 1) FROM board board_alias), 0, 0, 0, #{comment_content})
+   </insert>
+	
+</mapper>
