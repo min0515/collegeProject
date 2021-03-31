@@ -5,7 +5,7 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout/school_layout">
 <div layout:fragment="school_content">
-	<form class="ui large form" method="POST" action="boardUpdateSave"
+	<form class="ui large form" method="POST" action="boardCommentSave"
 		enctype="multipart/form-data" data-parsley-validate="true">
 		<div class="ui sixteen wide grid center aligned"
 			style="background-color: #F3F3F3;">
@@ -65,14 +65,16 @@
 					</div>
 					<form class="ui reply form">
 						<div class="field" >
-							<textarea style="height: 10px; width:85%; margin-bottom:20px"></textarea>
-								<span class="ui blue labeled submit icon button" style="margin-left: 10px;  height:110px;"> <i class="icon edit" style="text-align:middle; display: block"></i> 
+							<textarea style="height: 10px; width:85%; margin-bottom:20px" name="comment_content" id="comment_content"></textarea>
+								<button type="submit"> <span class="ui blue labeled submit icon button" style="margin-left: 10px;  height:110px;">
+								<i class="icon edit" style="text-align:middle; display: block"></i> 
 								<span style="position:relative; padding: 10; margin-top:25px; line-height: 20px; display: block; text-align: center;">댓글<br>등록</span>
-								 </span>
+								 </span></button>
 						</div>
 					</form>
 				</div>
 			</div>
+			</form>
 		</div>
 <div class="ui mini modal boardmodal">
 	<div class="header">Header</div>
