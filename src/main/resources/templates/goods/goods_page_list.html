@@ -21,11 +21,6 @@
 			<div class="ui grid center aligned">
 				<div class="twelve wide column" >
 					<div class="field center aligned" style="margin-top: 30px;">
-
-
-
-
-
 						<div class="ui four cards">
 							<div class="ui card" th:each="goods : ${goodses}" style="text-align: center">
 								<div class="ui slide right reveal image" >
@@ -43,19 +38,13 @@
 								</div>
 								<div class="extra content">
 <!-- 								th:href="@{goodsDelivery(g_seq=${goods.g_seq})}" -->
-									<a > <i class="won sign icon" ></i> 구매하기
-									</a>
+									 <i class="won sign icon" ></i> 구매하기
 									<div>
 										<i class="shopping bag icon"></i> 장바구니
 									</div>
-									
 								</div>
 							</div>
 						</div>
-
-
-
-
 						<div class="field" style="margin-top: 10px">
 							<span th:each="page : ${pages}"> <a
 								th:href="@{goodsPageSelect(page=${page})}">[<span
