@@ -75,7 +75,7 @@ public class BoardController {
 		}
 		String ip = getIp(request);
 		board.setB_inputip(ip);
-		SimpleDateFormat df = new SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm:ss");
+		SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd hh:mm");
 		Date date = new Date();
 		String today = df.format(date);
 		board.setB_inputtime(today);

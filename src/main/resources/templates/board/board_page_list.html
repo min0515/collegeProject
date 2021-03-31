@@ -17,25 +17,22 @@
 			style="background-color: #F3F3F3;">
 			<div class="ui stacked segment"  style="width: 60%; margin-bottom:50px">
 
-		<table id="example" class="ui celled table" style="width:100%">
+		<table class="ui blue padded table">
         <thead>
-            <tr>
-                <th>글번호</th>
-                <th>글제목</th>
-                <th>작성자</th>
-                <th>날짜</th>
-                <th>조회수</th>
+            <tr style="text-align:center;">
+                <th style="width:8%">번호</th>
+                <th style="width:40%;">글제목</th>
+                <th style="width:15%">작성자</th>
+                <th style="width:20%">날짜</th>
+                <th style="width:10%">조회수</th>
             </tr>
         </thead>
         <tbody>
               <tr class="block" th:each="board : ${boards}"
                         style="text-align: center">
                         <td th:text="${board.b_seq}"></td>
-                        <td th:text="${board.b_name}"></td>
-                        <td><span th:if="${board.b_step gt 0}"> 
-                        <img src="/images/reply.png" style="width: 20px; height: 20px;">
-                        </span> <a th:href="@{boardDetail(b_seq=${board.b_seq})}">
-                        <span th:text="${board.b_title}"></span></a></td>
+                        <td style="text-align:left; margin-left:10px;" ><a th:href="@{boardDetail(b_seq=${board.b_seq})}"><span th:text="${board.b_title}"></span></a></td>
+                        <td th:text="${board.b_name}" ></td>
                         <td th:text="${board.b_inputtime}"></td>
                         <td th:text="${board.b_hit}"></td>
                      </tr>
