@@ -3,6 +3,22 @@ function test01() {
 	document.getElementById("name2").value = $("#name1").val();
 	document.getElementById("phone2").value = $("#phone1").val();
 };
+
+window.onpageshow = function(event) {
+	if (event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+		// Back Forward Cache로 브라우저가 로딩될 경우 혹은 브라우저 뒤로가기 했을 경우
+		response.setHeader("Expires", "Sat, 6 May 1995 12:00:00 GMT");
+		response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+		response.addHeader("Cache-Control", "post-check=0, pre-check=0");
+		response.setHeader("Pragma", "no-cache");
+
+
+	}
+}
+
+
+
+
 // 검색시 주소 뛰우기
 function zipcodeFindB() {
 
@@ -73,8 +89,11 @@ function zipcodeFindB() {
 	}).open();
 
 };
-$(document).ready(function() {
 
+
+$(document).ready(function() {
+	
+	
 	$('#qtyInputProdetail').on('change', function() {
 		var qty = $('#qtyInputProdetail').val();
 		var price = $('#priceHiddenDetail').val();
@@ -128,8 +147,8 @@ $(document).ready(function() {
 				success: function(data) {
 					if (data == "login") {
 						location.href = 'shoppingLogin'
-					}else{
-						
+					} else {
+
 					}
 				},
 				error: function(xhr, status, error) {
@@ -252,10 +271,20 @@ $(document).ready(function() {
 
 
 	$('#cartPayment').on('click', function() {
-		location.href = 'cartPaymentGo'
+
+		if ($('input').is(":checked") == true) {
+			location.href = 'cartPaymentGo'
+		} else {
+			$('.ui.paymentGo.modal').modal('show');
+
+		}
+
 	});
 
 
+
+	$("#goodinfobtn").click(function() {
+		});
 	
 	$("#goodinfobtn").click(function(){
 		$('#goodinfobtn').attr('class', 'item active');
@@ -265,8 +294,8 @@ $(document).ready(function() {
 		$('#goodsreview').css('display', 'none');
 		$('#goodsqna').css('display', 'none');
 	});
-	
-	$("#goodreviewbtn").click(function(){
+
+	$("#goodreviewbtn").click(function() {
 		$('#goodinfobtn').attr('class', 'item');
 		$('#goodreviewbtn').attr('class', 'item active');
 		$('#goodqnabtn').attr('class', 'item');
@@ -274,8 +303,8 @@ $(document).ready(function() {
 		$('#goodsreview').css('display', 'block');
 		$('#goodsqna').css('display', 'none');
 	});
-	
-	$("#goodqnabtn").click(function(){
+
+	$("#goodqnabtn").click(function() {
 		$('#goodinfobtn').attr('class', 'item');
 		$('#goodreviewbtn').attr('class', 'item');
 		$('#goodqnabtn').attr('class', 'item active');
@@ -382,4 +411,5 @@ $(document).ready(function() {
     		 $('.ui.modal.delete').modal('hide');
     	 });
 	});
+
 });

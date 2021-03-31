@@ -2,17 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout/lms_layout">
-<head>
-<title>index</title>
-<!-- <th:block layout:fragment="css"> -->
-<!-- 	<link rel="stylesheet" th:href="@{/css/class.css}"> -->
-<!-- </th:block> -->
-<!-- <th:block layout:fragment="script"> -->
-<!-- 	<script type="text/javascript" th:src="@{/js/class.js}"></script> -->
-<!-- </th:block> -->
-</head>
 
-<body>
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/class.css}">
+</th:block>
+<th:block layout:fragment="script">
+	<script type="text/javascript" th:src="@{/js/class.js}"></script>
+</th:block>
+<body layout:fragment="content">
+	<div class="ui middle aligned center aligned grid">
+		<div class="column">
 
 	<div layout:fragment="content">
 		<div layout:fragment="leftmenu"></div>
@@ -176,7 +175,33 @@
 						<div class="ui cancel button">확인</div>
 					</div>
 				</div>
+				<div class="actions">
+					<button style="width: 40%; margin-right: 40px"
+						class="ui cancel primary button">닫기</button>
+				</div>
 			</div>
+			<!-- 수강평 불러오는 모달 end-->
+			<div class="ui classBasketFind mini modal">
+				<div class="header">검색</div>
+				<div class="classFind content">
+					<p>검색조건이 충분하지 않습니다.</p>
+					<p>이수구분과 학점을 선택해 주세요.</p>
+				</div>
+				<div class="actions">
+					<div class="ui cancel button">확인</div>
+				</div>
+			</div>
+			<div class="ui classFind mini modal">
+				<div class="header">검색</div>
+				<div class="classFind content">
+					<p>검색조건이 충분하지 않습니다.</p>
+					<p>이수구분과 학점을 선택해 주세요.</p>
+				</div>
+				<div class="actions">
+					<div class="ui cancel button">확인</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 	</div>

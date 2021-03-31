@@ -2,43 +2,50 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout/lms_layout">
-<head>
-<title>index</title>
-</head>
-<body>
-	<div layout:fragment="content">
-			<div class="ten wide column center aligned"
-				style="background-color: #F5F6F7; padding: 60px 0px">
-				<h2 class="ui header" id="lmstitle">
-					<strong>강의조회</strong>
-				</h2>
-			<div class="ui labeled input searchInput">
-				<div class="ui label">년도</div>
-				<select class="ui dropdown" id="yyyy">
-					<option th:each="yyyy : ${yyyys}" th:text="${yyyy}"
-						th:value="${yyyy}"></option>
-				</select>
-				<div class="ui label">학기</div>
-				<select class="ui dropdown" id="term">
-					<option th:text="1" th:value="1"></option>
-					<option th:text="2" th:value="2"></option>
-				</select>
-				<button class="ui primary button" id="myclassListSearchBtn"
-					type="button">조회</button>
-			</div>
-		</div>
-		<div class="ui stacked segment" style="height: 600px; padding: 3%;">
-			<table id="MyclassSearchfinalListExample" class="display nowrap"
-				style="width: 100% !important; font-size: 15px;">
-				<thead>
-					<tr style="text-align: center">
-						<th>강의번호</th>
-						<th>강의이름</th>
-						<th>수업타입</th>
-						<th>학점</th>
-						<th>수강평</th>
-					</tr>
-				</thead>
+
+<title>join</title>
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/class.css}">
+</th:block>
+<th:block layout:fragment="script">
+	<script type="text/javascript" th:src="@{/js/class.js}"></script>
+</th:block>
+<body layout:fragment="content">
+	<div class="ui middle aligned center aligned grid">
+		<div class="column">
+			<form class="ui large from" id="myclassFinalListSearch">
+				<div class="ui stacked segment">
+					<h4 class="ui header">
+						<strong>강의 조회</strong>
+					</h4>
+					<div class="ui labeled input searchInput">
+						<div class="ui label">년도</div>
+						<select class="ui dropdown" id="yyyy">
+							<option th:each="yyyy : ${yyyys}" th:text="${yyyy}"
+								th:value="${yyyy}"></option>
+						</select>
+						<div class="ui label">학기</div>
+						<select class="ui dropdown" id="term">
+							<option th:text="1" th:value="1"></option>
+							<option th:text="2" th:value="2"></option>
+						</select>
+						<button class="ui primary button" id="myclassListSearchBtn"
+							type="button">조회</button>
+					</div>
+				</div>
+			</form>
+			<div class="ui stacked segment" style="height: 600px; padding: 3%;">
+				<table id="MyclassSearchfinalListExample" class="display nowrap"
+					style="width: 100% !important; font-size: 15px;">
+					<thead>
+						<tr style="text-align: center">
+							<th>강의번호</th>
+							<th>강의이름</th>
+							<th>수업타입</th>
+							<th>학점</th>
+							<th>수강평</th>
+						</tr>
+					</thead>
 
 				<tbody id="ajaxReplaceFinalList">
 					<tr th:each="classTb : ${classTb}" style="cursor: pointer;">

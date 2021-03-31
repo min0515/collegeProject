@@ -23,6 +23,7 @@ import com.kakao.kitkat.entities.Tb_classreview;
 import com.kakao.kitkat.entities.Tb_department;
 import com.kakao.kitkat.entities.Tb_grade;
 import com.kakao.kitkat.entities.Tb_professor;
+import com.kakao.kitkat.entities.Tb_registration;
 import com.kakao.kitkat.entities.Tb_student;
 
 @Controller
@@ -110,6 +111,7 @@ public class ClassController {
 			check = 0;
 		}
 		if (check == 0) {
+			System.out.println("ehldjfk");
 			return "redirect:classInsert";
 		} else {
 			dao.professorInsertRow(tb_class_professor);
@@ -413,18 +415,24 @@ public class ClassController {
 
 	@RequestMapping(value = "/preRegistrationStartAjax", method = RequestMethod.POST)
 	@ResponseBody
-	public String preRegistrationStartAjax() throws Exception {
+	public String preRegistrationStartAjax(HttpSession session) throws Exception {
+
 		Tb_classDao dao = sqlSession.getMapper(Tb_classDao.class);
 		dao.preRegistrationStartUpdate();
 
 		dao.preRegistrationStartClassUpdate();
 		dao.preRegistrationStartStudentUpdate();
+
+		Tb_classDao dao1 = sqlSession.getMapper(Tb_classDao.class);
+		Tb_registration tb_registration = dao1.sessionRegistration();
+		session.setAttribute("sessionPreregistrationyn", tb_registration.getPreregistrationyn());
+		session.setAttribute("sessionRegistrationyn", tb_registration.getRegistrationyn());
 		return "y";
 	}
 
 	@RequestMapping(value = "/preRegistrationEndAjax", method = RequestMethod.POST)
 	@ResponseBody
-	public String preRegistrationEndAjax() throws Exception {
+	public String preRegistrationEndAjax(HttpSession session) throws Exception {
 		Tb_classDao dao = sqlSession.getMapper(Tb_classDao.class);
 		// n으로 바꿔줌
 		dao.preRegistrationEndUpdate();
@@ -443,24 +451,39 @@ public class ClassController {
 		/* 정원 이하 들어온강의 */
 		// tb_class에서 정원이하인것들 정원 update처리
 		dao.preRegistrationEndCapacityUpdate2();
+
+		Tb_classDao dao1 = sqlSession.getMapper(Tb_classDao.class);
+		Tb_registration tb_registration = dao1.sessionRegistration();
+		session.setAttribute("sessionPreregistrationyn", tb_registration.getPreregistrationyn());
+		session.setAttribute("sessionRegistrationyn", tb_registration.getRegistrationyn());
 		return "y";
 	}
 
 	@RequestMapping(value = "/registrationStartAjax", method = RequestMethod.POST)
 	@ResponseBody
-	public String registrationStartAjax() throws Exception {
+	public String registrationStartAjax(HttpSession session) throws Exception {
 		Tb_classDao dao = sqlSession.getMapper(Tb_classDao.class);
 		dao.registrationStartUpdate();
+
+		Tb_classDao dao1 = sqlSession.getMapper(Tb_classDao.class);
+		Tb_registration tb_registration = dao1.sessionRegistration();
+		session.setAttribute("sessionPreregistrationyn", tb_registration.getPreregistrationyn());
+		session.setAttribute("sessionRegistrationyn", tb_registration.getRegistrationyn());
 		return "y";
 	}
 
 	@RequestMapping(value = "/registrationEndAjax", method = RequestMethod.POST)
 	@ResponseBody
-	public String registrationEndAjax() throws Exception {
+	public String registrationEndAjax(HttpSession session) throws Exception {
 		Tb_classDao dao = sqlSession.getMapper(Tb_classDao.class);
 		dao.registrationEndUpdate();
 		dao.registrationEndCapacityUpdate();
 		dao.registrationEndCreditUpdate();
+
+		Tb_classDao dao1 = sqlSession.getMapper(Tb_classDao.class);
+		Tb_registration tb_registration = dao1.sessionRegistration();
+		session.setAttribute("sessionPreregistrationyn", tb_registration.getPreregistrationyn());
+		session.setAttribute("sessionRegistrationyn", tb_registration.getRegistrationyn());
 		return "y";
 	}
 
