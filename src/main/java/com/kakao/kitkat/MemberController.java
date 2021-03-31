@@ -76,6 +76,7 @@ public class MemberController {
 				session.setAttribute("sessionStudent_name", data.getStudent_name());
 				session.setAttribute("sessionDepartment_no", data.getDepartment_no());
 				session.setAttribute("sessionAbsence_yn", data.getAbsence_yn());
+				session.setAttribute("sessionlevel", data.getMemlevel());
 				return "index";
 			} else {
 				return "login/login";
@@ -105,6 +106,7 @@ public class MemberController {
 				session.setAttribute("sessionMember_id", data.getProfessor_no());
 				session.setAttribute("sessionProfessor_name", data.getProfessor_name());
 				session.setAttribute("sessionDepartment_no", data.getDepartment_no());
+				session.setAttribute("sessionlevel", data.getMemlevel());
 				return "index";
 			} else {
 				return "login/login";
