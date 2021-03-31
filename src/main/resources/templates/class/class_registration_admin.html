@@ -7,32 +7,29 @@
 </head>
 <body>
 	<div layout:fragment="content">
-				<h2 class="ui header">
-					<strong>수강신청관리</strong>
-				</h2>
-				<div class="ui stacked segment">
-					<div class="field">
-						<h3>수강바구니기간</h3>
-						<button class="ui primary button" style="width: 30%"
-							id="preRegistrationStart">시작</button>
-						<button class="ui button" style="width: 30%"
-							id="preRegistrationEnd">마감</button>
-						<h3>수강신청기간</h3>
-						<button class="ui primary button" style="width: 30%"
-							id="registrationStart">시작</button>
-						<button class="ui button" style="width: 30%" id="registrationEnd">마감</button>
+		<h2 class="ui header" id="lmstitle">
+			<strong>수강신청관리</strong>
+		</h2>
+		<div class="ui stacked segment">
+			<div class="field">
+				<h3>수강바구니기간</h3>
+				<button class="ui primary button" style="width: 30%"
+					id="preRegistrationStart">시작</button>
+				<button class="ui button" style="width: 30%" id="preRegistrationEnd">마감</button>
+				<h3>수강신청기간</h3>
+				<button class="ui primary button" style="width: 30%"
+					id="registrationStart">시작</button>
+				<button class="ui button" style="width: 30%" id="registrationEnd">마감</button>
+			</div>
+			<div class="field">
+				<div class="ui registrationAdmin mini modal">
+					<div class="registrationAdmin header"></div>
+					<div class="registrationAdmin content">
+						<p></p>
 					</div>
-					<div class="field">
-						<div class="ui registrationAdmin mini modal">
-							<div class="registrationAdmin header"></div>
-							<div class="registrationAdmin content">
-								<p></p>
-							</div>
-							<div class="actions">
-								<div class="ui registrationAdmin primary button"></div>
-								<div class="ui cancel button">취소</div>
-							</div>
-						</div>
+					<div class="actions">
+						<div class="ui registrationAdmin primary button"></div>
+						<div class="ui cancel button">취소</div>
 					</div>
 				</div>
 			</div>

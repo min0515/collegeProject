@@ -14,7 +14,7 @@
 	<th:block th:replace="fragments/classLeftMenu"></th:block>
 	<div class="ui middle aligned center aligned grid">
 		<div class="column">
-			<h2 class="ui header">
+			<h2 class="ui header" id="lmstitle">
 				<strong>강의평작성</strong>
 			</h2>
 			<form class="ui large from" id="classReviewInsert"
@@ -52,7 +52,8 @@
 					<p>로그인 세션이 만료되었습니다. 다시 로그인 해주세요</p>
 				</div>
 				<div class="actions">
-					<div class="ui primary button" onclick="location.href='login'">로그인 하러가기</div>
+					<div class="ui primary button" onclick="location.href='login'">로그인
+						하러가기</div>
 					<div class="ui cancel button">취소</div>
 				</div>
 			</div>
