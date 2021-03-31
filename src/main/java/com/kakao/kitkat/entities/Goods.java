@@ -13,6 +13,8 @@ public class Goods {
 	private int g_qty;
 	private int g_total;
 	private int g_delivery;
+	private String g_info;
+	
 
 	public Goods() {
 	}; // Default Constructor 추가
@@ -100,5 +102,17 @@ public class Goods {
 	public void setG_delivery(int g_delivery) {
 		this.g_delivery = g_delivery;
 	}
+
+	public String getG_info() {
+		return g_info;
+	}
+
+	public void setG_info(String g_info) {
+		this.g_info = g_info;
+	}
+
+
+	
+	
 
 }

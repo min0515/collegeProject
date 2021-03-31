@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kakao.kitkat.dao.MemberDao;
 import com.kakao.kitkat.dao.Tb_classDao;
+import com.kakao.kitkat.dao.Tb_studentDao;
 import com.kakao.kitkat.entities.Member;
 import com.kakao.kitkat.entities.Tb_professor;
 import com.kakao.kitkat.entities.Tb_registration;
@@ -218,6 +219,17 @@ public class MemberController {
 	public String logout(HttpSession session, Locale locale) {
 		session.invalidate();
 		return "index";
+	}
+	
+	@RequestMapping(value = "/memberUpdate", method = RequestMethod.GET)
+	public String memberUpdate(Locale locale, Model model, HttpSession session) throws Exception {
+		
+		String stuno = (String)session.getAttribute("sessionMember_id");
+		
+		Tb_studentDao dao = sqlSession.getMapper(Tb_studentDao.class);
+		Tb_student student = dao.selectOne(stuno);
+		model.addAttribute("student", student);
+		return "goods/shopping_update";
 	}
 
 	private String hashPassword(String plainTextPassword) {

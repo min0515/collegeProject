@@ -256,4 +256,65 @@ $(document).ready(function() {
 	});
 
 
+	
+	$("#goodinfobtn").click(function(){
+		$('#goodinfobtn').attr('class', 'item active');
+		$('#goodreviewbtn').attr('class', 'item');
+		$('#goodqnabtn').attr('class', 'item');
+		$('#goodsinfo').css('display', 'block');
+		$('#goodsreview').css('display', 'none');
+		$('#goodsqna').css('display', 'none');
+	});
+	
+	$("#goodreviewbtn").click(function(){
+		$('#goodinfobtn').attr('class', 'item');
+		$('#goodreviewbtn').attr('class', 'item active');
+		$('#goodqnabtn').attr('class', 'item');
+		$('#goodsinfo').css('display', 'none');
+		$('#goodsreview').css('display', 'block');
+		$('#goodsqna').css('display', 'none');
+	});
+	
+	$("#goodqnabtn").click(function(){
+		$('#goodinfobtn').attr('class', 'item');
+		$('#goodreviewbtn').attr('class', 'item');
+		$('#goodqnabtn').attr('class', 'item active');
+		$('#goodsinfo').css('display', 'none');
+		$('#goodsreview').css('display', 'none');
+		$('#goodsqna').css('display', 'block');
+	});
+	$(document).off().on('click','#myCartTable td #productDeletebtn',function(){
+    	var row = $(this).closest('tr');
+		var td = row.children();
+    	var g_seq = td.eq(9).children().val();
+		$('.ui.modal.prodelete').modal('show');
+		 $('#deleteok').on('click',function(){
+    			$.ajax({
+    	            type:'POST',
+    	            data : {g_seq:g_seq},
+    	            datatype:'json',
+    	            url : 'ProductDeleteAjax',
+    	            success : function(data){
+    	            	if(data=="y"){
+    	            		row.remove();
+    	            		$('#resultmessage').text("삭제 되었습니다.");
+    	            	}else{
+    	            		$('#resultmessage').text("삭제 되지 않았습니다.");
+    	            	}
+    	            	
+    	                $('#successmessage').css('display', "block").delay(1200).queue(function(){
+    	                   $('#successmessage').css('display', "none").dequeue();
+    	                });
+    	                $('.ui.modal.prodelete').modal('hide');
+    	             },
+    	            error : function(xhr, status, error){
+    	                alert('ajax error' + xhr.status);
+    	            }
+    	        });
+    			
+    	 });
+		 $('#deletecancel').on('click',function(){
+    		 $('.ui.modal.delete').modal('hide');
+    	 });
+	});
 });

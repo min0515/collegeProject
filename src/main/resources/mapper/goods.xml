@@ -132,7 +132,10 @@
 		from tb_cart a join goods b on a.g_seq=b.g_seq where
 		member_id=#{member_id} and checkYn='y'
 	</select>
-
+	
+	<delete id="ProductDeleteAjax">
+		delete from tb_cart where g_seq=#{g_seq} and member_id=#{member_id}
+	</delete>
 
 
 
