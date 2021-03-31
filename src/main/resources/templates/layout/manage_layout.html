@@ -40,18 +40,22 @@
 	</div>
 
 
-	<!-- 내용 -->
-	<div class="container">
-		<div class="content">
-			<div layout:fragment="content"></div>
+	<!-- 왼쪽메뉴 -->
+	<div class="ui sixteen column grid" style="background-color: #F5F6F7">
+			<th:block th:replace="fragments/manageLeftMenu"></th:block>
+	
+	<!--컨텐츠	 -->
+		<div class=" ui ten column grid center aligned  container">
+			<div class="content">
+				<div layout:fragment="content"></div>
+			</div>
 		</div>
 	</div>
 
 
-
-		<!-- 푸터 -->
-		<div class="ui inverted vertical footer segment">
-			<th:block th:replace="fragments/footer"></th:block>
-		</div>
+	<!-- 푸터 -->
+	<div class="ui inverted vertical footer segment">
+		<th:block th:replace="fragments/footer"></th:block>
+	</div>
 </body>
 </html>

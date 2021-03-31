@@ -29,6 +29,8 @@ public interface GoodsDao {
 	public int myGoodsCartCount(String member_id) throws Exception;
 
 	public ArrayList<Tb_cart> myGoodsCartSelect(String member_id) throws Exception;
+	
+	public int selectCountFirst() throws Exception;
 
 	public int cartCheckUpdateRow(Tb_cart tb_cart) throws Exception;
 
