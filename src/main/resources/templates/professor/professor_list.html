@@ -1,43 +1,45 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${session.lang}"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
-      layout:decorator="layout/lms_layout">
-<head>
-<title>Home</title>
-</head>
-
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/lms_layout">
 
 <body layout:fragment="content" oncontextmenu="return false">
-	<form name="formname" method="POST" action="professorlist">
-		<div class="ui icon message" id="successmessage" style="display: none">
-			<i class="notched circle loading icon"></i>
-			<div class="content">
-				<div class="header" id="resultmessage"></div>
+	<div class="ui middle aligned center aligned grid">
+		<form name="formname" method="POST" action="professorlist"
+			style="width: 70%; margin-top:70px;">
+			<div class="ui icon message" id="successmessage"
+				style="display: none">
+				<i class="notched circle loading icon"></i>
+				<div class="content">
+					<div class="header" id="resultmessage"></div>
+				</div>
 			</div>
-		</div>
-		<div class="fluid fifteen wide column ">
-			<table id="professorexample" class="display nowrap" style="width: 100%">
-				<thead>
-					<tr>
-						<td>교수번호</td>
-						<td>교수이름</td>
-						<td>교수주민번호</td>
-						<td>교수주소</td>
-						<td>학과번호</td>
+			<div class="fluid fifteen wide column ">
+				<table id="professorexample" class="display nowrap"
+					style="width: 100%">
+					<thead>
+						<tr>
+							<td>교수번호</td>
+							<td>교수이름</td>
+							<td>교수주민번호</td>
+							<td>교수주소</td>
+							<td>학과번호</td>
+						</tr>
+					</thead>
+					<tr th:each="item : ${professors}">
+						<td th:text="${item.professor_no}"></td>
+						<td th:text="${item.professor_name}"></td>
+						<td th:text="${item.professor_ssn}"></td>
+						<td th:text="${item.professor_address}"></td>
+						<td th:text="${item.department_no}"></td>
 					</tr>
-				</thead>
-				<tr th:each="item : ${professors}">
-					<td th:text="${item.professor_no}"></td>
-                    <td th:text="${item.professor_name}"></td>
-                    <td th:text="${item.professor_ssn}"></td>
-                    <td th:text="${item.professor_address}"></td>
-                    <td th:text="${item.department_no}"></td>
-                 </tr>
-			</table>
-		</div>
+				</table>
+			</div>
 
-	</form>
+		</form>
+	</div>
 </body>
 
 </html>

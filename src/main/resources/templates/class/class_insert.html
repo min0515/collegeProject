@@ -2,13 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout/lms_layout">
-<head>
-<title>index</title>
-</head>
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/class.css}">
+</th:block>
+<th:block layout:fragment="script">
+	<script type="text/javascript" th:src="@{/js/class.js}"></script>
+</th:block>
 <body>
 	<div layout:fragment="content">
-			<div class="ten wide column center aligned"
-				style="background-color: #F5F6F7; padding: 60px 0px">
+		<div class="ui middle aligned center aligned grid">
+			<div class="column">
 				<h2 class="ui header">
 					<strong>강의등록</strong>
 				</h2>
@@ -47,12 +50,6 @@
 									readonly="readonly">
 								<button class="ui grey basic button" type="button"
 									id="professorSearchInsert">교수검색</button>
-							</div>
-						</div>
-						<div class="field">
-							<div class="ui fluid labeled input">
-								<div class="ui label">학과정원</div>
-								<input type="text" name="maxcapacity" required>
 							</div>
 						</div>
 						<div class="field">

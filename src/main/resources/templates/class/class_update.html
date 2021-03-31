@@ -2,11 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout/lms_layout">
+
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/class.css}">
+</th:block>
 <th:block layout:fragment="script">
 	<script type="text/javascript" th:src="@{/js/class.js}"></script>
 </th:block>
 <body layout:fragment="content">
-	<th:block th:replace="fragments/classLeftMenu"></th:block>
 	<div class="ui middle aligned center aligned grid">
 		<div class="column">
 			<h2 class="ui header">
@@ -48,13 +51,6 @@
 							<div class="ui label">수업이름</div>
 							<input type="text" name="class_name"
 								th:value="${classtb.class_name}" required>
-						</div>
-					</div>
-					<div class="field">
-						<div class="ui fluid labeled input">
-							<div class="ui label">학과정원</div>
-							<input type="text" name="maxcapacity"
-								th:value="${classtb.maxcapacity}" required>
 						</div>
 					</div>
 

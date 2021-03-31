@@ -1,4 +1,8 @@
-
+.column {
+	max-width: 85%;
+	margin-top: 50px;
+	margin-bottom:7em;
+}
 .card{
 	height:340px;
 }

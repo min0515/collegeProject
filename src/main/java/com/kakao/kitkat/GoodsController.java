@@ -337,4 +337,19 @@ public class GoodsController {
 
 	}
 
+	@RequestMapping(value = "/ProductDeleteAjax", method = RequestMethod.POST)
+	@ResponseBody
+	public String ProductDeleteAjax(@RequestParam int g_seq, HttpSession session) throws Exception {
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+		String member_id = (String) session.getAttribute("sessionMember_id");
+		tb_cart.setMember_id(member_id);
+		tb_cart.setG_seq(g_seq);
+		int result = dao.ProductDeleteAjax(tb_cart);
+		if (result > 0) {
+			return "y";
+
+		} else {
+			return "n";
+		}
+	}
 }

@@ -2,11 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout/lms_layout">
-<head>
-<title>index</title>
-</head>
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/class.css}">
+</th:block>
+<th:block layout:fragment="script">
+	<script type="text/javascript" th:src="@{/js/class.js}"></script>
+</th:block>
 <body>
 	<div layout:fragment="content">
+		<div class="ui middle aligned center aligned grid">
+			<div class="column">
 				<h2 class="ui header">
 					<strong>수강신청관리</strong>
 				</h2>
