@@ -284,6 +284,68 @@ $(document).ready(function() {
 		$('#goodsqna').css('display', 'block');
 	});
 	
+	$("#goodsordernewbtn").click(function(){
+		alert("1");
+		$('#goodsordernewbtn').attr('class', 'item active');
+		$('#goodsorderdepositbtn').attr('class', 'item');
+		$('#goodsorderpayokbtn').attr('class', 'item');
+		$('#goodsorderdeliveryreadybtn').attr('class', 'item');
+		$('#goodsordershippingbtn').attr('class', 'item');
+		$('#goodsorderdeliverycompletebtn').attr('class', 'item');
+	});
+	
+	$("#goodsorderdepositbtn").click(function(){
+		alert("2");
+		$('#goodsordernewbtn').attr('class', 'item');
+		$('#goodsorderdepositbtn').attr('class', 'item active');
+		$('#goodsorderpayokbtn').attr('class', 'item');
+		$('#goodsorderdeliveryreadybtn').attr('class', 'item');
+		$('#goodsordershippingbtn').attr('class', 'item');
+		$('#goodsorderdeliverycompletebtn').attr('class', 'item');
+	});
+	
+	$("#goodsorderpayokbtn").click(function(){
+		alert("3");
+		$('#goodsordernewbtn').attr('class', 'item');
+		$('#goodsorderdepositbtn').attr('class', 'item');
+		$('#goodsorderpayokbtn').attr('class', 'item active');
+		$('#goodsorderdeliveryreadybtn').attr('class', 'item');
+		$('#goodsordershippingbtn').attr('class', 'item');
+		$('#goodsorderdeliverycompletebtn').attr('class', 'item');
+	});
+
+	$("#goodsorderdeliveryreadybtn").click(function(){
+		alert("4");
+		$('#goodsordernewbtn').attr('class', 'item');
+		$('#goodsorderdepositbtn').attr('class', 'item');
+		$('#goodsorderpayokbtn').attr('class', 'item');
+		$('#goodsorderdeliveryreadybtn').attr('class', 'item active');
+		$('#goodsordershippingbtn').attr('class', 'item');
+		$('#goodsorderdeliverycompletebtn').attr('class', 'item');
+	});
+	
+	$("#goodsordershippingbtn").click(function(){
+		alert("5");
+		$('#goodsordernewbtn').attr('class', 'item');
+		$('#goodsorderdepositbtn').attr('class', 'item');
+		$('#goodsorderpayokbtn').attr('class', 'item');
+		$('#goodsorderdeliveryreadybtn').attr('class', 'item');
+		$('#goodsordershippingbtn').attr('class', 'item active');
+		$('#goodsorderdeliverycompletebtn').attr('class', 'item');
+	});
+	
+	$("#goodsorderdeliverycompletebtn").click(function(){
+		alert("6");
+		$('#goodsordernewbtn').attr('class', 'item');
+		$('#goodsorderdepositbtn').attr('class', 'item');
+		$('#goodsorderpayokbtn').attr('class', 'item');
+		$('#goodsorderdeliveryreadybtn').attr('class', 'item');
+		$('#goodsordershippingbtn').attr('class', 'item');
+		$('#goodsorderdeliverycompletebtn').attr('class', 'item active');
+	});
+	
+	
+	
 	
 
 	$(document).off().on('click','#myCartTable td #productDeletebtn',function(){

@@ -50,10 +50,13 @@
 	<select id="goodsSelectPageList"
 		resultType="com.kakao.kitkat.entities.Goods">
 		select * from goods order by g_seq desc
-		limit
-		#{startrow},#{endrow}
+		limit #{startrow},#{endrow}
 	</select>
-
+	
+	<select id="selectCountFirst" resultType="Integer">
+		select count(*) from goods
+	</select>
+	
 	<select id="goodsSelectCount" resultType="Integer">
 		select count(*) from
 		goods where b_title like CONCAT('%',#{find},'%')

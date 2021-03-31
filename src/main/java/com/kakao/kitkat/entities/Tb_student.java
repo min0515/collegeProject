@@ -14,6 +14,8 @@ public class Tb_student {
 	private String entrance_date;
 	private String student_address;
 	private String memlevel;
+	private String student_ssn;
+	private String coach_professor_no;
 
 	public String getStudent_no() {
 		return student_no;
@@ -94,7 +96,22 @@ public class Tb_student {
 	public void setMemlevel(String memlevel) {
 		this.memlevel = memlevel;
 	}
-	
-	
 
+	public String getStudent_ssn() {
+		return student_ssn;
+	}
+
+	public void setStudent_ssn(String student_ssn) {
+		this.student_ssn = student_ssn;
+	}
+
+	public String getCoach_professor_no() {
+		return coach_professor_no;
+	}
+
+	public void setCoach_professor_no(String coach_professor_no) {
+		this.coach_professor_no = coach_professor_no;
+	}
+
+	
 }

@@ -45,7 +45,7 @@ public class GoodsController {
 	Orders orders;
 	@Autowired
 	GoodsPaging goodspaging;
-	public static String find;
+	static String find;
 
 	@Autowired
 	Tb_cart tb_cart;
@@ -108,6 +108,101 @@ public class GoodsController {
 
 	@RequestMapping(value = "/manageGoodsList", method = RequestMethod.GET)
 	public String manageGoodsList(Model model) throws Exception {
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+		
+		int rowcount = dao.selectCountFirst();
+		int pagesize = 10;
+		int page = 1;
+		int startrow = (page - 1) * pagesize;
+		int endrow = 10;
+		if (goodspaging.getFind() == null) {
+			goodspaging.setFind("");
+		}
+		goodspaging.setStartrow(startrow);
+		goodspaging.setEndrow(endrow);
+		int absPage = 1;
+		if (rowcount % pagesize == 0) {
+			absPage = 0;
+		}
+		
+		int pagecount = rowcount / pagesize + absPage;
+		int pages[] = new int[pagecount];
+		for (int i = 0; i < pagecount; i++) {
+			pages[i] = i + 1;
+		}
+
+		ArrayList<Goods> goodses = dao.goodsSelectPageList(goodspaging);
+
+		model.addAttribute("goodses", goodses);
+		model.addAttribute("pages", pages);
+		return "goods/manage_goods";
+	}
+	
+	@RequestMapping(value = "/managePageSelect", method = RequestMethod.GET)
+	public String managePageSelect(Model model, @RequestParam int page) throws Exception {
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+		
+		int pagesize = 10;
+		int startrow = (page - 1) * pagesize;
+		int endrow = 10;
+		
+		goodspaging.setFind(find);
+		if (goodspaging.getFind() == null) {
+			goodspaging.setFind("");
+		}
+		goodspaging.setStartrow(startrow);
+		goodspaging.setEndrow(endrow);
+		int rowcount = dao.goodsSelectCount(goodspaging);
+		int absPage = 1;
+		if (rowcount % pagesize == 0) {
+			absPage = 0;
+		}
+		
+		int pagecount = rowcount / pagesize + absPage;
+		int pages[] = new int[pagecount];
+		for (int i = 0; i < pagecount; i++) {
+			pages[i] = i + 1;
+		}
+
+		ArrayList<Goods> goodses = dao.goodsSelectPageList(goodspaging);
+		model.addAttribute("goodses", goodses);
+		model.addAttribute("pages", pages);
+		model.addAttribute("find", find);
+		return "goods/manage_goods";
+	}
+	
+	@RequestMapping(value = "/findListmanage", method = RequestMethod.GET)
+	public String findListmanage(Model model, @RequestParam String find) throws Exception {
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+		
+		int pagesize = 10;
+		int page = 1;
+		int startrow = (page - 1) * pagesize;
+		int endrow = 10;
+		
+		goodspaging.setFind(find);
+		if (goodspaging.getFind() == null) {
+			goodspaging.setFind("");
+		}
+		goodspaging.setStartrow(startrow);
+		goodspaging.setEndrow(endrow);
+		int rowcount = dao.goodsSelectCount(goodspaging);
+		int absPage = 1;
+		if (rowcount % pagesize == 0) {
+			absPage = 0;
+		}
+		
+		int pagecount = rowcount / pagesize + absPage;
+		int pages[] = new int[pagecount];
+		for (int i = 0; i < pagecount; i++) {
+			pages[i] = i + 1;
+		}
+
+		ArrayList<Goods> goodses = dao.goodsSelectPageList(goodspaging);
+		model.addAttribute("goodses", goodses);
+		model.addAttribute("pages", pages);
+		model.addAttribute("find", find);
+		
 		return "goods/manage_goods";
 	}
 

@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.lang}"
 	th:lang="${session.lang}"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layout/shopping_layout">
+	layout:decorator="layout/manage_layout">
 <head>
 <th:block layout:fragment="css">
 	<link rel="stylesheet" th:href="@{/css/shopping.css}">
@@ -14,59 +14,25 @@
 	referrerpolicy="origin"></script>
 </head>
 <body>
-	<div class="ui four column grid left aligned" style="background-color: #F5F6F7">
-		<div class="one wide column" style="background-color: #F5F6F7">
-			<div></div>
-		</div>
-		<div class="three wide column" 	style="margin-top: 50px; background-color: #F5F6F7"> <div class="ui vertical menu">
-  <div class="item">
-    <div class="header">사용자 관리</div>
-    <div class="menu">
-      <a class="item">사용자 목록</a>
-      <a class="item">메시지 보내기</a>
-    </div>
-  </div>
-  <div class="item">
-    <div class="header">쇼핑</div>
-    <div class="menu">
-      <a class="item" onclick="location.href='manageGoodsList'">상품관리</a>
-      <a class="item" onclick="location.href='manageOrder'">주문관리</a>
-      <a class="item" onclick="location.href='manageCancel'"style="color:#000000;">>취소관리</a>
-      <a class="item" onclick="location.href='boardReview'">리뷰관리</a>
-      <a class="item" onclick="location.href='boardQna'">문의관리</a>
-      <a class="item">적립금관리</a>
-      <a class="item">쿠폰</a>
-    </div>
-  </div>
-  <div class="item">
-    <div class="header">돌리랑</div>
-    <div class="menu">
-      <a class="item">도트가</a>
-      <a class="item">제일 좋아</a>
-    </div>
-  </div>
-  <div class="item">
-    <div class="header">어쩌고</div>
-    <div class="menu">
-      <a class="item">저쩌고</a>
-      <a class="item">개힘드러</a>
-    </div>
-  </div>
-</div>
-		</div>
-		<div class="ten wide column"
-			style="background-color: #F5F6F7; margin-top: 50px;">
-			<div class="ui secondary pointing menu">
-				<a class="item"> 신규취소 </a> 
-				<a class="item"> 취소요청 </a> 
-				<a class="item active"> 취소처리중 </a>
-				<a class="item"> 취소처리실패 </a> 
-				<a class="item"> 취소완료 </a> 
-				<div class="right menu">
-				</div>
+	<div layout:fragment="content">
+		<div class="ui four column grid left aligned"
+			style="background-color: #F5F6F7">
+			<div class="one wide column" style="background-color: #F5F6F7">
+				<div></div>
 			</div>
-			<div class="ui segment">
-				<p></p>
+			<div class="three wide column"
+				style="margin-top: 50px; background-color: #F5F6F7"></div>
+			<div class="sixteen wide column"
+				style="background-color: #F5F6F7; margin-top: 50px;">
+				<div class="ui secondary pointing menu">
+					<a class="item"> 신규취소 </a> <a class="item"> 취소요청 </a> <a
+						class="item active"> 취소처리중 </a> <a class="item"> 취소처리실패 </a> <a
+						class="item"> 취소완료 </a>
+					<div class="right menu"></div>
+				</div>
+				<div class="ui segment">
+					<p></p>
+				</div>
 			</div>
 		</div>
 	</div>
