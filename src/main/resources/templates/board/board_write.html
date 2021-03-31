@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.lang}"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}"
 	th:lang="${session.lang}"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layout/layout">
-<head>
-	<script src="/js/aiappproject.js"></script>	
-	<script
-		src="https://cdn.tiny.cloud/1/1in9hzsqug5gwpl0vwku0rsdmw8w2equelp9j08kmfa49lxw/tinymce/5/tinymce.min.js"
-		referrerpolicy="origin"></script>
-</head>
-<body>
-<div layout:fragment="content">
-<form class="ui large form" method="POST" action="boardWriteSave" enctype="multipart/form-data"
+	layout:decorator="layout/school_layout">
+<div layout:fragment="school_content">
+	<form class="ui large form" method="POST" action="boardWriteSave" enctype="multipart/form-data"
             data-parsley-validate="true">
 	<div class="ui grid center aligned">
 		<div class="five wide column">
@@ -20,7 +13,7 @@
 		<div class="five wide column">
 		
 			<div class="field center aligned" style="margin-top:30px">
-				<h3> 게시판 </h3>
+				<h3> 게시판123 </h3>
 			</div>
 		
 			<div class="field">
@@ -80,4 +73,3 @@
 </div>
 </body>
 </html>
-

@@ -42,22 +42,11 @@ public class BoardController {
 	BoardPaging boardpaging;
 
 	public static String find;
-
-	@RequestMapping(value = "/schoolDepBoardWrite", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "/boardWrite", method = RequestMethod.GET)
 	public String boardWrite(Locale locale, Model model) {
-		return "board/school_dep_board_write";
+		return "board/board_write";
 	}
-
-	@RequestMapping(value = "/schoolQnaBoardWrite", method = RequestMethod.GET)
-	public String schoolQnaBoardWrite(Locale locale, Model model) {
-		return "board/school_qna_board_write";
-	}
-
-	@RequestMapping(value = "/schoolFreeBoardWrite", method = RequestMethod.GET)
-	public String schoolFreeBoardWrite(Locale locale, Model model) {
-		return "board/school_free_board_write";
-	}
-
 	@RequestMapping(value = "/boardDelete", method = RequestMethod.GET)
 	public String boardDelete(@RequestParam int b_seq) throws Exception {
 		BoardDao dao = sqlSession.getMapper(BoardDao.class);
@@ -93,7 +82,7 @@ public class BoardController {
 		BoardDao dao = sqlSession.getMapper(BoardDao.class);
 		dao.insertRow(board);
 
-		return "index";
+		return "redirect:boardPageList";
 	}
 
 	@RequestMapping(value = "/boardDetail", method = RequestMethod.GET)

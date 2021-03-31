@@ -10,8 +10,9 @@
 </head>
 <body>
 	<div layout:fragment="content">
-			<div class="five wide column center aligned" style="background-color: #F5F6F7; padding:60px 0px">
-			<h2 class="ui header">
+		<div class="five wide column center aligned"
+			style="background-color: #F5F6F7; padding: 60px 0px">
+			<h2 class="ui header" id="lmstitle">
 				<strong>강의관리</strong>
 			</h2>
 			<div class="ui icon message" id="successmessage"
@@ -40,17 +41,17 @@
 						<td th:text="${classtb.department_no}"></td>
 						<td th:text="${classtb.class_name}"></td>
 						<td th:text="${classtb.class_type}"></td>
-						<td>
-						<a th:href="@{classAdminUpdateGo(class_no=${classtb.class_no})}">
+						<td><a
+							th:href="@{classAdminUpdateGo(class_no=${classtb.class_no})}">
 								<i class="edit outline icon primary black" title="update"></i>
-						</a>
-						</td>
+						</a></td>
 						<td><i class="trash alternate outline icon red"
 							title="delete" id="classAdminDeleteBtn"></i></td>
 					</tr>
 				</tbody>
 			</table>
-			<div class="ui mini classDelete modal">오후 12:33 2021-03-30
+			<div class="ui mini classDelete modal">
+				오후 12:33 2021-03-30
 				<div class="classmodal header">강의삭제</div>
 				<div class="classmodal content">
 					<p>삭제 하시겠습니까?</p>
