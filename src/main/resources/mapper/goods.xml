@@ -132,7 +132,7 @@
 		from tb_cart a join goods b on a.g_seq=b.g_seq where
 		member_id=#{member_id} and checkYn='y'
 	</select>
-
+	
 
 
 

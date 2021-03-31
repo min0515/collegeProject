@@ -293,6 +293,8 @@ public class GoodsController {
 		} else {
 			ArrayList<Tb_cart> cartPayments = dao.myGoodsCartCheckedPaymentSelect(member_id);
 			model.addAttribute("cartPayments", cartPayments);
+			Tb_cart cartprice = dao.myGoodsCartCheckedSelect(member_id);
+			model.addAttribute("cartprice", cartprice);
 			return "goods/payment_cart";
 		}
 

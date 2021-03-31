@@ -95,4 +95,12 @@ public class Tb_cart {
 		this.deliveryTotalPrice = deliveryTotalPrice;
 	}
 
+	public int getG_delivery() {
+		return g_delivery;
+	}
+
+	public void setG_delivery(int g_delivery) {
+		this.g_delivery = g_delivery;
+	}
+
 }

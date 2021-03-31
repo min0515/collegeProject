@@ -35,7 +35,6 @@ public interface GoodsDao {
 	public Tb_cart myGoodsCartCheckedSelect(String member_id) throws Exception;
 
 	public ArrayList<Tb_cart> myGoodsCartCheckedPaymentSelect(String member_id) throws Exception;
-
 //	public int goodsUpdateAjax(Goods Goods) throws Exception;
 //	public int goodsUpdateRow(Goods Goods) throws Exception;
 //	public int goodsDeleteAjax(String g_seq) throws Exception;
