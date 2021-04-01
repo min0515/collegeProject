@@ -13,11 +13,14 @@
 <body layout:fragment="content">
 	<div class="ui middle aligned center aligned grid">
 		<div class="column">
+		<div class="field" style="margin-bottom: 40px">
+				<h1 class="ui  left aligned header">
+					<strong style="margin-left:2%; ">내 수강 이력</strong>
+				</h1>
+				<div class="ui section divider" style="margin-top:15px;"></div>
+			</div>
 			<form class="ui large from" id="myclassFinalListSearch">
 				<div class="ui stacked segment">
-					<h4 class="ui header">
-						<strong>강의 조회</strong>
-					</h4>
 					<div class="ui labeled input searchInput">
 						<div class="ui label">년도</div>
 						<select class="ui dropdown" id="yyyy">
@@ -47,19 +50,20 @@
 						</tr>
 					</thead>
 
-				<tbody id="ajaxReplaceFinalList">
-					<tr th:each="classTb : ${classTb}" style="cursor: pointer;">
-						<td th:text="${classTb.class_no}"></td>
-						<td th:text="${classTb.class_name}"></td>
-						<td th:text="${classTb.class_type}"></td>
-						<td th:text="${classTb.point}"></td>
-						<td><a
-							th:href="@{classReviewWrite(class_no=${classTb.class_no},class_name=${classTb.class_name})}">
-								<i class="pencil alternate icon link"></i>
-						</a></td>
-					</tr>
-				</tbody>
-			</table>
+					<tbody id="ajaxReplaceFinalList">
+						<tr th:each="classTb : ${classTb}" style="cursor: pointer;">
+							<td th:text="${classTb.class_no}"></td>
+							<td th:text="${classTb.class_name}"></td>
+							<td th:text="${classTb.class_type}"></td>
+							<td th:text="${classTb.point}"></td>
+							<td><a
+								th:href="@{classReviewWrite(class_no=${classTb.class_no},class_name=${classTb.class_name})}">
+									<i class="pencil alternate icon link"></i>
+							</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 </body>

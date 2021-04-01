@@ -10,11 +10,12 @@
 </th:block>
 <body layout:fragment="content">
 	<div class="ui middle aligned center aligned grid">
-		<div class="column" style="margin-bottom:300px;">
-			<div class="field" style="margin-bottom: 50px">
+		<div class="column" style="margin-bottom: 300px;">
+			<div class="field" style="margin-bottom: 40px">
 				<h1 class="ui  left aligned header">
-					<strong style="margin-left: 4%;">내 예약</strong>
+					<strong style="margin-left: 2%;">내 예약</strong>
 				</h1>
+				<div class="ui section divider" style="margin-top: 15px;"></div>
 			</div>
 			<div class="ui secondary segment grid" style="padding: 2% 7% 1% 7%;">
 				<i class="massive hand point right outline black icon"
@@ -32,13 +33,14 @@
 				</div>
 
 			</div>
-			<div class="field" style="padding-right:92%; margin-top:2%;">
-				<span style="font-size:17px;"><strong>전체</strong></span>
-				<span style="font-size:17px; color:#0064CD;"><strong th:text="${myReservationCount}"></strong></span>
-				<span style="font-size:17px;"><strong>건</strong></span>
+			<div class="field" style="padding-right: 92%; margin-top: 2%;">
+				<span style="font-size: 17px;"><strong>전체</strong></span> <span
+					style="font-size: 17px; color: #0064CD;"><strong
+					th:text="${myReservationCount}"></strong></span> <span
+					style="font-size: 17px;"><strong>건</strong></span>
 			</div>
-			<table id="myReservationTable" style="text-align: center; font-size:16px;"
-				class="ui fixed table">
+			<table id="myReservationTable"
+				style="text-align: center; font-size: 16px;" class="ui fixed table">
 				<thead>
 					<tr>
 						<th>장소번호</th>

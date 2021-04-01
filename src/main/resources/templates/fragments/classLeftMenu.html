@@ -3,15 +3,15 @@
 <head></head>
 <body th:fragment="leftmenu">
 	<div class="ui middle aligned left aligned grid">
-		<div class="inverted column" style="margin-top: 10px; color: #464646;">
+		<div class="inverted column" style="margin-top: 0px; color: #464646;">
 			<span style="font-size: 22px;">학사관리</span>
 			<div class="ui section divider" style="margin-top: 15px;"></div>
 			<div class="ui  vertical menu">
-				<a class="item" href="schoolMain"> 자바대학교 홈페이지 </a> <a class="item"
+				<a class="leftmenulink item" href="schoolMain"> 자바대학교 홈페이지 </a> <a class="leftmenulink item"
 					href="shoppingAboutus"> <i class="grid layout icon"></i> 자바대학교
 					쇼핑몰
-				</a> <a class="item" href="professorLoginUp"> 자바대학교 LMS </a>
-				<div class="ui dropdown item">
+				</a>
+				<div class="ui dropdown leftmenulink item">
 					수강정보 <i class="dropdown icon"></i>
 					<div class="menu">
 						<a class="item" href="classInsert" th:if="${session.sessionlevel} == p"> <i class="edit icon"></i>강의등록</a> 
@@ -24,7 +24,7 @@
 						<a class="item" href="classSearchListGo" th:if="${session.sessionlevel} == s"><i class="settings icon"></i> 수강신청안내</a>
 					</div>
 				</div>
-				<div class="ui dropdown item">
+				<div class="ui dropdown leftmenulink item">
 					예약 <i class="dropdown icon"></i>
 					<div class="menu">
 						<a class="item" href="reservationPageGo"><i class="edit icon"></i>
