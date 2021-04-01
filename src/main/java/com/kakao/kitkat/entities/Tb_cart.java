@@ -14,6 +14,7 @@ public class Tb_cart {
 	private String g_attach;
 	private String checkYn;
 	private int deliveryTotalPrice;
+	private String orders_contact;
 
 	public String getMember_id() {
 		return member_id;
@@ -101,6 +102,14 @@ public class Tb_cart {
 
 	public void setG_delivery(int g_delivery) {
 		this.g_delivery = g_delivery;
+	}
+
+	public String getOrders_contact() {
+		return orders_contact;
+	}
+
+	public void setOrders_contact(String orders_contact) {
+		this.orders_contact = orders_contact;
 	}
 
 }

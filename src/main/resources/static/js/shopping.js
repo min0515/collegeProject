@@ -11,13 +11,8 @@ window.onpageshow = function(event) {
 		response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
 		response.addHeader("Cache-Control", "post-check=0, pre-check=0");
 		response.setHeader("Pragma", "no-cache");
-
-
 	}
 }
-
-
-
 
 // 검색시 주소 뛰우기
 function zipcodeFindB() {
@@ -280,13 +275,7 @@ $(document).ready(function() {
 		}
 
 	});
-
-
-
 	$("#goodinfobtn").click(function() {
-		});
-	
-	$("#goodinfobtn").click(function(){
 		$('#goodinfobtn').attr('class', 'item active');
 		$('#goodreviewbtn').attr('class', 'item');
 		$('#goodqnabtn').attr('class', 'item');
@@ -392,6 +381,7 @@ $(document).ready(function() {
     	            	if(data=="y"){
     	            		row.remove();
     	            		$('#resultmessage').text("삭제 되었습니다.");
+							location.href='goodsCartGo'
     	            	}else{
     	            		$('#resultmessage').text("삭제 되지 않았습니다.");
     	            	}
@@ -411,5 +401,50 @@ $(document).ready(function() {
     		 $('.ui.modal.delete').modal('hide');
     	 });
 	});
+	$("#myCartTable").on('change', '#qtyInputProdetail', 'td', function() {
+		var row = $(this).closest('tr');
+		var td = row.children();
+		var price= $('#productPriceVal').val();
+		alert(price);
+		var input = td.eq(0).children().children();
+		var qty = td.eq(3).children().val();
+		var g_seq = td.eq(9).children().val();
+		if ($(input).is(":checked") == true) {
+			$.ajax({
+				type: 'POST',
+				data: { g_seq: g_seq,qty:qty },
+				datatype: 'json',
+				url: 'cartProductQtyAjax',
+				success: function(data) {
+					if (data == "login") {
+						location.href = 'shoppingLogin'
+					} else {
 
+					}
+				},
+				error: function(xhr, status, error) {
+					alert('ajax error' + xhr.status);
+				}
+			});
+		}else{
+			if ($(input).is(":checked") == true) {
+				$.ajax({
+					type: 'POST',
+					data: { g_seq: g_seq,qty:qty },
+					datatype: 'json',
+					url: 'cartProductDownQtyAjax',
+					success: function(data) {
+						if (data == "login") {
+							location.href = 'shoppingLogin'
+						} else {
+
+						}
+					},
+					error: function(xhr, status, error) {
+					alert('ajax error' + xhr.status);
+					}
+				});
+			}		
+		}
+	});
 });

@@ -3,22 +3,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.kakao.kitkat.dao.OrdersDao">
+
 	<select id="ordersSelectOne"
 		resultType="com.kakao.kitkat.entities.Orders">
-		select *from orders where member_id=#{member_id} and orders_seq = (select max(orders_seq) from orders);
+		select *from orders where member_id=#{member_id} and
+		orders_seq = (select max(orders_seq) from orders);
 	</select>
+
 	<insert id="goodsInsertRow">
-		insert into goods (g_seq, g_title, g_price, g_content, g_attach, g_sellyn
-		) values ( (SELECT ifnull(MAX(g_seq)+1, 1) FROM goods goods_alias),
-		#{g_title}, #{g_price}, #{g_content}, #{g_attach}, 0
+		insert into goods (g_seq, g_title, g_price,
+		g_content, g_attach, g_sellyn
+		) values ( (SELECT ifnull(MAX(g_seq)+1,
+		1) FROM goods goods_alias),
+		#{g_title}, #{g_price}, #{g_content},
+		#{g_attach}, 0
 		)
 	</insert>
 
 	<insert id="goodsInsertItem">
-		insert into goods (g_seq, g_title, g_price, g_content, g_attach,
+		insert into goods (g_seq, g_title, g_price,
+		g_content, g_attach,
 		g_sellyn,g_qty,g_total,g_delivery
-		) values ( (SELECT ifnull(MAX(g_seq)+1, 1) FROM goods goods_alias),
-		#{g_title}, #{g_price}, #{g_content}, #{g_attach}, 0
+		) values (
+		(SELECT ifnull(MAX(g_seq)+1, 1) FROM goods goods_alias),
+		#{g_title},
+		#{g_price}, #{g_content}, #{g_attach}, 0
 		,#{g_qty},#{g_qty}*#{g_price}+#{g_delivery},#{g_delivery})
 	</insert>
 	<update id="updateRow">
@@ -39,5 +48,25 @@
 		orders_alias),#{member_id},#{orders_name},#{orders_contact},#{orders_zipcode},#{orders_address},#{g_title},#{orders_qty},#{orders_qty}*#{g_price},#{g_delivery},#{orders_qty}*#{g_price}+#{g_delivery},'y','y'
 		)
 	</insert>
+
+	<insert id="OrderssAdd2">
+		insert into
+		orders(member_id,orders_qty, g_price,
+		g_total,orders_seq,orders_contact,g_title)
+		values(
+		#{member_id},#{qty},#{price},#{totalprice}+#{g_delivery},
+		(SELECT
+		ifnull(MAX(orders_seq)+1, 1) FROM orders
+		orders_alias),#{orders_contact},#{g_title}
+		)
+	</insert>
+
+	<update id="rororororor">
+		update orders set
+		orders_name=#{orders_name},orders_zipcode=#{orders_zipcode},orders_address=#{orders_address}
+		where (select orders_seq from (select max(orders_seq) as orders_seq
+		from orders) as a_t) and member_id=#{member_id}
+		and orders_contact=#{orders_contact}
+	</update>
 
 </mapper>

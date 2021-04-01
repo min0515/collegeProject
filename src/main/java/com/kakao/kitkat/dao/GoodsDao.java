@@ -28,8 +28,10 @@ public interface GoodsDao {
 
 	public int myGoodsCartCount(String member_id) throws Exception;
 
+	public ArrayList<Tb_cart> cartyb(String member_id) throws Exception;
+
 	public ArrayList<Tb_cart> myGoodsCartSelect(String member_id) throws Exception;
-	
+
 	public int selectCountFirst() throws Exception;
 
 	public int cartCheckUpdateRow(Tb_cart tb_cart) throws Exception;
@@ -40,11 +42,6 @@ public interface GoodsDao {
 
 	public int ProductDeleteAjax(Tb_cart tb_cart) throws Exception;
 
-//	public int goodsUpdateAjax(Goods Goods) throws Exception;
-//	public int goodsUpdateRow(Goods Goods) throws Exception;
-//	public int goodsDeleteAjax(String g_seq) throws Exception;
-//	public ArrayList<Goods> selectPageList(BoardPaging boardpaging) throws Exception;
-//	public int selectCount(BoardPaging boardpaging) throws Exception;
-//	public int selectMaxStep(int g_ref) throws Exception;
-//	int goodsDeleteRow(int g_seq) throws Exception;
+	public int cartQtyUpdateRow(Tb_cart tb_cart) throws Exception;
+
 }
