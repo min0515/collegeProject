@@ -361,10 +361,6 @@ $(document).ready(function() {
 		$('#goodsordershippingbtn').attr('class', 'item');
 		$('#goodsorderdeliverycompletebtn').attr('class', 'item active');
 	});
-	
-	
-	
-	
 
 	$(document).off().on('click','#myCartTable td #productDeletebtn',function(){
     	var row = $(this).closest('tr');
