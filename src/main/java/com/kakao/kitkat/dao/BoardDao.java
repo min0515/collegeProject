@@ -6,7 +6,6 @@ import com.kakao.kitkat.entities.Board;
 import com.kakao.kitkat.entities.BoardPaging;
 import com.kakao.kitkat.entities.Comment;
 
-
 public interface BoardDao {
 	public Board selectOne(int b_seq) throws Exception;
 	
@@ -19,9 +18,11 @@ public interface BoardDao {
 	public int updateRow(Board Board) throws Exception;
 
 	public ArrayList<Board> selectAll() throws Exception;
-	
+
+	public int insertCommentRow(Board Board) throws Exception;
+
 	public ArrayList<Board> findListBoard(BoardPaging boardpaging) throws Exception;
-	
+
 	public ArrayList<Board> selectPageList(BoardPaging boardpaging) throws Exception;
 
 	public int updateAjax(Board Board) throws Exception;
@@ -31,8 +32,6 @@ public interface BoardDao {
 	public int selectCountFirst(BoardPaging boardpaging) throws Exception;
 
 	public int selectCount(BoardPaging boardpaging) throws Exception;
-
-	
 
 	public void addHit(int b_seq) throws Exception;
 

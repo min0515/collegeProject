@@ -1,10 +1,8 @@
 package com.kakao.kitkat;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -26,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.kakao.kitkat.dao.BoardDao;
 import com.kakao.kitkat.dao.CommentDao;
@@ -41,11 +38,23 @@ public class BoardController {
 	@Autowired
 	Board board;
 	@Autowired
-	Comment comment;
-	@Autowired
 	BoardPaging boardpaging;
+	@Autowired
+	Comment comment;
 
 	public static String find;
+
+	@RequestMapping(value = "/boardCommentSave", method = RequestMethod.POST)
+	public String boardCommentSave(Model model, @ModelAttribute Comment comment) throws Exception {
+		SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd HH:mm");
+		Date date = new Date();
+		String today = df.format(date);
+		comment.setComment_inputtime(today);
+		CommentDao dao = sqlSession.getMapper(CommentDao.class);
+		dao.insertCommentRow(comment);
+
+		return "redirect:/";
+	}
 
 	@RequestMapping(value = "/boardWrite", method = RequestMethod.GET)
 	public String boardWrite(Locale locale, Model model) {
@@ -60,12 +69,13 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/boardWriteSave", method = RequestMethod.POST)
-	public String board_insertSave(Model model, @ModelAttribute Board board, HttpServletRequest request) throws Exception {
+	public String board_insertSave(Model model, @ModelAttribute Board board, HttpServletRequest request)
+			throws Exception {
 		String path = "F:/SPRINGBOOTSOURCE/eyeconspringboot (1)/src/main/resources/static/uploadattachs/";
 		String realpath = "/uploadattachs/";
 		String ip = getIp(request);
 		board.setB_inputip(ip);
-		SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd hh:mm");
+		SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd HH:mm");
 		Date date = new Date();
 		String today = df.format(date);
 		board.setB_inputtime(today);
@@ -75,23 +85,20 @@ public class BoardController {
 		return "redirect:boardPageList";
 	}
 
-	@RequestMapping(value = "/boardCommentSave", method = RequestMethod.POST)
-	public String boardCommentSave(Model model, @ModelAttribute Comment comment) throws Exception {
-		CommentDao dao = sqlSession.getMapper(CommentDao.class);
-		dao.insertCommentRow(comment);
-		return "index";
-	}
-
 	@RequestMapping(value = "/boardDetail", method = RequestMethod.GET)
 	public String boardDetail(Model model, @RequestParam int b_seq, HttpSession session) throws Exception {
-		BoardDao dao = sqlSession.getMapper(BoardDao.class);
-		board = dao.selectOne(b_seq);
-//	      String cursession = (String) session.getAttribute("sessionemail");
-//	      if (cursession.equals(board.getB_studentno())) {
-//	         dao.addHit(b_seq);
-//	      }
-		//
+		BoardDao boarddao = sqlSession.getMapper(BoardDao.class);
+		CommentDao commentdao = sqlSession.getMapper(CommentDao.class);
+		board = boarddao.selectOne(b_seq);
 		model.addAttribute("board", board);
+		ArrayList<Comment> comments = commentdao.selectCommentList(b_seq);
+//      if(comments == null) {
+//         System.out.println("djqtek");
+//      }
+//      for(Comment i : comments) {
+//         System.out.println(i.getComment_content());
+//      }
+		model.addAttribute("comments", comments);
 		return "board/board_detail";
 	}
 
@@ -209,74 +216,6 @@ public class BoardController {
 		model.addAttribute("boards", boards);
 		model.addAttribute("pages", pages);
 		return "board/board_page_list";
-	}
-
-	@RequestMapping(value = "/boardFreeList", method = RequestMethod.GET)
-	public String boardFreeList(Locale locale, Model model) throws Exception {
-		BoardDao dao = sqlSession.getMapper(BoardDao.class);
-		int pagesize = 10;
-		int page = 1;
-		int startrow = (page - 1) * pagesize;
-		int endrow = 10;
-
-		boardpaging.setFind(this.find);
-		if (boardpaging.getFind() == null) {
-			boardpaging.setFind("");
-		}
-
-		boardpaging.setStartrow(startrow);
-		boardpaging.setEndrow(endrow);
-		int rowcount = dao.selectCountFirst(boardpaging);
-		int absPage = 1;
-
-		if (rowcount % pagesize == 0) {
-			absPage = 0;
-		}
-		int pagecount = rowcount / pagesize + absPage;
-		int pages[] = new int[pagecount];
-		for (int i = 0; i < pagecount; i++) {
-			pages[i] = i + 1;
-		}
-
-		ArrayList<Board> boards = dao.selectPageList(boardpaging);
-
-		model.addAttribute("boards", boards);
-		model.addAttribute("pages", pages);
-		return "board/board_free_list";
-	}
-
-	@RequestMapping(value = "/schoolQnaBoardList", method = RequestMethod.GET)
-	public String schoolQnaBoardList(Locale locale, Model model) throws Exception {
-		BoardDao dao = sqlSession.getMapper(BoardDao.class);
-		int pagesize = 10;
-		int page = 1;
-		int startrow = (page - 1) * pagesize;
-		int endrow = 10;
-
-		boardpaging.setFind(this.find);
-		if (boardpaging.getFind() == null) {
-			boardpaging.setFind("");
-		}
-
-		boardpaging.setStartrow(startrow);
-		boardpaging.setEndrow(endrow);
-		int rowcount = dao.selectCountFirst(boardpaging);
-		int absPage = 1;
-
-		if (rowcount % pagesize == 0) {
-			absPage = 0;
-		}
-		int pagecount = rowcount / pagesize + absPage;
-		int pages[] = new int[pagecount];
-		for (int i = 0; i < pagecount; i++) {
-			pages[i] = i + 1;
-		}
-
-		ArrayList<Board> boards = dao.selectPageList(boardpaging);
-
-		model.addAttribute("boards", boards);
-		model.addAttribute("pages", pages);
-		return "board/school_qna_board_list";
 	}
 
 	@RequestMapping(value = "/findListBoard", method = RequestMethod.POST)
