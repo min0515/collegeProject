@@ -10,16 +10,20 @@
 </th:block>
 <body>
 	<div layout:fragment="content">
-		<div class="five wide column center aligned"
-			style="background-color: #F5F6F7; padding: 60px 0px">
-			<h2 class="ui header" id="lmstitle">
-				<strong>강의관리</strong>
-			</h2>
-			<div class="ui icon message" id="successmessage"
-				style="display: none; text-align: center;">
-				<i class="notched circle loading icon"></i>
-				<div class="content">
-					<div class="header" id="resultmessage">삭제되었습니다.</div>
+		<div class="ui middle aligned center aligned grid">
+			<div class="column">
+				<div class="field" style="margin-bottom: 40px">
+				<h1 class="ui left aligned header">
+					<strong style="margin-left:2%; ">강의 관리</strong>
+				</h1>
+				<div class="ui section divider" style="margin-top:15px;"></div>
+			</div>
+				<div class="ui icon message" id="successmessage"
+					style="display: none; text-align: center;">
+					<i class="notched circle loading icon"></i>
+					<div class="content">
+						<div class="header" id="resultmessage">삭제되었습니다.</div>
+					</div>
 				</div>
 				<table id="classAdminListexample" class="display nowrap"
 					style="width: 100% !important;">

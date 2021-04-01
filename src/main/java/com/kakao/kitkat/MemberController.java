@@ -63,7 +63,6 @@ public class MemberController {
 		Tb_registration tb_registration = dao1.sessionRegistration();
 		session.setAttribute("sessionPreregistrationyn", tb_registration.getPreregistrationyn());
 		session.setAttribute("sessionRegistrationyn", tb_registration.getRegistrationyn());
-
 		MemberDao dao = sqlSession.getMapper(MemberDao.class);
 		Tb_student data = dao.selectOne(tb_student.getStudent_no());
 
@@ -84,8 +83,6 @@ public class MemberController {
 		}
 
 	}
-	
-	
 
 	@RequestMapping(value = "/professorLoginUp", method = RequestMethod.POST)
 	public String loginUp(@ModelAttribute Tb_professor tb_professor, HttpSession session) throws Exception {
@@ -214,35 +211,34 @@ public class MemberController {
 	public String login3(HttpSession session) {
 		return "login/login3";
 	}
-	
+
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session, Locale locale) {
 		session.invalidate();
 		return "index";
 	}
-	
+
 	@RequestMapping(value = "/memberUpdate", method = RequestMethod.GET)
 	public String memberUpdate(Locale locale, Model model, HttpSession session) throws Exception {
-		
-		String stuno = (String)session.getAttribute("sessionMember_id");
-		
+
+		String stuno = (String) session.getAttribute("sessionMember_id");
+
 		Tb_studentDao dao = sqlSession.getMapper(Tb_studentDao.class);
 		Tb_student student = dao.selectOne(stuno);
 		model.addAttribute("student", student);
 		return "goods/shopping_update";
 	}
-	
+
 	@RequestMapping(value = "/memberUpdate1", method = RequestMethod.GET)
 	public String memberUpdate1(Locale locale, Model model, HttpSession session) throws Exception {
-		
-		String stuno = (String)session.getAttribute("sessionMember_id");
-		
+
+		String stuno = (String) session.getAttribute("sessionMember_id");
+
 		Tb_studentDao dao = sqlSession.getMapper(Tb_studentDao.class);
 		Tb_student student = dao.selectOne(stuno);
 		model.addAttribute("student", student);
 		return "school/school_update";
 	}
-
 
 	private String hashPassword(String plainTextPassword) {
 		return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());

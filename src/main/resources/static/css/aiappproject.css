@@ -40,20 +40,41 @@ body {
 	margin: 5em 0em 0em;
 	padding: 5em 0em;
 }
-.field{
-	margin-bottom:1em;
-}
-.profileimage{
-	width:30px;
-	height:30px;
-    border-radius: 50%;
-/*     overflow: hidden; */
 
+.field {
+	margin-bottom: 1em;
 }
 
-.link{
+.profileimage {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	/*     overflow: hidden; */
+}
+
+.link {
 	color: #000000;
 }
 
+.leftmenulink {
+	height: 60px;
+	padding-top: 21px !important;
+	font-size: 16px;
+}
 
+#slideIndex {
+	animation-duration: 2s;
+	animation-name: slidein;
+}
 
+@keyframes slidein {
+	from { 
+	margin-left:100%;
+	width: 300%
+	}
+
+	to {	
+	margin-left: 0%;
+	width: 100%;
+	}
+}

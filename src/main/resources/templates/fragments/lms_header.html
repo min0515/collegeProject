@@ -2,30 +2,41 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head></head>
 <body th:fragment="header">
-	<span style="background-color: #F5F6F7; font-size: 20px; font-weight: bold; padding: 1% 2% 1% 2% !important;" onclick="location.href='professorLoginUp';">자바대학교 학사관리시스템</span>
-	<div class="ui text right aligned container" style="margin-right:5px !important;"
+	<span style="margin-left: 3%; padding: 0.5% 0% 0.5% 0%;">
+	<img src="images/school.png" style="width:47px; height:47px;">
+	</span>
+	<span
+		style=" color: #0A4E80; font-size: 20px; font-weight: bold; padding: 1.5% 1% 1.5% 0% !important;"
+		onclick="location.href='professorLoginUp';">자바대학교</span>
+	<span style="font-size: 17px; font-weight: bold; padding: 1.5% 1% 1.5% 0% !important;">학사관리 시스템</span>
+	<div class="ui text middle aligned right aligned container"
+		style="margin-right: 5px !important;"
 		th:unless="${session.sessionMember_id==null}">
-		<div class="ui container">
-			<div class="ui inline dropdown" style="padding:1% 2% 0.1% 2%;">
-				<img class="left floated mini ui image" src="/images/ggom.png">
-				<span style="color: white;"
-					th:if="${session.sessionProfessor_name} !=null"
-					th:text="${session.sessionProfessor_name}"></span><i
-					class="dropdown icon"></i> <span
+		<div class="ui container" style="padding: 3% 2% 3% 2%;">
+			<div class="ui inline dropdown">
+				<h4 style="margin: 0px;"
+					th:if=" ${session.sessionProfessor_name} !=null"
+					th:text="${session.sessionProfessor_name}"></h4>
+				<h4 style="margin: 0px;"
 					th:if="${session.sessionStudent_name} !=null"
-					th:text="${session.sessionStudent_name}"></span><i
-					class="dropdown icon"></i>
-				<div class="menu">
+					th:text="${session.sessionStudent_name}"></h4>
+				<div th:if=" ${session.sessionProfessor_name} !=null" class="menu">
 					<div class="item" onclick="location.href='professorUpdate'">
 						정보수정</div>
 					<div class="item" onclick="location.href='tbclassupdateRow'">
 						수업수정</div>
 					<div class="item" id="proclassUpdatePage"
 						onclick="location.href='gradesearch'">학생조회</div>
-					<div class="item" id="proclassUpdatePage"
-						onclick="location.href='logout'">로그아웃</div>
+
 				</div>
+
 			</div>
+			<i th:if=" ${session.sessionProfessor_name} !=null"
+				class="dropdown icon"></i>
+		</div>
+		<div style="padding: 2% 1% 2% 1%;">
+			<div class="ui black button" id="proclassUpdatePage"
+				onclick="location.href='logout'">logout</div>
 		</div>
 	</div>
 </body>
