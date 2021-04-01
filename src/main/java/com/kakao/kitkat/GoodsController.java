@@ -47,7 +47,7 @@ public class GoodsController {
 	Orders orders;
 	@Autowired
 	GoodsPaging goodspaging;
-	public static String find;
+	static String find;
 
 	@RequestMapping(value = "/qnaBoardWriteSave", method = RequestMethod.POST)
 	public String qnaBoardWriteSave(Model model, @ModelAttribute Board board,
@@ -107,6 +107,101 @@ public class GoodsController {
 
 	@RequestMapping(value = "/manageGoodsList", method = RequestMethod.GET)
 	public String manageGoodsList(Model model) throws Exception {
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+
+		int rowcount = dao.selectCountFirst();
+		int pagesize = 10;
+		int page = 1;
+		int startrow = (page - 1) * pagesize;
+		int endrow = 10;
+		if (goodspaging.getFind() == null) {
+			goodspaging.setFind("");
+		}
+		goodspaging.setStartrow(startrow);
+		goodspaging.setEndrow(endrow);
+		int absPage = 1;
+		if (rowcount % pagesize == 0) {
+			absPage = 0;
+		}
+
+		int pagecount = rowcount / pagesize + absPage;
+		int pages[] = new int[pagecount];
+		for (int i = 0; i < pagecount; i++) {
+			pages[i] = i + 1;
+		}
+
+		ArrayList<Goods> goodses = dao.goodsSelectPageList(goodspaging);
+
+		model.addAttribute("goodses", goodses);
+		model.addAttribute("pages", pages);
+		return "goods/manage_goods";
+	}
+
+	@RequestMapping(value = "/managePageSelect", method = RequestMethod.GET)
+	public String managePageSelect(Model model, @RequestParam int page) throws Exception {
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+
+		int pagesize = 10;
+		int startrow = (page - 1) * pagesize;
+		int endrow = 10;
+
+		goodspaging.setFind(find);
+		if (goodspaging.getFind() == null) {
+			goodspaging.setFind("");
+		}
+		goodspaging.setStartrow(startrow);
+		goodspaging.setEndrow(endrow);
+		int rowcount = dao.goodsSelectCount(goodspaging);
+		int absPage = 1;
+		if (rowcount % pagesize == 0) {
+			absPage = 0;
+		}
+
+		int pagecount = rowcount / pagesize + absPage;
+		int pages[] = new int[pagecount];
+		for (int i = 0; i < pagecount; i++) {
+			pages[i] = i + 1;
+		}
+
+		ArrayList<Goods> goodses = dao.goodsSelectPageList(goodspaging);
+		model.addAttribute("goodses", goodses);
+		model.addAttribute("pages", pages);
+		model.addAttribute("find", find);
+		return "goods/manage_goods";
+	}
+
+	@RequestMapping(value = "/findListmanage", method = RequestMethod.GET)
+	public String findListmanage(Model model, @RequestParam String find) throws Exception {
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+
+		int pagesize = 10;
+		int page = 1;
+		int startrow = (page - 1) * pagesize;
+		int endrow = 10;
+
+		goodspaging.setFind(find);
+		if (goodspaging.getFind() == null) {
+			goodspaging.setFind("");
+		}
+		goodspaging.setStartrow(startrow);
+		goodspaging.setEndrow(endrow);
+		int rowcount = dao.goodsSelectCount(goodspaging);
+		int absPage = 1;
+		if (rowcount % pagesize == 0) {
+			absPage = 0;
+		}
+
+		int pagecount = rowcount / pagesize + absPage;
+		int pages[] = new int[pagecount];
+		for (int i = 0; i < pagecount; i++) {
+			pages[i] = i + 1;
+		}
+
+		ArrayList<Goods> goodses = dao.goodsSelectPageList(goodspaging);
+		model.addAttribute("goodses", goodses);
+		model.addAttribute("pages", pages);
+		model.addAttribute("find", find);
+
 		return "goods/manage_goods";
 	}
 
@@ -295,27 +390,36 @@ public class GoodsController {
 			model.addAttribute("cartPayments", cartPayments);
 			Tb_cart cartprice = dao.myGoodsCartCheckedSelect(member_id);
 			model.addAttribute("cartprice", cartprice);
+			cartprice.getG_title();
 			return "goods/payment_cart";
 		}
 	}
 
 	@RequestMapping(value = "/cartPaymentGoYo", method = RequestMethod.POST)
-	public String cartPaymentGoYo(Model model, @ModelAttribute Orders orders, @RequestParam String orders_address1,
-			@RequestParam String orders_address2, HttpSession session) throws Exception {
+	public String cartPaymentGoYo(Model model, @ModelAttribute Orders orders, @RequestParam int totalprice,
+			@RequestParam String orders_address1, @RequestParam String orders_address2, HttpSession session)
+			throws Exception {
 		String member_id = (String) session.getAttribute("sessionMember_id");
 		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
-		tb_cart = dao.myGoodsCartCheckedSelect(member_id);
 		OrdersDao dao2 = sqlSession.getMapper(OrdersDao.class);
 		orders.setOrders_address(orders_address1 + "-" + orders_address2);
-		orders.setG_title(tb_cart.getG_title());
 		String pattern = "yyyyMMdd";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 		String date = simpleDateFormat.format(new Date());
-		int num = dao2.contactMaxNum();
-		orders.setOrders_contact(date + "-" + Integer.toString(num));
-		orders.setG_price(tb_cart.getPrice());
+		ArrayList<Tb_cart> cartyb = dao.cartyb(member_id);
+		if (cartyb == null) {
+			System.out.println("fdfkasdjfksad");
+		}
 		orders.setMember_id(member_id);
-		dao2.OrderssAdd2(orders);
+		for (Tb_cart i : cartyb) {
+			i.setOrders_contact(date + "-" + i.getG_seq());
+			dao2.OrderssAdd2(i);
+			orders.setOrders_contact(date + "-" + i.getG_seq());
+			dao2.rororororor(orders);
+		}
+		String ccc = orders.getOrders_contact();
+		model.addAttribute("ccc", ccc);
+		model.addAttribute("totalprice", totalprice);
 		return "goods/payment_cartcomplete";
 	}
 

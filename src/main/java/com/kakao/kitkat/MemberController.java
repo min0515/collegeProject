@@ -231,6 +231,18 @@ public class MemberController {
 		model.addAttribute("student", student);
 		return "goods/shopping_update";
 	}
+	
+	@RequestMapping(value = "/memberUpdate1", method = RequestMethod.GET)
+	public String memberUpdate1(Locale locale, Model model, HttpSession session) throws Exception {
+		
+		String stuno = (String)session.getAttribute("sessionMember_id");
+		
+		Tb_studentDao dao = sqlSession.getMapper(Tb_studentDao.class);
+		Tb_student student = dao.selectOne(stuno);
+		model.addAttribute("student", student);
+		return "school/school_update";
+	}
+
 
 	private String hashPassword(String plainTextPassword) {
 		return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
