@@ -4,12 +4,17 @@ import java.util.ArrayList;
 
 import com.kakao.kitkat.entities.Board;
 import com.kakao.kitkat.entities.BoardPaging;
+import com.kakao.kitkat.entities.Comment;
 
 
 public interface BoardDao {
 	public Board selectOne(int b_seq) throws Exception;
+	
+	public Comment selectCommentOne(int b_seq) throws Exception;
 
 	public int insertRow(Board Board) throws Exception;
+	
+	public int insertCommentRow(Board Board) throws Exception;
 
 	public int updateRow(Board Board) throws Exception;
 
@@ -22,8 +27,6 @@ public interface BoardDao {
 	public int updateAjax(Board Board) throws Exception;
 
 	public int deleteAjax(String b_seq) throws Exception;
-
-	
 
 	public int selectCountFirst(BoardPaging boardpaging) throws Exception;
 

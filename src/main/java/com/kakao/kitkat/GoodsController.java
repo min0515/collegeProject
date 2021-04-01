@@ -418,7 +418,7 @@ public class GoodsController {
 			dao2.rororororor(orders);
 		}
 		String ccc = orders.getOrders_contact();
-		model.addAttribute("ccc", ccc);
+		model.addAttribute("ccc",ccc);
 		model.addAttribute("totalprice", totalprice);
 		return "goods/payment_cartcomplete";
 	}

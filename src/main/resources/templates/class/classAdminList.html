@@ -2,75 +2,78 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout/lms_layout">
-<head>
-<title>index</title>
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/class.css}">
+</th:block>
 <th:block layout:fragment="script">
 	<script type="text/javascript" th:src="@{/js/class.js}"></script>
 </th:block>
-</head>
 <body>
 	<div layout:fragment="content">
-		<div class="five wide column center aligned"
-			style="background-color: #F5F6F7; padding: 60px 0px">
-			<h2 class="ui header" id="lmstitle">
-				<strong>강의관리</strong>
-			</h2>
-			<div class="ui icon message" id="successmessage"
-				style="display: none; text-align: center;">
-				<i class="notched circle loading icon"></i>
-				<div class="content">
-					<div class="header" id="resultmessage">삭제되었습니다.</div>
-				</div>
+		<div class="ui middle aligned center aligned grid">
+			<div class="column">
+				<div class="field" style="margin-bottom: 40px">
+				<h1 class="ui left aligned header">
+					<strong style="margin-left:2%; ">강의 관리</strong>
+				</h1>
+				<div class="ui section divider" style="margin-top:15px;"></div>
 			</div>
-			<table id="classAdminListexample" class="display nowrap"
-				style="width: 100% !important;">
-				<thead>
-					<tr style="text-align: center">
-						<th>강의번호</th>
-						<th>학과번호</th>
-						<th>수업이름</th>
-						<th>수업타입</th>
-						<th>수정</th>
-						<th>삭제</th>
-					</tr>
-				</thead>
+				<div class="ui icon message" id="successmessage"
+					style="display: none; text-align: center;">
+					<i class="notched circle loading icon"></i>
+					<div class="content">
+						<div class="header" id="resultmessage">삭제되었습니다.</div>
+					</div>
+				</div>
+				<table id="classAdminListexample" class="display nowrap"
+					style="width: 100% !important;">
+					<thead>
+						<tr style="text-align: center">
+							<th>강의번호</th>
+							<th>학과번호</th>
+							<th>수업이름</th>
+							<th>수업타입</th>
+							<th>수정</th>
+							<th>삭제</th>
+						</tr>
+					</thead>
 
-				<tbody>
-					<tr th:each="classtb : ${classtbs}" style="cursor: pointer;">
-						<td th:text="${classtb.class_no}" th:value="${classtb.class_no}"></td>
-						<td th:text="${classtb.department_no}"></td>
-						<td th:text="${classtb.class_name}"></td>
-						<td th:text="${classtb.class_type}"></td>
-						<td><a
-							th:href="@{classAdminUpdateGo(class_no=${classtb.class_no})}">
-								<i class="edit outline icon primary black" title="update"></i>
-						</a></td>
-						<td><i class="trash alternate outline icon red"
-							title="delete" id="classAdminDeleteBtn"></i></td>
-					</tr>
-				</tbody>
-			</table>
-			<div class="ui mini classDelete modal">
-				오후 12:33 2021-03-30
-				<div class="classmodal header">강의삭제</div>
-				<div class="classmodal content">
-					<p>삭제 하시겠습니까?</p>
+					<tbody>
+						<tr th:each="classtb : ${classtbs}" style="cursor: pointer;">
+							<td th:text="${classtb.class_no}" th:value="${classtb.class_no}"></td>
+							<td th:text="${classtb.department_no}"></td>
+							<td th:text="${classtb.class_name}"></td>
+							<td th:text="${classtb.class_type}"></td>
+							<td><a
+								th:href="@{classAdminUpdateGo(class_no=${classtb.class_no})}">
+									<i class="edit outline icon primary black" title="update"></i>
+							</a></td>
+							<td><i class="trash alternate outline icon red"
+								title="delete" id="classAdminDeleteBtn"></i></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="ui mini classDelete modal">
+					오후 12:33 2021-03-30
+					<div class="classmodal header">강의삭제</div>
+					<div class="classmodal content">
+						<p>삭제 하시겠습니까?</p>
+					</div>
+					<div class="actions">
+						<button type="button" class="ui red button" id="classDeleteOkBtn">확인</button>
+						<div class="ui cancel button" id="classDeleteCancelBtn">취소</div>
+					</div>
 				</div>
-				<div class="actions">
-					<button type="button" class="ui red button" id="classDeleteOkBtn">확인</button>
-					<div class="ui cancel button" id="classDeleteCancelBtn">취소</div>
-				</div>
-			</div>
-			<div class="ui noncancel tiny modal">
-				<div class="header">삭제중단</div>
-				<div class="content">
-					<p>이 강의에 대한 성적데이터가 있어</p>
-					<p>삭제가 어렵습니다. 성적데이터 삭제후</p>
-					<p>다시 시도해주세요</p>
+				<div class="ui noncancel tiny modal">
+					<div class="header">삭제중단</div>
+					<div class="content">
+						<p>이 강의에 대한 성적데이터가 있어</p>
+						<p>삭제가 어렵습니다. 성적데이터 삭제후</p>
+						<p>다시 시도해주세요</p>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 </body>
 </html>

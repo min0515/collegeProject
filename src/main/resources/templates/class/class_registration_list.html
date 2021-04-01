@@ -2,15 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout/lms_layout">
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/class.css}">
+</th:block>
 <th:block layout:fragment="script">
 	<script type="text/javascript" th:src="@{/js/class.js}"></script>
 </th:block>
 <body layout:fragment="content">
 	<div class="ui middle aligned center aligned grid">
 		<div class="column" style="max-width: 85% !important;">
-			<h2 class="ui header" id="lmstitle">
-				<strong>수강신청</strong>
-			</h2>
+			<div class="field" style="margin-bottom: 40px">
+				<h1 class="ui  left aligned header">
+					<strong style="margin-left: 2%;">수강신청</strong>
+				</h1>
+				<div class="ui section divider" style="margin-top: 15px;"></div>
+			</div>
 			<form class="ui large form" id="classFindForm" Method="post">
 				<div class="ui stacked segment" id="segmentSearch">
 					<div class="field">
@@ -74,7 +80,7 @@
 							<td th:text="${classtb.class_type}"></td>
 							<td th:text="${classtb.nowcapacity}"></td>
 							<td>
-								<button class="ui violet basic button" type="button"
+								<button class="ui blue basic button" type="button"
 									id="classRegistration">신청</button> <span
 								id="classRegistrationOk" style="display: none;">신청완료</span>
 							</td>
@@ -109,34 +115,30 @@
 						</div>
 					</div>
 					<table id="MyClassListExample" class="display nowrap"
-						style="width: 100% !important; font-size: 11px;">
+						style="font-size: 14px;">
 						<thead>
 							<tr style="text-align: center">
 								<th>학기</th>
 								<th>강의번호</th>
 								<th>수업이름</th>
 								<th>학점</th>
-								<th>이수구분</th>
-								<th>신청취소</th>
+								<th>취소</th>
 							</tr>
 						</thead>
 
 						<tbody id="ajaxReplaceMyClass">
 							<tr th:each="myClassTb : ${myClassTb}" style="cursor: pointer;">
-								<td th:text="${myClassTb.term_no}"
+								<td th:text="${myClassTb.term_no}" style="height: 30px;"
 									th:value="${myClassTb.term_no}"></td>
 								<td th:text="${myClassTb.class_no}"
 									th:value="${myClassTb.class_no}"></td>
 								<td th:text="${myClassTb.class_name}"
 									th:value="${myClassTb.class_name}"></td>
 								<td th:text="${myClassTb.credit}"></td>
-								<td th:text="${myClassTb.class_type}"></td>
-								<td>
-									<button class="ui red basic button" type="button"
-										id="MyClassRegistrationCancelBtn">취소</button> <span
-									id="MyClassCancelOk" style="display: none;">취소완료<i
-										class="notched circle loading icon"></i></span>
-								</td>
+								<td><span id="MyClassRegistrationCancelBtn"><i
+										class="trash red large alternate icon"></i></span> <span
+									id="MyClassCancelOk" style="display: none;">완료<i
+										class="notched circle loading icon"></i></span></td>
 							</tr>
 						</tbody>
 					</table>

@@ -11,12 +11,14 @@
 	<script type="text/javascript" th:src="@{/js/class.js}"></script>
 </th:block>
 <body layout:fragment="content">
-	<th:block th:replace="fragments/classLeftMenu"></th:block>
 	<div class="ui middle aligned center aligned grid">
 		<div class="column">
-			<h2 class="ui header" id="lmstitle">
-				<strong>강의평작성</strong>
-			</h2>
+			<div class="field" style="margin-bottom: 40px">
+				<h1 class="ui  left aligned header">
+					<strong style="margin-left: 2%;">강의평작성</strong>
+				</h1>
+				<div class="ui section divider" style="margin-top: 15px;"></div>
+			</div>
 			<form class="ui large from" id="classReviewInsert"
 				action="classReviewInsert" Method="post">
 				<div class="ui stacked segment" style="padding: 30px;">
@@ -34,15 +36,15 @@
 					</div>
 					<div class="field">
 						<div class="fluid ui input">
-							<textarea rows="8" cols="150" placeholder="review" name="review"
-								id="review"></textarea>
+							<textarea style="width: 100%;" rows="8" cols="150"
+								placeholder="review" name="review" id="review"></textarea>
 						</div>
 					</div>
 					<div class="field" style="margin-top: 20px">
 						<span><button type="button" id="classReviewInsertBtn"
-								class="ui primary basic button" style="width: 48%">저장</button></span> <span><button
+								class="ui primary basic button" style="width: 49%">저장</button></span> <span><button
 								type="button" class="ui negative  basic button"
-								onclick="location.href='classCancel'" style="width: 48%">취소</button></span>
+								onclick="location.href='classCancel'" style="width: 50%">취소</button></span>
 					</div>
 				</div>
 			</form>

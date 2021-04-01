@@ -276,6 +276,9 @@ $(document).ready(function() {
 
 	});
 	$("#goodinfobtn").click(function() {
+		});
+	
+	$("#goodinfobtn").click(function(){
 		$('#goodinfobtn').attr('class', 'item active');
 		$('#goodreviewbtn').attr('class', 'item');
 		$('#goodqnabtn').attr('class', 'item');
@@ -398,6 +401,7 @@ $(document).ready(function() {
     		 $('.ui.modal.delete').modal('hide');
     	 });
 	});
+
 	$("#myCartTable").on('change', '#qtyInputProdetail', 'td', function() {
 		var row = $(this).closest('tr');
 		var td = row.children();
@@ -445,3 +449,7 @@ $(document).ready(function() {
 		}
 	});
 });
+
+
+
+

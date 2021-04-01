@@ -29,8 +29,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kakao.kitkat.dao.BoardDao;
+import com.kakao.kitkat.dao.CommentDao;
 import com.kakao.kitkat.entities.Board;
 import com.kakao.kitkat.entities.BoardPaging;
+import com.kakao.kitkat.entities.Comment;
 
 @Controller
 public class BoardController {
@@ -39,14 +41,17 @@ public class BoardController {
 	@Autowired
 	Board board;
 	@Autowired
+	Comment comment;
+	@Autowired
 	BoardPaging boardpaging;
 
 	public static String find;
-	
+
 	@RequestMapping(value = "/boardWrite", method = RequestMethod.GET)
 	public String boardWrite(Locale locale, Model model) {
 		return "board/board_write";
 	}
+
 	@RequestMapping(value = "/boardDelete", method = RequestMethod.GET)
 	public String boardDelete(@RequestParam int b_seq) throws Exception {
 		BoardDao dao = sqlSession.getMapper(BoardDao.class);
@@ -55,24 +60,9 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/boardWriteSave", method = RequestMethod.POST)
-	public String board_insertSave(Model model, @ModelAttribute Board board,
-			@RequestParam("b_attachfile") MultipartFile b_attachfile, HttpServletRequest request) throws Exception {
-		String filename = b_attachfile.getOriginalFilename();
+	public String board_insertSave(Model model, @ModelAttribute Board board, HttpServletRequest request) throws Exception {
 		String path = "F:/SPRINGBOOTSOURCE/eyeconspringboot (1)/src/main/resources/static/uploadattachs/";
 		String realpath = "/uploadattachs/";
-		if (!filename.equals("")) {
-			byte bytes[] = b_attachfile.getBytes();
-			try {
-				BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(path + filename));
-				output.write(bytes);
-				output.flush();
-				output.close();
-				board.setB_attach(realpath + filename);
-
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-		}
 		String ip = getIp(request);
 		board.setB_inputip(ip);
 		SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd hh:mm");
@@ -85,15 +75,22 @@ public class BoardController {
 		return "redirect:boardPageList";
 	}
 
+	@RequestMapping(value = "/boardCommentSave", method = RequestMethod.POST)
+	public String boardCommentSave(Model model, @ModelAttribute Comment comment) throws Exception {
+		CommentDao dao = sqlSession.getMapper(CommentDao.class);
+		dao.insertCommentRow(comment);
+		return "index";
+	}
+
 	@RequestMapping(value = "/boardDetail", method = RequestMethod.GET)
 	public String boardDetail(Model model, @RequestParam int b_seq, HttpSession session) throws Exception {
 		BoardDao dao = sqlSession.getMapper(BoardDao.class);
 		board = dao.selectOne(b_seq);
-//		String cursession = (String) session.getAttribute("sessionemail");
-//		if (cursession.equals(board.getB_studentno())) {
-//			dao.addHit(b_seq);
-//		}
-//
+//	      String cursession = (String) session.getAttribute("sessionemail");
+//	      if (cursession.equals(board.getB_studentno())) {
+//	         dao.addHit(b_seq);
+//	      }
+		//
 		model.addAttribute("board", board);
 		return "board/board_detail";
 	}
