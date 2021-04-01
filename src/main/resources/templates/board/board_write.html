@@ -5,71 +5,71 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout/school_layout">
 <div layout:fragment="school_content">
-	<form class="ui large form" method="POST" action="boardWriteSave" enctype="multipart/form-data"
-            data-parsley-validate="true">
-	<div class="ui grid center aligned">
-		<div class="five wide column">
-		</div>
-		<div class="five wide column">
-		
-			<div class="field center aligned" style="margin-top:30px">
-				<h3> 게시판123 </h3>
-			</div>
-		
-			<div class="field">
-				<div class="fluid ui left icon input">
-					<i class="id card outline icon"></i>
-					<input type="text" name="b_name" placeholder="닉네임을 입력하세요">
-				</div>
-			</div>
-			
-			<div class="field">
-				<div class="fluid ui left icon input">
-					<i class="clipboard outline icon"></i>
-					<input type="text" name="b_title" placeholder="글 제목을 입력하세요">
-				</div>
-			</div>
+	<form class="ui large form" method="POST" action="boardWriteSave"
+		enctype="multipart/form-data" data-parsley-validate="true">
+		<div class="ui grid center aligned" style="background-color: #F3F3F3;">
+			<div class="ten wide column">
+
+				<!-- 			<input type="hidden" name="b_seq" id="hidden_seq" -->
+				<!-- 				th:value="${board.b_seq}"> -->
 
 
-			<div class="field">
-				<div class="ui labeled input">
-					<div class="ui label">
-						<i class="paperclip icon attachbtn"></i>
+				<div class="field center aligned" style="margin-top: 30px">
+					<h2 style="margin-bottom: 40px">게시글 작성</h2>
+				</div>
+				<div class="ui grid center aligned">
+					<div class="ui stacked segment"
+						style="width: 50%; margin-bottom: 50px">
+
+
+
+						<div class="field">
+							<div class="ui fluid input">
+								<select class="ui dropdown" style="width: 60%;">
+									<option value="">게시판 카테고리를 선택해주세요</option>
+									<option value="free">자유 게시판</option>
+									<option value="depart">학과 게시판</option>
+									<option value="qna">질문 게시판</option>
+								</select> 
+								<input class="ui  dividing header" name="b_name" th:if="${session.sessionStudent_name} !=null"  th:value="${session.sessionStudent_name}+'&nbsp'+학우님" readonly>
+            					<input class="ui  dividing header" name="b_name" th:if="${session.sessionProfessor_name} !=null"  th:value="${session.sessionProfessor_name}+'&nbsp'+교수님" readonly>
+							</div>
+							<div class="field" style="margin-top:15px">
+								<div class="fluid ui left icon input">
+									<i class="clipboard outline icon"></i> <input type="text"
+										name="b_title" placeholder="글 제목을 입력하세요">
+								</div>
+							</div>
+
+							<div class="field">
+								<div class="fluid ui left icon input" style="height: 150px">
+									<textarea rows="8" placeholder="내용" name="b_content"></textarea>
+								</div>
+							</div>
+
+							<div class="field">
+								<span><button type="submit"
+										class="ui primary basic button" style="width: 48%">저장</button></span>
+								<span><button type="button"
+										class="ui negative  basic button" onclick="history.back(-1);"
+										style="width: 48%">취소</button></span>
+							</div>
+						</div>
 					</div>
-					<input type="file" id="b_attach" name="b_attachfile"
-						style="display: none"> <input type="text"
-						name="b_attachname" class="b_attachname" placeholder="첨부파일">
+				</div>
+			</div>
+			<div class="ui modal">
+				<div class="header">Header</div>
+				<div class="image content">
+					<img class="image">
+					<div class="description">
+						<p></p>
+					</div>
 				</div>
 			</div>
 
-
-			<div class="field">
-                <div class="fluid ui left icon input" style="height:150px">
-                     <textarea rows="8" placeholder="내용" name="b_content"></textarea>
-                </div>
-            </div>
-			
-			<div class="field" style="margin-top:70px">
-				<span><button type="submit" class="ui primary basic button" style="width:48%">저장</button></span>
-				<span><button type="button" class="ui negative  basic button" onclick="location.href='index'" style="width:48%">취소</button></span>
-			</div>
-			
 		</div>
-		<div class="five wide column">
-		</div>
-		
-		<div class="ui modal">
-			<div class="header">Header</div>
-			<div class="image content">
-				<img class="image">
-				<div class="description">
-					<p></p>
-				</div>
-			</div>
-		</div>
-		
-	</div>
-</form>		
+	</form>
 </div>
 </body>
 </html>
