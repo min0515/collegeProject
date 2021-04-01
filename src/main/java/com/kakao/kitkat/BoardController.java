@@ -55,24 +55,9 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/boardWriteSave", method = RequestMethod.POST)
-	public String board_insertSave(Model model, @ModelAttribute Board board,
-			@RequestParam("b_attachfile") MultipartFile b_attachfile, HttpServletRequest request) throws Exception {
-		String filename = b_attachfile.getOriginalFilename();
+	public String board_insertSave(Model model, @ModelAttribute Board board, HttpServletRequest request) throws Exception {
 		String path = "F:/SPRINGBOOTSOURCE/eyeconspringboot (1)/src/main/resources/static/uploadattachs/";
 		String realpath = "/uploadattachs/";
-		if (!filename.equals("")) {
-			byte bytes[] = b_attachfile.getBytes();
-			try {
-				BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(path + filename));
-				output.write(bytes);
-				output.flush();
-				output.close();
-				board.setB_attach(realpath + filename);
-
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-		}
 		String ip = getIp(request);
 		board.setB_inputip(ip);
 		SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd hh:mm");
