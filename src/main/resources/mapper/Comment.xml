@@ -4,14 +4,23 @@
 
 <mapper namespace="com.kakao.kitkat.dao.CommentDao">
 
-	
-	<select id="selectCommentOne" resultType="com.kakao.kitkat.entities.Comment">
+	<select id="selectCommentOne"
+		resultType="com.kakao.kitkat.entities.Comment">
 		select * from comment where b_seq=#{b_seq}
 	</select>
-	
-   <insert id = "insertCommentRow">
-   	insert into comment (b_seq, comment_step, comment_name, comment_inputtime, comment_content)
-   	values ((SELECT ifnull(MAX(b_seq)+1, 1) FROM board board_alias), 0, 0, 0, #{comment_content})
-   </insert>
-	
+
+	<insert id="insertCommentRow">
+		insert into comment (b_seq, comment_step, comment_name, comment_inputtime,
+		comment_content)
+		values (
+		#{b_seq}, 
+		0, 
+		#{comment_name}, 
+		#{comment_inputtime},
+		#{comment_content})
+	</insert>
+	<select id="selectCommentList"
+		resultType="com.kakao.kitkat.entities.Comment">
+		select * from comment where b_seq=#{b_seq} order by comment_inputtime
+	</select>
 </mapper>
