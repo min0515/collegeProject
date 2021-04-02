@@ -7,7 +7,7 @@ public class Tb_grade {
 	private String term_no;
 	private String student_no;
 	private String class_no;
-	private float point;
+	private Double point;
 
 	public String getTerm_no() {
 		return term_no;
@@ -33,11 +33,11 @@ public class Tb_grade {
 		this.class_no = class_no;
 	}
 
-	public float getPoint() {
+	public Double getPoint() {
 		return point;
 	}
 
-	public void setPoint(float point) {
-		this.point = point;
+	public void setPoint(Double point2) {
+		this.point = point2;
 	}
 }

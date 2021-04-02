@@ -405,8 +405,6 @@ $(document).ready(function() {
 	$("#myCartTable").on('change', '#qtyInputProdetail', 'td', function() {
 		var row = $(this).closest('tr');
 		var td = row.children();
-		var price= $('#productPriceVal').val();
-		alert(price);
 		var input = td.eq(0).children().children();
 		var qty = td.eq(3).children().val();
 		var g_seq = td.eq(9).children().val();

@@ -46,8 +46,8 @@
 											th:src="${cartPayment.g_attach}"
 											style="width: 90%; height: 100%;"></td>
 										<td id="g_title" th:text="${cartPayment.g_title}"></td>
-										<td th:text="${cartPayment.g_delivery}"></td>
-										<td th:text="${cartPayment.price}"></td>
+										<td th:text="${#numbers.formatDecimal(cartPayment.g_delivery, 0, 'COMMA', 0, 'POINT')}+원"></td>
+										<td th:text="${#numbers.formatDecimal(cartPayment.price, 0, 'COMMA', 0, 'POINT')}+원"></td>
 										<td th:text="${cartPayment.qty}"></td>
 									</tr>
 								</tbody>
