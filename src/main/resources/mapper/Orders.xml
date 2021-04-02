@@ -2,6 +2,7 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+
 <mapper namespace="com.kakao.kitkat.dao.OrdersDao">
 
 	<select id="ordersSelectOne"
@@ -9,6 +10,26 @@
 		select *from orders where member_id=#{member_id} and
 		orders_seq = (select max(orders_seq) from orders);
 	</select>
+	<select id="myOrdersqtySum" resultType="Integer">
+		select sum(orders_qty)
+		from
+		orders where member_id=#{member_id}
+	</select>
+	<select id="myOrderstotalSum" resultType="Integer">
+		select sum(g_total)
+		from
+		orders where member_id=#{member_id}
+	</select>
+	
+	<select id="selectproyo"
+		resultType="com.kakao.kitkat.entities.CartList">
+		select
+		a.*,
+		b.*
+		from orders a
+		left join goods b on a.g_title = b.g_title
+		where member_id=#{member_id}
+ 	</select>
 
 	<insert id="goodsInsertRow">
 		insert into goods (g_seq, g_title, g_price,
@@ -66,7 +87,8 @@
 		orders_name=#{orders_name},orders_zipcode=#{orders_zipcode},orders_address=#{orders_address}
 		where (select orders_seq from (select max(orders_seq) as orders_seq
 		from orders) as a_t) and member_id=#{member_id}
-		and orders_contact=#{orders_contact}
+		and
+		orders_contact=#{orders_contact}
 	</update>
 
 </mapper>

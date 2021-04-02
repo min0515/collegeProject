@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/shopping_layout">
+
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/shopping.css}">
+</th:block>
+<th:block layout:fragment="script">
+	<script type="text/javascript" th:src="@{/js/shopping.js}"></script>
+</th:block>
+
+<body layout:fragment="content">
+	<div class="ui icon message" id="successmessage" style="display: none">
+		<i class="notched circle loading icon"></i>
+		<div class="content">
+			<div class="header" id="resultmessage"></div>
+		</div>
+	</div>
+	<div class="ui middle aligned center aligned grid">
+		<div class="column"
+			style="max-width: 75% !important; margin-top: 2em !important;">
+			<div class="field" style="margin-top: 20px">
+				<h1 class="ui   header">
+					<strong style="margin-left: 4%;">장바구니</strong>
+				</h1>
+			</div>
+			<input type="hidden" name="g_seq">
+			<div class="segment"
+				style="height: 600px; width: 73%; margin-bottom: 60px; float: left; padding: 20px;">
+				<div class="field" style="padding-right: 80%; margin-top: 2%;">
+					<span style="font-size: 17px;"><strong>전체</strong></span> <span
+						style="font-size: 17px; color: #0064CD;" th:text="${mycartcount}"><strong
+						th:text="아직"></strong></span> <span style="font-size: 17px;"><strong>건</strong></span>
+						<span>&nbsp</span>
+						<span>&nbsp</span>
+						<span>&nbsp</span>
+						<span style="font-size: 15px;"><strong>수량</strong></span> <span
+						style="font-size: 17px; color: #0064CD;" th:text="${sum}"><strong
+						th:text="아직"></strong></span> <span style="font-size: 17px;"><strong>개</strong></span>
+				</div>
+				<table id="myCartTable" style="text-align: center;"
+					class="ui very basic table">
+					<thead>
+						<tr style="font-size: 15px;">
+							<th></th>
+							<th>item</th>
+							<th></th>
+							<th>가격</th>
+						</tr>
+					</thead>
+					<tbody style="font-size: 18px; ">
+						<tr th:each="cartyb : ${cartyb}" >
+							<td style="width: 10%;">
+							</td>
+							<td style="width: 20%;"><img th:src="${cartyb.g_attach}"
+								style="width: 90%; height: 120px;"></td>
+							<td style="width: 20%;"><h3>
+									<span th:text="${cartyb.g_title}"></span>
+								</h3></td>
+							<td style="width: 20%;"
+								th:text="${#numbers.formatDecimal(cartyb.g_price, 0, 'COMMA', 0, 'POINT')}+원"></td>
+							<td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="ui stacked segment"
+				style="float: right; width: 25%; height: 400px; padding: 2%; margin-top: 70px; font-size: 15px;">
+				<div class="field" style="margin-bottom: 30px;">
+					<span style="float: left;"><strong>상품금액</strong></span> <span
+						style="float: right;"><strong id="productPrice"
+						th:text="${#numbers.formatDecimal(sumtotal-2500, 0, 'COMMA', 0, 'POINT')}"></strong><strong>원</strong></span>
+
+				</div>
+				<input type="hidden" id="totalprice">
+				<div class="field" style="margin-bottom: 60px;">
+					<span style="float: left;"><strong>배송비</strong></span> <span
+						style="float: right;"><strong id="deliveryPrice"
+						th:text="${#numbers.formatDecimal(2500, 0, 'COMMA', 0, 'POINT')}"></strong><strong>원</strong></span>
+				</div>
+				<div class="ui section divider"></div>
+				<div class="field" style="margin-bottom: 100px;">
+					<span style="float: left;"><strong>결제금액</strong></span> <span
+						style="float: right;"><strong id="finalPrice"
+						th:text="${#numbers.formatDecimal(sumtotal, 0, 'COMMA', 0, 'POINT')}"></strong><strong>원</strong></span>
+				</div>
+			</div>
+			<div class="ui paymentGo mini modal">
+				<div class="header">선택된 상품없음</div>
+				<div class="content">
+					<p>선택된 상품이 없습니다</p>
+				</div>
+				<div class="actions">
+					<div class="ui primary cancel button">확인</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+	window.onpageshow = function(event) {
+		if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+			// Back Forward Cache로 브라우저가 로딩될 경우 혹은 브라우저 뒤로가기 했을 경우
+			 location.href="goodsCartGo"
+        }
+	}
+	</script>
+</body>
+</html>
