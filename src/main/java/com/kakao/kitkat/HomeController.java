@@ -32,4 +32,9 @@ public class HomeController {
 		model.addAttribute("message", "thymeleaf  message");
 		return "school_index";
 	}
+
+	@RequestMapping(value = "/lmsHome")
+	public String lmsHome(Model model, HttpSession session) {
+		return "index";
+	}
 }
