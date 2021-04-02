@@ -1,10 +1,8 @@
 package com.kakao.kitkat;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -26,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kakao.kitkat.dao.BoardDao;
 import com.kakao.kitkat.dao.CommentDao;
@@ -47,28 +45,17 @@ public class BoardController {
 
 	public static String find;
 
-	@RequestMapping(value = "/boardCommentSave", method = RequestMethod.POST)
-	public String boardCommentSave(Model model, @ModelAttribute Comment comment) throws Exception {
-		SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd HH:mm");
-		Date date = new Date();
-		String today = df.format(date);
-		comment.setComment_inputtime(today);
-		CommentDao dao = sqlSession.getMapper(CommentDao.class);
-		dao.insertCommentRow(comment);
-
-		return "redirect:/";
-	}
-
 	@RequestMapping(value = "/boardWrite", method = RequestMethod.GET)
 	public String boardWrite(Locale locale, Model model) {
 		return "board/board_write";
 	}
 
-	@RequestMapping(value = "/boardDelete", method = RequestMethod.GET)
-	public String boardDelete(@RequestParam int b_seq) throws Exception {
+	@RequestMapping(value = "/boardDeleteAjax", method = RequestMethod.POST)
+	@ResponseBody
+	public String boardDeleteAjax(@RequestParam int b_seq) throws Exception {
 		BoardDao dao = sqlSession.getMapper(BoardDao.class);
-		dao.deleteRow(b_seq);
-		return "redirect:boardPageList";
+		dao.BoardDeleteRow(b_seq);
+		return "y";
 	}
 
 	@RequestMapping(value = "/boardWriteSave", method = RequestMethod.POST)
@@ -95,14 +82,31 @@ public class BoardController {
 		board = boarddao.selectOne(b_seq);
 		model.addAttribute("board", board);
 		ArrayList<Comment> comments = commentdao.selectCommentList(b_seq);
-//		if(comments == null) {
-//			System.out.println("djqtek");
-//		}
-//		for(Comment i : comments) {
-//			System.out.println(i.getComment_content());
-//		}
 		model.addAttribute("comments", comments);
+		boarddao.addHit(b_seq);
+		int commentCount = boarddao.selectCommentCount(b_seq);
+		model.addAttribute("commentCount", commentCount);
 		return "board/board_detail";
+	}
+
+	@RequestMapping(value = "/boardCommentSave", method = RequestMethod.POST)
+	public String boardCommentSave(HttpSession session, RedirectAttributes redirectAttributes, Model model,
+			@RequestParam int b_seq, @ModelAttribute Comment comment) throws Exception {
+		String member_name = (String) session.getAttribute("sessionMember_name");
+		if (member_name == null) {
+			return "login/login3";
+		} else {
+			SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd HH:mm");
+			Date date = new Date();
+			String today = df.format(date);
+			comment.setComment_inputtime(today);
+			comment.setComment_name(member_name);
+			CommentDao dao = sqlSession.getMapper(CommentDao.class);
+
+			dao.insertCommentRow(comment);
+			redirectAttributes.addAttribute("b_seq", b_seq);
+			return "redirect:boardDetail";
+		}
 	}
 
 	@RequestMapping(value = "/boardUpdateSave", method = RequestMethod.POST)
@@ -111,6 +115,14 @@ public class BoardController {
 		System.out.println("b_seq:" + board.getB_seq());
 		dao.updateRow(board);
 		return "redirect:boardPageList";
+	}
+
+	@RequestMapping(value = "/boardUpdate", method = RequestMethod.GET)
+	public String boardUpdate(Model model, @RequestParam int b_seq) throws Exception {
+		BoardDao dao = sqlSession.getMapper(BoardDao.class);
+		board = dao.selectOne(b_seq);
+		model.addAttribute("board", board);
+		return "board/board_update";
 	}
 
 	@RequestMapping(value = "/replyWrite", method = RequestMethod.GET)
@@ -286,7 +298,7 @@ public class BoardController {
 		model.addAttribute("boards", boards);
 		model.addAttribute("pages", pages);
 		model.addAttribute("find", find);
-		return "redirect:boardPageList";
+		return "board/board_page_list";
 	}
 
 	private String getIp(HttpServletRequest request) {

@@ -11,14 +11,16 @@
 	<script type="text/javascript" th:src="@{/js/class.js}"></script>
 </th:block>
 <body layout:fragment="content">
-	<th:block th:replace="fragments/classLeftMenu"></th:block>
 	<div class="ui middle aligned center aligned grid">
 		<div class="column">
+		<div class="field" style="margin-bottom: 40px">
+				<h1 class="ui  left aligned header">
+					<strong style="margin-left:2%; ">내 수강 이력</strong>
+				</h1>
+				<div class="ui section divider" style="margin-top:15px;"></div>
+			</div>
 			<form class="ui large from" id="myclassFinalListSearch">
 				<div class="ui stacked segment">
-					<h4 class="ui header">
-						<strong>강의 조회</strong>
-					</h4>
 					<div class="ui labeled input searchInput">
 						<div class="ui label">년도</div>
 						<select class="ui dropdown" id="yyyy">

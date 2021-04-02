@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:with="lang=${#locale.language}" th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+
+<head th:replace="fragments/shopping_config :: shopping_config">
+</head>
+<body>
+	<div class="sixteen column row ui grid center aligned"
+		style="background-color: #FFFFFF;">
+		<div class="three wide column"
+			style="text-align: left; display: left; margin: 0 auto;">
+			<button class="ui button"
+				style="background-color: #FFFFFF; margin-left: 20px;"
+				onclick="location.href='manageGoodsList';">관리페이지</button>
+		</div>
+		<div class="ten wide column">
+			<img src="images/javacollegelogo (3).png" style="width: 200px;">
+		</div>
+		<div class="three wide right align column"
+			style="text-align: right; display: right; margin: 0 auto;">
+
+			<button class="ui button" th:if="${session.sessionMember_id==null}"
+				onclick="location.href='shoppingLogin';"
+				style="background-color: #FFFFFF;">로그인</button>
+			<button class="ui button"
+				th:unless="${session.sessionMember_id==null}"
+				onclick="location.href='logout';" style="background-color: #FFFFFF;">로그아웃</button>
+			<button class="ui button"
+				th:unless="${session.sessionMember_id==null}"
+				onclick="location.href='memberUpdate';"
+				style="background-color: #FFFFFF;">정보수정</button>
+		</div>
+	</div>
+
+	<!--메뉴바 -->
+	<div class="ui borderless main menu"
+		style="margin: 0; background-color: #000000;">
+		<th:block th:replace="fragments/shopping_header"></th:block>
+	</div>
+
+
+	<!-- 왼쪽메뉴 -->
+	<div class="ui sixteen column grid" style="background-color: #F5F6F7">
+			<th:block th:replace="fragments/manageLeftMenu"></th:block>
+	
+	<!--컨텐츠	 -->
+		<div class=" ui ten column grid center aligned  container">
+			<div class="content">
+				<div layout:fragment="content"></div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- 푸터 -->
+	<div class="ui inverted vertical footer segment">
+		<th:block th:replace="fragments/footer"></th:block>
+	</div>
+</body>
+</html>

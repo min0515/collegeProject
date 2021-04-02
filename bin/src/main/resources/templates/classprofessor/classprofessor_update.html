@@ -13,28 +13,17 @@
 	<form class="ui large form" id="deleteclassnoform" method="POST">
 		<div class="ui grid" style="margin-top: 5px; margin-bottom: 200px">
 			<div class="four wide column"></div>
-			<div class="eight wide column">
+			<div class="eight wide column" id="professorClassNoCheck">
 				<h3 style="text-align: center;">수업삭제</h3>
-				<div class="allCheck" style="border-bottom: 1px solid gray;margin-bottom: 0px">
+				<div class="allCheck" style="border-bottom: 1px solid gray;margin-bottom: 0">
 					<input type="checkbox" name="allCheck" id="allCheck" /><label
 						for="allCheck">모두 선택</label>
-					<div class="delBtn" style="text-align: right">
-						<button type="button" class="selectDelete_btn">선택 삭제</button>
-					</div>
 				</div>
-
 				<p></p>
-				<div class="ui input" th:each="item : ${classpro}"
+				<div class="ui input"  th:each="item : ${classpro}"
 					style="margin-top: 10px; display: inline-block; width: 49%; line-height: 20%;">
-					<input type="checkbox" class="chBox" name="class_no" id="class_no"
-						th:text="${item.class_name}" th:value="${item.class_no}">
+					<input type="checkbox" class="chBox" th:text="${item.class_name}" th:value="${item.class_no}" id="class_no">
 				</div>
-				<!-- 				<div class="fluid ui labeled input"> -->
-				<!-- 					<div class="ui label" style="width: 100px">수업번호</div> -->
-				<!-- 					<input type="text" name="class_no" id="class_no"  -->
-				<!-- 						placeholder="번호" required="required"> -->
-				<!-- 					<button type="button" class="btn tbproconfig" style="width: 15%;">검색</button> -->
-				<!-- 				</div> -->
 				<div class="fluid ui labeled input" style="margin-top: 10px">
 					<div class="ui label" style="width: 100px">교수번호</div>
 					<input type="text" name="professor_no" id="professor_no"
@@ -53,14 +42,12 @@
 				style="display: block;">
 				<button th:if="${result==0}"
 					class="ui black button professordeletebtn" type="button">회원탈퇴</button>
-				<button th:unless="${result==0}" class="ui black button classdelete"
+				<button th:unless="${result==0}" class="ui black button classdelete" id="class_noDeleteBtn"
 					type="button">수업삭제</button>
 				<button class="ui black basic button" type="button"
 					onclick="history.back(-1)">취소</button>
 			</div>
-
 		</div>
-
 		<div class="ui small modal classnoDelete" style="text-align: center;">
 			<i class="close icon"></i>
 			<div class="header">수업삭제</div>

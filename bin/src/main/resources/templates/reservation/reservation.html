@@ -2,27 +2,27 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout/lms_layout">
-
 <th:block layout:fragment="css">
 	<link rel="stylesheet" th:href="@{/css/reservation.css}">
 </th:block>
 <th:block layout:fragment="script">
 	<script type="text/javascript" th:src="@{/js/reservation.js}"></script>
 </th:block>
-<body layout:fragment="content">
+<body>
+	<div layout:fragment="content">
 	<div class="ui middle aligned center aligned grid">
 		<div class="column">
-			<div class="field" style="margin-bottom: 50px">
+			<div class="field" style="margin-bottom: 40px">
 				<h1 class="ui  left aligned header">
-					<strong style="margin-left:4%;">예약 서비스</strong>
+					<strong style="margin-left:2%; ">예약 서비스</strong>
 				</h1>
 				<div class="ui section divider" style="margin-top:15px;"></div>
 			</div>
 			<div class="field" style="margin-bottom: 50px">
 				<div class="ui three item menu">
 					<a class="item active" id="libraryBtn"><strong>중앙 도서관</strong></a>
-					<a class="item" id="studyroomBtn"><strong>제 1열람실</strong></a> <a
-						class="item" id="studyroomBtn2"><strong>제 2열람실</strong></a>
+					<a class="item" id="studyroomBtn"><strong>제 1열람실</strong></a> 
+					<a class="item" id="studyroomBtn2"><strong>제 2열람실</strong></a>
 				</div>
 			</div>
 			<div class="field" id="library">
@@ -166,6 +166,7 @@
 		<div class="actions">
 			<div class="ui cancel button">확인</div>
 		</div>
+	</div>
 	</div>
 	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 

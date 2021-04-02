@@ -1,18 +1,28 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
+	th:with="lang=${#locale.language}" th:lang="${session.lang}"
 	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 <head th:replace="fragments/lms_config :: lms_config">
 </head>
 <body>
-	<div class="ui borderless main menu">
+	<!-- 메뉴바 -->
+	<div class="ui borderless main menu"
+		style="margin: 0;  padding: 0.1% 2% 0.1% 2%;">
 		<th:block th:replace="fragments/lms_header"></th:block>
 	</div>
-	<div class="container">
-		<div class="content">
+	<!-- 왼쪽메뉴 -->
+	<div class="contanier"
+		style="height: 1200px; padding: 1% 0% 1% 0%;">
+		<div style="width: 11%; float: left; padding: 1% 0% 1% 3%; position:fixed; z-index:10; ">
+			<th:block th:replace="fragments/classLeftMenu"></th:block>
+		</div>
+		<!-- 내용 -->
+		<div class="content" style="width: 87%; float: right;">
 			<div layout:fragment="content"></div>
 		</div>
 	</div>
+	<!-- 푸터 -->
 	<div class="ui inverted vertical footer segment">
 		<th:block th:replace="fragments/footer"></th:block>
 	</div>

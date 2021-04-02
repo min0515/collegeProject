@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kakao.kitkat.dao.CommentDao">
+
+	<select id="selectCommentOne"
+		resultType="com.kakao.kitkat.entities.Comment">
+		select * from comment where b_seq=#{b_seq}
+	</select>
+
+	<insert id="insertCommentRow">
+		insert into comment (b_seq, comment_step, comment_name, comment_inputtime,
+		comment_content)
+		values (
+		#{b_seq}, 
+		0, 
+		#{comment_name}, 
+		#{comment_inputtime},
+		#{comment_content})
+	</insert>
+	<select id="selectCommentList"
+		resultType="com.kakao.kitkat.entities.Comment">
+		select * from comment where b_seq=#{b_seq} order by comment_inputtime
+	</select>
+</mapper>

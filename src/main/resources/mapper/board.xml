@@ -17,6 +17,11 @@
 		resultType="com.kakao.kitkat.entities.Comment">
 		select * from comment where b_seq=#{b_seq}
 	</select>
+	
+	<select id="selectCommentCount"
+		resultType="Integer">
+		select count(*) from comment where b_seq=#{b_seq}
+	</select>
 
 	<insert id="insertRow">
 		insert into board (b_seq, b_ref, b_step, b_studentno, b_name, b_title,
@@ -28,14 +33,15 @@
 	</insert>
 
 	<update id="updateRow">
-		update Board set b_title=#{b_title},
+		update board set b_title=#{b_title},
 		b_content=#{b_content} where b_seq = #{b_seq};
 	</update>
 
 	<insert id="insertCommentRow">
 		insert into comment (b_seq, comment_step, comment_name, comment_inputtime,
 		comment_content)
-		values ((SELECT ifnull(MAX(b_seq)+1, 1) FROM board board_alias), 0, 0, 0,
+		values (#{b_seq},
+		0, 0, 0,
 		#{comment_content})
 	</insert>
 
@@ -56,7 +62,7 @@
 		b_seq=#{b_seq}
 	</update>
 
-	<delete id="deleteRow">
+	<delete id="BoardDeleteRow">
 		delete from board where b_seq=#{b_seq}
 	</delete>
 

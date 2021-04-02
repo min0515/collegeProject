@@ -12,24 +12,46 @@
 			style="text-align: left; display: left; margin: 0 auto;">
 			<button class="ui button"
 				style="background-color: #FFFFFF; margin-left: 20px;"
-				onclick="location.href='manageOrder';">관리페이지</button>
+				onclick="location.href='manageGoodsList';">관리페이지</button>
 		</div>
 		<div class="ten wide column">
 			<img src="images/javacollegelogo (3).png" style="width: 200px;">
 		</div>
 		<div class="three wide right align column"
 			style="text-align: right; display: right; margin: 0 auto;">
-			<button class="ui button" onclick="location.href='shoppingLogin';" style="background-color: #FFFFFF;">로그인</button>
-			<button class="ui button" style="background-color: #FFFFFF;">정보수정</button>
+
+			<button class="ui button" th:if="${session.sessionMember_id==null}"
+				onclick="location.href='shoppingLogin';"
+				style="background-color: #FFFFFF;">로그인</button>
+			<button class="ui button"
+				th:unless="${session.sessionMember_id==null}"
+				onclick="location.href='logout';" style="background-color: #FFFFFF;">로그아웃</button>
+			<button class="ui button"
+				th:unless="${session.sessionMember_id==null}"
+				onclick="location.href='memberUpdate';"
+				style="background-color: #FFFFFF;">정보수정</button>
 		</div>
 	</div>
-	<div class="ui borderless main menu" style=" margin:0; background-color:#000000;">
+
+	<!--메뉴바 -->
+	<div class="ui borderless main menu"
+		style="margin: 0; background-color: #000000;">
 		<th:block th:replace="fragments/shopping_header"></th:block>
 	</div>
+
+
+	<!-- 내용 -->
 	<div class="container">
 		<div class="content">
 			<div layout:fragment="content"></div>
 		</div>
 	</div>
+
+
+
+		<!-- 푸터 -->
+		<div class="ui inverted vertical footer segment">
+			<th:block th:replace="fragments/footer"></th:block>
+		</div>
 </body>
 </html>

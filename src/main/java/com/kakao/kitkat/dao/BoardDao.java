@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.kakao.kitkat.entities.Board;
 import com.kakao.kitkat.entities.BoardPaging;
-import com.kakao.kitkat.entities.Comment;
 
 public interface BoardDao {
 	public Board selectOne(int b_seq) throws Exception;
@@ -35,5 +34,7 @@ public interface BoardDao {
 
 	public int selectMaxStep(int b_ref) throws Exception;
 
-	int deleteRow(int b_seq) throws Exception;
+	public int BoardDeleteRow(int b_seq) throws Exception;
+
+	public int selectCommentCount(int b_seq) throws Exception;
 }

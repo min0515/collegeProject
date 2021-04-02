@@ -85,7 +85,7 @@ $(document).ready(function() {
 			$("select[name='dialPlanListTable_length'], #searchBox").removeClass("input-sm");
 			$('#searchBox').css("width", "700px").focus();
 			$('#searchBox').css("margin", "20px").focus();
-			$('#searchBox').css("margin-right", "130px").focus();
+			$('#searchBox').css("margin-right", "240px").focus();
 			$('#searchBox').css("height", "40px").focus();
 			$('#dialPlanListTable_filter').removeClass('dataTables_filter');
 		}
@@ -308,6 +308,7 @@ $(document).ready(function() {
 		searching: false,
 		"dom": '<"top"f>rt<"bottom"lp><"clear">',
 		destroy: true
+		
 	});
 
 	//수강신청 취소버튼
@@ -414,6 +415,7 @@ $(document).ready(function() {
 		deferRender: true,
 		displayLength: 7,
 		searching: false,
+		autowidth: true,
 		"dom": '<"top"f>rt<"bottom"lp><"clear">',
 		destroy: true
 	});

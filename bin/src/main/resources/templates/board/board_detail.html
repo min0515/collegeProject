@@ -5,97 +5,103 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout/school_layout">
 <div layout:fragment="school_content">
-<form class="ui large form" method="POST" action="boardUpdateSave" enctype="multipart/form-data"
-            data-parsley-validate="true">
-	<div class="ui grid center aligned">
-		<div class="five wide column">
+	<form class="ui large form" method="POST" action="boardCommentSave"
+		enctype="multipart/form-data" data-parsley-validate="true">
+		<div class="ui sixteen wide grid center aligned"
+			style="background-color: #F3F3F3;">
+			<input type="hidden" name="b_seq" id="hidden_seq"
+				th:value="${board.b_seq}">
+			<h2 style="margin-bottom: 40px">학과게시판</h2>
 		</div>
-		<div class="five wide column">
-			<input type="hidden" name="b_seq" id="hidden_seq" th:value="${board.b_seq}">
-			<div class="field center aligned" style="margin-top:30px">
-				<h3> 글보기 </h3>
-			</div>
-		
-			<div class="field">
-				<div class="fluid ui left icon input">
-					<i class="mail icon"></i>
-					<input type="text" id="studentno" name="b_studentno" placeholder="학번"  readonly="readonly"
-					th:value="${board.b_studentno}">
-				</div>
-			</div>
-		
-			<div class="field">
-				<div class="fluid ui left icon input">
-					<i class="id card outline icon"></i>
-					<input type="text" name="b_name" class="meminsertfocus" readonly="readonly"
-					th:value="${board.b_name}">
-				</div>
-			</div>
-			
-			<div class="field">
-				<div class="fluid ui left icon input">
-					<i class="clipboard outline icon"></i>
-					<input type="text" name="b_title" th:value="${board.b_title}" placeholder="글 제목을 입력하세요">
-				</div>
-			</div>
+		<div class="ui grid center aligned" style="background-color: #F3F3F3;">
+			<div class="ui stacked segment"
+				style="width: 60%; margin-bottom: 50px">
 
+				<h2 class="ui dividing header" th:text="${board.b_title}"
+					th:value="${board.b_title}">
+					<span th:text="${board.b_hit}"></span>
+				</h2>
+				<!-- 				<h3 class="ui dividing header" th:text="${board.b_studentno}" th:value="${board.b_studentno}"></h3> -->
+				<h3 class="ui dividing header" th:text="${board.b_name}"
+					th:value="${board.b_name}"></h3>
 
-			<div class="field">
-				<div class="ui labeled input">
-					<div class="ui label">
-						<span>첨부</span>
+				<div class="field">
+					<div class="fluid ui left icon input" style="height: 150px">
+						<h5 th:text="${board.b_content}"></h5>
 					</div>
-					<div>
-					<input type="file" id="b_attach" name="b_attachfile"
-						style="display: none"> <input type="text"
-						name="b_attachname" class="b_attachname" placeholder="첨부파일"> 
-						<span th:if="${board.b_attach != null}"> 
-							<a th:href="@{fileDownload(b_attach=${board.b_attach})}"> 
-								<i class="paperclip icon"></i>
-							</a>
-						</span>
-					</div>
-					<div class="ui label">
-						<span>조회수</span>
-					</div>
-					<input type="text" th:value="${board.b_hit}">
 				</div>
-			</div>
+				<div class="ui grid center aligned">
+					<div class="ui olive labeled submit icon button"
+						onclick="history.back(-1);">
+						<i class="icon bars"></i> 게시판 목록
+					</div>
+					<div class="ui green labeled submit icon button">
+						<i class="icon edit"></i> 글 수정
+					</div>
+					<div class="ui teal labeled submit icon button">
+						<i class="icon eraser"></i> 글 삭제
+					</div>
+				</div>
+				
+				
+				
+				
+				<h3 class="ui dividing fluid header">댓글456</h3>
+				<div class="ui comments">
+					<div class="comment" th:each="comment : ${comments}">
+						<a class="avatar"> <img src="/images/gom.jpg">
+						</a>
+						<div class="content">
+							<a class="author" th:text="${comment.comment_name}"></a>
+							<div class="metadata">
+								<span class="date" th:text="${comment.comment_inputtime}"></span>
+							</div>
+							<div class="text" th:text="${comment.comment_content}"></div>
+							<div class="actions">
+								<!-- 								<a class="reply">Reply</a> -->
 
 
-			<div class="field">
-                <div class="fluid ui left icon input" style="height:150px">
-                     <textarea rows="8" placeholder="글 내용을 입력하세요" name="b_content" th:text="${board.b_content}"></textarea>
-                </div>
-            </div>
-			
-			<div class="field" style="margin-top:70px">
-				<span><button type="button" class="ui primary basic button" style="width:48%" onclick="history.back(-1);"><i class="List icon"></i>글목록</button></span>
-				<span th:if="${session.sessionemail != null}"><button type="button" class="ui primary basic button" th:onclick="'location.href=\''+@{replyWrite(b_seq=${board.b_seq})}+'\';'">댓글</button></span>
-				<span th:if="${session.sessionemail == board.b_email}"><button type="submit" class="ui primary basic button">Save</button></span>
-				<span th:if="${session.sessionlevel le 3 || session.email==board.b_email}"><button type="button" class="ui primary basic button boarddelete" id="deletebtn" >Delete</button></span>
-			</div>
-			
-		</div>
-		<div class="five wide column">
-		</div>
-		
-		<div class="ui mini modal boardmodal">
-			<div class="header">Header</div>
-			<div class="image content">
-				<img class="image">
-				<div class="description">
-					<p>삭제 하시겠습니까?</p>
+
+
+
+
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="actions">
-					<div class="ui black deny button" id="modalcancle">취소</div>
-					<div class="ui positive icon button" id="modaldelete">삭제</div>
-				</div>
+				<form class="ui reply form">
+					<div class="field">
+					<input type="hidden" class="ui  dividing header" name="comment_name" th:if="${session.sessionStudent_name} !=null"  th:value="${session.sessionStudent_name}+'&nbsp'+학우님" readonly>
+            					<input type="hidden" class="ui  dividing header" name="comment_name" th:if="${session.sessionProfessor_name} !=null"  th:value="${session.sessionProfessor_name}+'&nbsp'+교수님" readonly>
+						<textarea style="height: 10px; width: 85%; margin-bottom: 20px"
+							name="comment_content" id="comment_content"></textarea>
+						<button type="submit">
+							<span class="ui blue labeled submit icon button"
+								style="margin-left: 10px; height: 110px;"> <i
+								class="icon edit" style="text-align: middle; display: block"></i>
+								<span
+								style="position: relative; padding: 10; margin-top: 25px; line-height: 20px; display: block; text-align: center;">댓글<br>등록
+							</span>
+							</span>
+						</button>
+					</div>
+				</form>
 			</div>
 		</div>
-		
+	</form>
+</div>
+<div class="ui mini modal boardmodal">
+	<div class="header">Header</div>
+	<div class="image content">
+		<img class="image">
+		<div class="description">
+			<p>삭제 하시겠습니까?</p>
+		</div>
+		<div class="actions">
+			<div class="ui black deny button" id="modalcancle">취소</div>
+			<div class="ui positive icon button" id="modaldelete">삭제</div>
+		</div>
 	</div>
-</form>		
 </div>
 </body>
 </html>
