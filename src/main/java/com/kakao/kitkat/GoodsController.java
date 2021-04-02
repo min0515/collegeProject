@@ -29,6 +29,7 @@ import com.kakao.kitkat.dao.BoardDao;
 import com.kakao.kitkat.dao.GoodsDao;
 import com.kakao.kitkat.dao.OrdersDao;
 import com.kakao.kitkat.entities.Board;
+import com.kakao.kitkat.entities.CartList;
 import com.kakao.kitkat.entities.Goods;
 import com.kakao.kitkat.entities.GoodsPaging;
 import com.kakao.kitkat.entities.Orders;
@@ -407,9 +408,6 @@ public class GoodsController {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 		String date = simpleDateFormat.format(new Date());
 		ArrayList<Tb_cart> cartyb = dao.cartyb(member_id);
-		if (cartyb == null) {
-			System.out.println("fdfkasdjfksad");
-		}
 		orders.setMember_id(member_id);
 		for (Tb_cart i : cartyb) {
 			i.setOrders_contact(date + "-" + i.getG_seq());
@@ -418,7 +416,7 @@ public class GoodsController {
 			dao2.rororororor(orders);
 		}
 		String ccc = orders.getOrders_contact();
-		model.addAttribute("ccc",ccc);
+		model.addAttribute("ccc", ccc);
 		model.addAttribute("totalprice", totalprice);
 		return "goods/payment_cartcomplete";
 	}
@@ -511,5 +509,23 @@ public class GoodsController {
 
 		}
 
+	}
+
+	@RequestMapping(value = "/goodsMyList", method = RequestMethod.GET)
+	public String goodsMyList(Model model, HttpSession session) throws Exception {
+		String member_id = (String) session.getAttribute("sessionMember_id");
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+		OrdersDao dao2 = sqlSession.getMapper(OrdersDao.class);
+		int sum = dao2.myOrdersqtySum(member_id);
+		int totalsum = dao2.myOrderstotalSum(member_id);
+		int mycartcount = dao.myGoodsCartCount(member_id);
+		ArrayList<CartList> selectproyo = dao2.selectproyo(member_id);
+		Tb_cart cartprice = dao.myGoodsCartCheckedSelect(member_id);
+		model.addAttribute("cartprice", cartprice);
+		model.addAttribute("cartyb", selectproyo);
+		model.addAttribute("mycartcount", mycartcount);
+		model.addAttribute("sum", sum);
+		model.addAttribute("sumtotal", totalsum);
+		return "goods/goods_mylist";
 	}
 }
