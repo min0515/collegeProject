@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <body th:fragment="school_header">
-	<div class="ui text container">
+<div class="ui text container" style="padding: 0 0;">
 		<div class="header item">
 			<a class="link" style="color: #000000;"
 				onclick="location.href='schoolMain';">학교홈페이지 </a>
@@ -11,14 +11,14 @@
 			<a class="link" style="color: #000000;"
 				onclick="location.href='boardPageList';">학과게시판 </a>
 		</div>
-		<div class="header item">
-			<a class="link" style="color: #000000;"
-				onclick="location.href='boardQnaList';">질문게시판 </a>
-		</div>
-		<div class="header item">
-			<a class="link" style="color: #000000;"
-				onclick="location.href='boardFreeList';">자유게시판 </a>
-		</div>
+		<!-- 		<div class="header item"> -->
+		<!-- 			<a class="link" style="color: #000000;" -->
+		<!-- 				onclick="location.href='boardQnaList';">질문게시판 </a> -->
+		<!-- 		</div> -->
+		<!-- 		<div class="header item"> -->
+		<!-- 			<a class="link" style="color: #000000;" -->
+		<!-- 				onclick="location.href='boardFreeList';">자유게시판 </a> -->
+		<!-- 		</div> -->
 		<div class="header item">
 			<a class="link" style="color: #000000;"
 				onclick="location.href='schoolIntro';"> 학교설명 </a>
@@ -36,11 +36,13 @@
 				onclick="location.href='boardWrite';"> 글쓰기 </a>
 		</div>
 		<div class="header item">
-			<a class="ui inverted button" style="color: #000000;"
-				onclick="location.href='login';">LMS</a> <a
-				class="ui inverted button" style="color: #000000;"
-				onclick="location.href='shoppingAboutus';">자바대학 쇼핑몰</a>
+			<a class="link" style="color: #000000;"
+				onclick="location.href='login';"> LMS </a>
 		</div>
-	</div>
+		<div class="header item">
+			<a class="link" style="color: #000000;"
+				onclick="location.href='shoppingAboutus';"> 자바대학 쇼핑몰 </a>
+		</div>
+		</div>
 </body>
 </html>
