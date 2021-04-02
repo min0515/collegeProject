@@ -74,7 +74,7 @@ public class ProfessorController {
 	@RequestMapping(value = "/professor_logout", method = RequestMethod.GET)
 	public String professor_logout(HttpSession session) {
 		session.invalidate();
-		return "redirect:index";
+		return "index";
 	}
 
 	// 교수 정보수정페이지
@@ -102,7 +102,7 @@ public class ProfessorController {
 		Tb_professorDao dao = sqlSession.getMapper(Tb_professorDao.class);
 		dao.deleteOne(professor);
 		session.invalidate();
-		return "redirect:index";
+		return "index";
 	}
 
 	// 교수 정보 수정 저장
@@ -111,7 +111,7 @@ public class ProfessorController {
 			throws Exception {
 		Tb_professorDao dao = sqlSession.getMapper(Tb_professorDao.class);
 		dao.updateRow(professor);
-		return "redirect:index";
+		return "index";
 	}
 
 	// 교직원 리스트 보기
@@ -307,7 +307,7 @@ public class ProfessorController {
 	@ResponseBody
 	public String gradeUpdateAjax(@RequestParam Double point, @RequestParam String student_no) throws Exception {
 		Tb_gradeDao dao = sqlSession.getMapper(Tb_gradeDao.class);
-//		tb_grade.setPoint(point);
+		tb_grade.setPoint(point);
 		tb_grade.setStudent_no(student_no);
 		int result = dao.gradeUpdateAjax(tb_grade);
 		if (result > 0) {

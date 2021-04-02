@@ -8,10 +8,11 @@
 
 
 
-	<select id="selectOne"
-		resultType="com.kakao.kitkat.entities.Board">
-		select * from board where b_seq=#{b_seq}
-	</select>
+   <select id="selectOne"
+      resultType="com.kakao.kitkat.entities.Board">
+      select * from board where b_seq=#{b_seq}
+   </select>
+
 
 	<select id="selectCommentOne"
 		resultType="com.kakao.kitkat.entities.Comment">
@@ -23,19 +24,23 @@
 		select count(*) from comment where b_seq=#{b_seq}
 	</select>
 
-	<insert id="insertRow">
-		insert into board (b_seq, b_ref, b_step, b_studentno, b_name, b_title,
-		b_content, b_hit, b_attach,b_inputtime,b_inputip)
-		values ( (SELECT ifnull(MAX(b_seq)+1, 1) FROM board board_alias), (SELECT
-		ifnull(MAX(b_seq)+1, 1) FROM board board_alias), 0, #{b_studentno},
-		#{b_name}, #{b_title}, #{b_content}, 0,
-		#{b_attach},#{b_inputtime},#{b_inputip})
-	</insert>
+
+   <insert id="insertRow">
+      insert into board (b_seq, b_ref, b_step, b_studentno, b_name, b_title,
+      b_content, b_hit, b_attach,b_inputtime,b_inputip)
+      values ( (SELECT ifnull(MAX(b_seq)+1, 1) FROM board board_alias), (SELECT
+      ifnull(MAX(b_seq)+1, 1) FROM board board_alias), 0, #{b_studentno},
+      #{b_name}, #{b_title}, #{b_content}, 0,
+      #{b_attach},#{b_inputtime},#{b_inputip})
+   </insert>
+
 
 	<update id="updateRow">
 		update board set b_title=#{b_title},
 		b_content=#{b_content} where b_seq = #{b_seq};
 	</update>
+
+
 
 	<insert id="insertCommentRow">
 		insert into comment (b_seq, comment_step, comment_name, comment_inputtime,
@@ -45,66 +50,68 @@
 		#{comment_content})
 	</insert>
 
-	<insert id="insertReplyRow">
-		insert into Board (b_seq, b_ref, b_step, b_email, b_name, b_title,
-		b_content, b_hit, b_attach,
-		b_inputtime,b_inputip)
-		values (
-		(SELECT ifnull(MAX(b_seq)+1, 1) FROM board board_alias),
-		#{b_ref}, 
 
-		#{b_email}, #{b_name}, #{b_title}, #{b_content},
-		0, #{b_attach},#{b_inputtime},#{b_inputip})
-	</insert>
+   <insert id="insertReplyRow">
+      insert into Board (b_seq, b_ref, b_step, b_email, b_name, b_title,
+      b_content, b_hit, b_attach,
+      b_inputtime,b_inputip)
+      values (
+      (SELECT ifnull(MAX(b_seq)+1, 1) FROM board board_alias),
+      #{b_ref}, 
 
-	<update id="addHit">
-		update board set b_hit = b_hit + 1 where
-		b_seq=#{b_seq}
-	</update>
+      #{b_email}, #{b_name}, #{b_title}, #{b_content},
+      0, #{b_attach},#{b_inputtime},#{b_inputip})
+   </insert>
+
+   <update id="addHit">
+      update board set b_hit = b_hit + 1 where
+      b_seq=#{b_seq}
+   </update>
 
 	<delete id="BoardDeleteRow">
 		delete from board where b_seq=#{b_seq}
 	</delete>
 
 
-	<!-- <update id="updateRow"> update board set name=#{name},password=#{password},phone1=#{phone1}, 
-		phone2=#{phone2},phone3=#{phone3},photo=#{photo} where b_seq = #{b_seq} </update> 
-		<select id="selectAll" resultType="com.naver.dgkim1007.entities.Board"> select 
-		* from board </select> <update id="updateAjax"> update board set memlevel=#{memlevel} 
-		where b_seq = #{b_seq} </update> <delete id="deleteAjax"> </delete> -->
 
-	<select id="selectPageList"
-		resultType="com.kakao.kitkat.entities.Board">
-		select * from board order by b_ref desc, b_step asc
-		limit
-		#{startrow},#{endrow}
-	</select>
+   <!-- <update id="updateRow"> update board set name=#{name},password=#{password},phone1=#{phone1}, 
+      phone2=#{phone2},phone3=#{phone3},photo=#{photo} where b_seq = #{b_seq} </update> 
+      <select id="selectAll" resultType="com.naver.dgkim1007.entities.Board"> select 
+      * from board </select> <update id="updateAjax"> update board set memlevel=#{memlevel} 
+      where b_seq = #{b_seq} </update> <delete id="deleteAjax"> </delete> -->
 
-	<select id="selectCount" resultType="Integer">
-		select count(*) from board
-		where b_title like CONCAT('%',#{find},'%')
-		or b_name like
-		CONCAT('%',#{find},'%') or b_content like CONCAT('%',#{find},'%')
-	</select>
+   <select id="selectPageList"
+      resultType="com.kakao.kitkat.entities.Board">
+      select * from board order by b_ref desc, b_step asc
+      limit
+      #{startrow},#{endrow}
+   </select>
 
-	<select id="findListBoard"
-		resultType="com.kakao.kitkat.entities.Board">
-		select * from board where b_title like
-		CONCAT('%',#{find},'%')
-		or b_name like CONCAT('%',#{find},'%') or
-		b_content like CONCAT('%',#{find},'%')
-		order by b_ref desc, b_step asc
-		limit #{startrow},#{endrow}
-	</select>
-	<select id="selectCountFirst" resultType="Integer">
-		select count(*) from
-		board
-	</select>
-	<select id="selectMaxStep" resultType="Integer">
-		select ifnull(max(b_step)
-		+ 1,1) from board where b_ref = #{b_ref}
+   <select id="selectCount" resultType="Integer">
+      select count(*) from board
+      where b_title like CONCAT('%',#{find},'%')
+      or b_name like
+      CONCAT('%',#{find},'%') or b_content like CONCAT('%',#{find},'%')
+   </select>
 
-	</select>
+   <select id="findListBoard"
+      resultType="com.kakao.kitkat.entities.Board">
+      select * from board where b_title like
+      CONCAT('%',#{find},'%')
+      or b_name like CONCAT('%',#{find},'%') or
+      b_content like CONCAT('%',#{find},'%')
+      order by b_ref desc, b_step asc
+      limit #{startrow},#{endrow}
+   </select>
+   <select id="selectCountFirst" resultType="Integer">
+      select count(*) from
+      board
+   </select>
+   <select id="selectMaxStep" resultType="Integer">
+      select ifnull(max(b_step)
+      + 1,1) from board where b_ref = #{b_ref}
+
+   </select>
 
 
 

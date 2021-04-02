@@ -23,7 +23,7 @@
 		update goods set g_title=#{g_title},
 		g_content=#{g_content} where g_seq = #{g_seq};
 	</update>
-	
+
 	<!-- <delete id="deleteRow"> -->
 	<!-- delete from board where b_seq=#{b_seq} -->
 	<!-- </delete> -->
@@ -50,13 +50,15 @@
 	<select id="goodsSelectPageList"
 		resultType="com.kakao.kitkat.entities.Goods">
 		select * from goods order by g_seq desc
-		limit #{startrow},#{endrow}
+		limit
+		#{startrow},#{endrow}
 	</select>
-	
+
 	<select id="selectCountFirst" resultType="Integer">
-		select count(*) from goods
+		select count(*) from
+		goods
 	</select>
-	
+
 	<select id="goodsSelectCount" resultType="Integer">
 		select count(*) from
 		goods where b_title like CONCAT('%',#{find},'%')
@@ -81,29 +83,25 @@
 	<!-- select ifnull(max(b_step) + 1,1) from board where b_ref = #{b_ref} -->
 
 	<!-- </select> -->
-
 	<insert id="cartInsertRow">
 		insert into tb_cart (member_id, g_seq,
 		price,qty,totalprice
 		)
 		values (#{member_id},
 		#{g_seq},
-		#{price},#{qty},#{totalprice}
+		#{price},#{qty},#{price}*#{qty}
 		)
 	</insert>
-
 	<update id="cartUpdateRow">
 		update tb_cart set qty=qty + #{qty}, totalprice
 		=totalprice + #{totalprice}
 		where g_seq = #{g_seq} and
 		member_id=#{member_id}
 	</update>
-
 	<select id="myGoodsCartCount" resultType="Integer">
 		select count(*) from
 		tb_cart where member_id=#{member_id}
 	</select>
-
 	<select id="myGoodsCartSelect"
 		resultType="com.kakao.kitkat.entities.Tb_cart">
 		select
@@ -111,7 +109,6 @@
 		from tb_cart a join goods b on a.g_seq=b.g_seq where
 		member_id=#{member_id}
 	</select>
-
 	<update id="cartCheckUpdateRow">
 		update tb_cart set
 		checkYn = #{checkYn}
@@ -119,27 +116,40 @@
 		#{g_seq} and
 		member_id=#{member_id}
 	</update>
-
 	<select id="myGoodsCartCheckedSelect"
 		resultType="com.kakao.kitkat.entities.Tb_cart">
 		select
 		sum(totalprice) totalprice,sum(b.g_delivery)
-		deliveryTotalPrice
-		from tb_cart a join goods b on a.g_seq=b.g_seq where
+		deliveryTotalPrice,sum(qty) qty
+		from tb_cart a join goods b on
+		a.g_seq=b.g_seq where
 		member_id=#{member_id} and checkYn='y'
 	</select>
-
 	<select id="myGoodsCartCheckedPaymentSelect"
 		resultType="com.kakao.kitkat.entities.Tb_cart">
-		select a.g_seq,a.checkYn,a.price,a.qty,a.totalprice,b.g_title,b.g_delivery,b.g_attach
+		select
+		a.g_seq,a.checkYn,a.price,a.qty,a.totalprice,b.g_title,b.g_delivery,b.g_attach
 		from tb_cart a join goods b on a.g_seq=b.g_seq where
 		member_id=#{member_id} and checkYn='y'
 	</select>
-	
+
 	<delete id="ProductDeleteAjax">
-		delete from tb_cart where g_seq=#{g_seq} and member_id=#{member_id}
+		delete from tb_cart where g_seq=#{g_seq} and
+		member_id=#{member_id}
 	</delete>
 
+	<select id="cartyb"
+		resultType="com.kakao.kitkat.entities.Tb_cart">
+		select a.member_id,a.qty,a.g_seq,a.price,a.totalprice,b.g_delivery,b.g_title
+		from tb_cart a join goods b on a.g_seq=b.g_seq where
+		member_id=#{member_id} and checkYn='y';
+	</select>
 
+	<update id="cartQtyUpdateRow">
+		update tb_cart set
+		qty=#{qty},totalprice=#{qty}*price
+		where g_seq =#{g_seq} and
+		member_id=#{member_id}
+	</update>
 
 </mapper>

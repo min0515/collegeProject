@@ -8,18 +8,17 @@
 	<script type="text/javascript" th:src="@{/js/board.js}"></script>
 </th:block>
 <div layout:fragment="school_content">
-	<form class="ui large form" method="POST" action="boardCommentSave"
-		enctype="multipart/form-data" data-parsley-validate="true">
-		<div class="ui sixteen wide grid center aligned"
-			style="background-color: #F3F3F3;">
-			<input type="hidden" name="b_seq" id="hidden_seq"
-				th:value="${board.b_seq}">
-			<h2 style="margin-bottom: 40px">학과게시판</h2>
-		</div>
-		<div class="ui grid center aligned" style="background-color: #F3F3F3;">
-			<div class="ui stacked segment"
-				style="width: 60%; margin-bottom: 50px">
-
+   <form class="ui large form" method="POST" action="boardCommentSave"
+      enctype="multipart/form-data" data-parsley-validate="true">
+      <div class="ui sixteen wide grid center aligned"
+         style="background-color: #F3F3F3;">
+         <input type="hidden" name="b_seq" id="hidden_seq"
+            th:value="${board.b_seq}">
+         <h2 style="margin-bottom: 40px">학과게시판</h2>
+      </div>
+      <div class="ui grid center aligned" style="background-color: #F3F3F3;">
+         <div class="ui stacked segment"
+            style="width: 60%; margin-bottom: 50px">
 				<h2 class="ui dividing header" th:text="${board.b_title}"
 					th:value="${board.b_title}">
 					<span th:text="${board.b_hit}"></span>

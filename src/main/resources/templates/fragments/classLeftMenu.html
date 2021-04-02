@@ -14,21 +14,23 @@
 				<div class="ui dropdown leftmenulink item">
 					수강정보 <i class="dropdown icon"></i>
 					<div class="menu">
-						<a class="item" href="classInsert"><i class="edit icon"></i>
-							강의등록</a> <a class="item" href="classAdminListGo"><i
-							class="globe icon"></i> 강의관리</a> <a class="item"
-							href="classRegistrationAdminPageGo"><i class="globe icon"></i>
-							수강신청관리</a> <a class="item"
-							th:if="${session.sessionRegistrationyn}=='y'"
-							href="classRegistrationGo"><i class="globe blue icon"></i>
-							수강신청</a> <a class="item"
-							th:if="${session.sessionPreregistrationyn}=='y'"
-							href="ClassPreRegistrationGo"><i class="globe blue icon"></i>
-							수강바구니</a> <a class="item" href="myclassFinalList"><i
-							class="globe icon"></i> 수강이력조회</a> <a class="item"
-							href="classSearchList"><i class="globe icon"></i> 강의조회</a> <a
-							class="item" href="classSearchListGo"><i
-							class="settings icon"></i> 수강신청안내</a>
+						<a class="item" href="classInsert"
+							th:if="${session.sessionlevel} == p && ${session.sessionlevel} == a"> <i class="edit icon"></i>강의등록
+						</a> <a class="item" href="classAdminListGo"
+							th:if="${session.sessionlevel} == p && ${session.sessionlevel} == a"><i class="globe icon"></i>강의관리</a>
+						<a class="item" href="classRegistrationAdminPageGo"
+							th:if="${session.sessionlevel} == a"><i class="globe icon"></i>수강신청관리</a>
+						<a class="item" href="classRegistrationGo"
+							th:if="${session.sessionlevel} == s && ${session.sessionlevel} == a"><i class="globe icon"></i>수강신청</a>
+						<a class="item" href="ClassPreRegistrationGo"
+							th:if="${session.sessionlevel} == s && ${session.sessionlevel} == a"><i class="globe icon"></i>수강바구니</a>
+						<a class="item" href="myclassFinalList"
+							th:if="${session.sessionlevel} == s && ${session.sessionlevel} == a"><i class="globe icon"></i>
+							수강이력조회</a> <a class="item" href="classSearchList"
+							th:if="${session.sessionlevel} == s && ${session.sessionlevel} == a"><i class="globe icon"></i>
+							강의조회</a> <a class="item" href="classSearchListGo"
+							th:if="${session.sessionlevel} == s && ${session.sessionlevel} == a"><i class="settings icon"></i>
+							수강신청안내</a>
 					</div>
 				</div>
 				<div class="ui dropdown leftmenulink item">
@@ -40,7 +42,8 @@
 							href="myReservationPageGo"><i class="globe icon"></i> 내 예약</a>
 					</div>
 				</div>
-				<div class="ui dropdown leftmenulink item">
+				<div class="ui dropdown leftmenulink item"
+					th:if="${session.sessionlevel} == a && ${session.sessionlevel} == a">
 					교수 <i class="dropdown icon"></i>
 					<div class="menu">
 						<a class="item" href="professorjoin"><i class="edit icon"></i>
