@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kakao.kitkat.dao.Tb_studentDao">
+
+	<insert id="insertRow">
+		insert into tb_student(student_no, department_no,student_ssn, student_name, student_address,entrance_date,absence_yn, coach_professor_no,student_pw)
+		values(#{student_no},#{department_no},#{student_ssn},#{student_name},#{student_address},#{entrance_date},#{absence_yn},#{coach_professor_no},#{student_pw})
+	</insert>
+	
+	<select id="selectOne" resultType="com.kakao.kitkat.entities.Tb_student">
+		select * from tb_student where student_no=#{student_no}
+	</select>
+
+	<select id="selectAll"
+		resultType="com.kakao.kitkat.entities.Tb_student">
+		select * from tb_student order by student_no limit 100;
+	</select>
+	
+<!--학생 삭제 수정-->
+	<delete id="studentDeleteAjax">
+		delete from tb_student where student_no=#{student_no}
+	</delete>
+	
+<!-- 	<update id="StudentUpdateAjax"> -->
+<!-- 		update product set stock=#{stock}  -->
+<!-- 		where code = #{code} -->
+<!-- 	</update> -->
+
+
+	
+</mapper>

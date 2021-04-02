@@ -36,7 +36,7 @@
 		values(
 		(SELECT
 		ifnull(MAX(orders_seq)+1, 1) FROM orders
-		orders_alias),#{member_id},#{orders_name},#{orders_contact},#{orders_zipcode},#{orders_address},#{g_title},#{orders_qty},#{orders_qty}*#{g_price},#{g_delivery},#{orders_qty}*#{g_price}+#{g_delivery},#{orders_pay},#{orders_delivery}
+		orders_alias),#{member_id},#{orders_name},#{orders_contact},#{orders_zipcode},#{orders_address},#{g_title},#{orders_qty},#{orders_qty}*#{g_price},#{g_delivery},#{orders_qty}*#{g_price}+#{g_delivery},'y','y'
 		)
 	</insert>
 

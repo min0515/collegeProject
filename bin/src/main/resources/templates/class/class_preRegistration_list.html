@@ -2,19 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout/lms_layout">
-
-<th:block layout:fragment="css">
-	<link rel="stylesheet" th:href="@{/css/class.css}">
-</th:block>
 <th:block layout:fragment="script">
 	<script type="text/javascript" th:src="@{/js/class.js}"></script>
 </th:block>
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/class.css}">
+</th:block>
 <body layout:fragment="content">
 	<div class="ui middle aligned center aligned grid">
-		<div class="column" style="max-width: 85% !important;">
+		<div class="column">
+			<div class="field" style="margin-bottom: 40px">
+				<h1 class="ui  left aligned header">
+					<strong style="margin-left: 2%;">수강 바구니</strong>
+				</h1>
+				<div class="ui section divider" style="margin-top: 15px;"></div>
+			</div>
 			<form class="ui large form" id="classBasketFindForm" Method="post">
 				<div class="ui stacked segment" id="segmentSearch">
 					<div class="field">
+
 						<div class="ui labeled input fluid searchInput">
 							<div class="ui label">이수구분</div>
 							<input type="hidden" name="beforeClassType"> <select
@@ -76,8 +82,8 @@
 							<td th:text="${classtb.class_type}"></td>
 							<td th:text="${classtb.nowcapacity}"></td>
 							<td>
-								<button class="ui violet basic button" type="button"
-									id="classPreRegistration">바구니담기</button> <span
+								<button class="ui blue basic button" type="button"
+									id="classPreRegistration">담기</button> <span
 								id="classPreRegistrationOk" style="display: none;">담기완료</span>
 							</td>
 						</tr>
@@ -112,34 +118,30 @@
 						</div>
 					</div>
 					<table id="MyClassBasketListExample" class="display nowrap"
-						style="width: 100% !important; font-size: 11px;">
+						style="font-size: 14px;">
 						<thead>
 							<tr style="text-align: center">
 								<th>학기</th>
 								<th>강의번호</th>
 								<th>수업이름</th>
 								<th>학점</th>
-								<th>이수구분</th>
 								<th>삭제</th>
 							</tr>
 						</thead>
 
 						<tbody id="ajaxReplaceMyClassBasket">
 							<tr th:each="myClassTb : ${myClassTb}" style="cursor: pointer;">
-								<td th:text="${myClassTb.term_no}"
+								<td th:text="${myClassTb.term_no}" style="height: 30px;"
 									th:value="${myClassTb.term_no}"></td>
 								<td th:text="${myClassTb.class_no}"
 									th:value="${myClassTb.class_no}"></td>
 								<td th:text="${myClassTb.class_name}"
 									th:value="${myClassTb.class_name}"></td>
 								<td th:text="${myClassTb.credit}"></td>
-								<td th:text="${myClassTb.class_type}"></td>
-								<td>
-									<button class="ui red basic button" type="button"
-										id="MyClassPreRegistrationCancelBtn">삭제</button> <span
-									id="MyClassBasketCancelOk" style="display: none;">취소완료<i
-										class="notched circle loading icon"></i></span>
-								</td>
+								<td><span id="MyClassPreRegistrationCancelBtn"><i
+										class="trash red alternate icon"></i></span> <span
+									id="MyClassBasketCancelOk" style="display: none;">완료<i
+										class="notched circle loading icon"></i></span></td>
 							</tr>
 						</tbody>
 					</table>

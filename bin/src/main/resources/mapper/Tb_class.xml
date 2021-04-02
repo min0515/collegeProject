@@ -4,8 +4,8 @@
 
 	<insert id="insertRow">
 		insert into tb_class (class_no, department_no,
-		class_name,class_type,maxcapacity)
-		values(#{class_no},#{department_no},#{class_name},#{class_type},#{maxcapacity})
+		class_name,class_type)
+		values(#{class_no},#{department_no},#{class_name},#{class_type})
 	</insert>
 
 	<select id="selectOne"
@@ -16,6 +16,12 @@
 	<select id="selectClass"
 		resultType="com.kakao.kitkat.entities.Tb_class">
 		select * from tb_class where department_no=#{department_no}
+	</select>
+	
+	<select id="departmentSelectOne"
+		resultType="com.kakao.kitkat.entities.Tb_department">
+		select * from tb_department where
+		department_no=#{department_no}
 	</select>
 
 	<select id="departmentSelectAll"
@@ -272,7 +278,9 @@
 		where
 		class_no=#{class_no}
 	</select>
-
-
+	
+	<select id="sessionRegistration" resultType="com.kakao.kitkat.entities.Tb_registration">
+		select * from tb_registration
+	</select>
 
 </mapper>

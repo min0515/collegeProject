@@ -37,5 +37,7 @@ public interface BoardDao {
 
 	public int selectMaxStep(int b_ref) throws Exception;
 
-	int deleteRow(int b_seq) throws Exception;
+	public int BoardDeleteRow(int b_seq) throws Exception;
+
+	public int selectCommentCount(int b_seq) throws Exception;
 }

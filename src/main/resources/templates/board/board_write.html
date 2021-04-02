@@ -31,8 +31,7 @@
 									<option value="depart">학과 게시판</option>
 									<option value="qna">질문 게시판</option>
 								</select> 
-								<input class="ui  dividing header" name="b_name" th:if="${session.sessionStudent_name} !=null"  th:value="${session.sessionStudent_name}+'&nbsp'+학우님" readonly>
-            					<input class="ui  dividing header" name="b_name" th:if="${session.sessionProfessor_name} !=null"  th:value="${session.sessionProfessor_name}+'&nbsp'+교수님" readonly>
+								<input class="ui  dividing header" name="b_name" th:if="${session.sessionMember_name} !=null"  th:value="${session.sessionMember_name}+'&nbsp'+학우님" readonly>
 							</div>
 							<div class="field" style="margin-top:15px">
 								<div class="fluid ui left icon input">

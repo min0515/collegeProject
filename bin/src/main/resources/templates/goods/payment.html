@@ -15,8 +15,8 @@
 </head>
 <body>
 	<div layout:fragment="content">
-				<form class="ui large form" id="Complete" method="post" action="paymentComplete" enctype="multipart/form-data" data-parsley-validate="true" style="background-color: #F3F3F3">
-	<input type="hidden" name="g_seq" th:value="${goods.g_seq}">	
+	<form class="ui large form" id="Complete" method="post" action="paymentComplete" enctype="multipart/form-data" data-parsley-validate="true" style="background-color: #F3F3F3">
+	<input type="hidden"  name="g_seq" id="g_seq" th:value="${goods.g_seq}">	
 			<div class="ui one wide column grid center aligned" style="margin-top:15px;">
 				<div style="font-size: 30px; padding: 60px 0px;">결제하기</div>
 			</div>
@@ -32,17 +32,16 @@
 							<div class="ui five wide column grid left aligned">
 								<div th:text="${goods.g_title}" ></div>
 								<div style="font-size: 13px; color: gray; margin-top: 5px">
-									<input type="number" min="0" max="99" name="orders_qty" id="g_qty" placeholder="갯수" >
-									<input type="hidden" name="beforeqty" id="beforeqty" value="0">
 								</div>
 								<div style="font-size: 13px; color: gray; margin-top: 5px">
-								<input type="hidden" th:value="${goods.g_price}" id="g_pricehidden">
+								<input type="hidden" name="g_price" th:value="${goods.g_price}" id="g_pricehidden">
 								<div  id="g_price"  th:text="${#numbers.formatDecimal(goods.g_price, 0, 'COMMA', 0, 'POINT')}+원"></div>
 								<input type="hidden" name="g_total" th:value="${goods.g_total}" id="g_total" >
 								<input type="hidden" name="g_delivery" id="g_delivery" th:value="${goods.g_delivery}" >
 								<input type="hidden" name="g_pay">
 								<input type="hidden" name="g_delivery">
 								<input type="hidden" name="member_id">
+								
 								</div>
 							</div>
 						</div>
@@ -71,7 +70,7 @@
 								<input type="text" name="orders_zipcode"  id="zipcode" placeholder="우편번호"
 									style="width: 180px; margin-top: 5px">
 								<button class="ui button" type="button"
-									style="width: 100px; color: white; margin-left: 5px; margin-top: 5px" onclick="zipcodeFind()">주소찾기</button>
+									style="width: 100px; color: white; margin-left: 5px; margin-top: 5px" onclick="zipcodeFindB()">주소찾기</button>
 								<input type="text" name="orders_address1" placeholder="주소"
 									style="width: 495px; margin-top: 5px" id="addr1"> <input
 									type="text" name="orders_address2"  id="addr2" placeholder="상세주소"
@@ -98,13 +97,16 @@
 				<div class="ui four wide column grid left aligned" >
 					<div id="box2" >
 						<div id="boxtitle">최종 결제금액</div>
-						<div style="float: right;" id="final_price" th:text="${goods.g_total}"  th:value="${goods.g_total}"></div>
+						<div style="float: right;" id="final_price" th:text="${#numbers.formatDecimal(goods.g_total, 0, 'COMMA', 0, 'POINT')}+원"  th:value="${goods.g_total}"></div>
 						<div style="font-size: 13px; width:100%; word-break:break-all;word-wrap:break-word;   color: gray;"> 상품가격</div>
 						<div style="float: right;">2,500원</div>
 						<div style="font-size: 13px; width:100%; word-break:break-all;word-wrap:break-word; color: gray;">배송비</div>
 						<hr align="left">
-						<div style="float: right;"id="total_money" ></div>
+						<div style="float: right;"id="total_money"  th:text="${#numbers.formatDecimal(goods.g_total+goods.g_delivery, 0, 'COMMA', 0, 'POINT')}+원" ></div>
 						<div style="font-size: 15px;" id="countupdown" th:text="|총결제금액(${goods.g_qty})개|"></div>
+						<input type="hidden" th:value="${goods.g_qty}" name="orders_qty">
+						
+						
 					</div>
 					<div id="box2" style="height: 100px;">
 						<div id="boxtitle">결제방법</div>
@@ -126,7 +128,7 @@
 
 					</div>
 					<button class="fluid black ui button" id="completebtn"
-						style="width: 300px; color: white; height: 80px" type="button">결제하기</button>
+						style="width: 300px; color: white; height: 80px" type="submit">결제하기</button>
 				</div>
 			</div>
 			<div class="ui three wide column grid center aligned"></div>

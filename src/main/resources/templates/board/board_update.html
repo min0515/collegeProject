@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/school_layout">
+<div layout:fragment="school_content">
+	<form class="ui large form" method="POST" action="boardUpdateSave"
+		enctype="multipart/form-data" data-parsley-validate="true">
+		<div class="ui grid center aligned" style="background-color: #F3F3F3;">
+			<div class="ten wide column">
+				<div class="field center aligned" style="margin-top: 30px">
+					<h2 style="margin-bottom: 40px">게시글 수정</h2>
+				</div>
+				<input type="hidden" name="b_seq" id="hidden_seq"
+				th:value="${board.b_seq}">
+				<div class="ui grid center aligned">
+					<div class="ui stacked segment"
+						style="width: 50%; margin-bottom: 50px">
+						<div class="field">
+							<div class="ui fluid input">
+								<select class="ui dropdown" style="width: 60%;">
+									<option value="학과 게시판">학과 게시판</option>
+								</select> 
+								<input class="ui  dividing header" name="b_name"  th:value="${board.b_name}" readonly>
+							</div>
+							<div class="field" style="margin-top:15px">
+								<div class="fluid ui left icon input">
+									<i class="clipboard outline icon"></i> <input type="text"
+										name="b_title"  th:value="${board.b_title}" placeholder="글 제목을 입력하세요">
+								</div>
+							</div>
+							<div class="field">
+								<div class="fluid ui input" style="height: 150px">
+									<textarea rows="8" placeholder="내용" th:value="${board.b_content}" th:text="${board.b_content}" name="b_content"></textarea>
+								</div>
+							</div>
+							<div class="field">
+								<span><button type="submit"
+										class="ui primary basic button" style="width: 48%">저장</button></span>
+								<span><button type="button"
+										class="ui negative  basic button" onclick="history.back(-1);"
+										style="width: 48%">취소</button></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ui modal">
+				<div class="header">Header</div>
+				<div class="image content">
+					<img class="image">
+					<div class="description">
+						<p></p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</form>
+</div>
+</body>
+</html>

@@ -72,7 +72,7 @@ public class MemberController {
 			boolean passchk = BCrypt.checkpw(tb_student.getStudent_pw(), data.getStudent_pw());
 			if (passchk) {
 				session.setAttribute("sessionMember_id", data.getStudent_no());
-				session.setAttribute("sessionStudent_name", data.getStudent_name());
+				session.setAttribute("sessionMember_name", data.getStudent_name());
 				session.setAttribute("sessionDepartment_no", data.getDepartment_no());
 				session.setAttribute("sessionAbsence_yn", data.getAbsence_yn());
 				session.setAttribute("sessionlevel", data.getMemlevel());
@@ -101,7 +101,7 @@ public class MemberController {
 			boolean passchk = BCrypt.checkpw(tb_professor.getProfessor_pw(), data.getProfessor_pw());
 			if (passchk) {
 				session.setAttribute("sessionMember_id", data.getProfessor_no());
-				session.setAttribute("sessionProfessor_name", data.getProfessor_name());
+				session.setAttribute("sessionMember_name", data.getProfessor_name());
 				session.setAttribute("sessionDepartment_no", data.getDepartment_no());
 				session.setAttribute("sessionlevel", data.getMemlevel());
 				return "index";
@@ -123,7 +123,7 @@ public class MemberController {
 			boolean passchk = BCrypt.checkpw(tb_student.getStudent_pw(), data.getStudent_pw());
 			if (passchk) {
 				session.setAttribute("sessionMember_id", data.getStudent_no());
-				session.setAttribute("sessionStudent_name", data.getStudent_name());
+				session.setAttribute("sessionMember_name", data.getStudent_name());
 				session.setAttribute("sessionDepartment_no", data.getDepartment_no());
 				session.setAttribute("sessionAbsence_yn", data.getAbsence_yn());
 				return "index2";
@@ -145,7 +145,7 @@ public class MemberController {
 			boolean passchk = BCrypt.checkpw(tb_professor.getProfessor_pw(), data.getProfessor_pw());
 			if (passchk) {
 				session.setAttribute("sessionMember_id", data.getProfessor_no());
-				session.setAttribute("sessionProfessor_name", data.getProfessor_name());
+				session.setAttribute("sessionMember_name", data.getProfessor_name());
 				session.setAttribute("sessionDepartment_no", data.getDepartment_no());
 				return "index2";
 			} else {
@@ -166,7 +166,7 @@ public class MemberController {
 			boolean passchk = BCrypt.checkpw(tb_student.getStudent_pw(), data.getStudent_pw());
 			if (passchk) {
 				session.setAttribute("sessionMember_id", data.getStudent_no());
-				session.setAttribute("sessionStudent_name", data.getStudent_name());
+				session.setAttribute("sessionMember_name", data.getStudent_name());
 				session.setAttribute("sessionDepartment_no", data.getDepartment_no());
 				session.setAttribute("sessionAbsence_yn", data.getAbsence_yn());
 				return "school_index";
@@ -188,7 +188,7 @@ public class MemberController {
 			boolean passchk = BCrypt.checkpw(tb_professor.getProfessor_pw(), data.getProfessor_pw());
 			if (passchk) {
 				session.setAttribute("sessionMember_id", data.getProfessor_no());
-				session.setAttribute("sessionProfessor_name", data.getProfessor_name());
+				session.setAttribute("sessionMember_name", data.getProfessor_name());
 				session.setAttribute("sessionDepartment_no", data.getDepartment_no());
 				return "school_index";
 			} else {
