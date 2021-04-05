@@ -51,7 +51,7 @@
 								<td th:text="${goods.g_seq}">
 								<td><img th:src="${goods.g_attach}" style="width: 90px"></td>
 								<td th:text="${goods.g_title}"></td>
-								<td th:text="${goods.g_price}"></td>
+								<td th:text="${#numbers.formatDecimal(goods.g_price, 0, 'COMMA', 0, 'POINT')}+원"></td>
 								<td style="text-align: left" th:text="${goods.g_content}"></td>
 								<td style="text-align: left" th:text="${goods.g_content}"></td>
 							</tr>
