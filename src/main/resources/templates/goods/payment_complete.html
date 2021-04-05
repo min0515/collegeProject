@@ -28,32 +28,41 @@
 
 					<div class="ui sixteen wide column grid center aligned">
 						<div class="ui six wide column grid center aligned">
-							<div class="ui equal width center aligned padded grid" style="background-color:white">
+							<div class="ui equal width center aligned padded grid"
+								style="background-color: white">
 								<div class="row">
-									<div class="ui column left aligned"  style="font-size: 15px; color: gray; font-family: Helvetica, sans-serif;">주문번호</div>
-									<div class="ui column left aligned"  th:text="${ord.orders_contact}"></div>
+									<div class="ui column left aligned"
+										style="font-size: 15px; color: gray; font-family: Helvetica, sans-serif;">주문번호</div>
+									<div class="ui column left aligned"
+										th:text="${ord.orders_contact}"></div>
 								</div>
-								<hr style="width:100%; color:gray;">
+								<hr style="width: 100%; color: gray;">
 								<div class="row">
-									<div class="ui column left aligned" style="font-size: 15px; color: gray; font-family: Helvetica, sans-serif;">결제정보</div>
+									<div class="ui column left aligned"
+										style="font-size: 15px; color: gray; font-family: Helvetica, sans-serif;">결제정보</div>
 									<div class="ui column left aligned">무료결제</div>
 								</div>
-								<hr style="width:100%; color:gray;">
+								<hr style="width: 100%; color: gray;">
 								<div class="row">
-									<div class="ui column left aligned" style="font-size: 15px; color: gray; font-family: Helvetica, sans-serif;">결제금액</div>
-									<div class="ui column left aligned" th:text="${#numbers.formatDecimal(ord.g_total, 0, 'COMMA', 0, 'POINT')}+원"th:value="${ord.g_total}"></div>
+									<div class="ui column left aligned"
+										style="font-size: 15px; color: gray; font-family: Helvetica, sans-serif;">결제금액</div>
+									<div class="ui column left aligned"
+										th:text="${#numbers.formatDecimal(ord.g_total, 0, 'COMMA', 0, 'POINT')}+원"
+										th:value="${ord.g_total}"></div>
 								</div>
-									<hr style="width:100%; background-color:white;">
-									<button class="field gray ui button" type="button" style="width:250px; color: white; height: 50px" onclick="location.href='shoppingAboutus'">홈으로</button>
-									<button class="field black ui button" style="width:250px; color: white; height: 50px" type="button" onclick="location.href='goodsMyList'">마이페이지</button>
-								</div>
+								<hr style="width: 100%; background-color: white;">
+								<button class="field gray ui button" type="button"
+									style="width: 250px; color: white; height: 50px"
+									onclick="location.href='shoppingAboutus'">홈으로</button>
+								<button class="field black ui button"
+									style="width: 250px; color: white; height: 50px" type="button"
+									onclick="location.href='goodsMyList'">마이페이지</button>
 							</div>
-						
+						</div>
 					</div>
-
 				</div>
 			</div>
-	</form>
+		</form>
 	</div>
 </body>
 </html>
