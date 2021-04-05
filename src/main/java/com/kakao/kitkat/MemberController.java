@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kakao.kitkat.dao.MemberDao;
 import com.kakao.kitkat.dao.Tb_classDao;
+import com.kakao.kitkat.dao.Tb_professorDao;
 import com.kakao.kitkat.dao.Tb_studentDao;
 import com.kakao.kitkat.entities.Member;
 import com.kakao.kitkat.entities.Tb_professor;
@@ -241,15 +242,24 @@ public class MemberController {
 		return "goods/shopping_update";
 	}
 
-	@RequestMapping(value = "/memberUpdate1", method = RequestMethod.GET)
-	public String memberUpdate1(Locale locale, Model model, HttpSession session) throws Exception {
-
+	@RequestMapping(value = "/schoolStudentInfoUpdate", method = RequestMethod.GET)
+	public String schoolStudentInfoUpdate(Locale locale, Model model, HttpSession session) throws Exception {
 		String stuno = (String) session.getAttribute("sessionMember_id");
 
 		Tb_studentDao dao = sqlSession.getMapper(Tb_studentDao.class);
 		Tb_student student = dao.selectOne(stuno);
 		model.addAttribute("student", student);
-		return "school/school_update";
+		return "school/school_student_info_update";
+	}
+	
+	@RequestMapping(value = "/schoolProfessorInfoUpdate", method = RequestMethod.GET)
+	public String schoolProfessorInfoUpdate(Locale locale, Model model, HttpSession session) throws Exception {
+
+		String prono = (String) session.getAttribute("sessionMember_id");
+		Tb_professorDao dao = sqlSession.getMapper(Tb_professorDao.class);
+		Tb_professor professor = dao.selectOne(prono);
+		model.addAttribute("professor", professor);
+		return "school/school_professor_info_update";
 	}
 
 	private String hashPassword(String plainTextPassword) {

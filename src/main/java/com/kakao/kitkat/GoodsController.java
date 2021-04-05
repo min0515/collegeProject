@@ -329,7 +329,6 @@ public class GoodsController {
 		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
 		String member_id = (String) session.getAttribute("sessionMember_id");
 
-		System.out.println(tb_cart.getG_price());
 		if (member_id == null) {
 			return "login/login2";
 		} else {

@@ -259,8 +259,6 @@ $(document).ready(function() {
 		}
 
 	});
-	$("#goodinfobtn").click(function() {
-	});
 
 	$("#goodinfobtn").click(function() {
 		$('#goodinfobtn').attr('class', 'item active');
@@ -288,9 +286,7 @@ $(document).ready(function() {
 		$('#goodsreview').css('display', 'none');
 		$('#goodsqna').css('display', 'block');
 	});
-
-
-	$("#goodsordernewbtn").click(function() {
+	$("#goodsordernewbtn").click(function(){
 		alert("1");
 		$('#goodsordernewbtn').attr('class', 'item active');
 		$('#goodsorderdepositbtn').attr('class', 'item');
@@ -385,7 +381,6 @@ $(document).ready(function() {
 			$('.ui.modal.delete').modal('hide');
 		});
 	});
-
 	$("#myCartTable").on('change', '#qtyInputProdetail', 'td', function() {
 		var row = $(this).closest('tr');
 		var td = row.children();
@@ -410,7 +405,3 @@ $(document).ready(function() {
 		});
 	});
 });
-
-
-
-

@@ -12,11 +12,11 @@
 	
 	<insert id="goodsInsertRow">
 		insert into goods (g_seq, g_title, g_price,
-		g_content, g_attach, g_sellyn
+		g_qty, g_delievery
 		) values ( (SELECT ifnull(MAX(g_seq)+1,
 		1) FROM goods goods_alias),
-		#{g_title}, #{g_price}, #{g_content},
-		#{g_attach}, 0
+		#{g_title}, #{g_price},
+		10, #{g_delievery}
 		)
 	</insert>
 
@@ -134,7 +134,6 @@
 		from tb_cart a join goods b on a.g_seq=b.g_seq join goods_info c on b.g_seq=c.g_seq where
 		member_id=#{member_id} and checkYn='y'
 	</select>
-
 	<delete id="ProductDeleteAjax">
 		delete from tb_cart where g_seq=#{g_seq} and
 		member_id=#{member_id}
