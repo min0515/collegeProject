@@ -274,32 +274,30 @@ public class GoodsController {
 	}
 
 	@RequestMapping(value = "/goodsWriteSave", method = RequestMethod.POST)
-	public String goodsWriteSave(Model model, @ModelAttribute Goods goods,
-			@RequestParam("g_attachfile") MultipartFile g_attachfile, MultipartHttpServletRequest request)
-			throws Exception {
-		List<MultipartFile> fileList = request.getFiles("g_attachfile");
-		String path = "D:/util/college/src/main/resources/static/uploadattachs/";
-		String filename = g_attachfile.getOriginalFilename();
-		String realpath = "uploadattachs/"; // server path
-		for (MultipartFile mf : fileList) {
-			String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-			long fileSize = mf.getSize(); // 파일 사이즈
-			String safeFile = path + originFileName;
-			try {
-				mf.transferTo(new File(safeFile));
-			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		SimpleDateFormat df = new SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm:ss");
-		Date date = new Date();
-		String today = df.format(date);
-		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
-		dao.goodsInsertRow(goods);
+	   public String goodsWriteSave(Model model, @ModelAttribute Goods goods, MultipartHttpServletRequest request)
+	         throws Exception {
+	      List<MultipartFile> fileList = request.getFiles("g_attachfile");
+	      String path = "D:/util/college/src/main/resources/static/uploadattachs/";
+	      String realpath = "uploadattachs/"; // server path
+	      for (MultipartFile mf : fileList) {
+	         String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+	         long fileSize = mf.getSize(); // 파일 사이즈
+	         String safeFile = path + originFileName;
+	         try {
+	            mf.transferTo(new File(safeFile));
+	         } catch (IllegalStateException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	         }
+	      }
+	      SimpleDateFormat df = new SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm:ss");
+	      Date date = new Date();
+	      String today = df.format(date);
+	      GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+	      dao.goodsInsertRow(goods);
 
-		return "index";
-	}
+	      return "index";
+	   }
 
 	@RequestMapping(value = "/goodsMyList", method = RequestMethod.GET)
 	public String goodsMyList(Model model, HttpSession session) throws Exception {

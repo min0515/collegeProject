@@ -292,6 +292,22 @@ $(document).ready(function() {
 					$(registrationBtn).css('display', 'none');
 					$(registrationText).css('display', 'block');
 					$(capacity).text(capacityTextAfter);
+					$.post("myClassListRefreshAjax", function(data) {
+					}).done(function(data) {
+						$("#ajaxReplaceMyClass").replaceWith(data);
+						$('#MyClassListExample').DataTable({
+							lengthChange: false,
+							deferRender: true,
+							displayLength: 7,
+							searching: false,
+							"dom": '<"top"f>rt<"bottom"lp><"clear">',
+							destroy: true
+						});
+					});
+					$.post("myClassListRefreshCreditAjax", function(data) {
+					}).done(function(data) {
+						$("#creditRefresh").replaceWith(data);
+					});
 				}
 			},
 			error: function(xhr, status, error) {
@@ -308,7 +324,7 @@ $(document).ready(function() {
 		searching: false,
 		"dom": '<"top"f>rt<"bottom"lp><"clear">',
 		destroy: true
-		
+
 	});
 
 	//수강신청 취소버튼
@@ -318,6 +334,7 @@ $(document).ready(function() {
 		var class_no = td.eq(1).text();
 		var credit = td.eq(3).text();
 		var registrationCancelBtn = td.eq(5).children().eq(0);
+
 		var registrationCancelText = td.eq(5).children().eq(1);
 		$('.ui.MyClassRegistration.modal').modal('show');
 		//수강신청 취소 확인 버튼
@@ -334,8 +351,8 @@ $(document).ready(function() {
 						$('.classRegistration.content').text('로그인을 다시 해주세요.');
 						$('.ui.classRegistration.modal').modal('show');
 					} else {
-						$(registrationCancelBtn).css('display', "none")
-						$(registrationCancelText).css('display', "block")
+						$("#MyClassRegistrationCancelBtn").css('display', "none");
+						$('#MyClassCancelOk').css('display', "block")
 							.delay(700).queue(function() {
 								row.remove();
 							});
@@ -458,6 +475,7 @@ $(document).ready(function() {
 		var preRegistrationText = td.eq(6).children().eq(1);
 		var capacity = td.eq(5);
 		var capacityTextAfter = Number(td.eq(5).text()) + 1;
+		var a = 0;
 		$.ajax({
 			type: 'POST',
 			data: { class_no: class_no, credit: credit },
@@ -480,12 +498,32 @@ $(document).ready(function() {
 					$(preRegistrationBtn).css('display', 'none');
 					$(preRegistrationText).css('display', 'block');
 					$(capacity).text(capacityTextAfter);
+
+					$.post("myClassBasketListRefreshAjax", function(data) {
+					}).done(function(data) {
+						$("#ajaxReplaceMyClassBasket").replaceWith(data);
+						$('#MyClassBasketListExample').DataTable({
+							lengthChange: false,
+							deferRender: true,
+							displayLength: 7,
+							searching: false,
+							"dom": '<"top"f>rt<"bottom"lp><"clear">',
+							destroy: true
+						});
+					});
+					$.post("myClassBasketListRefreshCreditAjax", function(data) {
+					}).done(function(data) {
+						$("#preCreditRefresh").replaceWith(data);
+					});
 				}
 			},
 			error: function(xhr, status, error) {
 				alert('ajax error' + xhr.status);
 			}
 		});
+
+
+
 	});
 
 	//수강바구니 취소버튼
@@ -511,8 +549,8 @@ $(document).ready(function() {
 						$('.classPreRegistration.content').text('로그인을 다시 해주세요.');
 						$('.ui.classPreRegistration.modal').modal('show');
 					} else {
-						$(preRegistrationCancelBtn).css('display', "none")
-						$(preRegistrationCancelText).css('display', "block")
+						$('#MyClassPreRegistrationCancelBtn').css('display', "none");
+						$('#MyClassBasketCancelOk').css('display', "block")
 							.delay(700).queue(function() {
 								row.remove();
 							});
@@ -690,7 +728,7 @@ $(document).ready(function() {
 		});
 	});
 
-	
+
 
 
 

@@ -2,23 +2,53 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+
 <mapper namespace="com.kakao.kitkat.dao.OrdersDao">
+
 	<select id="ordersSelectOne"
 		resultType="com.kakao.kitkat.entities.Orders">
-		select *from orders where member_id=#{member_id} and orders_seq = (select max(orders_seq) from orders);
+		select *from orders where member_id=#{member_id} and
+		orders_seq = (select max(orders_seq) from orders);
 	</select>
+	<select id="myOrdersqtySum" resultType="Integer">
+		select sum(orders_qty)
+		from
+		orders where member_id=#{member_id}
+	</select>
+	<select id="myOrderstotalSum" resultType="Integer">
+		select sum(g_total)
+		from
+		orders where member_id=#{member_id}
+	</select>
+	
+	<select id="selectproyo"
+		resultType="com.kakao.kitkat.entities.CartList">
+		select
+		a.*,
+		b.*
+		from orders a
+		left join goods b on a.g_title = b.g_title
+		where member_id=#{member_id}
+ 	</select>
+
 	<insert id="goodsInsertRow">
-		insert into goods (g_seq, g_title, g_price, g_content, g_attach, g_sellyn
-		) values ( (SELECT ifnull(MAX(g_seq)+1, 1) FROM goods goods_alias),
-		#{g_title}, #{g_price}, #{g_content}, #{g_attach}, 0
+		insert into goods (g_seq, g_title, g_price,
+		g_content, g_attach, g_sellyn
+		) values ( (SELECT ifnull(MAX(g_seq)+1,
+		1) FROM goods goods_alias),
+		#{g_title}, #{g_price}, #{g_content},
+		#{g_attach}, 0
 		)
 	</insert>
 
 	<insert id="goodsInsertItem">
-		insert into goods (g_seq, g_title, g_price, g_content, g_attach,
+		insert into goods (g_seq, g_title, g_price,
+		g_content, g_attach,
 		g_sellyn,g_qty,g_total,g_delivery
-		) values ( (SELECT ifnull(MAX(g_seq)+1, 1) FROM goods goods_alias),
-		#{g_title}, #{g_price}, #{g_content}, #{g_attach}, 0
+		) values (
+		(SELECT ifnull(MAX(g_seq)+1, 1) FROM goods goods_alias),
+		#{g_title},
+		#{g_price}, #{g_content}, #{g_attach}, 0
 		,#{g_qty},#{g_qty}*#{g_price}+#{g_delivery},#{g_delivery})
 	</insert>
 	<update id="updateRow">
@@ -31,13 +61,31 @@
 	</select>
 	<insert id="OrderssAdd">
 		insert into
-		orders(orders_seq,member_id,orders_name,orders_contact,orders_zipcode,orders_address,g_title,orders_qty,g_price
-		,g_delivery,g_total,orders_pay,orders_delivery)
+		orders(member_id,orders_seq,orders_qty,
+		orders_total,orders_date,g_seq,orders_name,orders_zipcode,orders_address)
 		values(
-		(SELECT
-		ifnull(MAX(orders_seq)+1, 1) FROM orders
-		orders_alias),#{member_id},#{orders_name},#{orders_contact},#{orders_zipcode},#{orders_address},#{g_title},#{orders_qty},#{orders_qty}*#{g_price},#{g_delivery},#{orders_qty}*#{g_price}+#{g_delivery},'y','y'
-		)
+		#{member_id},
+		(SELECT ifnull(MAX(orders_seq)+1, 1) FROM orders orders_alias where member_id=#{member_id}),
+		#{orders_qty},#{orders_total},#{orders_date},#{g_seq},#{orders_name},#{orders_zipcode},#{orders_address})
 	</insert>
+
+	<insert id="OrderssAdd2">
+		insert into
+		orders(member_id,orders_seq,orders_qty,
+		orders_total,orders_date,g_seq)
+		values(
+		#{member_id},
+		(SELECT ifnull(MAX(orders_seq)+1, 1) FROM orders orders_alias where member_id=#{member_id}),
+		#{qty},#{totalprice}+#{g_delivery},#{orders_date},#{g_seq})
+		
+	</insert>
+
+	<update id="ordersUpdateInsert">
+		update orders set
+		orders_name=#{orders_name},orders_zipcode=#{orders_zipcode},orders_address=#{orders_address}
+		where orders_seq IN 
+		(select orders_seq from
+		(select max(orders_seq) as orders_seq from orders where member_id=#{member_id} and orders_date=#{orders_date}) as temp)
+	</update>
 
 </mapper>

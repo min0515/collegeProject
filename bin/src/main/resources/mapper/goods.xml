@@ -6,16 +6,17 @@
 
 	<select id="goodsSelectOne"
 		resultType="com.kakao.kitkat.entities.Goods">
-		select * from goods where g_seq=#{g_seq}
+		select  a.g_seq,a.g_title,a.g_price,a.g_qty,a.g_delivery,b.g_attach,b.g_content  
+		from goods a join goods_info b on a.g_seq=b.g_seq where a.g_seq=#{g_seq}
 	</select>
-
+	
 	<insert id="goodsInsertRow">
 		insert into goods (g_seq, g_title, g_price,
-		g_content, g_attach, g_sellyn
+		g_qty, g_delievery
 		) values ( (SELECT ifnull(MAX(g_seq)+1,
 		1) FROM goods goods_alias),
-		#{g_title}, #{g_price}, #{g_content},
-		#{g_attach}, 0
+		#{g_title}, #{g_price},
+		10, #{g_delievery}
 		)
 	</insert>
 
@@ -23,7 +24,7 @@
 		update goods set g_title=#{g_title},
 		g_content=#{g_content} where g_seq = #{g_seq};
 	</update>
-	
+
 	<!-- <delete id="deleteRow"> -->
 	<!-- delete from board where b_seq=#{b_seq} -->
 	<!-- </delete> -->
@@ -49,14 +50,17 @@
 
 	<select id="goodsSelectPageList"
 		resultType="com.kakao.kitkat.entities.Goods">
-		select * from goods order by g_seq desc
-		limit #{startrow},#{endrow}
+		select a.g_seq,a.g_title,a.g_price,a.g_qty,a.g_delivery,b.g_attach from goods a 
+		join goods_info b on a.g_seq=b.g_seq order by g_seq desc
+		limit
+		#{startrow},#{endrow}
 	</select>
-	
+
 	<select id="selectCountFirst" resultType="Integer">
-		select count(*) from goods
+		select count(*) from
+		goods
 	</select>
-	
+
 	<select id="goodsSelectCount" resultType="Integer">
 		select count(*) from
 		goods where b_title like CONCAT('%',#{find},'%')
@@ -81,37 +85,32 @@
 	<!-- select ifnull(max(b_step) + 1,1) from board where b_ref = #{b_ref} -->
 
 	<!-- </select> -->
-
 	<insert id="cartInsertRow">
 		insert into tb_cart (member_id, g_seq,
-		price,qty,totalprice
+		g_price,qty,totalprice
 		)
 		values (#{member_id},
 		#{g_seq},
-		#{price},#{qty},#{totalprice}
+		#{g_price},#{qty},#{totalprice}
 		)
 	</insert>
-
 	<update id="cartUpdateRow">
 		update tb_cart set qty=qty + #{qty}, totalprice
 		=totalprice + #{totalprice}
 		where g_seq = #{g_seq} and
 		member_id=#{member_id}
 	</update>
-
 	<select id="myGoodsCartCount" resultType="Integer">
 		select count(*) from
 		tb_cart where member_id=#{member_id}
 	</select>
-
 	<select id="myGoodsCartSelect"
 		resultType="com.kakao.kitkat.entities.Tb_cart">
 		select
-		a.g_seq,a.checkYn,a.price,a.qty,a.totalprice,b.g_title,b.g_delivery,b.g_attach
-		from tb_cart a join goods b on a.g_seq=b.g_seq where
+		a.g_seq,a.checkYn,a.qty,a.totalprice,b.g_price,b.g_title,b.g_delivery,c.g_attach
+		from tb_cart a join goods b on a.g_seq=b.g_seq join goods_info c on b.g_seq=c.g_seq where
 		member_id=#{member_id}
 	</select>
-
 	<update id="cartCheckUpdateRow">
 		update tb_cart set
 		checkYn = #{checkYn}
@@ -119,27 +118,39 @@
 		#{g_seq} and
 		member_id=#{member_id}
 	</update>
-
 	<select id="myGoodsCartCheckedSelect"
 		resultType="com.kakao.kitkat.entities.Tb_cart">
 		select
 		sum(totalprice) totalprice,sum(b.g_delivery)
-		deliveryTotalPrice
-		from tb_cart a join goods b on a.g_seq=b.g_seq where
+		deliveryTotalPrice,sum(qty) qty
+		from tb_cart a join goods b on
+		a.g_seq=b.g_seq where
 		member_id=#{member_id} and checkYn='y'
 	</select>
-
 	<select id="myGoodsCartCheckedPaymentSelect"
 		resultType="com.kakao.kitkat.entities.Tb_cart">
-		select a.g_seq,a.checkYn,a.price,a.qty,a.totalprice,b.g_title,b.g_delivery,b.g_attach
-		from tb_cart a join goods b on a.g_seq=b.g_seq where
+		select
+		a.g_seq,a.checkYn,a.g_price,a.qty,a.totalprice,b.g_title,b.g_delivery,c.g_attach
+		from tb_cart a join goods b on a.g_seq=b.g_seq join goods_info c on b.g_seq=c.g_seq where
 		member_id=#{member_id} and checkYn='y'
 	</select>
-	
 	<delete id="ProductDeleteAjax">
-		delete from tb_cart where g_seq=#{g_seq} and member_id=#{member_id}
+		delete from tb_cart where g_seq=#{g_seq} and
+		member_id=#{member_id}
 	</delete>
 
+	<select id="cartyb"
+		resultType="com.kakao.kitkat.entities.Tb_cart">
+		select a.member_id,a.qty,a.g_seq,a.g_price,a.totalprice,b.g_delivery,b.g_title
+		from tb_cart a join goods b on a.g_seq=b.g_seq where
+		member_id=#{member_id} and checkYn='y';
+	</select>
 
+	<update id="cartQtyUpdateRow">
+		update tb_cart set
+		qty=#{qty},totalprice=#{qty}*g_price
+		where g_seq =#{g_seq} and
+		member_id=#{member_id}
+	</update>
 
 </mapper>
