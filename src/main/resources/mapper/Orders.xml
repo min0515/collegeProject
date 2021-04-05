@@ -61,34 +61,31 @@
 	</select>
 	<insert id="OrderssAdd">
 		insert into
-		orders(orders_seq,member_id,orders_name,orders_contact,orders_zipcode,orders_address,g_title,orders_qty,g_price
-		,g_delivery,g_total,orders_pay,orders_delivery)
+		orders(member_id,orders_seq,orders_qty,
+		orders_total,orders_date,g_seq,orders_name,orders_zipcode,orders_address)
 		values(
-		(SELECT
-		ifnull(MAX(orders_seq)+1, 1) FROM orders
-		orders_alias),#{member_id},#{orders_name},#{orders_contact},#{orders_zipcode},#{orders_address},#{g_title},#{orders_qty},#{orders_qty}*#{g_price},#{g_delivery},#{orders_qty}*#{g_price}+#{g_delivery},'y','y'
-		)
+		#{member_id},
+		(SELECT ifnull(MAX(orders_seq)+1, 1) FROM orders orders_alias where member_id=#{member_id}),
+		#{orders_qty},#{orders_total},#{orders_date},#{g_seq},#{orders_name},#{orders_zipcode},#{orders_address})
 	</insert>
 
 	<insert id="OrderssAdd2">
 		insert into
-		orders(member_id,orders_qty, g_price,
-		g_total,orders_seq,orders_contact,g_title)
+		orders(member_id,orders_seq,orders_qty,
+		orders_total,orders_date,g_seq)
 		values(
-		#{member_id},#{qty},#{price},#{totalprice}+#{g_delivery},
-		(SELECT
-		ifnull(MAX(orders_seq)+1, 1) FROM orders
-		orders_alias),#{orders_contact},#{g_title}
-		)
+		#{member_id},
+		(SELECT ifnull(MAX(orders_seq)+1, 1) FROM orders orders_alias where member_id=#{member_id}),
+		#{qty},#{totalprice}+#{g_delivery},#{orders_date},#{g_seq})
+		
 	</insert>
 
-	<update id="rororororor">
+	<update id="ordersUpdateInsert">
 		update orders set
 		orders_name=#{orders_name},orders_zipcode=#{orders_zipcode},orders_address=#{orders_address}
-		where (select orders_seq from (select max(orders_seq) as orders_seq
-		from orders) as a_t) and member_id=#{member_id}
-		and
-		orders_contact=#{orders_contact}
+		where orders_seq IN 
+		(select orders_seq from
+		(select max(orders_seq) as orders_seq from orders where member_id=#{member_id} and orders_date=#{orders_date}) as temp)
 	</update>
 
 </mapper>

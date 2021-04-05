@@ -253,7 +253,7 @@ public class GoodsController {
 		return "goods/goods_page_list";
 	}
 
-	@RequestMapping(value = "/goodsDelivery", method = RequestMethod.GET)
+	@RequestMapping(value = "/onePaymentGo", method = RequestMethod.POST)
 	public String goodsDelivery(Model model, @RequestParam int g_seq, @RequestParam int qty, HttpSession session)
 			throws Exception {
 		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
@@ -267,7 +267,6 @@ public class GoodsController {
 	public String goodsDetail2(Model model, @RequestParam int g_seq, HttpSession session) throws Exception {
 		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
 		goods = dao.goodsSelectOne(g_seq);
-//		System.out.println(g_seq);
 		model.addAttribute("goods", goods);
 		return "goods/goods_detail2";
 	}
@@ -278,32 +277,32 @@ public class GoodsController {
 	}
 
 	@RequestMapping(value = "/goodsWriteSave", method = RequestMethod.POST)
-	   public String goodsWriteSave(Model model, @ModelAttribute Goods goods,
-	         @RequestParam("g_attachfile") MultipartFile g_attachfile, MultipartHttpServletRequest request)
-	         throws Exception {
-	      List<MultipartFile> fileList = request.getFiles("g_attachfile");
-	      String path = "D:/util/college/src/main/resources/static/uploadattachs/";
-	      String filename = g_attachfile.getOriginalFilename();
-	      String realpath = "uploadattachs/"; // server path
-	      for (MultipartFile mf : fileList) {
-	         String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-	         long fileSize = mf.getSize(); // 파일 사이즈
-	         String safeFile = path + originFileName;
-	         try {
-	            mf.transferTo(new File(safeFile));
-	         } catch (IllegalStateException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	         }
-	      }
-	      SimpleDateFormat df = new SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm:ss");
-	      Date date = new Date();
-	      String today = df.format(date);
-	      GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
-	      dao.goodsInsertRow(goods);
+	public String goodsWriteSave(Model model, @ModelAttribute Goods goods,
+			@RequestParam("g_attachfile") MultipartFile g_attachfile, MultipartHttpServletRequest request)
+			throws Exception {
+		List<MultipartFile> fileList = request.getFiles("g_attachfile");
+		String path = "D:/util/college/src/main/resources/static/uploadattachs/";
+		String filename = g_attachfile.getOriginalFilename();
+		String realpath = "uploadattachs/"; // server path
+		for (MultipartFile mf : fileList) {
+			String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+			long fileSize = mf.getSize(); // 파일 사이즈
+			String safeFile = path + originFileName;
+			try {
+				mf.transferTo(new File(safeFile));
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		SimpleDateFormat df = new SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm:ss");
+		Date date = new Date();
+		String today = df.format(date);
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+		dao.goodsInsertRow(goods);
 
-	      return "index";
-	   }
+		return "index";
+	}
 
 	@RequestMapping(value = "/goodsMyList", method = RequestMethod.GET)
 	public String goodsMyList(Model model, HttpSession session) throws Exception {
@@ -329,6 +328,7 @@ public class GoodsController {
 	public String goodsCartIn(Model model, Tb_cart tb_cart, HttpSession session) throws Exception {
 		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
 		String member_id = (String) session.getAttribute("sessionMember_id");
+
 		if (member_id == null) {
 			return "login/login2";
 		} else {
@@ -390,46 +390,53 @@ public class GoodsController {
 	public String paymentComplete(Model model, @ModelAttribute Orders orders, @RequestParam int g_seq,
 			@RequestParam String orders_address1, @RequestParam String orders_address2, HttpSession session)
 			throws Exception {
-		String professor_no = (String) session.getAttribute("sessionMember_id");
 		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
-		goods = dao.goodsSelectOne(g_seq);
 		OrdersDao dao2 = sqlSession.getMapper(OrdersDao.class);
-		orders.setOrders_address(orders_address1 + "-" + orders_address2);
-		orders.setG_title(goods.getG_title());
-		String pattern = "yyyyMMdd";
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-		String date = simpleDateFormat.format(new Date());
-		int num = dao2.contactMaxNum();
-		orders.setOrders_date(date + "-" + Integer.toString(num));
-		orders.setMember_id(professor_no);
-		dao2.OrderssAdd(orders);
-		Orders ord = dao2.ordersSelectOne(professor_no);
-		model.addAttribute("ord", ord);
-		return "goods/payment_complete";
+		String member_id = (String) session.getAttribute("sessionMember_id");
+		if (member_id == null) {
+			return "login/login2";
+		} else {
+			orders.setMember_id(member_id);
+			orders.setOrders_address(orders_address1 + "-" + orders_address2);
+			String pattern = "yyyyMMdd";
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+			String date = simpleDateFormat.format(new Date());
+			orders.setOrders_date(date);
+			dao2.OrderssAdd(orders);
+			model.addAttribute("ord", orders);
+			return "goods/payment_complete";
+		}
+
 	}
 
 	@RequestMapping(value = "/cartPaymentGoYo", method = RequestMethod.POST)
 	public String cartPaymentGoYo(Model model, @ModelAttribute Orders orders, @RequestParam int totalprice,
 			@RequestParam String orders_address1, @RequestParam String orders_address2, HttpSession session)
 			throws Exception {
-		String member_id = (String) session.getAttribute("sessionMember_id");
 		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
 		OrdersDao dao2 = sqlSession.getMapper(OrdersDao.class);
-		orders.setOrders_address(orders_address1 + "-" + orders_address2);
-		String pattern = "yyyyMMdd";
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-		String date = simpleDateFormat.format(new Date());
-		ArrayList<Tb_cart> cartyb = dao.cartyb(member_id);
-		orders.setMember_id(member_id);
-		for (Tb_cart i : cartyb) {
-			dao2.OrderssAdd2(i);
-			orders.setOrders_date(date + "-" + i.getG_seq());
-			dao2.rororororor(orders);
+		String member_id = (String) session.getAttribute("sessionMember_id");
+		if (member_id == null) {
+			return "login/login2";
+		} else {
+			orders.setOrders_address(orders_address1 + "-" + orders_address2);
+			String pattern = "yyyyMMdd";
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+			String date = simpleDateFormat.format(new Date());
+			orders.setMember_id(member_id);
+			orders.setOrders_date(date);
+			ArrayList<Tb_cart> cartyb = dao.cartyb(member_id);
+			String dateG_seq = date;
+			for (Tb_cart tb_cart : cartyb) {
+				tb_cart.setOrders_date(date);
+				dao2.OrderssAdd2(tb_cart);
+				dao2.ordersUpdateInsert(orders);
+				dateG_seq = dateG_seq + tb_cart.getG_seq();
+			}
+			model.addAttribute("dateG_seq", dateG_seq);
+			model.addAttribute("totalprice", totalprice);
+			return "goods/payment_cartcomplete";
 		}
-		String ccc = orders.getOrders_date();
-		model.addAttribute("ccc", ccc);
-		model.addAttribute("totalprice", totalprice);
-		return "goods/payment_cartcomplete";
 	}
 
 	@RequestMapping(value = "/cartProductCheckYnAjax", method = RequestMethod.POST)

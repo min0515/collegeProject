@@ -18,7 +18,7 @@ public interface OrdersDao {
 
 	public int OrderssAdd2(Tb_cart tb_cart) throws Exception;
 
-	public int rororororor(Orders orders);
+	public int ordersUpdateInsert(Orders orders);
 
 	public int maxg_seq(int orders_seq) throws Exception;
 

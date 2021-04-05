@@ -10,7 +10,12 @@ public class Tb_cart {
 	private int g_price;
 	private int totalprice;
 	private String checkYn;
+
 	private int deliveryTotalPrice;
+	private String g_title;
+	private int g_delivery;
+	private String g_attach;
+	private String orders_date;
 
 	public String getMember_id() {
 		return member_id;
@@ -66,6 +71,38 @@ public class Tb_cart {
 
 	public void setDeliveryTotalPrice(int deliveryTotalPrice) {
 		this.deliveryTotalPrice = deliveryTotalPrice;
+	}
+
+	public String getG_title() {
+		return g_title;
+	}
+
+	public void setG_title(String g_title) {
+		this.g_title = g_title;
+	}
+
+	public int getG_delivery() {
+		return g_delivery;
+	}
+
+	public void setG_delivery(int g_delivery) {
+		this.g_delivery = g_delivery;
+	}
+
+	public String getG_attach() {
+		return g_attach;
+	}
+
+	public void setG_attach(String g_attach) {
+		this.g_attach = g_attach;
+	}
+
+	public String getOrders_date() {
+		return orders_date;
+	}
+
+	public void setOrders_date(String orders_date) {
+		this.orders_date = orders_date;
 	}
 
 }

@@ -47,7 +47,7 @@
 											style="width: 90%; height: 100%;"></td>
 										<td id="g_title" th:text="${cartPayment.g_title}"></td>
 										<td th:text="${#numbers.formatDecimal(cartPayment.g_delivery, 0, 'COMMA', 0, 'POINT')}+원"></td>
-										<td th:text="${#numbers.formatDecimal(cartPayment.price, 0, 'COMMA', 0, 'POINT')}+원"></td>
+										<td th:text="${#numbers.formatDecimal(cartPayment.g_price, 0, 'COMMA', 0, 'POINT')}+원"></td>
 										<td th:text="${cartPayment.qty}"></td>
 									</tr>
 								</tbody>
@@ -55,7 +55,7 @@
 						</div>
 					</div>
 					<div id="box1">
-					<input type="hidden" name="price" th:value="${cartprice.price}" id="pricehidden">
+					<input type="hidden" name="g_price" th:value="${cartprice.g_price}" id="pricehidden">
 						<div id="boxtitle">주문자정보</div>
 						<form class="ui form">
 							<div class="field">

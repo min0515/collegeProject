@@ -87,8 +87,8 @@ function zipcodeFindB() {
 
 
 $(document).ready(function() {
-	
-	
+
+
 	$('#qtyInputProdetail').on('change', function() {
 		var qty = $('#qtyInputProdetail').val();
 		var price = $('#priceHiddenDetail').val();
@@ -243,25 +243,9 @@ $(document).ready(function() {
 	//		$('#countupdown').text("총결제금액("+qty+")개");
 	//	})
 
-	$('#shoppingPaiging').on('click', function() {
-		var g_seq = $('#hiddeng_seq').val()
-		var qty = $('#qtyInputProdetail').val();
-		var price = $('#priceHiddenDetail').val();
-		var result = String(price * qty);
-		var commaresult = result.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		var delivery = $('#g_delivery').val();
-		var commafinalresult = String(price * qty + Number(delivery));
-		var finalResult = commafinalresult.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		$('#final_price').text(commaresult + '원');
-		$('#total_money').text(finalResult + '원');
-		$('#countupdown').text("총결제금액(" + qty + ")개");
-		document.location.href = "goodsDelivery?g_seq=" + g_seq + "&qty=" + qty;
-	});
-
-	$('#completebtn').on('click', function() {
-		$("#Complete").attr("action", "paymentComplete");
-		$("#Complete").submit();
-
+	$('#onePaymentGo').on('click', function() {
+		$("#goodsDetailform").attr("action", "onePaymentGo");
+		$("#goodsDetailform").submit();
 	});
 
 
@@ -275,6 +259,7 @@ $(document).ready(function() {
 		}
 
 	});
+
 	$("#goodinfobtn").click(function() {
 		$('#goodinfobtn').attr('class', 'item active');
 		$('#goodreviewbtn').attr('class', 'item');
@@ -301,7 +286,6 @@ $(document).ready(function() {
 		$('#goodsreview').css('display', 'none');
 		$('#goodsqna').css('display', 'block');
 	});
-	
 	$("#goodsordernewbtn").click(function(){
 		alert("1");
 		$('#goodsordernewbtn').attr('class', 'item active');
@@ -311,8 +295,8 @@ $(document).ready(function() {
 		$('#goodsordershippingbtn').attr('class', 'item');
 		$('#goodsorderdeliverycompletebtn').attr('class', 'item');
 	});
-	
-	$("#goodsorderdepositbtn").click(function(){
+
+	$("#goodsorderdepositbtn").click(function() {
 		alert("2");
 		$('#goodsordernewbtn').attr('class', 'item');
 		$('#goodsorderdepositbtn').attr('class', 'item active');
@@ -321,8 +305,8 @@ $(document).ready(function() {
 		$('#goodsordershippingbtn').attr('class', 'item');
 		$('#goodsorderdeliverycompletebtn').attr('class', 'item');
 	});
-	
-	$("#goodsorderpayokbtn").click(function(){
+
+	$("#goodsorderpayokbtn").click(function() {
 		alert("3");
 		$('#goodsordernewbtn').attr('class', 'item');
 		$('#goodsorderdepositbtn').attr('class', 'item');
@@ -332,7 +316,7 @@ $(document).ready(function() {
 		$('#goodsorderdeliverycompletebtn').attr('class', 'item');
 	});
 
-	$("#goodsorderdeliveryreadybtn").click(function(){
+	$("#goodsorderdeliveryreadybtn").click(function() {
 		alert("4");
 		$('#goodsordernewbtn').attr('class', 'item');
 		$('#goodsorderdepositbtn').attr('class', 'item');
@@ -341,8 +325,8 @@ $(document).ready(function() {
 		$('#goodsordershippingbtn').attr('class', 'item');
 		$('#goodsorderdeliverycompletebtn').attr('class', 'item');
 	});
-	
-	$("#goodsordershippingbtn").click(function(){
+
+	$("#goodsordershippingbtn").click(function() {
 		alert("5");
 		$('#goodsordernewbtn').attr('class', 'item');
 		$('#goodsorderdepositbtn').attr('class', 'item');
@@ -351,8 +335,8 @@ $(document).ready(function() {
 		$('#goodsordershippingbtn').attr('class', 'item active');
 		$('#goodsorderdeliverycompletebtn').attr('class', 'item');
 	});
-	
-	$("#goodsorderdeliverycompletebtn").click(function(){
+
+	$("#goodsorderdeliverycompletebtn").click(function() {
 		alert("6");
 		$('#goodsordernewbtn').attr('class', 'item');
 		$('#goodsorderdepositbtn').attr('class', 'item');
@@ -362,40 +346,40 @@ $(document).ready(function() {
 		$('#goodsorderdeliverycompletebtn').attr('class', 'item active');
 	});
 
-	$(document).off().on('click','#myCartTable td #productDeletebtn',function(){
-    	var row = $(this).closest('tr');
+	$(document).off().on('click', '#myCartTable td #productDeletebtn', function() {
+		var row = $(this).closest('tr');
 		var td = row.children();
-    	var g_seq = td.eq(9).children().val();
+		var g_seq = td.eq(9).children().val();
 		$('.ui.modal.prodelete').modal('show');
-		 $('#deleteok').on('click',function(){
-    			$.ajax({
-    	            type:'POST',
-    	            data : {g_seq:g_seq},
-    	            datatype:'json',
-    	            url : 'ProductDeleteAjax',
-    	            success : function(data){
-    	            	if(data=="y"){
-    	            		row.remove();
-    	            		$('#resultmessage').text("삭제 되었습니다.");
-							location.href='goodsCartGo'
-    	            	}else{
-    	            		$('#resultmessage').text("삭제 되지 않았습니다.");
-    	            	}
-    	            	
-    	                $('#successmessage').css('display', "block").delay(1200).queue(function(){
-    	                   $('#successmessage').css('display', "none").dequeue();
-    	                });
-    	                $('.ui.modal.prodelete').modal('hide');
-    	             },
-    	            error : function(xhr, status, error){
-    	                alert('ajax error' + xhr.status);
-    	            }
-    	        });
-    			
-    	 });
-		 $('#deletecancel').on('click',function(){
-    		 $('.ui.modal.delete').modal('hide');
-    	 });
+		$('#deleteok').on('click', function() {
+			$.ajax({
+				type: 'POST',
+				data: { g_seq: g_seq },
+				datatype: 'json',
+				url: 'ProductDeleteAjax',
+				success: function(data) {
+					if (data == "y") {
+						row.remove();
+						$('#resultmessage').text("삭제 되었습니다.");
+						location.href = 'goodsCartGo'
+					} else {
+						$('#resultmessage').text("삭제 되지 않았습니다.");
+					}
+
+					$('#successmessage').css('display', "block").delay(1200).queue(function() {
+						$('#successmessage').css('display', "none").dequeue();
+					});
+					$('.ui.modal.prodelete').modal('hide');
+				},
+				error: function(xhr, status, error) {
+					alert('ajax error' + xhr.status);
+				}
+			});
+
+		});
+		$('#deletecancel').on('click', function() {
+			$('.ui.modal.delete').modal('hide');
+		});
 	});
 	$("#myCartTable").on('change', '#qtyInputProdetail', 'td', function() {
 		var row = $(this).closest('tr');
@@ -403,42 +387,21 @@ $(document).ready(function() {
 		var input = td.eq(0).children().children();
 		var qty = td.eq(3).children().val();
 		var g_seq = td.eq(9).children().val();
-		if ($(input).is(":checked") == true) {
-			$.ajax({
-				type: 'POST',
-				data: { g_seq: g_seq,qty:qty },
-				datatype: 'json',
-				url: 'cartProductQtyAjax',
-				success: function(data) {
-					if (data == "login") {
-						location.href = 'shoppingLogin'
-					} else {
+		$.ajax({
+			type: 'POST',
+			data: { g_seq: g_seq, qty: qty },
+			datatype: 'json',
+			url: 'cartProductQtyAjax',
+			success: function(data) {
+				if (data == "login") {
+					location.href = 'shoppingLogin'
+				} else {
 
-					}
-				},
-				error: function(xhr, status, error) {
-					alert('ajax error' + xhr.status);
 				}
-			});
-		}else{
-			if ($(input).is(":checked") == true) {
-				$.ajax({
-					type: 'POST',
-					data: { g_seq: g_seq,qty:qty },
-					datatype: 'json',
-					url: 'cartProductDownQtyAjax',
-					success: function(data) {
-						if (data == "login") {
-							location.href = 'shoppingLogin'
-						} else {
-
-						}
-					},
-					error: function(xhr, status, error) {
-					alert('ajax error' + xhr.status);
-					}
-				});
-			}		
-		}
+			},
+			error: function(xhr, status, error) {
+				alert('ajax error' + xhr.status);
+			}
+		});
 	});
 });
