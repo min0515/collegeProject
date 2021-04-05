@@ -12,11 +12,11 @@
 	
 	<insert id="goodsInsertRow">
 		insert into goods (g_seq, g_title, g_price,
-		g_qty, g_delievery
+		g_qty, g_delivery
 		) values ( (SELECT ifnull(MAX(g_seq)+1,
 		1) FROM goods goods_alias),
 		#{g_title}, #{g_price},
-		10, #{g_delievery}
+		10, #{g_delivery}
 		)
 	</insert>
 
