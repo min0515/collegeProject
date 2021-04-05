@@ -5,7 +5,7 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout/school_layout">
 <div layout:fragment="school_content">
-	<form class="ui large form" method="POST" action="boardUpdateSave"
+	<form class="ui large form"
 		enctype="multipart/form-data" data-parsley-validate="true">
 		<div class="ui sixteen wide grid center aligned"
 			style="background-color: #F3F3F3;">
@@ -40,8 +40,11 @@
 						</tr>
 					</tbody>
 					<tfoot>
+					
 						<tr>
+						
 							<th colspan="5">
+							<a th:if="${session.sessionMember_name} !=null" th:text="게시글작성" class="ui blue button" onclick="location.href='boardWrite';"></a>
 								<div class="ui right floated pagination menu">
 									<a class="icon item"> <i class="left chevron icon"></i>
 									</a> 

@@ -19,13 +19,14 @@
       <div class="ui grid center aligned" style="background-color: #F3F3F3;">
          <div class="ui stacked segment"
             style="width: 60%; margin-bottom: 50px">
-				<h2 class="ui dividing header" th:text="${board.b_title}"
+				<h2 class="ui dividing header" th:text="${board.b_title} + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'+ '날짜'+${board.b_inputtime}"
 					th:value="${board.b_title}">
-					<span th:text="${board.b_hit}"></span>
+					
 				</h2>
+				
 				<!-- 				<h3 class="ui dividing header" th:text="${board.b_studentno}" th:value="${board.b_studentno}"></h3> -->
-				<h3 class="ui dividing header" th:text="${board.b_name}"
-					th:value="${board.b_name}"></h3>
+				<div class="ui dividing header" th:text="${board.b_name} + '&nbsp'+'조회수'+${board.b_hit}"
+					th:value="${board.b_name}"></div>					
 		
 				<div class="field">
 					<div class="fluid ui left icon input" style="height: 150px">
@@ -37,11 +38,11 @@
 						onclick="history.back(-1);">
 						<i class="icon bars"></i> 게시판 목록
 					</div>
-					<a th:href="@{boardUpdate(b_seq=${board.b_seq})}"><div
-							class="ui green labeled submit icon button">
+					<a th:href="@{boardUpdate(b_seq=${board.b_seq})}">
+						<div th:if="${session.sessionMember_name}+'&nbsp'+학우님 == ${board.b_name}" class="ui green labeled submit icon button">
 							<i class="icon edit"></i> 글 수정
 						</div> </a>
-					<div class="ui teal labeled submit icon button" id="boardDeleteBtn">
+					<div th:if="${session.sessionMember_name}+'&nbsp'+학우님 == ${board.b_name}" class="ui teal labeled submit icon button" id="boardDeleteBtn">
 						<i class="icon eraser"></i> 글 삭제
 					</div>
 				</div>
@@ -69,15 +70,14 @@
 						<input type="hidden" class="ui  dividing header"
 							name="comment_name" th:if="${session.sessionMember_name} !=null"
 							th:value="${session.sessionMember_name}+'&nbsp'+님" readonly>
+							
 						<textarea style="height: 10px; width: 85%; margin-bottom: 20px"
 							name="comment_content" id="comment_content"></textarea>
-						<button type="submit">
-							<span class="ui blue labeled submit icon button"
+							<button type="submit" class="ui blue labeled submit icon button"
 								style="margin-left: 10px; height: 110px;"> <i
 								class="icon edit" style="text-align: middle; display: block"></i>
 								<span
-								style="position: relative; padding: 10; margin-top: 25px; line-height: 20px; display: block; text-align: center;">댓글<br>등록
-							</span>
+								style="position: relative; padding: 10; line-height: 20px; display: block; text-align: center;">댓글<br>등록
 							</span>
 						</button>
 					</div>
