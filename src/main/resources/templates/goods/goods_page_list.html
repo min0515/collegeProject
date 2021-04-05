@@ -8,16 +8,12 @@
 <th:block layout:fragment="css">
 	<link rel="stylesheet" th:href="@{/css/shopping.css}">
 </th:block>
-<script src="/js/aiappproject.js"></script>
-<script
-	src="https://cdn.tiny.cloud/1/1in9hzsqug5gwpl0vwku0rsdmw8w2equelp9j08kmfa49lxw/tinymce/5/tinymce.min.js"
-	referrerpolicy="origin"></script>
-</head>
 <body>
 	<div layout:fragment="content">
-		<div class="ui center aligned grid" style=" margin:40px 0px 0px 0px !important; width:100%; height:900px;">
+		<div class="ui center aligned grid"
+			style="margin: 40px 0px 0px 0px !important; width: 100%; height: 900px;">
 			<div class="column"
-				style="max-width: 90% !important; padding:0 20px 0 20px;">
+				style="max-width: 90% !important; padding: 0 20px 0 20px;">
 				<div class="field" style="margin-bottom: 40px">
 					<h1 class="ui  left aligned header">
 						<strong style="margin-left: 2%;">상품</strong>
@@ -25,22 +21,43 @@
 					<div class="ui section divider" style="margin-top: 15px;"></div>
 				</div>
 
-				<div class="ui link  cards" style="margin-left:2%;">
-					<div class="ui card" style="margin:15px; width:22%;" th:each="goods : ${goodses}">
-						<div class="image">
-							<img id="imgcss" th:src="${goods.g_attach}">
+				<div class="ui link  cards" style="margin-left: 2%;">
+					<a th:each="goods,index : ${goodses}">
+						<div class="ui card" style="margin: 15px; width: 22%;"
+							th:if="${index.index} % 2 ==0">
+							<div class="image">
+								<img id="imgcss" th:src="${goods.g_attach}">
+							</div>
+							<div class="content">
+								<a class="header"
+									th:href="@{goodsDetail2(g_seq=${goods.g_seq})}"> <span
+									th:text="${goods.g_title}"></span>
+								</a>
+							</div>
+							<div class="extra content">
+								<span class="date"
+									th:text="${#numbers.formatDecimal(goods.g_price, 0, 'COMMA', 0, 'POINT')}+원"></span>
+							</div>
 						</div>
-						<div class="content">
-							<a class="header" th:href="@{goodsDetail2(g_seq=${goods.g_seq})}">
-								<span th:text="${goods.g_title}"></span>
-							</a>
+						<div class="ui card"
+							style="margin: 15px; width: 22%; margin-top: 3%; margin-bottom: 0;"
+							th:unless="${index.index} % 2 ==0">
+							<div class="image">
+								<img id="imgcss" th:src="${goods.g_attach}">
+							</div>
+							<div class="content">
+								<a class="header"
+									th:href="@{goodsDetail2(g_seq=${goods.g_seq})}"> <span
+									th:text="${goods.g_title}"></span>
+								</a>
+							</div>
+							<div class="extra content">
+								<span class="date"
+									th:text="${#numbers.formatDecimal(goods.g_price, 0, 'COMMA', 0, 'POINT')}+원"></span>
+							</div>
 						</div>
-						<div class="extra content">
-							<span class="date"
-								th:text="${#numbers.formatDecimal(goods.g_price, 0, 'COMMA', 0, 'POINT')}+원"></span>
-						</div>
-					</div>
-					
+					</a>
+
 				</div>
 			</div>
 		</div>
