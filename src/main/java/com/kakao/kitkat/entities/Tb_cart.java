@@ -10,6 +10,7 @@ public class Tb_cart {
 	private int g_price;
 	private int totalprice;
 	private String checkYn;
+	private int deliveryTotalPrice;
 
 	public String getMember_id() {
 		return member_id;
@@ -57,6 +58,14 @@ public class Tb_cart {
 
 	public void setG_price(int g_price) {
 		this.g_price = g_price;
+	}
+
+	public int getDeliveryTotalPrice() {
+		return deliveryTotalPrice;
+	}
+
+	public void setDeliveryTotalPrice(int deliveryTotalPrice) {
+		this.deliveryTotalPrice = deliveryTotalPrice;
 	}
 
 }

@@ -7,7 +7,7 @@ public class Orders {
 	private int orders_seq;
 	private String member_id;
 	private String orders_name;
-	private String orders_contact;
+	private String orders_date;
 	private String orders_address;
 	private String orders_zipcode;
 	private String g_title;
@@ -41,12 +41,12 @@ public class Orders {
 		this.orders_name = orders_name;
 	}
 
-	public String getOrders_contact() {
-		return orders_contact;
+	public String getOrders_date() {
+		return orders_date;
 	}
 
-	public void setOrders_contact(String orders_contact) {
-		this.orders_contact = orders_contact;
+	public void setOrders_date(String orders_date) {
+		this.orders_date = orders_date;
 	}
 
 	public String getOrders_zipcode() {

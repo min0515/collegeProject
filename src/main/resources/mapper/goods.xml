@@ -85,11 +85,11 @@
 	<!-- </select> -->
 	<insert id="cartInsertRow">
 		insert into tb_cart (member_id, g_seq,
-		price,qty,totalprice
+		g_price,qty,totalprice
 		)
 		values (#{member_id},
 		#{g_seq},
-		#{price},#{qty},#{price}*#{qty}
+		#{price},#{qty},#{g_price}*#{qty}
 		)
 	</insert>
 	<update id="cartUpdateRow">
@@ -105,8 +105,8 @@
 	<select id="myGoodsCartSelect"
 		resultType="com.kakao.kitkat.entities.Tb_cart">
 		select
-		a.g_seq,a.checkYn,a.price,a.qty,a.totalprice,b.g_title,b.g_delivery,b.g_attach
-		from tb_cart a join goods b on a.g_seq=b.g_seq where
+		a.g_seq,a.checkYn,a.qty,a.totalprice,b.g_price,b.g_title,b.g_delivery,c.g_attach
+		from tb_cart a join goods b on a.g_seq=b.g_seq join goods_info c on b.g_seq=c.g_seq where
 		member_id=#{member_id}
 	</select>
 	<update id="cartCheckUpdateRow">
@@ -128,8 +128,8 @@
 	<select id="myGoodsCartCheckedPaymentSelect"
 		resultType="com.kakao.kitkat.entities.Tb_cart">
 		select
-		a.g_seq,a.checkYn,a.price,a.qty,a.totalprice,b.g_title,b.g_delivery,b.g_attach
-		from tb_cart a join goods b on a.g_seq=b.g_seq where
+		a.g_seq,a.checkYn,a.g_price,a.qty,a.totalprice,b.g_title,b.g_delivery,c.g_attach
+		from tb_cart a join goods b on a.g_seq=b.g_seq join goods_info c on b.g_seq=c.g_seq where
 		member_id=#{member_id} and checkYn='y'
 	</select>
 
