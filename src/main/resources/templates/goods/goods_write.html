@@ -42,20 +42,29 @@
 					</div>
 
 
-					<div class="field">
-						<div id="fileUpload" class="dragAndDropDiv">파일 첨부</div>
-						<input type="file" name="fileUpload" id="fileUpload"
-							style="display: none;" multiple />
+<!-- 					<div class="field"> -->
+<!-- 						<div id="fileUpload" class="dragAndDropDiv">파일 첨부</div> -->
+<!-- 						<input type="file" name="fileUpload" id="fileUpload" -->
+<!-- 							style="display: none;" multiple /> -->
 
 						<div class="field">
 							<div class="fluid ui left icon input" style="height: 150px">
 								<textarea rows="8" placeholder="내용" name="g_content"></textarea>
 							</div>
 						</div>
+						<div class="field">
 						<div class="ui right labeled input">
 							<label for="amount" class="ui label">배송비</label> 
-							<input type="text" placeholder="배송비를 입력해주세요" id="g_delievery" name="g_delievery">
+							<input type="text" placeholder="배송비를 입력해주세요" id="g_delivery" name="g_delivery">
 							<div class="ui basic label">원</div>
+						</div>
+						</div>
+						<div class="field">
+						<div class="ui right labeled input">
+							<label for="amount" class="ui label">수량</label> 
+							<input type="text" placeholder="상품의 수량을 입력해주세요" id="g_qty" name="g_qty">
+							<div class="ui basic label">개</div>
+						</div>
 						</div>
 
 						<div class="field" style="margin-top: 70px">

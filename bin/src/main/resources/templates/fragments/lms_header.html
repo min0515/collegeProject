@@ -7,7 +7,7 @@
 	</span>
 	<span
 		style=" color: #0A4E80; font-size: 20px; font-weight: bold; padding: 1.5% 1% 1.5% 0% !important;"
-		onclick="location.href='professorLoginUp';">자바대학교</span>
+		onclick="location.href='lmsHome';">자바대학교</span>
 	<span style="font-size: 17px; font-weight: bold; padding: 1.5% 1% 1.5% 0% !important;">학사관리 시스템</span>
 	<div class="ui text middle aligned right aligned container"
 		style="margin-right: 5px !important;"
@@ -15,12 +15,9 @@
 		<div class="ui container" style="padding: 3% 2% 3% 2%;">
 			<div class="ui inline dropdown">
 				<h4 style="margin: 0px;"
-					th:if=" ${session.sessionProfessor_name} !=null"
-					th:text="${session.sessionProfessor_name}"></h4>
-				<h4 style="margin: 0px;"
-					th:if="${session.sessionStudent_name} !=null"
-					th:text="${session.sessionStudent_name}"></h4>
-				<div th:if=" ${session.sessionProfessor_name} !=null" class="menu">
+					th:if="${session.sessionMember_name} !=null"
+					th:text="${session.sessionMember_name}"></h4>
+				<div th:if=" ${session.sessionMember_name} !=null" class="menu">
 					<div class="item" onclick="location.href='professorUpdate'">
 						정보수정</div>
 					<div class="item" onclick="location.href='tbclassupdateRow'">
@@ -31,8 +28,6 @@
 				</div>
 
 			</div>
-			<i th:if=" ${session.sessionProfessor_name} !=null"
-				class="dropdown icon"></i>
 		</div>
 		<div style="padding: 2% 1% 2% 1%;">
 			<div class="ui black button" id="proclassUpdatePage"

@@ -6,60 +6,64 @@
 	layout:decorator="layout/school_layout">
 <div layout:fragment="school_content">
 <img src="images/schoolboardbanner.png" style="width: 100%">
-	<div class="ui grid center aligned middle aligned">
-			<form class="ui large form" method="POST" action="MemberUpdateSave"
-				style="background-color: #ffffff; margin: 110px;">
-				<div class="column" style="width: 600px">
-					<div class="field">
-						<h3>학생수정</h3>
-					</div>
-					<div class="field">
+	<form class="ui large form"
+		enctype="multipart/form-data" data-parsley-validate="true">
+		<div class="ui sixteen wide grid center aligned"
+			style="background-color: #F3F3F3;">
+			<!-- 			<input type="hidden" name="b_seq" id="hidden_seq" -->
+			<!-- 				th:value="${board.b_seq}"> -->
+			<h2 style="margin-bottom: 40px; margin-top:4%">나의정보 수정</h2>
+		</div>
+		<div class="ui grid center aligned" style="background-color: #F3F3F3;">
+			<div class="ui stacked segment"
+				style="width: 40%; margin-bottom: 50px">
+
+			<div class="field">
 						<div class="ui labeled input">
-							<div class="ui label">학번</div>
+							<div class="ui blue label" style="width:15%; text-align:center">학번</div>
 							<input type="text" name="student_no" id="code" th:value="${student.student_no}" placeholder="학번" readonly>
 						</div>
 					</div>
 					<div class="field">
 						<div class="ui labeled input">
-							<div class="ui label">학과</div>
+							<div class="ui blue label" style="width:15%; text-align:center">학과</div>
 							<input type="text" name="department_no" th:value="${student.department_no}" placeholder="학과" readonly>
 						</div>
 					</div>
 					<div class="field">
 						<div class="ui labeled input">
-							<div class="ui label">학생이름</div>
+							<div class="ui blue label" style="width:15%; text-align:center">학생이름</div>
 							<input type="text" name="student_name" th:value="${student.student_name}" placeholder="학생이름" readonly>
 						</div>
 					</div>
 					<div class="field">
 						<div class="ui labeled input">
-							<div class="ui label">주소</div>
+							<div class="ui blue label" style="width:15%; text-align:center">주소</div>
 							<input type="text" name="student_address" th:value="${student.student_address}" placeholder="주소">
 						</div>
 					</div>
 					<div class="field">
 						<div class="ui labeled input">
-							<div class="ui label">입학일</div>
+							<div class="ui blue label" style="width:15%; text-align:center">입학일</div>
 							<input type="text" name="entdate" th:value="${student.entrance_date}" placeholder="입학일" readonly>
 						</div>
 					</div>
 					<div class="field">
 						<div class="ui labeled input">
-							<div class="ui label">비밀번호</div>
+							<div class="ui blue label" style="width:15%; text-align:center">비밀번호</div>
 							<input type="password" name="password" th:value="${student.student_pw}" placeholder="학생비밀번호">
 						</div>
 					</div>
 					
 					
-					<div class="field" style="margin-top: 20px">
+					<div class="field" style="margin-top: 20px;text-align:center">
 						<span><button type="submit" class="ui primary basic button"
-								style="width: 48%">저장</button></span> <span><button
+								style="width: 30%;">저장</button></span> <span><button
 								type="button" class="ui negative  basic button"
-								onclick="location.href='index'" style="width: 48%">취소</button></span>
+								onclick="location.href='index'" style="width: 30%">취소</button></span>
 					</div>
-				</div>
-			</form>
+			</div>
 		</div>
+	</form>
 </div>
 </html>
-

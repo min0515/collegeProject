@@ -33,8 +33,7 @@
 								<div class="row">
 									<div class="ui column left aligned"
 										style="font-size: 15px; color: gray; font-family: Helvetica, sans-serif;">주문번호</div>
-									<div class="ui column left aligned"
-										th:text="${ord.orders_date}+${ord.g_seq}"></div>
+									<div class="ui column left aligned" th:text="${dateG_seq}"></div>
 								</div>
 								<hr style="width: 100%; color: gray;">
 								<div class="row">
@@ -47,19 +46,19 @@
 									<div class="ui column left aligned"
 										style="font-size: 15px; color: gray; font-family: Helvetica, sans-serif;">결제금액</div>
 									<div class="ui column left aligned"
-										th:text="${#numbers.formatDecimal(ord.orders_total, 0, 'COMMA', 0, 'POINT')}+원"
-										th:value="${ord.orders_total}"></div>
+										th:text="${#numbers.formatDecimal(totalprice+2500, 0, 'COMMA', 0, 'POINT')}+원"></div>
 								</div>
 								<hr style="width: 100%; background-color: white;">
 								<button class="field gray ui button" type="button"
 									style="width: 250px; color: white; height: 50px"
 									onclick="location.href='shoppingAboutus'">홈으로</button>
 								<button class="field black ui button"
-									style="width: 250px; color: white; height: 50px" type="button"
-									onclick="location.href='goodsMyList'">마이페이지</button>
+									style="width: 250px; color: white; height: 50px" type="button" onclick="location.href='goodsMyList'">마이페이지</button>
 							</div>
 						</div>
+
 					</div>
+
 				</div>
 			</div>
 		</form>

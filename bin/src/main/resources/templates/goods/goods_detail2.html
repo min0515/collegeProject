@@ -25,9 +25,6 @@
 				style="background-color: #FFFFFF;">
 				<div class="one wide column"></div>
 				<div class="six wide column">
-					<!-- 						<div class="fluid ui input" style="width: 500px; margin-top: 50px"> -->
-					<!-- 							<img th:src="${goods.g_attach}"> -->
-					<!-- Swiper -->
 					<div class="fluid ui swiper-container"
 						style="width: 500px; height: 500px">
 						<div class="swiper-wrapper">
@@ -69,13 +66,13 @@
 							style="display: right; font-size: 18px; float: right;"></span>
 					</div>
 					<input type="hidden" id="priceHiddenDetail"
-						th:value="${goods.g_price}" name="price">
+						th:value="${goods.g_price}" name="g_price">
 					<div style="margin-top: 30px; margin-bottom: 30px;">
 						<span id="detailTotalQty" th:text="상품금액"></span><span
 							id="goodsDetailTotalPrice" th:text="${#numbers.formatDecimal(goods.g_price, 0, 'COMMA', 0, 'POINT')}+원"
 							style="text-align: center; font-size: 18px; float: right;"></span>
 					</div>
-					<button class="ui button" type="button" id="shoppingPaiging">Follow</button>
+					<button class="ui black button" style="color:fffff" type="button" id="onePaymentGo">결제하기</button>
 					<div class="ui vertical animated button" tabindex="0"
 						style="background-color: #FFFFFF; border: 1px solid;">
 						<div class="visible content">장바구니</div>
@@ -111,8 +108,6 @@
 				
 
 				<div class="ui five wide column" style="text-align: center; ">
-					<div id="goodsinfo" th:text="${goods.g_info}"></div>
-					
 				<div class="field" id="goodsreview" style="display: none;">
 				<div class="field" style="float: left; width: 50%;">
 					<img src="/images/library2-2.png"

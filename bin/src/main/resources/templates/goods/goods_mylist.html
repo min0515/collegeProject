@@ -22,7 +22,7 @@
 			style="max-width: 75% !important; margin-top: 2em !important;">
 			<div class="field" style="margin-top: 20px">
 				<h1 class="ui   header">
-					<strong style="margin-left: 4%;">장바구니</strong>
+					<strong style="margin-left: 4%;">마이페이지</strong>
 				</h1>
 			</div>
 			<input type="hidden" name="g_seq">
@@ -32,6 +32,12 @@
 					<span style="font-size: 17px;"><strong>전체</strong></span> <span
 						style="font-size: 17px; color: #0064CD;" th:text="${mycartcount}"><strong
 						th:text="아직"></strong></span> <span style="font-size: 17px;"><strong>건</strong></span>
+						<span>&nbsp</span>
+						<span>&nbsp</span>
+						<span>&nbsp</span>
+						<span style="font-size: 15px;"><strong>수량</strong></span> <span
+						style="font-size: 17px; color: #0064CD;" th:text="${sum}"><strong
+						th:text="아직"></strong></span> <span style="font-size: 17px;"><strong>개</strong></span>
 				</div>
 				<table id="myCartTable" style="text-align: center;"
 					class="ui very basic table">
@@ -40,45 +46,20 @@
 							<th></th>
 							<th>item</th>
 							<th></th>
-							<th>수량</th>
 							<th>가격</th>
-							<th>배송비
-							<th>
-							<th>삭제</th>
 						</tr>
 					</thead>
-					<tbody style="font-size: 18px;">
-						<tr th:each="myProduct : ${myProducts}">
+					<tbody style="font-size: 18px; ">
+						<tr th:each="cartyb : ${cartyb}" >
 							<td style="width: 10%;">
-								<div class="ui checkbox">
-									<input th:if="${myProduct.checkYn}=='n'" type="checkbox"
-										id="checkmycart"> <label></label> <input
-										th:unless="${myProduct.checkYn}=='n'" type="checkbox"
-										id="checkmycart" checked> <label></label>
-								</div>
 							</td>
-							<td style="width: 20%;"><img th:src="${myProduct.g_attach}"
+							<td style="width: 20%;"><img th:src="${cartyb.g_attach}"
 								style="width: 90%; height: 120px;"></td>
 							<td style="width: 20%;"><h3>
-									<span th:text="${myProduct.g_title}"></span>
+									<span th:text="${cartyb.g_title}"></span>
 								</h3></td>
-							<td style="width: 15%;"><Input type="number" min="1"
-								max="99" id="qtyInputProdetail" name="qty"
-								th:value="${myProduct.qty}" style="width: 40%;" /></td>
 							<td style="width: 20%;"
-								th:text="${#numbers.formatDecimal(myProduct.g_price, 0, 'COMMA', 0, 'POINT')}+원"></td>
-							<td style="width: 20%;"
-								th:text="${#numbers.formatDecimal(myProduct.g_delivery, 0, 'COMMA', 0, 'POINT')}+원"></td>
-							<td style="display: none;"><input type="hidden"
-								th:value="${myProduct.g_delivery}"></td>
-							<td style="display: none;"><input type="hidden"
-								th:value="${myProduct.g_price}"></td>
-							<td style="display: none;"><input type="hidden"
-								th:value="${myProduct.qty}"></td>
-							<td style="display: none;"><input type="hidden"
-								th:value="${myProduct.g_seq}"></td>
-							<td style="width: 5%;"><i class="trash alternate icon"
-								id="productDeletebtn" style="cursor: pointer"></i>
+								th:text="${#numbers.formatDecimal(cartyb.g_price, 0, 'COMMA', 0, 'POINT')}+원"></td>
 							<td>
 						</tr>
 					</tbody>
@@ -89,29 +70,20 @@
 				<div class="field" style="margin-bottom: 30px;">
 					<span style="float: left;"><strong>상품금액</strong></span> <span
 						style="float: right;"><strong id="productPrice"
-						th:text="${#numbers.formatDecimal(cartprice.totalprice, 0, 'COMMA', 0, 'POINT')}"></strong><strong>원</strong></span>
-					<input type="hidden" id="productPriceVal"
-						th:value="${cartprice.totalprice}">
+						th:text="${#numbers.formatDecimal(sumtotal-2500, 0, 'COMMA', 0, 'POINT')}"></strong><strong>원</strong></span>
+
 				</div>
 				<input type="hidden" id="totalprice">
 				<div class="field" style="margin-bottom: 60px;">
 					<span style="float: left;"><strong>배송비</strong></span> <span
 						style="float: right;"><strong id="deliveryPrice"
 						th:text="${#numbers.formatDecimal(2500, 0, 'COMMA', 0, 'POINT')}"></strong><strong>원</strong></span>
-					<input type="hidden" id="deliveryPriceVal"
-						th:value="${cartprice.deliveryTotalPrice}">
 				</div>
 				<div class="ui section divider"></div>
 				<div class="field" style="margin-bottom: 100px;">
-					<span style="float: left;"><strong>결제예정금액</strong></span> <span
+					<span style="float: left;"><strong>결제금액</strong></span> <span
 						style="float: right;"><strong id="finalPrice"
-						th:text="${#numbers.formatDecimal(cartprice.totalprice + 2500, 0, 'COMMA', 0, 'POINT')}"></strong><strong>원</strong></span>
-					<input type="hidden" id="finalPriceVal"
-						th:value="${cartprice.totalprice} + ${cartprice.deliveryTotalPrice}">
-				</div>
-				<div class="field">
-					<button class="ui grey fluid button" id="cartPayment">결제하러
-						가기</button>
+						th:text="${#numbers.formatDecimal(sumtotal, 0, 'COMMA', 0, 'POINT')}"></strong><strong>원</strong></span>
 				</div>
 			</div>
 			<div class="ui paymentGo mini modal">
@@ -125,7 +97,6 @@
 			</div>
 		</div>
 	</div>
-
 	<script>
 	window.onpageshow = function(event) {
 		if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
@@ -134,29 +105,5 @@
         }
 	}
 	</script>
-
-	<div class="ui mini modal prodelete">
-		<i class="close icon"></i>
-		<div class="header">상품삭제</div>
-		<div class="content">
-			<p>삭제하시겠습니까?</p>
-		</div>
-		<div class="actions">
-			<button class="ui red button" type="button" id="deleteok">삭제</button>
-			<button class=" ui cancel button" type="button" id="deletecancel">취소</button>
-		</div>
-
-	</div>
-
-	<script>
-	window.onpageshow = function(event) {
-		if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
-			// Back Forward Cache로 브라우저가 로딩될 경우 혹은 브라우저 뒤로가기 했을 경우
-			 location.href="goodsCartGo"
-        }
-	}
-	</script>
-
 </body>
-
 </html>
