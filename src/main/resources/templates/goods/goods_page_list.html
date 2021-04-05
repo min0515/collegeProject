@@ -15,48 +15,37 @@
 </head>
 <body>
 	<div layout:fragment="content">
-		<form class="ui large form" action="findListBoard"
-			name="findListformname" method="POST" enctype="multipart/form-data"
-			data-parsley-validate="true" style="background-color: #F3F3F3; margin-top:15px;">
-			<div class="ui grid center aligned">
-				<div class="twelve wide column" >
-					<div class="field center aligned" style="margin-top: 30px;">
-						<div class="ui four cards">
-							<div class="ui card" th:each="goods : ${goodses}" style="text-align: center">
-								<div class="ui slide right reveal image" >
-									<div class="visible content">
-										<img class="ui fluid image" th:src="${goods.g_attach}" style="width: 300px">
-									</div>
-									<div class="hidden content">
-										<img class="ui fluid image" src="images/zntus2.png" style="width: 300px">
-									</div>
-								</div>
-								<div class="content">
-									<a class="header" th:href="@{goodsDetail2(g_seq=${goods.g_seq})}"> 
-										<span th:text="${goods.g_title}"></span></a>
-										<span class="date" th:text="${#numbers.formatDecimal(goods.g_price, 0, 'COMMA', 0, 'POINT')}+원"></span>
-								</div>
-								<div class="extra content">
-<!-- 								th:href="@{goodsDelivery(g_seq=${goods.g_seq})}" -->
-									 <i class="won sign icon" ></i> 구매하기
-									<div>
-										<i class="shopping bag icon"></i> 장바구니
-									</div>
-								</div>
-							</div>
+		<div class="ui center aligned grid" style=" margin:40px 0px 0px 0px !important; width:100%; height:900px;">
+			<div class="column"
+				style="max-width: 90% !important; padding:0 20px 0 20px;">
+				<div class="field" style="margin-bottom: 40px">
+					<h1 class="ui  left aligned header">
+						<strong style="margin-left: 2%;">상품</strong>
+					</h1>
+					<div class="ui section divider" style="margin-top: 15px;"></div>
+				</div>
+
+				<div class="ui link  cards" style="margin-left:2%;">
+					<div class="ui card" style="margin:15px; width:22%;" th:each="goods : ${goodses}">
+						<div class="image">
+							<img id="imgcss" th:src="${goods.g_attach}">
 						</div>
-						<div class="field" style="margin-top: 10px">
-							<span th:each="page : ${pages}"> <a
-								th:href="@{goodsPageSelect(page=${page})}">[<span
-									th:text="${page}"></span>]
+						<div class="content">
+							<a class="header" th:href="@{goodsDetail2(g_seq=${goods.g_seq})}">
+								<span th:text="${goods.g_title}"></span>
 							</a>
-							</span>
+						</div>
+						<div class="extra content">
+							<span class="date"
+								th:text="${#numbers.formatDecimal(goods.g_price, 0, 'COMMA', 0, 'POINT')}+원"></span>
 						</div>
 					</div>
+					
 				</div>
 			</div>
-		</form>
+		</div>
 	</div>
+
 </body>
 </html>
 

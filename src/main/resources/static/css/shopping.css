@@ -206,3 +206,8 @@
 	cursor: pointer;
 	vertical-align: top
 }
+
+#imgcss{
+	width:100%; 
+	height:250px;
+}

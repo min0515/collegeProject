@@ -161,7 +161,6 @@ public class GoodsController {
 		for (int i = 0; i < pagecount; i++) {
 			pages[i] = i + 1;
 		}
-
 		ArrayList<Goods> goodses = dao.goodsSelectPageList(goodspaging);
 		model.addAttribute("goodses", goodses);
 		model.addAttribute("pages", pages);
@@ -245,9 +244,7 @@ public class GoodsController {
 		for (int i = 0; i < pagecount; i++) {
 			pages[i] = i + 1;
 		}
-
 		ArrayList<Goods> goodses = dao.goodsSelectPageList(goodspaging);
-
 		model.addAttribute("goodses", goodses);
 		model.addAttribute("pages", pages);
 		return "goods/goods_page_list";
