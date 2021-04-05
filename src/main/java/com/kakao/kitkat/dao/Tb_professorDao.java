@@ -16,4 +16,5 @@ public interface Tb_professorDao {
 	public int deleteAjax(String Professor_No) throws Exception;
 
 	public void deleteOne(Tb_professor professor);
+
 }

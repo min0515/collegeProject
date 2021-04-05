@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}"
+	th:lang="${session.lang}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/school_layout">
+<div layout:fragment="school_content">
+	<img src="images/schoolboardbanner.png" style="width: 100%">
+	<form class="ui large form" enctype="multipart/form-data"
+		data-parsley-validate="true">
+		<div class="ui sixteen wide grid center aligned"
+			style="background-color: #F3F3F3;">
+			<!-- 			<input type="hidden" name="b_seq" id="hidden_seq" -->
+			<!-- 				th:value="${board.b_seq}"> -->
+			<h2 style="margin-bottom: 40px; margin-top: 4%">나의정보 수정</h2>
+		</div>
+		<div class="ui grid center aligned" style="background-color: #F3F3F3;">
+			<div class="ui stacked segment"
+				style="width: 40%; margin-bottom: 50px">
+
+				<div class="field">
+					<div class="ui labeled input">
+						<div class="ui blue label" style="width: 15%; text-align: center">교수번호</div>
+						<input type="text" name="professor_code" id="code"
+							th:value="${professor.professor_no}" placeholder="교수번호" readonly>
+					</div>
+				</div>
+				<div class="field">
+					<div class="ui labeled input">
+						<div class="ui blue label" style="width: 15%; text-align: center">이름</div>
+						<input type="text" name="professor_name" id="name"
+							th:value="${professor.professor_name}" placeholder="이름" readonly>
+					</div>
+				</div>
+				<div class="field">
+					<div class="ui labeled input">
+						<div class="ui blue label" style="width: 15%; text-align: center">주소</div>
+						<input type="text" name="professor_address" id="address"
+							th:value="${professor.professor_address}" placeholder="거주지 주소" readonly>
+					</div>
+				</div>
+				<div class="field">
+					<div class="ui labeled input">
+						<div class="ui blue label" style="width: 15%; text-align: center">학과번호</div>
+						<input type="text" name="professor_no" id="dep_no"
+							th:value="${professor.department_no}" placeholder="학과번호" readonly>
+					</div>
+				</div>
+				<div class="field">
+					<div class="ui labeled input">
+						<div class="ui blue label" style="width: 15%; text-align: center">비밀번호</div>
+						<input type="text" name="professor_pw" id="pw"
+							th:value="${professor.professor_pw}" placeholder="비밀번호" readonly>
+					</div>
+				</div>
+				<div class="field" style="margin-top: 20px; text-align: center">
+					<span><button type="submit" class="ui primary basic button"
+							style="width: 30%;">저장</button></span> <span><button
+							type="button" class="ui negative  basic button"
+							onclick="location.href='index'" style="width: 30%">취소</button></span>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+</html>
