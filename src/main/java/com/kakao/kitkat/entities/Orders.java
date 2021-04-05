@@ -12,11 +12,10 @@ public class Orders {
 	private String orders_zipcode;
 	private String g_title;
 	private int orders_qty;
-	private int g_price;
+	private int g_seq;
 	private int g_delivery;
 	private int g_total;
 	private String orders_pay;
-	private String orders_delivery;
 
 	public int getOrders_seq() {
 		return orders_seq;
@@ -86,14 +85,6 @@ public class Orders {
 		this.g_title = g_title;
 	}
 
-	public int getG_price() {
-		return g_price;
-	}
-
-	public void setG_price(int g_price) {
-		this.g_price = g_price;
-	}
-
 	public int getG_delivery() {
 		return g_delivery;
 	}
@@ -114,12 +105,12 @@ public class Orders {
 		this.orders_pay = orders_pay;
 	}
 
-	public String getOrders_delivery() {
-		return orders_delivery;
+	public int getG_seq() {
+		return g_seq;
 	}
 
-	public void setOrders_delivery(String orders_delivery) {
-		this.orders_delivery = orders_delivery;
+	public void setG_seq(int g_seq) {
+		this.g_seq = g_seq;
 	}
 
 }
