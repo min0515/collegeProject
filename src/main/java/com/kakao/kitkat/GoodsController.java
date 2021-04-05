@@ -69,8 +69,6 @@ public class GoodsController {
 				e.printStackTrace();
 			}
 		}
-//		String ip = getIp(request);
-//		board.setB_inputip(ip);
 		SimpleDateFormat df = new SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm:ss");
 		Date date = new Date();
 		String today = df.format(date);
@@ -221,29 +219,6 @@ public class GoodsController {
 		return "goods/mypage_order_list";
 	}
 
-	@RequestMapping(value = "/paymentComplete", method = RequestMethod.POST)
-	public String paymentComplete(Model model, @ModelAttribute Orders orders, @RequestParam int g_seq,
-			@RequestParam String orders_address1, @RequestParam String orders_address2, HttpSession session)
-			throws Exception {
-		String professor_no = (String) session.getAttribute("sessionMember_id");
-		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
-		goods = dao.goodsSelectOne(g_seq);
-		OrdersDao dao2 = sqlSession.getMapper(OrdersDao.class);
-		orders.setOrders_address(orders_address1 + "-" + orders_address2);
-		orders.setG_title(goods.getG_title());
-//		orders.setG_price(goods.getG_price());
-		String pattern = "yyyyMMdd";
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-		String date = simpleDateFormat.format(new Date());
-		int num = dao2.contactMaxNum();
-		orders.setOrders_contact(date + "-" + Integer.toString(num));
-		orders.setMember_id(professor_no);
-		dao2.OrderssAdd(orders);
-		Orders ord = dao2.ordersSelectOne(professor_no);
-		model.addAttribute("ord", ord);
-		return "goods/payment_complete";
-	}
-
 	@RequestMapping(value = "/goodsPageList", method = RequestMethod.GET)
 	public String goodsPageList(Locale locale, Model model) throws Exception {
 		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
@@ -284,7 +259,6 @@ public class GoodsController {
 		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
 		goods = dao.goodsSelectOne(g_seq);
 		goods.setG_qty(qty);
-		goods.setG_total(goods.getG_price() * qty);
 		model.addAttribute("goods", goods);
 		return "goods/payment";
 	}
@@ -317,7 +291,6 @@ public class GoodsController {
 			String safeFile = path + originFileName;
 			try {
 				mf.transferTo(new File(safeFile));
-				goods.setG_attach(realpath + filename);
 			} catch (IllegalStateException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -332,6 +305,24 @@ public class GoodsController {
 		return "index";
 	}
 
+	@RequestMapping(value = "/goodsMyList", method = RequestMethod.GET)
+	public String goodsMyList(Model model, HttpSession session) throws Exception {
+		String member_id = (String) session.getAttribute("sessionMember_id");
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+		OrdersDao dao2 = sqlSession.getMapper(OrdersDao.class);
+		int sum = dao2.myOrdersqtySum(member_id);
+		int totalsum = dao2.myOrderstotalSum(member_id);
+		int mycartcount = dao.myGoodsCartCount(member_id);
+		ArrayList<CartList> selectproyo = dao2.selectproyo(member_id);
+		Tb_cart cartprice = dao.myGoodsCartCheckedSelect(member_id);
+		model.addAttribute("cartprice", cartprice);
+		model.addAttribute("cartyb", selectproyo);
+		model.addAttribute("mycartcount", mycartcount);
+		model.addAttribute("sum", sum);
+		model.addAttribute("sumtotal", totalsum);
+		return "goods/goods_mylist";
+	}
+
 	/* 장바구니 담기 버튼 */
 	@RequestMapping(value = "/goodsCartIn", method = RequestMethod.POST)
 	@ResponseBody
@@ -342,7 +333,7 @@ public class GoodsController {
 			return "login/login2";
 		} else {
 			tb_cart.setMember_id(member_id);
-			tb_cart.setTotalprice(tb_cart.getPrice() * tb_cart.getQty());
+			tb_cart.setTotalprice(tb_cart.getG_price() * tb_cart.getQty());
 			try {
 				dao.cartInsertRow(tb_cart);
 				return "y";
@@ -391,9 +382,30 @@ public class GoodsController {
 			model.addAttribute("cartPayments", cartPayments);
 			Tb_cart cartprice = dao.myGoodsCartCheckedSelect(member_id);
 			model.addAttribute("cartprice", cartprice);
-			cartprice.getG_title();
 			return "goods/payment_cart";
 		}
+	}
+
+	@RequestMapping(value = "/paymentComplete", method = RequestMethod.POST)
+	public String paymentComplete(Model model, @ModelAttribute Orders orders, @RequestParam int g_seq,
+			@RequestParam String orders_address1, @RequestParam String orders_address2, HttpSession session)
+			throws Exception {
+		String professor_no = (String) session.getAttribute("sessionMember_id");
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+		goods = dao.goodsSelectOne(g_seq);
+		OrdersDao dao2 = sqlSession.getMapper(OrdersDao.class);
+		orders.setOrders_address(orders_address1 + "-" + orders_address2);
+		orders.setG_title(goods.getG_title());
+		String pattern = "yyyyMMdd";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		String date = simpleDateFormat.format(new Date());
+		int num = dao2.contactMaxNum();
+		orders.setOrders_date(date + "-" + Integer.toString(num));
+		orders.setMember_id(professor_no);
+		dao2.OrderssAdd(orders);
+		Orders ord = dao2.ordersSelectOne(professor_no);
+		model.addAttribute("ord", ord);
+		return "goods/payment_complete";
 	}
 
 	@RequestMapping(value = "/cartPaymentGoYo", method = RequestMethod.POST)
@@ -410,12 +422,11 @@ public class GoodsController {
 		ArrayList<Tb_cart> cartyb = dao.cartyb(member_id);
 		orders.setMember_id(member_id);
 		for (Tb_cart i : cartyb) {
-			i.setOrders_contact(date + "-" + i.getG_seq());
 			dao2.OrderssAdd2(i);
-			orders.setOrders_contact(date + "-" + i.getG_seq());
+			orders.setOrders_date(date + "-" + i.getG_seq());
 			dao2.rororororor(orders);
 		}
-		String ccc = orders.getOrders_contact();
+		String ccc = orders.getOrders_date();
 		model.addAttribute("ccc", ccc);
 		model.addAttribute("totalprice", totalprice);
 		return "goods/payment_cartcomplete";
@@ -511,21 +522,4 @@ public class GoodsController {
 
 	}
 
-	@RequestMapping(value = "/goodsMyList", method = RequestMethod.GET)
-	public String goodsMyList(Model model, HttpSession session) throws Exception {
-		String member_id = (String) session.getAttribute("sessionMember_id");
-		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
-		OrdersDao dao2 = sqlSession.getMapper(OrdersDao.class);
-		int sum = dao2.myOrdersqtySum(member_id);
-		int totalsum = dao2.myOrderstotalSum(member_id);
-		int mycartcount = dao.myGoodsCartCount(member_id);
-		ArrayList<CartList> selectproyo = dao2.selectproyo(member_id);
-		Tb_cart cartprice = dao.myGoodsCartCheckedSelect(member_id);
-		model.addAttribute("cartprice", cartprice);
-		model.addAttribute("cartyb", selectproyo);
-		model.addAttribute("mycartcount", mycartcount);
-		model.addAttribute("sum", sum);
-		model.addAttribute("sumtotal", totalsum);
-		return "goods/goods_mylist";
-	}
 }
