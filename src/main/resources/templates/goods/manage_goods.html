@@ -71,36 +71,6 @@
 								onclick="findListformname.submit()" style="padding: 10px;"><i
 								class="search icon"></i></a>
 					</div>
-<<<<<<< Upstream, based on branch 'master' of https://github.com/min0515/collegeProject.git
-					<table class="ui celled padded table" style="text-align: center">
-						<thead>
-							<tr>
-								<th class="single line">상품번호</th>
-								<th>사진</th>
-								<th>상품명</th>
-								<th>가격</th>
-								<th>상품설명</th>
-								<th>재고</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="goods : ${goodses}" style="text-align: center">
-								<td th:text="${goods.g_seq}">
-								<td><img th:src="${goods.g_attach}" style="width: 90px"></td>
-								<td th:text="${goods.g_title}"></td>
-								<td th:text="${#numbers.formatDecimal(goods.g_price, 0, 'COMMA', 0, 'POINT')}+원"></td>
-								<td style="text-align: left" th:text="${goods.g_content}"></td>
-								<td style="text-align: left" th:text="${goods.g_content}"></td>
-							</tr>
-						</tbody>
-						<tfoot>
-							<tr>
-								<td th:each="page : ${pages}"
-									style="margin-top: 10px; display: inline-block; right:align;">
-									[<a th:href="@{manageGoodsList(page=${page})}"><span
-										th:text="${page}"></span></a> ]
-								</td>
-=======
 								<a
 									th:if="${session.sessionMember_name} !=null" th:text="게시글작성"
 									class="ui blue button" onclick="location.href='boardWrite';"></a>
@@ -113,7 +83,6 @@
 										</span> <a class="icon item"> <i class="right chevron icon"></i>
 										</a>
 									</div></th>
->>>>>>> 254918b 4월 6일 (학원 네 번만 더 가면 됨) 상품관리게시판 및 주문관리게시판 생성
 							</tr>
 						</tfoot>
 					</table>
