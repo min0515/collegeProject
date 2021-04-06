@@ -3,8 +3,6 @@ package com.kakao.kitkat.dao;
 import java.util.ArrayList;
 
 import com.kakao.kitkat.entities.CartList;
-import com.kakao.kitkat.entities.Goods;
-import com.kakao.kitkat.entities.GoodsPaging;
 import com.kakao.kitkat.entities.Orders;
 import com.kakao.kitkat.entities.OrdersPaging;
 import com.kakao.kitkat.entities.Tb_cart;
@@ -35,5 +33,5 @@ public interface OrdersDao {
 
 	public ArrayList<Orders> ordersSelectAll() throws Exception;
 
-
+	public int qtyUpdate(Tb_cart tb_cart);
 }

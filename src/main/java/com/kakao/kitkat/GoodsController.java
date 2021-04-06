@@ -28,17 +28,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.kakao.kitkat.dao.BoardDao;
 import com.kakao.kitkat.dao.GoodsDao;
 import com.kakao.kitkat.dao.OrdersDao;
-import com.kakao.kitkat.dao.Tb_professorDao;
-import com.kakao.kitkat.dao.Tb_studentDao;
 import com.kakao.kitkat.entities.Board;
 import com.kakao.kitkat.entities.CartList;
 import com.kakao.kitkat.entities.Goods;
 import com.kakao.kitkat.entities.GoodsPaging;
 import com.kakao.kitkat.entities.Orders;
-import com.kakao.kitkat.entities.OrdersPaging;
 import com.kakao.kitkat.entities.Tb_cart;
-import com.kakao.kitkat.entities.Tb_professor;
-import com.kakao.kitkat.entities.Tb_student;
 
 @Controller
 public class GoodsController {
@@ -54,8 +49,7 @@ public class GoodsController {
 	@Autowired
 	GoodsPaging goodspaging;
 	static String find;
-	
-	
+
 	@RequestMapping(value = "/manageOrder", method = RequestMethod.GET)
 	public String manageOrder(Model model) throws Exception {
 		OrdersDao odao = sqlSession.getMapper(OrdersDao.class);
@@ -63,8 +57,7 @@ public class GoodsController {
 		model.addAttribute("orderses", orderses);
 		return "goods/manage_order";
 	}
-	
-	
+
 	@RequestMapping(value = "/qnaBoardWriteSave", method = RequestMethod.POST)
 	public String qnaBoardWriteSave(Model model, @ModelAttribute Board board,
 			@RequestParam("b_attachfile") MultipartFile b_attachfile, HttpServletRequest request) throws Exception {
@@ -218,8 +211,6 @@ public class GoodsController {
 		return "goods/manage_goods";
 	}
 
-
-
 	@RequestMapping(value = "/myPage", method = RequestMethod.GET)
 	public String myPage(Model model) throws Exception {
 		return "goods/mypage";
@@ -286,30 +277,30 @@ public class GoodsController {
 	}
 
 	@RequestMapping(value = "/goodsWriteSave", method = RequestMethod.POST)
-	   public String goodsWriteSave(Model model, @ModelAttribute Goods goods, MultipartHttpServletRequest request)
-	         throws Exception {
-	      List<MultipartFile> fileList = request.getFiles("g_attachfile");
-	      String path = "D:/util/college/src/main/resources/static/uploadattachs/";
-	      String realpath = "uploadattachs/"; // server path
-	      for (MultipartFile mf : fileList) {
-	         String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-	         long fileSize = mf.getSize(); // 파일 사이즈
-	         String safeFile = path + originFileName;
-	         try {
-	            mf.transferTo(new File(safeFile));
-	         } catch (IllegalStateException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	         }
-	      }
-	      SimpleDateFormat df = new SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm:ss");
-	      Date date = new Date();
-	      String today = df.format(date);
-	      GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
-	      dao.goodsInsertRow(goods);
+	public String goodsWriteSave(Model model, @ModelAttribute Goods goods, MultipartHttpServletRequest request)
+			throws Exception {
+		List<MultipartFile> fileList = request.getFiles("g_attachfile");
+		String path = "D:/util/college/src/main/resources/static/uploadattachs/";
+		String realpath = "uploadattachs/"; // server path
+		for (MultipartFile mf : fileList) {
+			String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+			long fileSize = mf.getSize(); // 파일 사이즈
+			String safeFile = path + originFileName;
+			try {
+				mf.transferTo(new File(safeFile));
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		SimpleDateFormat df = new SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm:ss");
+		Date date = new Date();
+		String today = df.format(date);
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+		dao.goodsInsertRow(goods);
 
-	      return "index";
-	   }
+		return "index";
+	}
 
 	@RequestMapping(value = "/goodsMyList", method = RequestMethod.GET)
 	public String goodsMyList(Model model, HttpSession session) throws Exception {
@@ -411,6 +402,9 @@ public class GoodsController {
 			orders.setOrders_date(date);
 			dao2.OrderssAdd(orders);
 			model.addAttribute("ord", orders);
+			tb_cart.setQty(orders.getOrders_qty());
+			tb_cart.setG_seq(orders.getG_seq());
+			dao2.qtyUpdate(tb_cart);
 			return "goods/payment_complete";
 		}
 
@@ -439,6 +433,7 @@ public class GoodsController {
 				dao2.OrderssAdd2(tb_cart);
 				dao2.ordersUpdateInsert(orders);
 				dateG_seq = dateG_seq + tb_cart.getG_seq();
+				dao2.qtyUpdate(tb_cart);
 			}
 			model.addAttribute("dateG_seq", dateG_seq);
 			model.addAttribute("totalprice", totalprice);
