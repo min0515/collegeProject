@@ -8,41 +8,65 @@
 	<script type="text/javascript" th:src="@{/js/board.js}"></script>
 </th:block>
 <div layout:fragment="school_content">
-   <form class="ui large form" method="POST" action="boardCommentSave"
-      enctype="multipart/form-data" data-parsley-validate="true">
-      <div class="ui sixteen wide grid center aligned"
-         style="background-color: #F3F3F3;">
-         <input type="hidden" name="b_seq" id="hidden_seq"
-            th:value="${board.b_seq}">
-         <h2 style="margin-bottom: 40px">학과게시판</h2>
-      </div>
-      <div class="ui grid center aligned" style="background-color: #F3F3F3;">
-         <div class="ui stacked segment"
-            style="width: 60%; margin-bottom: 50px">
-				<h2 class="ui dividing header" th:text="${board.b_title} + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'+ '날짜'+${board.b_inputtime}"
-					th:value="${board.b_title}">
-					
-				</h2>
-				
-				<!-- 				<h3 class="ui dividing header" th:text="${board.b_studentno}" th:value="${board.b_studentno}"></h3> -->
-				<div class="ui dividing header" th:text="${board.b_name} + '&nbsp'+'조회수'+${board.b_hit}"
-					th:value="${board.b_name}"></div>					
-		
+	<form class="ui large form" method="POST" action="boardCommentSave"
+		enctype="multipart/form-data" data-parsley-validate="true">
+		<div class="ui sixteen wide grid center aligned"
+			style="background-color: #F3F3F3;">
+			<input type="hidden" name="b_seq" id="hidden_seq"
+				th:value="${board.b_seq}">
+			<h2 style="margin-bottom: 40px">학과게시판</h2>
+		</div>
+		<div class="ui grid center aligned" style="background-color: #F3F3F3;">
+			<div class="ui stacked segment"
+				style="width: 60%; margin-bottom: 50px">
+
+				<div class="ui vertical stripe quote segment">
+					<div class="ui equal width stackable internally grid"
+						style="padding: 0px 0px">
+						<div class="column">
+							<p style="text-align: left" th:text="${board.b_title}"></p>
+						</div>
+						<div class="column">
+							<p style="text-align: right; margin: 0 auto;"
+								th:text="'작성일: '+${board.b_inputtime}"></p>
+						</div>
+					</div>
+				</div>
+				<div class="ui vertical stripe quote segment">
+					<div class="ui equal width stackable internally grid"
+						style="padding: 0px 0px">
+						<div class="column">
+							<p style="text-align: left" th:text="${board.b_name}"></p>
+						</div>
+						<div class="column">
+							<p style="text-align: right; margin: 0 auto;"
+						th:text="'조회수: '+${board.b_hit}"></p>
+						</div>
+					</div>
+				</div>
+
+
+
+
 				<div class="field">
-					<div class="fluid ui left icon input" style="height: 150px">
-						<h5 th:text="${board.b_content}"></h5>
+					<div class="fluid ui left icon input" style="height: 200px">
+						<div style="margin-top: 1%" th:text="${board.b_content}"></div>
 					</div>
 				</div>
 				<div class="ui grid center aligned">
 					<div class="ui olive labeled submit icon button"
-						onclick="history.back(-1);">
+					onclick="location.href='boardPageList';">
 						<i class="icon bars"></i> 게시판 목록
 					</div>
 					<a th:href="@{boardUpdate(b_seq=${board.b_seq})}">
-						<div th:if="${session.sessionMember_name}+'&nbsp'+학우님 == ${board.b_name}" class="ui green labeled submit icon button">
+						<div th:if="${session.sessionMember_name}+'&nbsp'+학우님 == ${board.b_name}"
+							class="ui green labeled submit icon button">
 							<i class="icon edit"></i> 글 수정
-						</div> </a>
-					<div th:if="${session.sessionMember_name}+'&nbsp'+학우님 == ${board.b_name}" class="ui teal labeled submit icon button" id="boardDeleteBtn">
+						</div>
+					</a>
+					<div
+						th:if="${session.sessionMember_name}+'&nbsp'+학우님 == ${board.b_name}"
+						class="ui teal labeled submit icon button" id="boardDeleteBtn">
 						<i class="icon eraser"></i> 글 삭제
 					</div>
 				</div>
@@ -70,13 +94,13 @@
 						<input type="hidden" class="ui  dividing header"
 							name="comment_name" th:if="${session.sessionMember_name} !=null"
 							th:value="${session.sessionMember_name}+'&nbsp'+님" readonly>
-							
+
 						<textarea style="height: 10px; width: 85%; margin-bottom: 20px"
 							name="comment_content" id="comment_content"></textarea>
-							<button type="submit" class="ui blue labeled submit icon button"
-								style="margin-left: 10px; height: 110px;"> <i
-								class="icon edit" style="text-align: middle; display: block"></i>
-								<span
+						<button type="submit" class="ui blue labeled submit icon button"
+							style="margin-left: 10px; height: 110px;">
+							<i class="icon edit" style="text-align: middle; display: block"></i>
+							<span
 								style="position: relative; padding: 10; line-height: 20px; display: block; text-align: center;">댓글<br>등록
 							</span>
 						</button>
