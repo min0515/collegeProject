@@ -28,12 +28,9 @@
 					<div class="fluid ui swiper-container"
 						style="width: 500px; height: 500px">
 						<div class="swiper-wrapper">
-							<div class="swiper-slide" style="width: 500px; height: 500px">
-								<img th:src="${goods.g_attach}" style="width: 500px">
-							</div>
-							<div class="swiper-slide" style="width: 500px; height: 500px">
-								<img src="images/xjawmffj2.png"
-									style="width: 500px; height: 500px">
+							<div class="swiper-slide" style="width: 500px; height: 500px"
+								th:each="attachs : ${attachs}">
+								<img th:src="${attachs.g_attach}" style="width: 500px; height: 500px">
 							</div>
 						</div>
 						<!-- Add Pagination -->
@@ -48,7 +45,8 @@
 					style="height: 550px; text-align: left;">
 					<div th:text="${goods.g_seq}"
 						style="font-size: 25px; font: bold; margin-bottom: 25px; margin-top: 50px;"></div>
-					<input type="hidden" name="g_seq" id="hiddeng_seq" th:value="${goods.g_seq}">
+					<input type="hidden" name="g_seq" id="hiddeng_seq"
+						th:value="${goods.g_seq}">
 					<div th:text="${goods.g_title}" id="goodstitleDetail"
 						style="font-size: 25px; font: bold; margin-bottom: 25px; margin-top: 50px;"></div>
 					<div th:text="${goods.g_price}+원"
@@ -60,19 +58,21 @@
 						<p>수량</p>
 						<hr align="left">
 
-						<Input type="number" min="0" max="99" id="qtyInputProdetail" name="qty" value="1"
-							style="width: 100px;" /><span th:text="${#numbers.formatDecimal(goods.g_price, 0, 'COMMA', 0, 'POINT')}+원"
-
+						<Input type="number" min="0" max="99" id="qtyInputProdetail"
+							name="qty" value="1" style="width: 100px;" /><span
+							th:text="${#numbers.formatDecimal(goods.g_price, 0, 'COMMA', 0, 'POINT')}+원"
 							style="display: right; font-size: 18px; float: right;"></span>
 					</div>
 					<input type="hidden" id="priceHiddenDetail"
 						th:value="${goods.g_price}" name="g_price">
 					<div style="margin-top: 30px; margin-bottom: 30px;">
 						<span id="detailTotalQty" th:text="상품금액"></span><span
-							id="goodsDetailTotalPrice" th:text="${#numbers.formatDecimal(goods.g_price, 0, 'COMMA', 0, 'POINT')}+원"
+							id="goodsDetailTotalPrice"
+							th:text="${#numbers.formatDecimal(goods.g_price, 0, 'COMMA', 0, 'POINT')}+원"
 							style="text-align: center; font-size: 18px; float: right;"></span>
 					</div>
-					<button class="ui black button" style="color:fffff" type="button" id="onePaymentGo">결제하기</button>
+					<button class="ui black button" style="color: fffff" type="button"
+						id="onePaymentGo">결제하기</button>
 					<div class="ui vertical animated button" tabindex="0"
 						style="background-color: #FFFFFF; border: 1px solid;">
 						<div class="visible content">장바구니</div>
@@ -101,47 +101,48 @@
 			<div class="ui sixteen wide column">
 				<div class="ui five wide column" style="text-align: center;">
 					<div class="ui three item menu">
-						<a class="item active" id="goodinfobtn"> 상품설명 </a> <a class="item" id="goodreviewbtn"> 후기 </a> <a
-							class="item" id="goodqnabtn"> Q&A </a>
+						<a class="item active" id="goodinfobtn"> 상품설명 </a> <a class="item"
+							id="goodreviewbtn"> 후기 </a> <a class="item" id="goodqnabtn">
+							Q&A </a>
 					</div>
 				</div>
-				
 
-				<div class="ui five wide column" style="text-align: center; ">
-				<div class="field" id="goodsreview" style="display: none;">
-				<div class="field" style="float: left; width: 50%;">
-					<img src="/images/library2-2.png"
-						style="width: 100%; height: 400px; border-radius: 10px 100px / 120px;">
-				</div>
-				<div class="ui text container"
-					style="padding: 15px; width: 48%; height: 400px; float: right;">
-					<h3 class="ui dividing header">
-						<strong>제 1 열람실</strong>
-					</h3>
-					<p>국립중앙도서관은 국가 지식정보자원의 보고로서 1945년 개관한 이래, 국내에서 발행된 출판물과 각종
-						지식정보를 망라적으로 수집하고 이를 체계적으로 정리하여 제공하고 있습니다.</p>
-					<p>또한 변화하는 시대에 맞춰 종이 매체에서 온라인 자료에 이르기까지 풍부한 장서를 구축하고 있으며, 다양한
-						국민의 수요에 맞춰 누구나 손쉽게 자료를 이용할 수 있도록 지식문화유산 이용 서비스의 고도화 실현을 위해 노력하고
-						있습니다.</p>
-					<p>국립중앙도서관은 '지식정보가 국가 발전의 중요한 자원'이라는 신념을 가지고 개개인의 창의성으로 이루어 낸
-						지적성취가 오늘날의 첨단지식 정보와 어우러져 '살아 있는 정보'로 활용되도록 더욱더 노력하겠습니다.</p>
-					<div class="field">
-						<h2 class="ui dividing header"
-							style="height: 66px; padding: 10px;">
-							<button class="ui black button" style="width:30%" id="studyroomReservationGoBtn">자리예약</button>
-						</h2>
+
+				<div class="ui five wide column" style="text-align: center;">
+					<div class="field" id="goodsreview" style="display: none;">
+						<div class="field" style="float: left; width: 50%;">
+							<img src="/images/library2-2.png"
+								style="width: 100%; height: 400px; border-radius: 10px 100px/120px;">
+						</div>
+						<div class="ui text container"
+							style="padding: 15px; width: 48%; height: 400px; float: right;">
+							<h3 class="ui dividing header">
+								<strong>제 1 열람실</strong>
+							</h3>
+							<p>국립중앙도서관은 국가 지식정보자원의 보고로서 1945년 개관한 이래, 국내에서 발행된 출판물과 각종
+								지식정보를 망라적으로 수집하고 이를 체계적으로 정리하여 제공하고 있습니다.</p>
+							<p>또한 변화하는 시대에 맞춰 종이 매체에서 온라인 자료에 이르기까지 풍부한 장서를 구축하고 있으며, 다양한
+								국민의 수요에 맞춰 누구나 손쉽게 자료를 이용할 수 있도록 지식문화유산 이용 서비스의 고도화 실현을 위해 노력하고
+								있습니다.</p>
+							<p>국립중앙도서관은 '지식정보가 국가 발전의 중요한 자원'이라는 신념을 가지고 개개인의 창의성으로 이루어 낸
+								지적성취가 오늘날의 첨단지식 정보와 어우러져 '살아 있는 정보'로 활용되도록 더욱더 노력하겠습니다.</p>
+							<div class="field">
+								<h2 class="ui dividing header"
+									style="height: 66px; padding: 10px;">
+									<button class="ui black button" style="width: 30%"
+										id="studyroomReservationGoBtn">자리예약</button>
+								</h2>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-					
+
 				</div>
 			</div>
 		</form>
-	</div>
-	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+		<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-	<!-- Initialize Swiper -->
-	<script>
+		<!-- Initialize Swiper -->
+		<script>
     var swiper = new Swiper('.swiper-container', {
       slidesPerView: 1,
       spaceBetween: 30,
@@ -156,5 +157,7 @@
       },
     });
   </script>
+	</div>
+
 </body>
 </html>

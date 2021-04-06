@@ -8,88 +8,96 @@
 <th:block layout:fragment="css">
 	<link rel="stylesheet" th:href="@{/css/shopping.css}">
 </th:block>
-<script src="/js/aiappproject.js"></script>
+<th:block layout:fragment="script">
+	<script type="text/javascript" th:src="@{/js/shopping.js}"></script>
+</th:block>
 <script
 	src="https://cdn.tiny.cloud/1/1in9hzsqug5gwpl0vwku0rsdmw8w2equelp9j08kmfa49lxw/tinymce/5/tinymce.min.js"
 	referrerpolicy="origin"></script>
 </head>
 <body>
 	<div layout:fragment="content">
-		<form class="ui large form" method="POST" name="fileForm"
-			action="goodsWriteSave" enctype="multipart/form-data"
-			data-parsley-validate="true">
-			<div class="ui grid center aligned">
-				<div class="five wide column">
+		<form class="ui large form" method="POST" 
+			action="goodsWriteSave">
+		<div class="ui grid center aligned">
+			<div class="five wide column">
 
-					<div class="field center aligned" style="margin-top: 30px">
-						<h3>상품 입력</h3>
+				<div class="field center aligned" style="margin-top: 30px">
+					<h3>상품 입력</h3>
+				</div>
+
+
+				<div class="field">
+					<div class="fluid ui left icon input">
+						<i class="file outline icon"></i> <input type="text"
+							name="g_title" placeholder="굿즈 이름을 입력하세요.">
 					</div>
+				</div>
 
 
-					<div class="field">
-						<div class="fluid ui left icon input">
-							<i class="file outline icon"></i> <input type="text"
-								name="g_title" placeholder="굿즈 이름을 입력하세요.">
-						</div>
+				<div class="field">
+					<div class="fluid ui left icon input">
+						<i class="won sign icon"></i> <input type="text" name="g_price"
+							placeholder="굿즈 가격을 입력하세요.">
 					</div>
-
-
-					<div class="field">
-						<div class="fluid ui left icon input">
-							<i class="won sign icon"></i> <input type="text" name="g_price"
-								placeholder="굿즈 가격을 입력하세요.">
-						</div>
-					</div>
-
-
-<!-- 					<div class="field"> -->
-<!-- 						<div id="fileUpload" class="dragAndDropDiv">파일 첨부</div> -->
-<!-- 						<input type="file" name="fileUpload" id="fileUpload" -->
-<!-- 							style="display: none;" multiple /> -->
-
-						<div class="field">
-							<div class="fluid ui left icon input" style="height: 150px">
-								<textarea rows="8" placeholder="내용" name="g_content"></textarea>
+				</div>
+				<div class="field">
+					<form id="uploadForm">
+						<div class="ui labeled input">
+							
+							<input type="file" id="g_attach" name="g_attachs"
+								style="display: none;"> <input type="text"
+								class="g_attachname" placeholder="첨부파일">
+							<div class="ui label">
+								<i class="paperclip icon attachbtn"></i>
 							</div>
 						</div>
-						<div class="field">
+					</form>
+
+
+					<div class="field">
+						<div class="fluid ui left icon input" style="height: 150px">
+							<textarea rows="8" placeholder="내용" name="g_content"></textarea>
+						</div>
+					</div>
+					<div class="field">
 						<div class="ui right labeled input">
-							<label for="amount" class="ui label">배송비</label> 
-							<input type="text" placeholder="배송비를 입력해주세요" id="g_delivery" name="g_delivery">
+							<label for="amount" class="ui label">배송비</label> <input
+								type="text" placeholder="배송비를 입력해주세요" id="g_delivery"
+								name="g_delivery">
 							<div class="ui basic label">원</div>
 						</div>
-						</div>
-						<div class="field">
+					</div>
+					<div class="field">
 						<div class="ui right labeled input">
-							<label for="amount" class="ui label">수량</label> 
-							<input type="text" placeholder="상품의 수량을 입력해주세요" id="g_qty" name="g_qty">
+							<label for="amount" class="ui label">수량</label> <input
+								type="text" placeholder="상품의 수량을 입력해주세요" id="g_qty" name="g_qty">
 							<div class="ui basic label">개</div>
 						</div>
-						</div>
-
-						<div class="field" style="margin-top: 70px">
-							<span><button type="submit"
-									class="ui primary basic button" style="width: 48%">저장</button></span>
-							<span><button type="button"
-									class="ui negative basic button"
-									onclick="location.href='index'" style="width: 48%">취소</button></span>
-						</div>
-
 					</div>
-					<div class="five wide column"></div>
 
-					<div class="ui modal">
-						<div class="header">Header</div>
-						<div class="image content">
-							<img class="image">
-							<div class="description">
-								<p></p>
-							</div>
-						</div>
+					<div class="field" style="margin-top: 70px">
+						<span><button type="submit" class="ui primary basic button"
+								style="width: 48%">저장</button></span> <span><button
+								type="button" class="ui negative basic button"
+								onclick="location.href='index'" style="width: 48%">취소</button></span>
 					</div>
 
 				</div>
+				<div class="five wide column"></div>
+
+				<div class="ui modal">
+					<div class="header">Header</div>
+					<div class="image content">
+						<img class="image">
+						<div class="description">
+							<p></p>
+						</div>
+					</div>
+				</div>
+
 			</div>
+		</div>
 		</form>
 	</div>
 </body>

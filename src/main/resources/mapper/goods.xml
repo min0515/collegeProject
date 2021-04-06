@@ -10,6 +10,21 @@
 		from goods a join goods_info b on a.g_seq=b.g_seq where a.g_seq=#{g_seq}
 	</select>
 	
+	<select id="goodsInfoAllSelectOne"
+		resultType="com.kakao.kitkat.entities.Goods_info">
+		select * from goods_info where g_seq=#{g_seq}
+	</select>
+	
+	<select id="goodsAllSelectOne"
+		resultType="com.kakao.kitkat.entities.Goods">
+		select * from goods where g_seq=#{g_seq}
+	</select>
+	
+	<select id="goodsSelectG_seqOne"
+		resultType="Integer">
+		select g_seq from goods order by g_seq desc limit 1
+	</select>
+	
 	<insert id="goodsInsertRow">
 		insert into goods (g_seq, g_title, g_price,
 		g_qty, g_delivery
@@ -17,6 +32,14 @@
 		1) FROM goods goods_alias),
 		#{g_title}, #{g_price},
 		10, #{g_delivery}
+		)
+	</insert>
+	
+	<insert id="goodsInfoInsertRow">
+		insert into goods_info (g_seq,info_seq,g_content,g_attach
+		) values (#{g_seq}, (SELECT ifnull(MAX(info_seq)+1,
+		1) FROM goods_info goods_alias),
+		#{g_content},#{g_attach}
 		)
 	</insert>
 

@@ -1,14 +1,13 @@
 package com.kakao.kitkat;
 
 import java.io.BufferedOutputStream;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -32,6 +31,7 @@ import com.kakao.kitkat.entities.Board;
 import com.kakao.kitkat.entities.CartList;
 import com.kakao.kitkat.entities.Goods;
 import com.kakao.kitkat.entities.GoodsPaging;
+import com.kakao.kitkat.entities.Goods_info;
 import com.kakao.kitkat.entities.Orders;
 import com.kakao.kitkat.entities.Tb_cart;
 
@@ -49,6 +49,49 @@ public class GoodsController {
 	@Autowired
 	GoodsPaging goodspaging;
 	static String find;
+	@Autowired
+	Goods_info goods_info;
+
+	ArrayList<byte[]> attachs = new ArrayList<byte[]>();
+
+	@RequestMapping(value = "/goodsWriteAttach", method = RequestMethod.POST)
+	@ResponseBody
+	public String goodsWriteAttach(Map<String, MultipartFile> formData, MultipartHttpServletRequest mpRequest)
+			throws Exception {
+		Map<String, MultipartFile> files = mpRequest.getFileMap();
+		attachs.add(files.get("file").getBytes());
+		return "filename";
+	}
+
+	@RequestMapping(value = "/goodsWriteSave", method = RequestMethod.POST)
+	public String goodsWriteSave(@ModelAttribute Goods_info goods_info, @ModelAttribute Goods goods) throws Exception {
+		String path = "C:/Users/IT-5C/git/collegeProject/src/main/resources/static/uploadattachs/";
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+		dao.goodsInsertRow(goods);
+		int a = 0;
+		for (byte[] attach : attachs) {
+			String realpath = "uploadattachs/"; // server path
+			int g_seq = dao.goodsSelectG_seqOne();
+			String filename = String.valueOf(g_seq + "-" + String.valueOf(a) + ".png");
+			if (!filename.equals("")) {
+				byte bytes[] = attach;
+				goods_info.setG_seq(g_seq);
+				goods_info.setG_attach(realpath + filename);
+				dao.goodsInfoInsertRow(goods_info);
+				try {
+					BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(path + filename));
+					output.write(bytes);
+					output.flush();
+					output.close();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+
+			}
+			a++;
+		}
+		return "index";
+	}
 
 	@RequestMapping(value = "/qnaBoardWriteSave", method = RequestMethod.POST)
 	public String qnaBoardWriteSave(Model model, @ModelAttribute Board board,
@@ -263,8 +306,10 @@ public class GoodsController {
 	@RequestMapping(value = "/goodsDetail2", method = RequestMethod.GET)
 	public String goodsDetail2(Model model, @RequestParam int g_seq, HttpSession session) throws Exception {
 		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
-		goods = dao.goodsSelectOne(g_seq);
+		goods = dao.goodsAllSelectOne(g_seq);
+		ArrayList<Goods_info> attachs = dao.goodsInfoAllSelectOne(g_seq);
 		model.addAttribute("goods", goods);
+		model.addAttribute("attachs", attachs);
 		return "goods/goods_detail2";
 	}
 
@@ -272,32 +317,6 @@ public class GoodsController {
 	public String goodsWrite(Locale locale, Model model) {
 		return "goods/goods_write";
 	}
-
-	@RequestMapping(value = "/goodsWriteSave", method = RequestMethod.POST)
-	   public String goodsWriteSave(Model model, @ModelAttribute Goods goods, MultipartHttpServletRequest request)
-	         throws Exception {
-	      List<MultipartFile> fileList = request.getFiles("g_attachfile");
-	      String path = "D:/util/college/src/main/resources/static/uploadattachs/";
-	      String realpath = "uploadattachs/"; // server path
-	      for (MultipartFile mf : fileList) {
-	         String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-	         long fileSize = mf.getSize(); // 파일 사이즈
-	         String safeFile = path + originFileName;
-	         try {
-	            mf.transferTo(new File(safeFile));
-	         } catch (IllegalStateException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	         }
-	      }
-	      SimpleDateFormat df = new SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm:ss");
-	      Date date = new Date();
-	      String today = df.format(date);
-	      GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
-	      dao.goodsInsertRow(goods);
-
-	      return "index";
-	   }
 
 	@RequestMapping(value = "/goodsMyList", method = RequestMethod.GET)
 	public String goodsMyList(Model model, HttpSession session) throws Exception {

@@ -4,11 +4,18 @@ import java.util.ArrayList;
 
 import com.kakao.kitkat.entities.Goods;
 import com.kakao.kitkat.entities.GoodsPaging;
+import com.kakao.kitkat.entities.Goods_info;
 import com.kakao.kitkat.entities.Tb_cart;
 
 public interface GoodsDao {
 
 	public Goods goodsSelectOne(int g_seq) throws Exception;
+
+	public Goods goodsAllSelectOne(int g_seq) throws Exception;
+
+	public ArrayList<Goods_info> goodsInfoAllSelectOne(int g_seq) throws Exception;
+
+	public int goodsSelectG_seqOne() throws Exception;
 
 	public int goodsInsertRow(Goods Goods) throws Exception;
 
@@ -43,5 +50,7 @@ public interface GoodsDao {
 	public int ProductDeleteAjax(Tb_cart tb_cart) throws Exception;
 
 	public int cartQtyUpdateRow(Tb_cart tb_cart) throws Exception;
+
+	public int goodsInfoInsertRow(Goods_info goods_info) throws Exception;
 
 }
