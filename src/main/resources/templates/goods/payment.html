@@ -55,11 +55,11 @@
 						<div id="boxtitle">주문자정보</div>
 						<form class="ui form">
 							<div class="field">
-								<input type="text" id="name1" placeholder="이름"
+								<input type="text" th:value=${session.sessionMember_name} id="name1" placeholder="이름"
 									style="width: 245px" required="required"> <input
 									type="text" name="phone" id="phone1" placeholder="연락처"
-									style="width: 245px" required="required"> <input
-									type="email" name="email" placeholder="이메일"
+									style="width: 245px" value="0100101010" required="required"> <input
+									type="email" name="email" th:value=${session.sessionMember_id}  placeholder="이메일"
 									style="width: 495px; margin-top: 5px">
 							</div>
 						</form>

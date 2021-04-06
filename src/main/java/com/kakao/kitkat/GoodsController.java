@@ -93,6 +93,14 @@ public class GoodsController {
 		return "index";
 	}
 
+	@RequestMapping(value = "/manageOrder", method = RequestMethod.GET)
+	public String manageOrder(Model model) throws Exception {
+		OrdersDao odao = sqlSession.getMapper(OrdersDao.class);
+		ArrayList<Orders> orderses = odao.ordersSelectAll();
+		model.addAttribute("orderses", orderses);
+		return "goods/manage_order";
+	}
+
 	@RequestMapping(value = "/qnaBoardWriteSave", method = RequestMethod.POST)
 	public String qnaBoardWriteSave(Model model, @ModelAttribute Board board,
 			@RequestParam("b_attachfile") MultipartFile b_attachfile, HttpServletRequest request) throws Exception {
@@ -244,11 +252,6 @@ public class GoodsController {
 		model.addAttribute("find", find);
 
 		return "goods/manage_goods";
-	}
-
-	@RequestMapping(value = "/manageOrder", method = RequestMethod.GET)
-	public String manageOrder(Model model) throws Exception {
-		return "goods/manage_order";
 	}
 
 	@RequestMapping(value = "/myPage", method = RequestMethod.GET)
@@ -418,6 +421,9 @@ public class GoodsController {
 			orders.setOrders_date(date);
 			dao2.OrderssAdd(orders);
 			model.addAttribute("ord", orders);
+			tb_cart.setQty(orders.getOrders_qty());
+			tb_cart.setG_seq(orders.getG_seq());
+			dao2.qtyUpdate(tb_cart);
 			return "goods/payment_complete";
 		}
 
@@ -446,6 +452,7 @@ public class GoodsController {
 				dao2.OrderssAdd2(tb_cart);
 				dao2.ordersUpdateInsert(orders);
 				dateG_seq = dateG_seq + tb_cart.getG_seq();
+				dao2.qtyUpdate(tb_cart);
 			}
 			model.addAttribute("dateG_seq", dateG_seq);
 			model.addAttribute("totalprice", totalprice);
