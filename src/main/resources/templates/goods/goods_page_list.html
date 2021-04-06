@@ -25,6 +25,11 @@
 					<a th:each="goods,index : ${goodses}">
 						<div class="ui card" style="margin: 15px; width: 22%;"
 							th:if="${index.index} % 2 ==0">
+							<!-- <div class="ui slide masked reveal image" th:each="attachs : ${attachs}" th:if="${attachs.g_seq}==${goods.g_seq}">
+								<img id="imgcss" th:if="${#strings.contains(${attachs.g_attach},'-0')}" th:src="${attachs.g_attach}"> 
+								<img th:unless="${#strings.contains(${attachs.g_attach},'-0')}"
+									th:src="${attachs.g_attach}" class="hidden content">
+							</div> -->
 							<div class="image">
 								<img id="imgcss" th:src="${goods.g_attach}">
 							</div>
