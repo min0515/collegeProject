@@ -10,6 +10,10 @@
 		select *from orders where member_id=#{member_id} and
 		orders_seq = (select max(orders_seq) from orders);
 	</select>
+		<select id="ordersSelectAll"
+		resultType="com.kakao.kitkat.entities.Orders">
+		select * from orders order by orders_date
+	</select>
 	<select id="myOrdersqtySum" resultType="Integer">
 		select sum(orders_qty)
 		from

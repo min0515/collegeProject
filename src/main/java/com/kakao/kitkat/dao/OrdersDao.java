@@ -3,7 +3,10 @@ package com.kakao.kitkat.dao;
 import java.util.ArrayList;
 
 import com.kakao.kitkat.entities.CartList;
+import com.kakao.kitkat.entities.Goods;
+import com.kakao.kitkat.entities.GoodsPaging;
 import com.kakao.kitkat.entities.Orders;
+import com.kakao.kitkat.entities.OrdersPaging;
 import com.kakao.kitkat.entities.Tb_cart;
 
 public interface OrdersDao {
@@ -27,5 +30,10 @@ public interface OrdersDao {
 	public int myOrderstotalSum(String member_id) throws Exception;
 
 	public ArrayList<CartList> selectproyo(String member_id);
+
+	public ArrayList<Orders> ordersSelectPageList(OrdersPaging orderspaging);
+
+	public ArrayList<Orders> ordersSelectAll() throws Exception;
+
 
 }
