@@ -27,18 +27,13 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.kakao.kitkat.dao.BoardDao;
 import com.kakao.kitkat.dao.GoodsDao;
 import com.kakao.kitkat.dao.OrdersDao;
-import com.kakao.kitkat.dao.Tb_professorDao;
-import com.kakao.kitkat.dao.Tb_studentDao;
 import com.kakao.kitkat.entities.Board;
 import com.kakao.kitkat.entities.CartList;
 import com.kakao.kitkat.entities.Goods;
 import com.kakao.kitkat.entities.GoodsPaging;
 import com.kakao.kitkat.entities.Goods_info;
 import com.kakao.kitkat.entities.Orders;
-import com.kakao.kitkat.entities.OrdersPaging;
 import com.kakao.kitkat.entities.Tb_cart;
-import com.kakao.kitkat.entities.Tb_professor;
-import com.kakao.kitkat.entities.Tb_student;
 
 @Controller
 public class GoodsController {
@@ -98,9 +93,6 @@ public class GoodsController {
 		return "redirect:manageGoodsList";
 	}
 
-
-	
-	
 	@RequestMapping(value = "/manageOrder", method = RequestMethod.GET)
 	public String manageOrder(Model model) throws Exception {
 		OrdersDao odao = sqlSession.getMapper(OrdersDao.class);
@@ -108,8 +100,7 @@ public class GoodsController {
 		model.addAttribute("orderses", orderses);
 		return "goods/manage_order";
 	}
-	
-	
+
 	@RequestMapping(value = "/qnaBoardWriteSave", method = RequestMethod.POST)
 	public String qnaBoardWriteSave(Model model, @ModelAttribute Board board,
 			@RequestParam("b_attachfile") MultipartFile b_attachfile, HttpServletRequest request) throws Exception {
@@ -263,6 +254,7 @@ public class GoodsController {
 		return "goods/manage_goods";
 	}
 
+	@RequestMapping(value = "/myPage", method = RequestMethod.GET)
 	public String myPage(Model model) throws Exception {
 		return "goods/mypage";
 	}
@@ -303,10 +295,6 @@ public class GoodsController {
 		model.addAttribute("pages", pages);
 		ArrayList<Goods_info> attachs = dao.goodsInfoAllSelect();
 		model.addAttribute("attachs", attachs);
-		for (Goods_info attach : attachs) {
-			System.out.println(attach.getG_seq());
-			System.out.println(attach.getG_attach());
-		}
 		return "goods/goods_page_list";
 	}
 
@@ -316,7 +304,9 @@ public class GoodsController {
 		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
 		goods = dao.goodsSelectOne(g_seq);
 		goods.setG_qty(qty);
+		Goods_info attachs = dao.goodsInfoOneSelectOne(g_seq);
 		model.addAttribute("goods", goods);
+		model.addAttribute("attach", attachs);
 		return "goods/payment";
 	}
 
@@ -386,9 +376,11 @@ public class GoodsController {
 		} else {
 			int mycartcount = dao.myGoodsCartCount(member_id);
 			ArrayList<Tb_cart> myProducts = dao.myGoodsCartSelect(member_id);
+			ArrayList<Goods_info> attachs = dao.goodsInfoCartAllSelect(member_id);
 			Tb_cart cartprice = dao.myGoodsCartCheckedSelect(member_id);
 			model.addAttribute("mycartcount", mycartcount);
 			model.addAttribute("myProducts", myProducts);
+			model.addAttribute("attachs", attachs);
 			if (cartprice == null) {
 				tb_cart.setDeliveryTotalPrice(0);
 				tb_cart.setTotalprice(0);
@@ -412,7 +404,13 @@ public class GoodsController {
 			ArrayList<Tb_cart> cartPayments = dao.myGoodsCartCheckedPaymentSelect(member_id);
 			model.addAttribute("cartPayments", cartPayments);
 			Tb_cart cartprice = dao.myGoodsCartCheckedSelect(member_id);
+			ArrayList<Goods_info> attachs = dao.goodsInfoCartAllSelect(member_id);
 			model.addAttribute("cartprice", cartprice);
+			model.addAttribute("attachs", attachs);
+			for (Goods_info attach : attachs) {
+				System.out.println(attach.getG_seq());
+				System.out.println(attach.getG_attach());
+			}
 			return "goods/payment_cart";
 		}
 	}

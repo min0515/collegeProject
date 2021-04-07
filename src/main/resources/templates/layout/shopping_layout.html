@@ -20,47 +20,16 @@
 		<div class="three wide right align column"
 			style="text-align: right; display: right; margin: 0 auto;">
 
-
-
-
-
-			<div class="ui text middle aligned left aligned container"
-				style="margin-right: 5px !important;"
-				th:unless="${session.sessionMember_id==null}">
-				<div class="ui container" style="padding: 3% 2% 3% 2%;">
-					<div class="ui inline dropdown">
-						<h4 style="margin: 0px;"
-							th:if="${session.sessionMember_name} !=null"
-							th:text="${session.sessionMember_name}"></h4>
-
-						<div th:if=" ${session.sessionMember_name} !=null" class="menu">
-							<div class="item" th:unless="${session.sessionlevel !='s'}"
-								onclick="location.href='schoolStudentInfoUpdate'">나의정보수정</div>
-							<div class="item" th:unless="${session.sessionlevel !='p'}"
-								onclick="location.href='schoolProfessorInfoUpdate'">나의정보수정</div>
-							<div class="item" th:unless="${session.sessionlevel !='a'}"
-								onclick="location.href='studentList'">학생관리</div>
-						</div>
-
-					</div>
-				</div>
-				<div style="padding: 2% 1% 2% 1%;">
-					<div class="ui black button" id="proclassUpdatePage"
-						onclick="location.href='logout'">logout</div>
-				</div>
-			</div>
-
-
-
-
-
-
-
-
-
-
-
-
+			<button class="ui button" th:if="${session.sessionMember_id==null}"
+				onclick="location.href='shoppingLogin';"
+				style="background-color: #FFFFFF;">로그인</button>
+			<button class="ui button"
+				th:unless="${session.sessionMember_id==null}"
+				onclick="location.href='logout';" style="background-color: #FFFFFF;">로그아웃</button>
+			<button class="ui button"
+				th:unless="${session.sessionMember_id==null}"
+				onclick="location.href='memberUpdate';"
+				style="background-color: #FFFFFF;">정보수정</button>
 		</div>
 	</div>
 
@@ -80,9 +49,10 @@
 
 
 
-	<!-- 푸터 -->
-	<div class="ui inverted vertical footer segment">
-		<th:block th:replace="fragments/footer"></th:block>
-	</div>
+		<!-- 푸터 -->
+		<div class="ui inverted vertical footer segment" style="display:absolute; bottom:0;">
+			<th:block th:replace="fragments/footer"></th:block>
+		</div>
 </body>
+
 </html>
