@@ -35,15 +35,16 @@
                      <div class="field">
                         <form id="uploadForm">
                            <div class="ui labeled input">
-
-                              <input type="file" id="g_attach" name="g_attachs"
-                                 style="display: none;"> <input type="text"
+                              <input type="file" id="g_attach" name="g_attachs" onchange="setThumbnail(event);" 
+                                 style="display: none;" multiple="multiple"> <input type="text"
                                  class="g_attachname" placeholder="첨부파일">
                               <div class="ui label">
                                  <i class="paperclip icon attachbtn"></i>
                               </div>
                            </div>
                         </form>
+                        <div id="image_container" style="width: 11%;  padding: 1% 0% 1% 3%;  z-index:30; ">
+						</div>
                      </div>
                   </div>
                   <div id="goodsInsertBox1">
