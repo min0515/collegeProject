@@ -26,8 +26,6 @@
 				style="width: 80%; margin-bottom: 50px">
 
 
-
-
 				<table class="ui orange padded table">
 					<thead>
 						<tr>
@@ -68,8 +66,7 @@
 										th:value="${find}"> <a href="#"
 										onclick="findListformname.submit()" style="padding: 10px;"><i
 										class="search icon"></i></a>
-								</div> <a th:if="${session.sessionMember_name} !=null" th:text="게시글작성"
-								class="ui blue button" onclick="location.href='boardWrite';"></a>
+								</div> 
 								<div class="ui right floated pagination menu">
 									<a class="icon item"> <i class="left chevron icon"></i>
 									</a> <span th:each="page : ${pages}"> <a
@@ -83,6 +80,7 @@
 						</tr>
 					</tfoot>
 				</table>
+
 			</div>
 		</div>
 	</div>
