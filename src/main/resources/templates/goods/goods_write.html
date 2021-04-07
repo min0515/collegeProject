@@ -1,104 +1,98 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.lang}"
-	th:lang="${session.lang}"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layout/shopping_layout">
+   xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.lang}"
+   th:lang="${session.lang}"
+   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+   layout:decorator="layout/shopping_layout">
 <head>
 <th:block layout:fragment="css">
-	<link rel="stylesheet" th:href="@{/css/shopping.css}">
+   <link rel="stylesheet" th:href="@{/css/shopping.css}">
 </th:block>
 <th:block layout:fragment="script">
-	<script type="text/javascript" th:src="@{/js/shopping.js}"></script>
+   <script type="text/javascript" th:src="@{/js/shopping.js}"></script>
 </th:block>
 <script
-	src="https://cdn.tiny.cloud/1/1in9hzsqug5gwpl0vwku0rsdmw8w2equelp9j08kmfa49lxw/tinymce/5/tinymce.min.js"
-	referrerpolicy="origin"></script>
+   src="https://cdn.tiny.cloud/1/1in9hzsqug5gwpl0vwku0rsdmw8w2equelp9j08kmfa49lxw/tinymce/5/tinymce.min.js"
+   referrerpolicy="origin"></script>
 </head>
 <body>
-	<div layout:fragment="content">
-		<form class="ui large form" method="POST" 
-			action="goodsWriteSave">
-		<div class="ui grid center aligned">
-			<div class="five wide column">
+   <div layout:fragment="content">
+      <form class="ui large form" method="POST" action="goodsWriteSave"
+         style="background-color: #F3F3F3; margin-top: 15px">
+         <div class="ui grid center aligned" style="background-color: #F3F3F3">
+            <div class="ten wide column" >
 
-				<div class="field center aligned" style="margin-top: 30px">
-					<h3>상품 입력</h3>
-				</div>
+               <div class="field center aligned"
+                  style="margin-top: 3%; margin-bottom: 5%">
+                  <h3>상품 입력</h3>
+               </div>
 
+               <div class="ui grid sixteen center aligned wide column"
+                  style="margin-bottom:5%">
 
-				<div class="field">
-					<div class="fluid ui left icon input">
-						<i class="file outline icon"></i> <input type="text"
-							name="g_title" placeholder="굿즈 이름을 입력하세요.">
-					</div>
-				</div>
+                  <div id="goodsInsertBox1">
+                     <div id="boxtitle">사진 업로드</div>
+                     <div class="field">
+                        <form id="uploadForm">
+                           <div class="ui labeled input">
 
+                              <input type="file" id="g_attach" name="g_attachs"
+                                 style="display: none;"> <input type="text"
+                                 class="g_attachname" placeholder="첨부파일">
+                              <div class="ui label">
+                                 <i class="paperclip icon attachbtn"></i>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+                  <div id="goodsInsertBox1">
+                     <div id="boxtitle">상품명</div>
+                     <div class="field">
+                        <div class="fluid ui left icon input">
+                           <i class="file outline icon"></i> <input type="text"
+                              name="g_title" placeholder="굿즈 이름을 입력하세요.">
+                        </div>
+                     </div>
+                     <div class="field">
+                        <div class="fluid ui left icon input" style="height: 150px">
+                           <textarea rows="8" placeholder="내용" name="g_content"></textarea>
+                        </div>
+                     </div>
+                  </div>
 
-				<div class="field">
-					<div class="fluid ui left icon input">
-						<i class="won sign icon"></i> <input type="text" name="g_price"
-							placeholder="굿즈 가격을 입력하세요.">
-					</div>
-				</div>
-				<div class="field">
-					<form id="uploadForm">
-						<div class="ui labeled input">
-							
-							<input type="file" id="g_attach" name="g_attachs"
-								style="display: none;"> <input type="text"
-								class="g_attachname" placeholder="첨부파일">
-							<div class="ui label">
-								<i class="paperclip icon attachbtn"></i>
-							</div>
-						</div>
-					</form>
-
-
-					<div class="field">
-						<div class="fluid ui left icon input" style="height: 150px">
-							<textarea rows="8" placeholder="내용" name="g_content"></textarea>
-						</div>
-					</div>
-					<div class="field">
-						<div class="ui right labeled input">
-							<label for="amount" class="ui label">배송비</label> <input
-								type="text" placeholder="배송비를 입력해주세요" id="g_delivery"
-								name="g_delivery">
-							<div class="ui basic label">원</div>
-						</div>
-					</div>
-					<div class="field">
-						<div class="ui right labeled input">
-							<label for="amount" class="ui label">수량</label> <input
-								type="text" placeholder="상품의 수량을 입력해주세요" id="g_qty" name="g_qty">
-							<div class="ui basic label">개</div>
-						</div>
-					</div>
-
-					<div class="field" style="margin-top: 70px">
-						<span><button type="submit" class="ui primary basic button"
-								style="width: 48%">저장</button></span> <span><button
-								type="button" class="ui negative basic button"
-								onclick="location.href='index'" style="width: 48%">취소</button></span>
-					</div>
-				</div>
-				<div class="five wide column"></div>
-
-				<div class="ui modal">
-					<div class="header">Header</div>
-					<div class="image content">
-						<img class="image">
-						<div class="description">
-							<p></p>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-		</form>
-	</div>
+                  <div id="goodsInsertBox2">
+                     <div id="boxtitle">가격</div>
+                     <div>판매가(KRW)</div>
+                     <div class="field">
+                        <div class="fluid ui left icon input">
+                           <i class="won sign icon"></i> <input type="text" name="g_price"
+                              placeholder="굿즈 가격을 입력하세요.">
+                        </div>
+                     </div>
+                     <div>배송비</div>
+                     <div class="field">
+                        <div class="fluid ui left icon input">
+                           <i class="won sign icon"></i> <input type="text"
+                              placeholder="배송비를 입력해주세요" id="g_delivery" name="g_delivery">
+                        </div>
+                     </div>
+                     <div id="boxtitle">재고</div>
+                     <div class="field">
+                        <div class="ui right labeled input">
+                           <input type="text" placeholder="상품의 수량을 입력해주세요" id="g_qty"
+                              name="g_qty">
+                        </div>
+                     </div>
+                  </div>
+                  <button type="submit" class="ui black button"
+                     style="width: 30%; margin-top:2%">저장</button>
+                  <button type="button" class="ui gray button"
+                     onclick="location.href='index'" style="width: 30%;  margin-top:2%">취소</button>
+               </div>
+            </div>
+         </div>
+      </form>
+   </div>
 </body>
 </html>
-
