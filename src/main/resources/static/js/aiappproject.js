@@ -57,7 +57,6 @@ $(document).ready(function() {
 		$("#loginform").submit();
 	});
 	$('#buyReview').on('click', function() {
-		alert(200);
 		$('.ui.mini.reviewmodal').modal('show');
 	});
 		$('#star_grade a').click(function(){
