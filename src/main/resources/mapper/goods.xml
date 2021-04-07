@@ -4,6 +4,38 @@
 
 <mapper namespace="com.kakao.kitkat.dao.GoodsDao">
 
+	<insert id="goodsQnaInsertRow">
+		insert into goods_qna (member_id,g_seq, seq, ref,
+		qna_content, date
+		) values (#{member_id},#{g_seq}, (SELECT ifnull(MAX(seq)+1,
+		1) FROM goods_qna goods_alias where member_id=#{member_id}),0,
+		#{qna_content}, #{date}
+		)
+	</insert>
+	
+	<update id="AnswerUpdateRow">
+		update goods_qna set answerYn='y'
+		where g_seq = #{g_seq} and seq =#{seq} and member_id=#{member_id} and ref=0
+	</update>
+	
+	<insert id="goodsAnswerInsertRow">
+		insert into goods_qna (member_id,g_seq, seq, ref,
+		qna_content, date,answerYn
+		) values (#{member_id},#{g_seq},#{seq},1,
+		#{qna_content}, #{date},'y'
+		)
+	</insert>
+	
+	<select id="goodsQnaSelectAll"
+		resultType="com.kakao.kitkat.entities.Goods_qna">
+		select * from goods_qna where g_seq=#{g_seq}
+	</select>
+	
+	<select id="goodsQnaAdminSelectAll"
+		resultType="com.kakao.kitkat.entities.Goods_qna">
+		select * from goods_qna where answerYn='n'
+	</select>
+
 	<select id="goodsSelectOne"
 		resultType="com.kakao.kitkat.entities.Goods">
 		select * from goods where g_seq=#{g_seq}

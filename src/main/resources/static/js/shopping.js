@@ -425,6 +425,57 @@ $(document).ready(function() {
 			});
 		});
 	});
+	
+	$("#goodsQnaInsertSaveBtn").off().on('click',function() {
+		var goods_qna = $('#goodsQnaInsertSaveForm').serialize();
+		$.ajax({
+				type: 'POST',
+				data: goods_qna,
+				datatype: 'json',
+				url: 'goodsQnaInsertSave',
+				success: function(data) {
+					if(data=='login'){
+						location.href = "shoppingLogin";
+					}
+				},
+				error: function(xhr, status, error) {
+					alert('ajax error' + xhr.status);
+				}
+			});
+	});
+	
+	$("#answerListTable").on('click', '#answerGoBtn', 'td', function() {
+		var row = $(this).closest('tr');
+		var td = row.children();
+		var g_seq = td.eq(1).text();
+		var seq = td.eq(5).text();
+		var member_idcu = td.eq(0).text();
+		var btn = td.eq(4).children().eq(0);
+		var btn2 = td.eq(4).children().eq(1);
+		$('.ui.answer.modal').modal('show');
+		$("#answerInsertBtn").on('click',function() {
+			var qna_content = $("#qna_content").val();
+			$.ajax({
+				type: 'POST',
+				data: {g_seq:g_seq,seq:seq,qna_content:qna_content,member_idcu:member_idcu},
+				datatype: 'json',
+				url: 'goodsAnswerInsertSave',
+				success: function(data) {
+					if(data=='login'){
+						location.href = "shoppingLogin";
+					}else{
+						$('.ui.answer.modal').modal('hide');
+						$(btn).css('display','none');
+						$(btn2).css('display','block');
+						
+					}
+				},
+				error: function(xhr, status, error) {
+					alert('ajax error' + xhr.status);
+				}
+			});
+			});
+	});
 
 
 });
