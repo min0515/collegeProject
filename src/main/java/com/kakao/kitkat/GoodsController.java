@@ -27,13 +27,18 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.kakao.kitkat.dao.BoardDao;
 import com.kakao.kitkat.dao.GoodsDao;
 import com.kakao.kitkat.dao.OrdersDao;
+import com.kakao.kitkat.dao.Tb_professorDao;
+import com.kakao.kitkat.dao.Tb_studentDao;
 import com.kakao.kitkat.entities.Board;
 import com.kakao.kitkat.entities.CartList;
 import com.kakao.kitkat.entities.Goods;
 import com.kakao.kitkat.entities.GoodsPaging;
 import com.kakao.kitkat.entities.Goods_info;
 import com.kakao.kitkat.entities.Orders;
+import com.kakao.kitkat.entities.OrdersPaging;
 import com.kakao.kitkat.entities.Tb_cart;
+import com.kakao.kitkat.entities.Tb_professor;
+import com.kakao.kitkat.entities.Tb_student;
 
 @Controller
 public class GoodsController {
@@ -93,6 +98,9 @@ public class GoodsController {
 		return "redirect:manageGoodsList";
 	}
 
+
+	
+	
 	@RequestMapping(value = "/manageOrder", method = RequestMethod.GET)
 	public String manageOrder(Model model) throws Exception {
 		OrdersDao odao = sqlSession.getMapper(OrdersDao.class);
@@ -100,7 +108,8 @@ public class GoodsController {
 		model.addAttribute("orderses", orderses);
 		return "goods/manage_order";
 	}
-
+	
+	
 	@RequestMapping(value = "/qnaBoardWriteSave", method = RequestMethod.POST)
 	public String qnaBoardWriteSave(Model model, @ModelAttribute Board board,
 			@RequestParam("b_attachfile") MultipartFile b_attachfile, HttpServletRequest request) throws Exception {
@@ -254,7 +263,6 @@ public class GoodsController {
 		return "goods/manage_goods";
 	}
 
-	@RequestMapping(value = "/myPage", method = RequestMethod.GET)
 	public String myPage(Model model) throws Exception {
 		return "goods/mypage";
 	}

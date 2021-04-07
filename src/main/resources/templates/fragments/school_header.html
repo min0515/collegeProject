@@ -3,36 +3,41 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <body th:fragment="school_header">
 
-		<div class="header item">
-			<button class="ui button" style="color: #000000; background-color:white;"
-				onclick="location.href='schoolMain';">학교홈페이지 </button>
-		</div>
-		<div class="header item">
-		<button class="ui button" style="color: #000000; background-color:white;"
-				onclick="location.href='boardPageList';">학과게시판 </button>
-		</div>
-		<!-- 		<div class="header item"> -->
-		<!-- 			<a class="link" style="color: #000000;" -->
-		<!-- 				onclick="location.href='boardQnaList';">질문게시판 </a> -->
-		<!-- 		</div> -->
-		<!-- 		<div class="header item"> -->
-		<!-- 			<a class="link" style="color: #000000;" -->
-		<!-- 				onclick="location.href='boardFreeList';">자유게시판 </a> -->
-		<!-- 		</div> -->
-		<div class="header item">
-			<button class="ui button" style="color: #000000; background-color:white;"
-				onclick="location.href='schoolIntro';"> 학교설명 </button>
-		</div>
-		<div class="header item">
-			<button class="ui button" style="color: #000000; background-color:white;"
-				onclick="location.href='login';"> LMS </button>
-		</div>
-		<div class="header item">
-			<button class="ui button" style="color: #000000; background-color:white;"
-				onclick="location.href='shoppingAboutus';"> 자바대학 쇼핑몰 </button>
-		</div>
-		
-			<div class="ui text middle aligned right aligned container"
+	<div class="header item">
+		<button class="ui button"
+			style="color: #000000; background-color: white;"
+			onclick="location.href='schoolMain';">학교홈페이지</button>
+	</div>
+	<div class="header item">
+		<button class="ui button"
+			style="color: #000000; background-color: white;"
+			onclick="location.href='boardPageList';">학과게시판</button>
+	</div>
+	<!-- 		<div class="header item"> -->
+	<!-- 			<a class="link" style="color: #000000;" -->
+	<!-- 				onclick="location.href='boardQnaList';">질문게시판 </a> -->
+	<!-- 		</div> -->
+	<!-- 		<div class="header item"> -->
+	<!-- 			<a class="link" style="color: #000000;" -->
+	<!-- 				onclick="location.href='boardFreeList';">자유게시판 </a> -->
+	<!-- 		</div> -->
+	<div class="header item">
+		<button class="ui button"
+			style="color: #000000; background-color: white;"
+			onclick="location.href='schoolIntro';">학교설명</button>
+	</div>
+	<div class="header item">
+		<button class="ui button"
+			style="color: #000000; background-color: white;"
+			onclick="location.href='login';">LMS</button>
+	</div>
+	<div class="header item">
+		<button class="ui button"
+			style="color: #000000; background-color: white;"
+			onclick="location.href='shoppingAboutus';">자바대학 쇼핑몰</button>
+	</div>
+
+	<div class="ui text middle aligned right aligned container"
 		style="margin-right: 5px !important;"
 		th:unless="${session.sessionMember_id==null}">
 		<div class="ui container" style="padding: 3% 2% 3% 2%;">
@@ -40,14 +45,15 @@
 				<h4 style="margin: 0px;"
 					th:if="${session.sessionMember_name} !=null"
 					th:text="${session.sessionMember_name}"></h4>
-					
+
 				<div th:if=" ${session.sessionMember_name} !=null" class="menu">
-					<div class="item" th:unless="${session.sessionlevel !='s'}" onclick="location.href='schoolStudentInfoUpdate'">
-						나의정보수정</div>
-					<div class="item" th:unless="${session.sessionlevel !='p'}" onclick="location.href='schoolProfessorInfoUpdate'">
-						나의정보수정</div>
-				<div class="item" th:unless="${session.sessionlevel !='a'}" onclick="location.href='studentList'">학생관리</div>
-					</div>
+					<div class="item" th:unless="${session.sessionlevel !='s'}"
+						onclick="location.href='schoolStudentInfoUpdate'">나의정보수정</div>
+					<div class="item" th:unless="${session.sessionlevel !='p'}"
+						onclick="location.href='schoolProfessorInfoUpdate'">나의정보수정</div>
+					<div class="item" th:unless="${session.sessionlevel !='a'}"
+						onclick="location.href='studentList'">학생관리</div>
+				</div>
 
 			</div>
 		</div>
