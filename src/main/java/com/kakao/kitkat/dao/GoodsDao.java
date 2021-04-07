@@ -15,6 +15,8 @@ public interface GoodsDao {
 
 	public ArrayList<Goods_info> goodsInfoAllSelectOne(int g_seq) throws Exception;
 
+	public ArrayList<Goods_info> goodsInfoAllSelect() throws Exception;
+
 	public int goodsSelectG_seqOne() throws Exception;
 
 	public int goodsInsertRow(Goods Goods) throws Exception;

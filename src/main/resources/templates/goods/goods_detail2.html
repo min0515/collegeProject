@@ -30,7 +30,8 @@
 						<div class="swiper-wrapper">
 							<div class="swiper-slide" style="width: 500px; height: 500px"
 								th:each="attachs : ${attachs}">
-								<img th:src="${attachs.g_attach}" style="width: 500px; height: 500px">
+								<img th:src="${attachs.g_attach}"
+									style="width: 500px; height: 500px">
 							</div>
 						</div>
 						<!-- Add Pagination -->
@@ -106,15 +107,12 @@
 							Q&A </a>
 					</div>
 				</div>
-				
-					
-				</div>
 			</div>
-		</form>
-		<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+	</form>
+	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-		<!-- Initialize Swiper -->
-		<script>
+	<!-- Initialize Swiper -->
+	<script>
     var swiper = new Swiper('.swiper-container', {
       slidesPerView: 1,
       spaceBetween: 30,

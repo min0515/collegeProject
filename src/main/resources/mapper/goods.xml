@@ -10,6 +10,11 @@
 		from goods a join goods_info b on a.g_seq=b.g_seq where a.g_seq=#{g_seq}
 	</select>
 	
+	<select id="goodsInfoAllSelect"
+		resultType="com.kakao.kitkat.entities.Goods_info">
+		select * from goods_info
+	</select>
+	
 	<select id="goodsInfoAllSelectOne"
 		resultType="com.kakao.kitkat.entities.Goods_info">
 		select * from goods_info where g_seq=#{g_seq}
@@ -73,15 +78,13 @@
 
 	<select id="goodsSelectPageList"
 		resultType="com.kakao.kitkat.entities.Goods">
-		select a.g_seq,a.g_title,a.g_price,a.g_qty,a.g_delivery,b.g_attach from goods a 
-		join goods_info b on a.g_seq=b.g_seq order by g_seq desc
-		limit
+		select g_seq,g_title,g_price,g_qty,g_delivery from goods
+		 order by g_seq desc limit
 		#{startrow},#{endrow}
 	</select>
 
 	<select id="selectCountFirst" resultType="Integer">
-		select count(*) from
-		goods
+		select count(*) from goods
 	</select>
 
 	<select id="goodsSelectCount" resultType="Integer">

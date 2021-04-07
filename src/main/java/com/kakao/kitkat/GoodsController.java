@@ -293,6 +293,8 @@ public class GoodsController {
 		ArrayList<Goods> goodses = dao.goodsSelectPageList(goodspaging);
 		model.addAttribute("goodses", goodses);
 		model.addAttribute("pages", pages);
+		ArrayList<Goods_info> attachs = dao.goodsInfoAllSelect();
+		model.addAttribute("attachs", attachs);
 		return "goods/goods_page_list";
 	}
 
