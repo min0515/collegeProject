@@ -9,6 +9,8 @@ import com.kakao.kitkat.entities.Tb_cart;
 
 public interface GoodsDao {
 
+	public Goods_info goodsInfoOneSelectOne(int g_seq) throws Exception;
+
 	public Goods goodsSelectOne(int g_seq) throws Exception;
 
 	public Goods goodsAllSelectOne(int g_seq) throws Exception;
@@ -36,6 +38,8 @@ public interface GoodsDao {
 	public int cartUpdateRow(Tb_cart tb_cart) throws Exception;
 
 	public int myGoodsCartCount(String member_id) throws Exception;
+
+	public ArrayList<Goods_info> goodsInfoCartAllSelect(String member_id) throws Exception;
 
 	public ArrayList<Tb_cart> cartyb(String member_id) throws Exception;
 
