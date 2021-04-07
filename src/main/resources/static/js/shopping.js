@@ -573,6 +573,6 @@ $(document).ready(function() {
 
 		status.setAbort(jqXHR);
 	}*/
-
+	
 
 });
