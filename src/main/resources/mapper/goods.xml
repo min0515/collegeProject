@@ -12,7 +12,7 @@
 	
 	<select id="goodsInfoAllSelect"
 		resultType="com.kakao.kitkat.entities.Goods_info">
-		select * from goods_info
+		select g_seq,g_attach from goods_info where info_seq  in (select max(info_seq) from goods_info group by g_seq)
 	</select>
 	
 	<select id="goodsInfoAllSelectOne"

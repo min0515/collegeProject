@@ -90,7 +90,7 @@ public class GoodsController {
 			}
 			a++;
 		}
-		return "index";
+		return "redirect:manageGoodsList";
 	}
 
 	@RequestMapping(value = "/manageOrder", method = RequestMethod.GET)
@@ -295,6 +295,10 @@ public class GoodsController {
 		model.addAttribute("pages", pages);
 		ArrayList<Goods_info> attachs = dao.goodsInfoAllSelect();
 		model.addAttribute("attachs", attachs);
+		for (Goods_info attach : attachs) {
+			System.out.println(attach.getG_seq());
+			System.out.println(attach.getG_attach());
+		}
 		return "goods/goods_page_list";
 	}
 
