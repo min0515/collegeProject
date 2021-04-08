@@ -56,12 +56,9 @@ $(document).ready(function() {
 		$('#loginform').attr('action','professorLoginUp3');
 		$("#loginform").submit();
 	});
-	$('#buyReview').on('click', function() {
+	$('#review').on('click', function() {
 		$('.ui.mini.reviewmodal').modal('show');
 		$('.ui.mini.reviewmodal').modal({backdrop: 'static', keyboard: false}) ;
-	});
-	$('#aa').on('click', function() {
-		
 	});
 		$('#star_grade a').click(function(){
         $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 

@@ -14,6 +14,7 @@
 	referrerpolicy="origin"></script>
 </head>
 <body  layout:fragment="content">
+
 	<div class="ui four column grid center aligned" style="background-color:#F5F6F7; margin-bottom:100px;" >
 		<div class="one wide column" style="background-color:#F5F6F7">
 			<div> </div>
@@ -74,7 +75,7 @@
 							<td th:text="${myOrder.g_delivery}"></td>
 							<td th:text="${myOrder.orders_date}"></td>
 							<td>
-								<button class="ui black button">후기작성</button>
+								<button class="ui black button" type="button" id="review">후기작성</button>
 							</td>
 							<td style="display:none" th:text="${myOrder.g_seq}"></td>
 						</tr>
@@ -84,7 +85,55 @@
 		
 			
 		</div>
+		<div class="ui mini reviewmodal" style="display: none">
+		<div class="modal-header-text-center_add_review_wrap">
+			<h3 style="text-align: center; margin-top: 30px; margin-bottom: 30px">구매평
+				작성</h3>
+		</div>
+		<div class="modal-body_add_review_wrap">
+			<form id="review_form" method="post" action="goodsWritesave">
+				<div class="tabled full-width border-gray bright ">
+					<div class="table-cell vertical-middle width-2" th:each="myOrder : ${myOrders}">
+						<img class="margin-right-xxl prod_img"
+							th:src="${myOrder.g_attach}"
+							width="70" height="70" alt="상품 이미지">
+					</div>
+					<div class="table-cell vertical-middle">
+						<span class="text-15 prod_tit">The BODY</span>
+					</div>
+				</div>
+
+				<div class="large-padding text-center">
+					<div class="text-18 margin-bottom-xxl" style="text-align: center;">
+						<strong>상품은 어떠셨나요?</strong>
+					</div>
+					<div style="text-align: center;">
+						<div class="ui massive star rating" data-rating="3"
+							data-max-rating="5" id="reviewstar"></div>
+					</div>
+				</div>
+				<div class="ui form">
+					<div class="field">
+						<label>Text</label>
+						<textarea class="form-control border-gray bright" name="content"
+							rows="10" placeholder="어떤점이 좋으셨나요?"></textarea>
+					</div>
+				</div>
+				<div class="form-group margin-top-xxxxl clearfix">
+					<div class="review_image_wrap inline-blocked float_l"></div>
+				</div>
+		
+		</div>
+		<div class="modal-footer no-padding no-border">
+			<a class="btn btn-lg full-width btn_submit" href="javascript:;"
+				onclick="SITE_SHOP_REVIEW.submit(); return false;"> <button>등록</button>
+			</a>
+		</div>
 	</div>
+		<input type="hidden" name="g_title">
+		</form>
+	</div>
+
 </body>
 </html>
 

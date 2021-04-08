@@ -410,6 +410,7 @@ public class GoodsController {
 	@RequestMapping(value = "/goodsWritesave", method = RequestMethod.POST)
 	public String goodsWritesave(Locale locale, Model model) throws Exception {
 		ReviewDao dao = sqlSession.getMapper(ReviewDao.class);
+
 		dao.reviewInsertRow(goods_review);
 		return "goods/goods_write";
 	}
