@@ -54,19 +54,6 @@
 							</tr>
 						</tbody>
 					</table>
-					<div class="field" style="margin-top: 10px">
-						<div class="ui icon input">
-							<input type="text" name="find" placeholder="Search..."
-								th:value="${find}"> <a href="#"
-								onclick="findListformname.submit()" style="padding: 10px;"><i
-								class="search icon"></i></a>
-						</div>
-						<span th:each="page : ${pages}"> <a
-							th:href="@{boardPageSelect(page=${page})}">[<span
-								th:text="${page}"></span>]
-						</a>
-						</span>
-					</div>
 				</div>
 			</div>
 		</div>

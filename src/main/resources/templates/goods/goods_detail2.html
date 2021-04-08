@@ -126,46 +126,49 @@
 			</div>
 		</div>
 		<div class="ui sixteen wide column"
-			style="display: none; padding: 2% 20% 0 20%; margin-bottom:60px;" id="goodsqna">
-			<div style="width: 100%; margin: 0 0 20px 0 !important;">
+			style="display: none; padding: 2% 20% 0 20%; margin-bottom: 60px;"
+			id="goodsqna">
+			<div style="width: 100%; margin: 0 0 20px 0 !important;" >
 				<div class="field" style="margin-bottom: 15px">
 					<h1 class="ui  left aligned header">
 						<strong style="margin-left: 2%;">QNA</strong>
 					</h1>
 					<div class="ui section divider" style="margin-top: 15px;"></div>
 				</div>
-				<div class="ui comments" style="width: 70%; padding-left: 2%;">
-					<div class="comment" th:each="qna : ${qnas}">
-						<a class="avatar"> <img src="/images/man.png">
-						</a>
-						<div class="content" style="text-align: left;">
-							<a class="author" th:text="${qna.member_id}"></a>
-							<div class="metadata">
-								<span class="date" th:text="${qna.date}"></span>
-							</div>
-							<div class="text" th:text="${qna.qna_content}"></div>
-							<div class="actions">
-								<a class="reply">질문</a>
-							</div>
-						</div>
-					</div>
-					
-					<div class="comments" style="margin-top:10px;">
-						<div class="comment" style="width: 70%; padding-left: 10%;">
+				<div class="ui comments" style="width: 70%; padding-left: 2%;" id="QnaAjaxReplace">
+					<a th:each="qna : ${qnas}" >
+						<div class="comment" th:if="${qna.ref}==0">
 							<a class="avatar"> <img src="/images/man.png">
 							</a>
 							<div class="content" style="text-align: left;">
-								<a class="author">Jenny Hess</a>
+								<a class="author" th:text="${qna.member_id}"></a>
 								<div class="metadata">
-									<span class="date">Just now</span>
+									<span class="date" th:text="${qna.date}"></span>
 								</div>
-								<div class="text">Elliot you are always so right :)</div>
+								<div class="text" th:text="${qna.qna_content}"></div>
 								<div class="actions">
-									<a class="reply">Reply</a>
+									<a class="reply">질문</a>
 								</div>
 							</div>
 						</div>
-					</div>
+
+						<div class="comments" style="margin-top: 10px;" th:unless="${qna.ref}==0">
+							<div class="comment" style="width: 70%; padding-left: 10%;">
+								<a class="avatar"> <img src="/images/smile.png">
+								</a>
+								<div class="content" style="text-align: left;">
+									<a class="author" th:text="판매자"></a>
+									<div class="metadata">
+										<span class="date" th:text="${qna.date}"></span>
+									</div>
+									<div class="text" th:text="${qna.qna_content}"></div>
+									<div class="actions">
+										<a class="reply">대답</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</a>
 				</div>
 			</div>
 			<form class="ui reply form" id="goodsQnaInsertSaveForm">
@@ -186,10 +189,10 @@
 			</form>
 		</div>
 
-	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+		<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-	<!-- Initialize Swiper -->
-	<script>
+		<!-- Initialize Swiper -->
+		<script>
     var swiper = new Swiper('.swiper-container', {
       slidesPerView: 1,
       spaceBetween: 30,

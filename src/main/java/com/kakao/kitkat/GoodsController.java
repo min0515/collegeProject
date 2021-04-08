@@ -56,6 +56,14 @@ public class GoodsController {
 	@Autowired
 	Goods_qna goods_qna;
 
+	@RequestMapping(value = "/QnaReplaceAjax")
+	public String QnaReplaceAjax(Model model, @RequestParam int g_seq) throws Exception {
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+		ArrayList<Goods_qna> Qnas = dao.goodsQnaSelectAll(g_seq);
+		model.addAttribute("qnas", Qnas);
+		return "goods/goods_detail2 :: #QnaAjaxReplace";
+	}
+
 	@RequestMapping(value = "/goodsQnaInsertSave", method = RequestMethod.POST)
 	@ResponseBody
 	public String goodsQnaInsertSave(Goods_qna goods_qna, HttpSession session) throws Exception {
@@ -70,8 +78,6 @@ public class GoodsController {
 			String today = df.format(date);
 			goods_qna.setDate(today);
 			dao.goodsQnaInsertRow(goods_qna);
-
-			System.out.println(goods_qna.getMember_id());
 			return "filename";
 		}
 

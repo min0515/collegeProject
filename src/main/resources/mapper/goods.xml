@@ -21,7 +21,8 @@
 	<insert id="goodsAnswerInsertRow">
 		insert into goods_qna (member_id,g_seq, seq, ref,
 		qna_content, date,answerYn
-		) values (#{member_id},#{g_seq},#{seq},1,
+		) values (#{member_id},#{g_seq},#{seq},(SELECT ifnull(MAX(ref)+1,
+		1) FROM goods_qna goods_alias where seq=#{seq}),
 		#{qna_content}, #{date},'y'
 		)
 	</insert>
