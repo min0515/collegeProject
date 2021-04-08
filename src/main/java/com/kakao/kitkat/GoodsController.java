@@ -27,12 +27,14 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.kakao.kitkat.dao.BoardDao;
 import com.kakao.kitkat.dao.GoodsDao;
 import com.kakao.kitkat.dao.OrdersDao;
+import com.kakao.kitkat.dao.ReviewDao;
 import com.kakao.kitkat.entities.Board;
 import com.kakao.kitkat.entities.CartList;
 import com.kakao.kitkat.entities.Goods;
 import com.kakao.kitkat.entities.GoodsPaging;
 import com.kakao.kitkat.entities.Goods_info;
 import com.kakao.kitkat.entities.Goods_qna;
+import com.kakao.kitkat.entities.Goods_review;
 import com.kakao.kitkat.entities.Orders;
 import com.kakao.kitkat.entities.Tb_cart;
 
@@ -52,7 +54,8 @@ public class GoodsController {
 	static String find;
 	@Autowired
 	Goods_info goods_info;
-
+	@Autowired
+	Goods_review goods_review;
 	@Autowired
 	Goods_qna goods_qna;
 
@@ -386,6 +389,14 @@ public class GoodsController {
 
 	@RequestMapping(value = "/goodsWrite", method = RequestMethod.GET)
 	public String goodsWrite(Locale locale, Model model) {
+
+		return "goods/goods_write";
+	}
+
+	@RequestMapping(value = "/goodsWritesave", method = RequestMethod.POST)
+	public String goodsWritesave(Locale locale, Model model) throws Exception {
+		ReviewDao dao = sqlSession.getMapper(ReviewDao.class);
+		dao.reviewInsertRow(goods_review);
 		return "goods/goods_write";
 	}
 

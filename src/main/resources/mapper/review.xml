@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kakao.kitkat.dao.ReviewDao">
+
+	<insert id="reviewInsertRow">
+		insert into review (member_id,review_seq,g_seq, review_title, review_content,
+		review_attach, review_date
+		) values (#{member_id},(SELECT ifnull(MAX(review_seq)+1,
+		1 where member_id=#{member_id}),#{g_seq},#{review_title},
+		#{review_content}, #{review_attach},#{review_date}
+		)
+	</insert>
+
+</mapper>
