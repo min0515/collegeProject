@@ -413,15 +413,15 @@ $(document).ready(function() {
 			}
 		});
 	});
-	
-	
+
+
 	$('.attachbtn').off().on('click', function() {
 		$('#g_attach').click();
 		$('#g_attach').off().change(function() {
 			var filename = $('#g_attach').val();
 			$('.g_attachname').attr('value', filename);
 			var formData = new FormData($('#uploadForm')[0]);
-			formData.append("file",$("input[type='file']")[0].files[0]);
+			formData.append("file", $("input[type='file']")[0].files[0]);
 			$.ajax({
 				type: 'POST',
 				data: formData,
@@ -430,6 +430,72 @@ $(document).ready(function() {
 				contentType: false,
 				url: 'goodsWriteAttach',
 				success: function(data) {
+				},
+				error: function(xhr, status, error) {
+					alert('ajax error' + xhr.status);
+				}
+			});
+		});
+	});
+
+	$("#goodsQnaInsertSaveBtn").off().on('click', function() {
+		var goods_qna = $('#goodsQnaInsertSaveForm').serialize();
+		var g_seq = $('#hiddeng_seq').val();
+		$.ajax({
+			type: 'POST',
+			data: goods_qna,
+			datatype: 'json',
+			url: 'goodsQnaInsertSave',
+			success: function(data) {
+				if (data == 'login') {
+					location.href = "shoppingLogin";
+				} else {
+					$.ajax({
+						type: 'POST',
+						data: { g_seq: g_seq },
+						datatype: 'json',
+						url: 'QnaReplaceAjax',
+						/*cache : false*/
+					}).done(function(data1) {
+						$("#QnaAjaxReplace").replaceWith(data1);
+						$('#qna_content').val('');
+					});
+				}
+			},
+			error: function(xhr, status, error) {
+				alert('ajax error' + xhr.status);
+			}
+		});
+
+
+	});
+
+	$("#answerListTable").off().on('click', '#answerGoBtn', 'td', function() {
+		var row = $(this).closest('tr');
+		var td = row.children();
+		var g_seq = td.eq(1).text();
+		var seq = td.eq(5).text();
+		var member_idcu = td.eq(0).text();
+		var btn = td.eq(4).children().eq(0);
+		var btn2 = td.eq(4).children().eq(1);
+		$('.ui.answer.modal').modal('show');
+		$("#answerInsertBtn").off().on('click', function() {
+			var qna_content = $("#qna_content").val();
+			$.ajax({
+				type: 'POST',
+				data: { g_seq: g_seq, seq: seq, qna_content: qna_content, member_idcu: member_idcu },
+				datatype: 'json',
+				url: 'goodsAnswerInsertSave',
+				success: function(data) {
+					if (data == 'login') {
+						location.href = "shoppingLogin";
+					} else {
+						$('.ui.answer.modal').modal('hide');
+						$(btn).css('display', 'none');
+						$(btn2).css('display', 'block');
+						$('#qna_content').val('');
+
+					}
 				},
 				error: function(xhr, status, error) {
 					alert('ajax error' + xhr.status);

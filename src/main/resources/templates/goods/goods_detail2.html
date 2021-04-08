@@ -23,15 +23,15 @@
 			style="background-color: #F3F3F3; margin-top: 15px;">
 			<div class="ui sixteen wide column grid center aligned"
 				style="background-color: #FFFFFF;">
-				<div class="one wide column"></div>
-				<div class="six wide column">
+				<div class="seven wide column">
 					<div class="fluid ui swiper-container"
 						style="width: 500px; height: 500px;">
 						<div class="swiper-wrapper">
-							<div class="swiper-slide" style="width: 500px; height: 500px; background-color: #FFFFFF;" 
+							<div class="swiper-slide"
+								style="width: 500px; height: 500px; background-color: #FFFFFF;"
 								th:each="attachs : ${attachs}">
 								<img th:src="${attachs.g_attach}"
-									style="width: 500px; height: 500px; border-radius: 30px; margin-top:20px;">
+									style="width: 500px; height: 500px; border-radius: 30px; margin-top: 20px;">
 							</div>
 						</div>
 						<!-- Add Pagination -->
@@ -41,9 +41,8 @@
 						<div class="swiper-button-prev"></div>
 					</div>
 				</div>
-				<div class="one wide column"></div>
-				<div class="six wide column"
-					style="height: 550px; text-align: left;">
+				<div class="seven wide column"
+					style="padding-right: 8%; height: 550px; text-align: left;">
 					<div th:text="${goods.g_seq}"
 						style="font-size: 25px; font: bold; margin-bottom: 25px; margin-top: 50px;"></div>
 					<input type="hidden" name="g_seq" id="hiddeng_seq"
@@ -89,6 +88,8 @@
 						</div>
 					</div>
 				</div>
+
+
 				<div class="ui mini goodsdetailCart modal">
 					<div class="content">
 						<p>장바구니에 담겼습니다 장바구니로 이동하시겠습니까?</p>
@@ -98,36 +99,96 @@
 						<div class="ui cancel button">아니요</div>
 					</div>
 				</div>
-
-				<div class="ui sixteen wide column">
-					<div class="ui five wide column" style="text-align: center;">
-						<div class="ui three item menu">
-							<a class="item active" id="goodinfobtn"> 상품설명 </a> <a
-								class="item" id="goodreviewbtn"> 후기 </a> <a class="item"
-								id="goodqnabtn"> Q&A </a>
-						</div>
-					</div>
-				</div>
-				<div class="ui sixteen wide column" id="goodsinfo">
-					<div style="width: 100%; height: 500px; margin: 0px 0px 30px 0px !important;"
-						th:each="attachs,index : ${attachs}">
-						<h3 th:if="${index.index}==0" th:text="${attachs.g_content}"></h3>
-						<img th:src="${attachs.g_attach}"
-							style="width: 50%; height: 520px; border-radius: 30px; padding:20px;">
-					</div>
-				</div>
-				<div class="ui sixteen wide column" style="display: none;"
-					id="goodsreview">
-					<div style="width: 100%; height: 500px; margin: 0px !important;">
-						<h3>후기</h3></div>
-				</div>
-				<div class="ui sixteen wide column" style="display: none;"
-					id="goodsqna">
-					<div style="width: 100%; height: 500px; margin: 0px !important;">
-						<h3>Qna</h3></div>
+		</form>
+		<div class="ui sixteen wide column" style="padding: 0 10% 0 10%;">
+			<div class="ui five wide column" style="text-align: center;">
+				<div class="ui three item menu">
+					<a class="item active" id="goodinfobtn"> 상품설명 </a> <a class="item"
+						id="goodreviewbtn"> 후기 </a> <a class="item" id="goodqnabtn">
+						Q&A </a>
 				</div>
 			</div>
-		</form>
+		</div>
+		<div class="ui sixteen wide column" id="goodsinfo"
+			style="padding: 3% 10% 0 10%;">
+			<div
+				style="width: 100%; height: 500px; margin: 0px 0px 30px 0px !important;"
+				th:each="attachs,index : ${attachs}">
+				<h3 th:if="${index.index}==0" th:text="${attachs.g_content}"></h3>
+				<img th:src="${attachs.g_attach}"
+					style="width: 50%; height: 520px; border-radius: 30px; padding: 20px;">
+			</div>
+		</div>
+		<div class="ui sixteen wide column"
+			style="display: none; padding: 3% 10% 0 10%;" id="goodsreview">
+			<div style="width: 100%; height: 500px; margin: 0px !important;">
+				<h3>후기</h3>
+			</div>
+		</div>
+		<div class="ui sixteen wide column"
+			style="display: none; padding: 2% 20% 0 20%; margin-bottom: 60px;"
+			id="goodsqna">
+			<div style="width: 100%; margin: 0 0 20px 0 !important;" >
+				<div class="field" style="margin-bottom: 15px">
+					<h1 class="ui  left aligned header">
+						<strong style="margin-left: 2%;">QNA</strong>
+					</h1>
+					<div class="ui section divider" style="margin-top: 15px;"></div>
+				</div>
+				<div class="ui comments" style="width: 70%; padding-left: 2%;" id="QnaAjaxReplace">
+					<a th:each="qna : ${qnas}" >
+						<div class="comment" th:if="${qna.ref}==0">
+							<a class="avatar"> <img src="/images/man.png">
+							</a>
+							<div class="content" style="text-align: left;">
+								<a class="author" th:text="${qna.member_id}"></a>
+								<div class="metadata">
+									<span class="date" th:text="${qna.date}"></span>
+								</div>
+								<div class="text" th:text="${qna.qna_content}"></div>
+								<div class="actions">
+									<a class="reply">질문</a>
+								</div>
+							</div>
+						</div>
+
+						<div class="comments" style="margin-top: 10px;" th:unless="${qna.ref}==0">
+							<div class="comment" style="width: 70%; padding-left: 10%;">
+								<a class="avatar"> <img src="/images/smile.png">
+								</a>
+								<div class="content" style="text-align: left;">
+									<a class="author" th:text="판매자"></a>
+									<div class="metadata">
+										<span class="date" th:text="${qna.date}"></span>
+									</div>
+									<div class="text" th:text="${qna.qna_content}"></div>
+									<div class="actions">
+										<a class="reply">대답</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+			<form class="ui reply form" id="goodsQnaInsertSaveForm">
+				<div class="field">
+					<input type="hidden" name="g_seq" id="hiddeng_seq"
+						th:value="${goods.g_seq}">
+					<textarea style="height: 10px; width: 85%; margin-bottom: 20px"
+						name="qna_content" id="qna_content"></textarea>
+					<button type="button" id="goodsQnaInsertSaveBtn"
+						class="ui black labeled submit icon button"
+						style="margin-left: 10px; height: 110px; margin-top: 0px;">
+						<i class="icon edit" style="text-align: middle; display: block"></i>
+						<span
+							style="position: relative; padding: 10px; line-height: 20px; display: block; text-align: center;">질문<br>등록
+						</span>
+					</button>
+				</div>
+			</form>
+		</div>
+
 		<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 		<!-- Initialize Swiper -->

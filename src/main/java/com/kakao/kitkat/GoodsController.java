@@ -32,6 +32,7 @@ import com.kakao.kitkat.entities.CartList;
 import com.kakao.kitkat.entities.Goods;
 import com.kakao.kitkat.entities.GoodsPaging;
 import com.kakao.kitkat.entities.Goods_info;
+import com.kakao.kitkat.entities.Goods_qna;
 import com.kakao.kitkat.entities.Orders;
 import com.kakao.kitkat.entities.Tb_cart;
 
@@ -52,6 +53,36 @@ public class GoodsController {
 	@Autowired
 	Goods_info goods_info;
 
+	@Autowired
+	Goods_qna goods_qna;
+
+	@RequestMapping(value = "/QnaReplaceAjax")
+	public String QnaReplaceAjax(Model model, @RequestParam int g_seq) throws Exception {
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+		ArrayList<Goods_qna> Qnas = dao.goodsQnaSelectAll(g_seq);
+		model.addAttribute("qnas", Qnas);
+		return "goods/goods_detail2 :: #QnaAjaxReplace";
+	}
+
+	@RequestMapping(value = "/goodsQnaInsertSave", method = RequestMethod.POST)
+	@ResponseBody
+	public String goodsQnaInsertSave(Goods_qna goods_qna, HttpSession session) throws Exception {
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+		String member_id = (String) session.getAttribute("sessionMember_id");
+		if (member_id == null) {
+			return "login";
+		} else {
+			goods_qna.setMember_id(member_id);
+			SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd hh:mm");
+			Date date = new Date();
+			String today = df.format(date);
+			goods_qna.setDate(today);
+			dao.goodsQnaInsertRow(goods_qna);
+			return "filename";
+		}
+
+	}
+
 	ArrayList<byte[]> attachs = new ArrayList<byte[]>();
 
 	@RequestMapping(value = "/goodsWriteAttach", method = RequestMethod.POST)
@@ -68,6 +99,7 @@ public class GoodsController {
 		String path = "C:/Users/IT-5C/git/collegeProject/src/main/resources/static/uploadattachs/";
 		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
 		dao.goodsInsertRow(goods);
+		System.out.println(attachs.size());
 		int a = 0;
 		for (byte[] attach : attachs) {
 			String realpath = "uploadattachs/"; // server path
@@ -90,6 +122,7 @@ public class GoodsController {
 			}
 			a++;
 		}
+		attachs.clear();
 		return "redirect:manageGoodsList";
 	}
 
@@ -147,7 +180,36 @@ public class GoodsController {
 
 	@RequestMapping(value = "/boardQna", method = RequestMethod.GET)
 	public String boardQna(Model model) throws Exception {
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+		ArrayList<Goods_qna> qnas = dao.goodsQnaAdminSelectAll();
+		model.addAttribute("qnas", qnas);
 		return "goods/board_qna";
+	}
+
+	@RequestMapping(value = "/goodsAnswerInsertSave", method = RequestMethod.POST)
+	@ResponseBody
+	public String goodsAnswerInsertSave(@RequestParam int g_seq, @RequestParam int seq,
+			@RequestParam String member_idcu, @RequestParam String qna_content, HttpSession session) throws Exception {
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+		String member_id = (String) session.getAttribute("sessionMember_id");
+		if (member_id == null) {
+			return "login";
+		} else {
+			goods_qna.setG_seq(g_seq);
+			goods_qna.setSeq(seq);
+			goods_qna.setQna_content(qna_content);
+			goods_qna.setMember_id(member_id);
+			SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd hh:mm");
+			Date date = new Date();
+			String today = df.format(date);
+			goods_qna.setDate(today);
+			System.out.println(goods_qna.getDate());
+			dao.goodsAnswerInsertRow(goods_qna);
+			goods_qna.setMember_id(member_idcu);
+			dao.AnswerUpdateRow(goods_qna);
+			return "filename";
+		}
+
 	}
 
 	@RequestMapping(value = "/manageCancel", method = RequestMethod.GET)
@@ -317,6 +379,8 @@ public class GoodsController {
 		ArrayList<Goods_info> attachs = dao.goodsInfoAllSelectOne(g_seq);
 		model.addAttribute("goods", goods);
 		model.addAttribute("attachs", attachs);
+		ArrayList<Goods_qna> Qnas = dao.goodsQnaSelectAll(g_seq);
+		model.addAttribute("qnas", Qnas);
 		return "goods/goods_detail2";
 	}
 

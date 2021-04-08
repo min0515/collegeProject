@@ -128,7 +128,7 @@ public class MemberController {
 				session.setAttribute("sessionDepartment_no", data.getDepartment_no());
 				session.setAttribute("sessionAbsence_yn", data.getAbsence_yn());
 				session.setAttribute("sessionlevel", data.getMemlevel());
-				return "index2";
+				return "goods/shopping_aboutus";
 			} else {
 				return "login/login2";
 			}
@@ -150,7 +150,7 @@ public class MemberController {
 				session.setAttribute("sessionMember_name", data.getProfessor_name());
 				session.setAttribute("sessionDepartment_no", data.getDepartment_no());
 				session.setAttribute("sessionlevel", data.getMemlevel());
-				return "index2";
+				return "goods/shopping_aboutus";
 			} else {
 				return "login/login2";
 			}
@@ -251,7 +251,7 @@ public class MemberController {
 		model.addAttribute("student", student);
 		return "school/school_student_info_update";
 	}
-	
+
 	@RequestMapping(value = "/schoolProfessorInfoUpdate", method = RequestMethod.GET)
 	public String schoolProfessorInfoUpdate(Locale locale, Model model, HttpSession session) throws Exception {
 
