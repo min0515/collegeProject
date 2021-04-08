@@ -4,6 +4,20 @@
 
 <mapper namespace="com.kakao.kitkat.dao.GoodsDao">
 
+	<insert id="goodsReviewInsertRow">
+		insert into goods_review (member_id,review_seq,g_seq,
+		review_title,review_content,review_date,review_attach
+		) values (#{member_id}, 
+		(SELECT ifnull(MAX(review_seq)+1,1) FROM goods_review goods_alias where member_id=#{member_id}),
+		#{g_seq},#{review_title}, #{review_content}, #{review_date}, 'f'
+		)
+	</insert>
+	
+	<select id="goodsReviewSelectAll"
+		resultType="com.kakao.kitkat.entities.Goods_review">
+		select * from goods_review where g_seq=#{g_seq} order by review_date desc
+	</select>
+	
 	<delete id="cartOrderDelete">
 		delete from tb_cart where member_id=#{member_id}
 	</delete>

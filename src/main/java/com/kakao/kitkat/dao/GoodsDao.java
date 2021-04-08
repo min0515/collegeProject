@@ -7,9 +7,14 @@ import com.kakao.kitkat.entities.Goods;
 import com.kakao.kitkat.entities.GoodsPaging;
 import com.kakao.kitkat.entities.Goods_info;
 import com.kakao.kitkat.entities.Goods_qna;
+import com.kakao.kitkat.entities.Goods_review;
 import com.kakao.kitkat.entities.Tb_cart;
 
 public interface GoodsDao {
+
+	public ArrayList<Goods_review> goodsReviewSelectAll(int g_seq) throws Exception;
+
+	public int goodsReviewInsertRow(Goods_review goods_review) throws Exception;
 
 	public int cartOrderDelete(String member_id) throws Exception;
 

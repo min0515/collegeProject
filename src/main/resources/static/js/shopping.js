@@ -503,6 +503,28 @@ $(document).ready(function() {
 			});
 		});
 	});
+	
+	$('#mypageListBox').off().on('click', '#goodsReview', function() {
+		
+		var row = $(this).closest('tr');
+		var td = row.children();
+		var attachInput = td.eq(0).children().eq(1).val();
+		var g_title = td.eq(1).text();
+		var g_seq = td.eq(6).text();
+		$('#reviewWriteImg').attr('src', attachInput);
+		$('#reviewModalGoodsTitle').text(g_title);
+		$('#hiddenG_seq').val(g_seq);
+		$('.ui.mini.reviewmodal').modal('show');
+		$('.ui.mini.reviewmodal').modal({backdrop: 'static', keyboard: false}) ;
+	});
+		$('#star_grade a').click(function(){
+        $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
+        $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
+        return false;
+    });
+	$('.ui.star.rating').rating('enable');
+	
+	
 
 
 });

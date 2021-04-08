@@ -4,136 +4,136 @@
 	th:lang="${session.lang}"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout/shopping_layout">
-<head>
 <th:block layout:fragment="css">
 	<link rel="stylesheet" th:href="@{/css/shopping.css}">
 </th:block>
-<script src="/js/aiappproject.js"></script>
-<script
-	src="https://cdn.tiny.cloud/1/1in9hzsqug5gwpl0vwku0rsdmw8w2equelp9j08kmfa49lxw/tinymce/5/tinymce.min.js"
-	referrerpolicy="origin"></script>
-</head>
-<body  layout:fragment="content">
+<th:block layout:fragment="script">
+	<script type="text/javascript" th:src="@{/js/shopping.js}"></script>
+</th:block>
+<body layout:fragment="content">
 
-	<div class="ui four column grid center aligned" style="background-color:#F5F6F7; margin-bottom:100px;" >
-		<div class="one wide column" style="background-color:#F5F6F7">
+	<div class="ui four column grid center aligned"
+		style="background-color: #F5F6F7; padding-bottom: 100px; margin-top: 0px; ">
+		<div class="one wide column" style="background-color: #F5F6F7">
 			<div></div>
 		</div>
-		<div class="ten wide column" style="background-color:#F5F6F7; margin-top:50px;">
+		<div class="ten wide column "
+			style="background-color: #F5F6F7; margin-top: 50px; height:1000px;">
+			<div id="boxtitle">주문상품정보</div>
 			<div id="mypageInfoBox">
-						<div id="boxtitle">주문상품정보</div>
-						<div class="ui ten wide column grid left aligned">
-							<div class="ui four wide column grid left aligned">
-								<div>누구누구님 안녕하세요</div>
-								<div>누적 구매금액: 0원</div>
-							</div>
-							<div class="ui five wide column grid left aligned">
-							</div>
-						</div>
+
+				<div class="ui sixteen wide column grid left aligned">
+					<div class="ui four wide column grid left aligned">
+						<img src="images/123.png" style="margin-left: 20px; width: 170px">
 					</div>
-					<div th:each="myOrder : ${myOrders}">
-					<div>주문날짜: <span th:text="${myOrder.orders_date}"></span></div>
-					<div id="mypageListBox">
-						<div class="ui ten wide column grid left aligned">
-							<div class="ui four wide column grid left aligned">
-									
-							<span>
-								<img style="width: 100px; height: 80px;" th:src="${myOrder.g_attach}">
-							</span>
-							<span th:text="${myOrder.g_title}" >
-								
-							</span>
-							</div>
-							<div class="ui five wide column grid left aligned">
-							</div>
-						</div>
+					<div class="ui ten wide column grid left aligned"
+						style="margin-top: 5%">
+						<div class="ui text" style="font-size: 26px"
+							th:text="${session.sessionMember_name}+'님 안녕하세요'"></div>
+						<div style="margin-top: 3%;">누적 구매금액: 0원</div>
 					</div>
-					</div>
-					<table id="myCartTable" style="text-align: center;"
-					class="ui very basic table">
-					<thead>
-						<tr style="font-size: 15px;">
-							<th>item</th>
-							<th></th>
-							<th>수량</th>
-							<th>상품가격</th>
-							<th>결제금액</th>
-							<th>배송비</th>
-							<th>주문날짜</th>
-							<th>후기작성</th>
-						</tr>
-					</thead>
-					<tbody style="font-size: 18px;">
-						<tr th:each="myOrder : ${myOrders}">
-							<td>
-								<img style="width: 100px; height: 100px;" th:src="${myOrder.g_attach}">
-							</td>
-							<td th:text="${myOrder.g_title}"></td>
-							<td th:text="${myOrder.orders_qty}"></td>
-							<td th:text="${myOrder.g_price}"></td>
-							<td th:text="${myOrder.orders_total}"></td>
-							<td th:text="${myOrder.g_delivery}"></td>
-							<td th:text="${myOrder.orders_date}"></td>
-							<td>
-								<button class="ui black button" type="button" id="review">후기작성</button>
-							</td>
-							<td style="display:none" th:text="${myOrder.g_seq}"></td>
-						</tr>
-					</tbody>
-				</table>
-			
-		
-			
+
+				</div>
+
+			</div>
+
+			<div id="mypageListBox" style="margin-bottom: 70px;">
+				<div style="padding: 10px;">
+					
+					<table id="myPageOrdersTable" th:each="myOrder : ${myOrders}"
+						style="text-align: center; margin-bottom: 10px; background-color: #ffffff;"
+						class="ui very basic table">
+						<h5 th:text="'주문날짜 : '+${myOrder.orders_date}"
+							style="margin-bottom: 3px; padding-right: 84%;"></h5>
+						<div class="ui section divider header" style="margin: 0px;"></div>
+						<thead>
+							<tr style="font-size: 15px;">
+							</tr>
+						</thead>
+						<tbody style="font-size: 15px;">
+							<tr>
+								<td><img style="width: 70px; height: 70px;"
+									th:src="${myOrder.g_attach}"> <input type="hidden"
+									th:value="${myOrder.g_attach}"></td>
+								<td th:text="${myOrder.g_title}"></td>
+								<td th:text="${myOrder.orders_qty}+'개/'+${myOrder.g_price}+원"></td>
+								<td th:text="총+${myOrder.orders_total}+원"></td>
+								<td th:text="${myOrder.g_delivery}"></td>
+								<td>
+									<button class="ui black button" type="button" id="goodsReview">후기작성</button>
+								</td>
+								<td style="display: none" th:text="${myOrder.g_seq}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 		<div class="ui mini reviewmodal" style="display: none">
-		<div class="modal-header-text-center_add_review_wrap">
-			<h3 style="text-align: center; margin-top: 30px; margin-bottom: 30px">구매평
-				작성</h3>
-		</div>
-		<div class="modal-body_add_review_wrap">
-			<form id="review_form" method="post" action="goodsWritesave">
-				<div class="tabled full-width border-gray bright ">
-					<div class="table-cell vertical-middle width-2" th:each="myOrder : ${myOrders}">
-						<img class="margin-right-xxl prod_img"
-							th:src="${myOrder.g_attach}"
-							width="70" height="70" alt="상품 이미지">
-					</div>
-					<div class="table-cell vertical-middle">
-						<span class="text-15 prod_tit">The BODY</span>
-					</div>
-				</div>
+			<div class="modal-header-text-center_add_review_wrap">
+				<h3
+					style="color: #ffffff; text-align: center; margin-top: 30px; margin-bottom: 20px">구매평
+					작성</h3>
+			</div>
+			<div class="modal-body_add_review_wrap">
+				<form id="review_form" method="post" action="goodsReviewWritesave">
+					<div class="tabled full-width border-gray bright ">
+						<div class="table-cell vertical-middle"
+							style="margin-bottom: 10px; display: none;">
+							<span style="color: #ffffff;" id="reviewModalGoodsTitle"
+								class="text-15 prod_tit"></span>
+						</div>
+						<div class="table-cell vertical-middle width-2">
+							<img src="" id="reviewWriteImg" class="margin-right-xxl prod_img"
+								width="70" height="70" alt="상품 이미지">
+						</div>
 
-				<div class="large-padding text-center">
-					<div class="text-18 margin-bottom-xxl" style="text-align: center;">
-						<strong>상품은 어떠셨나요?</strong>
 					</div>
-					<div style="text-align: center;">
-						<div class="ui massive star rating" data-rating="3"
-							data-max-rating="5" id="reviewstar"></div>
-					</div>
-				</div>
-				<div class="ui form">
-					<div class="field">
-						<label>Text</label>
-						<textarea class="form-control border-gray bright" name="content"
-							rows="10" placeholder="어떤점이 좋으셨나요?"></textarea>
-					</div>
-				</div>
-				<div class="form-group margin-top-xxxxl clearfix">
-					<div class="review_image_wrap inline-blocked float_l"></div>
-				</div>
-		
-		</div>
-		<div class="modal-footer no-padding no-border">
-			<a class="btn btn-lg full-width btn_submit" href="javascript:;"
-				onclick="SITE_SHOP_REVIEW.submit(); return false;"> <button>등록</button>
-			</a>
-		</div>
-	</div>
-		<input type="hidden" name="g_title">
-		</form>
-	</div>
 
+					<div class="large-padding text-center">
+						<div class="text-18 margin-bottom-xxl"
+							style="text-align: left; margin-bottom: 2px !important;">
+							<strong style="color: #ffffff;">상품은 어떠셨나요?</strong>
+							<i style="float:right;" class="plus blue icon"></i>
+							<i style="float:right; margin:0px;" class="big blue file icon"></i>
+						</div>
+						<!-- <div style="text-align: center;">
+							<div class="ui massive star rating" data-rating="3"
+								data-max-rating="5" id="reviewstar"></div>
+						</div> -->
+					</div>
+					<div class="ui form">
+						<div style="margin-top: 20px; margin-bottom: 3px !important;">
+							<input class="ui input" name="review_title" placeholder="제목">
+						</div>
+						<div class="field">
+							<div><textarea style="float:right; width: 500px;"
+								class="form-control border-gray bright" name="review_content"
+								rows="10" placeholder="어떤점이 좋으셨나요?"></textarea></div>
+						</div>
+						<input type="file" id="review_attach" name="review_attach"
+						style="display: none"> 
+					</div>
+					<div class="form-group margin-top-xxxxl clearfix">
+						<div class="review_image_wrap inline-blocked float_l"></div>
+					</div>
+
+					<div class="modal-footer no-padding no-border">
+						<a class="btn btn-lg full-width btn_submit" href="javascript:;"
+							onclick="SITE_SHOP_REVIEW.submit(); return false;">
+							<button class="ui black fluid button">등록</button>
+						</a>
+					</div>
+					<input type="hidden" name="g_seq" id="hiddenG_seq">
+				</form>
+			</div>
+			<div class="actions">
+			<h3 style="color:#ffffff; padding:20px 0 0 80%;"class="ui cancel">취소</h3>
+			</div>
+		</div>
+
+	</div>
 </body>
+
 </html>
 
