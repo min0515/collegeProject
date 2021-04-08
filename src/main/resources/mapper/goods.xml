@@ -4,34 +4,47 @@
 
 <mapper namespace="com.kakao.kitkat.dao.GoodsDao">
 
+	<select id="myOrdersSelectAll"
+		resultType="com.kakao.kitkat.entities.CartList">
+		select a.*,b.g_title,b.g_price,b.g_delivery,c.g_attach
+		from orders a join goods b on a.g_seq=b.g_seq
+		join goods_info c on b.g_seq=c.g_seq where member_id=#{member_id} and
+		c.info_seq=1
+	</select>
+
 	<insert id="goodsQnaInsertRow">
 		insert into goods_qna (member_id,g_seq, seq, ref,
 		qna_content, date
-		) values (#{member_id},#{g_seq}, (SELECT ifnull(MAX(seq)+1,
-		1) FROM goods_qna goods_alias where member_id=#{member_id}),0,
+		) values (#{member_id},#{g_seq}, (SELECT
+		ifnull(MAX(seq)+1,
+		1) FROM goods_qna goods_alias where
+		member_id=#{member_id}),0,
 		#{qna_content}, #{date}
 		)
 	</insert>
-	
+
 	<update id="AnswerUpdateRow">
 		update goods_qna set answerYn='y'
-		where g_seq = #{g_seq} and seq =#{seq} and member_id=#{member_id} and ref=0
+		where g_seq =
+		#{g_seq} and seq =#{seq} and member_id=#{member_id} and ref=0
 	</update>
-	
+
 	<insert id="goodsAnswerInsertRow">
 		insert into goods_qna (member_id,g_seq, seq, ref,
 		qna_content, date,answerYn
-		) values (#{member_id},#{g_seq},#{seq},(SELECT ifnull(MAX(ref)+1,
-		1) FROM goods_qna goods_alias where seq=#{seq}),
+		) values
+		(#{member_id},#{g_seq},#{seq},(SELECT ifnull(MAX(ref)+1,
+		1) FROM
+		goods_qna goods_alias where seq=#{seq}),
 		#{qna_content}, #{date},'y'
 		)
 	</insert>
-	
+
 	<select id="goodsQnaSelectAll"
 		resultType="com.kakao.kitkat.entities.Goods_qna">
 		select * from goods_qna where g_seq=#{g_seq}
 	</select>
-	
+
 	<select id="goodsQnaAdminSelectAll"
 		resultType="com.kakao.kitkat.entities.Goods_qna">
 		select * from goods_qna where answerYn='n'
@@ -41,46 +54,53 @@
 		resultType="com.kakao.kitkat.entities.Goods">
 		select * from goods where g_seq=#{g_seq}
 	</select>
-	
+
 	<select id="goodsInfoAllSelect"
 		resultType="com.kakao.kitkat.entities.Goods_info">
-		select g_seq,g_attach from goods_info where info_seq  in (select max(info_seq) from goods_info group by g_seq)
+		select g_seq,g_attach from goods_info where info_seq in
+		(select max(info_seq) from goods_info group by g_seq)
 	</select>
-	
+
 	<select id="goodsInfoAllSelectOne"
 		resultType="com.kakao.kitkat.entities.Goods_info">
 		select * from goods_info where g_seq=#{g_seq}
 	</select>
-	
+
 	<select id="goodsInfoOneSelectOne"
 		resultType="com.kakao.kitkat.entities.Goods_info">
-		select * from goods_info where g_seq=#{g_seq} order by g_seq asc limit 1
+		select * from goods_info where g_seq=#{g_seq} order by
+		g_seq asc limit 1
 	</select>
-	
+
 	<select id="goodsAllSelectOne"
 		resultType="com.kakao.kitkat.entities.Goods">
 		select * from goods where g_seq=#{g_seq}
 	</select>
-	
-	<select id="goodsSelectG_seqOne"
-		resultType="Integer">
-		select g_seq from goods order by g_seq desc limit 1
+
+	<select id="goodsSelectG_seqOne" resultType="Integer">
+		select g_seq from
+		goods order by g_seq desc limit 1
 	</select>
-	
+
 	<insert id="goodsInsertRow">
 		insert into goods (g_seq, g_title, g_price,
-		g_qty, g_delivery
+		g_qty,
+		g_delivery
 		) values ( (SELECT ifnull(MAX(g_seq)+1,
-		1) FROM goods goods_alias),
+		1) FROM goods
+		goods_alias),
 		#{g_title}, #{g_price},
 		10, #{g_delivery}
 		)
 	</insert>
-	
+
 	<insert id="goodsInfoInsertRow">
-		insert into goods_info (g_seq,info_seq,g_content,g_attach
-		) values (#{g_seq}, (SELECT ifnull(MAX(info_seq)+1,
-		1) FROM goods_info goods_alias),
+		insert into goods_info
+		(g_seq,info_seq,g_content,g_attach
+		) values (#{g_seq}, (SELECT
+		ifnull(MAX(info_seq)+1,
+		1) FROM goods_info goods_alias where
+		g_seq=#{g_seq}),
 		#{g_content},#{g_attach}
 		)
 	</insert>
@@ -116,12 +136,13 @@
 	<select id="goodsSelectPageList"
 		resultType="com.kakao.kitkat.entities.Goods">
 		select g_seq,g_title,g_price,g_qty,g_delivery from goods
-		 order by g_seq desc limit
+		order by g_seq desc limit
 		#{startrow},#{endrow}
 	</select>
 
 	<select id="selectCountFirst" resultType="Integer">
-		select count(*) from goods
+		select count(*) from
+		goods
 	</select>
 
 	<select id="goodsSelectCount" resultType="Integer">
@@ -167,6 +188,7 @@
 		select count(*) from
 		tb_cart where member_id=#{member_id}
 	</select>
+
 	<select id="myGoodsCartSelect"
 		resultType="com.kakao.kitkat.entities.Tb_cart">
 		select
@@ -174,13 +196,15 @@
 		from tb_cart a join goods b on a.g_seq=b.g_seq where
 		member_id=#{member_id}
 	</select>
-	
+
 	<select id="goodsInfoCartAllSelect"
 		resultType="com.kakao.kitkat.entities.Goods_info">
-		select a.g_seq,a.g_attach from goods_info a join tb_cart b on a.g_seq=b.g_seq 
-		where info_seq  in (select max(info_seq) from goods_info group by g_seq) and b.member_id=#{member_id}
+		select a.g_seq,a.g_attach from goods_info a join tb_cart b
+		on a.g_seq=b.g_seq
+		where info_seq in (select max(info_seq) from goods_info group by g_seq) and
+		b.member_id=#{member_id}
 	</select>
-	
+
 	<update id="cartCheckUpdateRow">
 		update tb_cart set
 		checkYn = #{checkYn}
@@ -211,7 +235,8 @@
 
 	<select id="cartyb"
 		resultType="com.kakao.kitkat.entities.Tb_cart">
-		select a.member_id,a.qty,a.g_seq,a.g_price,a.totalprice,b.g_delivery,b.g_title
+		select
+		a.member_id,a.qty,a.g_seq,a.g_price,a.totalprice,b.g_delivery,b.g_title
 		from tb_cart a join goods b on a.g_seq=b.g_seq where
 		member_id=#{member_id} and checkYn='y';
 	</select>
