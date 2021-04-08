@@ -11,6 +11,8 @@ import com.kakao.kitkat.entities.Tb_cart;
 
 public interface GoodsDao {
 
+	public int cartOrderDelete(String member_id) throws Exception;
+
 	public ArrayList<CartList> myOrdersSelectAll(String member_id) throws Exception;
 
 	public Goods_info goodsInfoOneSelectOne(int g_seq) throws Exception;

@@ -485,10 +485,6 @@ public class GoodsController {
 			ArrayList<Goods_info> attachs = dao.goodsInfoCartAllSelect(member_id);
 			model.addAttribute("cartprice", cartprice);
 			model.addAttribute("attachs", attachs);
-			for (Goods_info attach : attachs) {
-				System.out.println(attach.getG_seq());
-				System.out.println(attach.getG_attach());
-			}
 			return "goods/payment_cart";
 		}
 	}
@@ -546,6 +542,7 @@ public class GoodsController {
 			}
 			model.addAttribute("dateG_seq", dateG_seq);
 			model.addAttribute("totalprice", totalprice);
+			dao.cartOrderDelete(member_id);
 			return "goods/payment_cartcomplete";
 		}
 	}

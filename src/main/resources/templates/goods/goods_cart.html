@@ -98,7 +98,7 @@
 				<div class="field" style="margin-bottom: 60px;">
 					<span style="float: left;"><strong>배송비</strong></span> <span
 						style="float: right;"><strong id="deliveryPrice"
-						th:text="${#numbers.formatDecimal(2500, 0, 'COMMA', 0, 'POINT')}"></strong><strong>원</strong></span>
+						th:text="${#numbers.formatDecimal(cartprice.deliveryTotalPrice, 0, 'COMMA', 0, 'POINT')}"></strong><strong>원</strong></span>
 					<input type="hidden" id="deliveryPriceVal"
 						th:value="${cartprice.deliveryTotalPrice}">
 				</div>
@@ -106,7 +106,7 @@
 				<div class="field" style="margin-bottom: 100px;">
 					<span style="float: left;"><strong>결제예정금액</strong></span> <span
 						style="float: right;"><strong id="finalPrice"
-						th:text="${#numbers.formatDecimal(cartprice.totalprice + 2500, 0, 'COMMA', 0, 'POINT')}"></strong><strong>원</strong></span>
+						th:text="${#numbers.formatDecimal(cartprice.totalprice, 0, 'COMMA', 0, 'POINT')}"></strong><strong>원</strong></span>
 					<input type="hidden" id="finalPriceVal"
 						th:value="${cartprice.totalprice} + ${cartprice.deliveryTotalPrice}">
 				</div>

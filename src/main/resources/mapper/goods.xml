@@ -4,6 +4,10 @@
 
 <mapper namespace="com.kakao.kitkat.dao.GoodsDao">
 
+	<delete id="cartOrderDelete">
+		delete from tb_cart where member_id=#{member_id}
+	</delete>
+
 	<select id="myOrdersSelectAll"
 		resultType="com.kakao.kitkat.entities.CartList">
 		select a.*,b.g_title,b.g_price,b.g_delivery,c.g_attach
@@ -42,7 +46,7 @@
 
 	<select id="goodsQnaSelectAll"
 		resultType="com.kakao.kitkat.entities.Goods_qna">
-		select * from goods_qna where g_seq=#{g_seq}
+		select * from goods_qna where g_seq=#{g_seq} order by seq asc
 	</select>
 
 	<select id="goodsQnaAdminSelectAll"
