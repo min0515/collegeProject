@@ -84,7 +84,19 @@ function zipcodeFindB() {
 	}).open();
 
 };
+function setThumbnail(event) { 
+for (var image of event.target.files) {
+var reader = new FileReader(); 
 
+reader.onload = function(event) {
+ var img = document.createElement("img"); 
+  img.setAttribute("width", "150px");
+  img.setAttribute("height", "150px");
+img.setAttribute("src", event.target.result);
+ document.querySelector("div#image").appendChild(img); 
+}; 
+console.log(image); reader.readAsDataURL(image); } 
+}
 
 $(document).ready(function() {
 
