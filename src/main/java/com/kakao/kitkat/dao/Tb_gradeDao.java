@@ -19,6 +19,8 @@ public interface Tb_gradeDao {
 
 	public int deleteAjax(String cass) throws Exception;
 
+	public int deleteStudent(String student_no) throws Exception;
+
 	public int gradeUpdateAjax(Tb_grade grade) throws Exception;
 
 }

@@ -25,11 +25,7 @@
 				style="background-color: #FFFFFF;">로그인</button>
 			<button class="ui button"
 				th:unless="${session.sessionMember_id==null}"
-				onclick="location.href='logout';" style="background-color: #FFFFFF;">로그아웃</button>
-			<button class="ui button"
-				th:unless="${session.sessionMember_id==null}"
-				onclick="location.href='memberUpdate';"
-				style="background-color: #FFFFFF;">정보수정</button>
+				onclick="location.href='shoppinglogout';" style="background-color: #FFFFFF;">로그아웃</button>
 		</div>
 	</div>
 
@@ -38,17 +34,12 @@
 		style="margin: 0; background-color: #000000;">
 		<th:block th:replace="fragments/shopping_header"></th:block>
 	</div>
-
-
 	<!-- 내용 -->
 	<div class="container">
 		<div class="content">
 			<div layout:fragment="content"></div>
 		</div>
 	</div>
-
-
-
 		<!-- 푸터 -->
 		<div class="ui inverted vertical footer segment" style="display:absolute; bottom:0;">
 			<th:block th:replace="fragments/footer"></th:block>

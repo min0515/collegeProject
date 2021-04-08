@@ -17,7 +17,6 @@ import com.kakao.kitkat.entities.Board;
 import com.kakao.kitkat.entities.BoardPaging;
 import com.kakao.kitkat.entities.Tb_student;
 
-
 @Controller
 public class StudentController {
 	@Autowired
@@ -28,8 +27,8 @@ public class StudentController {
 	BoardPaging boardpaging;
 
 	public static String find;
-	
-	//학생회원관리
+
+	// 학생회원관리
 	@RequestMapping(value = "/studentList", method = RequestMethod.GET)
 	public String studentList(Locale locale, Model model) throws Exception {
 		Tb_studentDao dao = sqlSession.getMapper(Tb_studentDao.class);
@@ -37,8 +36,8 @@ public class StudentController {
 		model.addAttribute("students", students);
 		return "student/student_list";
 	}
-	
-	//쇼핑몰 사용자목록
+
+	// 쇼핑몰 사용자목록
 	@RequestMapping(value = "/studentList1", method = RequestMethod.GET)
 	public String studentList1(Locale locale, Model model) throws Exception {
 		Tb_studentDao dao = sqlSession.getMapper(Tb_studentDao.class);
@@ -46,8 +45,8 @@ public class StudentController {
 		model.addAttribute("students", students);
 		return "goods/member_list";
 	}
-	
-	//학생회원삭제
+
+	// 학생회원삭제
 	@RequestMapping(value = "/studentDeleteAjax", method = RequestMethod.POST)
 	@ResponseBody
 	public String studentDeleteAjax(@RequestParam String student_no) throws Exception {
@@ -59,6 +58,4 @@ public class StudentController {
 			return "n.";
 		}
 	}
-
-
 }

@@ -114,14 +114,15 @@ $(document)
 				url: 'studentDeleteAjax',
 				contentType: 'application/x-www-form-urlencoded; charset=euc-kr',
 				success: function(data) {
-					if (result == "y") {
+					if (data == "y") {
 						row.remove();
 						$('#resultmessage').text("삭제 되었습니다.");
 					} else {
 						$('#resultmessage').text("삭제 되지않았습니다.");
 					}
+					
 					$('#successmessage').css('display', "block")
-						.delay(1000).queue(function() {
+						.delay(1200).queue(function() {
 							$('#successmessage').css('display', "none").dequeue();
 						});
 					$('.ui.mini.modal.studentdel').modal('hide');

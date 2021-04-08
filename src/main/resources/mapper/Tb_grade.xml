@@ -26,7 +26,9 @@
 	<select id="selectAll" resultType="com.kakao.kitkat.entities.Tb_grade">
 		select * from tb_grade;
 	</select>
-	
+	<delete id="deleteStudent">
+	delte from tb_grade where student_no=#{student_no}
+	</delete>
 	<update id="gradeUpdateAjax" >
 		update tb_grade set
 		point = #{point}

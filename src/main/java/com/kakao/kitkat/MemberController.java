@@ -209,9 +209,14 @@ public class MemberController {
 		return "login/login2";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(HttpSession session) {
-		return "login/login";
+	@RequestMapping(value = "/indexYo", method = RequestMethod.GET)
+	public String indexYo(HttpSession session) {
+		MemberDao dao = sqlSession.getMapper(MemberDao.class);
+		String data = (String) session.getAttribute("sessionMember_id");
+		if (data == null) {
+			return "login/login";
+		}
+		return "index";
 	}
 
 	@RequestMapping(value = "/schoolLogin", method = RequestMethod.GET)
@@ -222,13 +227,19 @@ public class MemberController {
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session, Locale locale) {
 		session.invalidate();
-		return "index";
+		return "redirect:schoolMain";
 	}
 
 	@RequestMapping(value = "/logout3", method = RequestMethod.GET)
 	public String logout3(HttpSession session, Locale locale) {
 		session.invalidate();
 		return "school_index";
+	}
+
+	@RequestMapping(value = "/shoppinglogout", method = RequestMethod.GET)
+	public String shoppinglogout(HttpSession session, Locale locale) {
+		session.invalidate();
+		return "redirect:shoppingAboutus";
 	}
 
 	@RequestMapping(value = "/memberUpdate", method = RequestMethod.GET)
