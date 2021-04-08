@@ -125,9 +125,9 @@
 	<!-- where b_seq = #{b_seq} -->
 	<!-- </update> -->
 
-	<!-- <select id="goodsSelectAll" resultType="com.naver.dgkim1007.entities.Board"> -->
-	<!-- select * from board -->
-	<!-- </select> -->
+<!-- 	<select id="goodsSelectAll" resultType="com.kakao.kitkat.entities.Good"> -->
+<!-- 	select * from goods where  -->
+<!-- 	</select>  -->
 
 	<!-- <update id="updateAjax"> -->
 	<!-- update board set memlevel=#{memlevel} -->

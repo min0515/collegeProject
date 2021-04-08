@@ -24,7 +24,6 @@
 		select count(*) from comment where b_seq=#{b_seq}
 	</select>
 
-
    <insert id="insertRow">
       insert into board (b_seq, b_ref, b_step, b_studentno, b_name, b_title,
       b_content, b_hit, b_attach,b_inputtime,b_inputip)
@@ -34,13 +33,10 @@
       #{b_attach},#{b_inputtime},#{b_inputip})
    </insert>
 
-
 	<update id="updateRow">
 		update board set b_title=#{b_title},
 		b_content=#{b_content} where b_seq = #{b_seq};
 	</update>
-
-
 
 	<insert id="insertCommentRow">
 		insert into comment (b_seq, comment_step, comment_name, comment_inputtime,
@@ -49,7 +45,6 @@
 		0, 0, 0,
 		#{comment_content})
 	</insert>
-
 
    <insert id="insertReplyRow">
       insert into Board (b_seq, b_ref, b_step, b_email, b_name, b_title,
@@ -71,8 +66,6 @@
 	<delete id="BoardDeleteRow">
 		delete from board where b_seq=#{b_seq}
 	</delete>
-
-
 
    <!-- <update id="updateRow"> update board set name=#{name},password=#{password},phone1=#{phone1}, 
       phone2=#{phone2},phone3=#{phone3},photo=#{photo} where b_seq = #{b_seq} </update> 
@@ -112,9 +105,5 @@
       + 1,1) from board where b_ref = #{b_ref}
 
    </select>
-
-
-
-
 
 </mapper>
