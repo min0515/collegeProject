@@ -73,6 +73,25 @@ public class GoodsController {
 
 	}
 
+	@RequestMapping(value = "/goodsReviewWritesave")
+	public String goodsReviewWritesave(Model model, @ModelAttribute Goods_review goods_review, HttpSession session)
+			throws Exception {
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+		String member_id = (String) session.getAttribute("sessionMember_id");
+		if (member_id == null) {
+			return "login/login2";
+		} else {
+			goods_review.setMember_id(member_id);
+			SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd hh:mm");
+			Date date = new Date();
+			String today = df.format(date);
+			goods_review.setReview_date(today);
+			dao.goodsReviewInsertRow(goods_review);
+			return "redirect:goodsMypageGo";
+		}
+
+	}
+
 	@RequestMapping(value = "/QnaReplaceAjax")
 	public String QnaReplaceAjax(Model model, @RequestParam int g_seq) throws Exception {
 		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
@@ -113,10 +132,10 @@ public class GoodsController {
 
 	@RequestMapping(value = "/goodsWriteSave", method = RequestMethod.POST)
 	public String goodsWriteSave(@ModelAttribute Goods_info goods_info, @ModelAttribute Goods goods) throws Exception {
-		String path = "C:/Users/IT-5C/git/collegeProject/src/main/resources/static/uploadattachs/";
+//		String path = "C:/Users/IT-5C/git/collegeProject/src/main/resources/static/uploadattachs/";
+		String path = "uploadattachs/";
 		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
 		dao.goodsInsertRow(goods);
-		System.out.println(attachs.size());
 		int a = 0;
 		for (byte[] attach : attachs) {
 			String realpath = "uploadattachs/"; // server path
@@ -398,6 +417,8 @@ public class GoodsController {
 		model.addAttribute("attachs", attachs);
 		ArrayList<Goods_qna> Qnas = dao.goodsQnaSelectAll(g_seq);
 		model.addAttribute("qnas", Qnas);
+		ArrayList<Goods_review> reviews = dao.goodsReviewSelectAll(g_seq);
+		model.addAttribute("reviews", reviews);
 		return "goods/goods_detail2";
 	}
 

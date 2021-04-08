@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/shopping_layout">
+
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/shopping.css}">
+</th:block>
+<th:block layout:fragment="script">
+	<script type="text/javascript" th:src="@{/js/shopping.js}"></script>
+</th:block>
+
+<body layout:fragment="content">
+	<div class="ui icon message" id="successmessage" style="display: none">
+		<i class="notched circle loading icon"></i>
+		<div class="content">
+			<div class="header" id="resultmessage"></div>
+		</div>
+	</div>
+	<div class="ui middle aligned center aligned grid">
+		<div class="column"
+			style="max-width: 75% !important; margin-top: 2em !important;">
+			<div class="field" style="margin-top: 20px">
+				<h1 class="ui   header">
+					<strong style="margin-left: 4%;">마이페이지</strong>
+				</h1>
+			</div>
+			<div class="segment"
+				style="height: 600px; width: 100%; margin-bottom: 60px; padding: 20px;">
+				<div class="field" style="padding-right: 80%; margin-top: 2%;">
+					<span style="font-size: 17px;"><strong>전체</strong></span> <span
+						style="font-size: 17px; color: #0064CD;" ><strong
+						th:text="아직"></strong></span> <span style="font-size: 17px;"><strong>건</strong></span>
+				</div>
+				<table id="myCartTable" style="text-align: center;"
+					class="ui very basic table">
+					<thead>
+						<tr style="font-size: 15px;">
+							<th>item</th>
+							<th></th>
+							<th>수량</th>
+							<th>상품가격</th>
+							<th>결제금액</th>
+							<th>배송비</th>
+						</tr>
+					</thead>
+					<tbody style="font-size: 18px;">
+						<tr th:each="myOrder : ${myOrders}">
+							<td>
+								<img style="width: 100px; height: 120px;" th:src="${myOrder.g_attach}">
+								<p th:text="${myOrder.g_title}"></p>
+							</td>
+							<td th:text="${myOrder.g_title}"></td>
+							<td th:text="${myOrder.orders_qty}"></td>
+							<td th:text="${myOrder.g_price}"></td>
+							<td th:text="${myOrder.orders_total}"></td>
+							<td th:text="${myOrder.g_delivery}"></td>
+							<!-- <td th:text="${myOrder.}"></td>
+							<td th:text="${myOrder.}"></td> -->
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<script>
+	window.onpageshow = function(event) {
+		if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+			// Back Forward Cache로 브라우저가 로딩될 경우 혹은 브라우저 뒤로가기 했을 경우
+			 location.href="goodsCartGo"
+        }
+	}
+	</script>
+
+	<div class="ui mini modal prodelete">
+		<i class="close icon"></i>
+		<div class="header">상품삭제</div>
+		<div class="content">
+			<p>삭제하시겠습니까?</p>
+		</div>
+		<div class="actions">
+			<button class="ui red button" type="button" id="deleteok">삭제</button>
+			<button class=" ui cancel button" type="button" id="deletecancel">취소</button>
+		</div>
+
+	</div>
+
+	<script>
+	window.onpageshow = function(event) {
+		if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+			// Back Forward Cache로 브라우저가 로딩될 경우 혹은 브라우저 뒤로가기 했을 경우
+			 location.href="goodsCartGo"
+        }
+	}
+	</script>
+
+</body>
+
+</html>
