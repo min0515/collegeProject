@@ -22,60 +22,55 @@
 			</div>
 			<div class="sixteen wide column"
 				style="background-color: #F5F6F7; margin-top: 50px;">
-				<div class="field center aligned">
-					<h3>1:1 문의하기</h3>
-				</div>
-				<div class="fluid" style="text-align: right;">
-					<span><a onclick="location.href='qnaWrite'"
-						style="color: #000000; font-size: 8px">글 작성</a></span>
+				<div class="field" style="margin-bottom: 40px">
+					<h2 class="ui  left aligned header">
+						<strong style="margin-left: 2%;">1:1 문의 답변</strong>
+					</h2>
+					<div class="ui section divider" style="margin-top: 15px;"></div>
 				</div>
 				<div class="field center aligned"
 					style="magin: 0 auto; margin-top: 10px;">
-					<table class="ui celled table">
+					<table class="ui single line table" id="answerListTable">
 						<thead>
 							<tr style="text-align: center">
-								<th>글번호</th>
-								<th>E-mail</th>
-								<th>작성자<h>
-									<th>제목</th>
-									<th>첨부파일</th>
-									<th>조회수</th>
+								<th>고객아이디</th>
+								<th>문의상품번호</th>
+								<th>문의내용<th>
+									<th>날짜</th>
+									<th></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="board : ${boards}" style="text-align: center">
-								<td th:text="${board.b_seq}"></td>
-								<td th:text="${board.b_email}"></td>
-								<td th:text="${board.b_name}"></td>
-								<td><span th:if="${board.b_step gt 0}"> <img
-										src="/images/reply.png" style="width: 20px; height: 20px;">
-								</span> <a th:href="@{boardDetail(b_seq=${board.b_seq})}"><span
-										th:text="${board.b_title}"></span></a></td>
-								<td style="padding: 10px; text-align: center;"><span
-									th:if="${board.b_attach != null}"> <a
-										th:href="@{fileDownload(b_attach=${board.b_attach})}"><i
-											class="paperclip icon"></i></a>
-								</span></td>
-								<td th:text="${board.b_hit}"></td>
+							<tr th:each="qna : ${qnas}" style="text-align: center">
+								<td th:text="${qna.member_id}"></td>
+								<td th:text="${qna.g_seq}"></td>
+								<td th:text="${qna.qna_content}"></td>
+								<td th:text="${qna.date}"></td>
+								<td>
+									<button class="ui black button" id="answerGoBtn" type="button">답변하기</button>
+									<span class="ui gray button" id="answerCompleteBtn" style="display:none; width:100%;">답변완료</span>
+								</td>
+								<td style="display:none" th:text="${qna.seq}"></td>
 							</tr>
 						</tbody>
 					</table>
-					<div class="field" style="margin-top: 10px">
-						<div class="ui icon input">
-							<input type="text" name="find" placeholder="Search..."
-								th:value="${find}"> <a href="#"
-								onclick="findListformname.submit()" style="padding: 10px;"><i
-								class="search icon"></i></a>
-						</div>
-						<span th:each="page : ${pages}"> <a
-							th:href="@{boardPageSelect(page=${page})}">[<span
-								th:text="${page}"></span>]
-						</a>
-						</span>
-					</div>
 				</div>
 			</div>
 		</div>
+		<form class="ui large form" id="answerAjaxForm">
+		<div class="ui tiny answer modal">
+			<div class="header">문의답변</div>
+			<div class="content">
+				<textarea style="height: 100%; width: 100%;"
+						name="qna_content" id="qna_content"></textarea>
+			</div>
+			<div class="actions">
+				<div class="ui primary button" id="answerInsertBtn">답변저장</div>
+				<div class="ui cancel button">취소</div>
+			</div>
+			
+		</div>
+		</form>
 	</div>
 </body>
 </html>

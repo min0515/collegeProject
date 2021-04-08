@@ -31,15 +31,16 @@
 						<div id="boxtitle">주문상품정보</div>
 						<div class="ui ten wide column grid left aligned">
 							<div class="ui four wide column grid left aligned">
-								<img th:src="${goods.g_attach}" style="width: 120px">
+								<img  th:src="${attach.g_attach}" style="width: 120px">
 							</div>
-							<div class="ui five wide column grid left aligned">
-								<div th:text="${goods.g_title}"></div>
+							<div class="ui six wide column grid left aligned">
+								<span th:text="${goods.g_title}"></span>
 								<div style="font-size: 13px; color: gray; margin-top: 5px">
 								</div>
 								<div style="font-size: 13px; color: gray; margin-top: 5px">
 									<input type="hidden" name="g_price" th:value="${goods.g_price}"
 										id="g_pricehidden">
+									<span th:text="수량+':'+ ${goods.g_qty}"></span>
 									<div id="g_price"
 										th:text="${#numbers.formatDecimal(goods.g_price, 0, 'COMMA', 0, 'POINT')}+원"></div>
 									<input type="hidden" name="g_delivery" id="g_delivery"

@@ -5,9 +5,22 @@ import java.util.ArrayList;
 import com.kakao.kitkat.entities.Goods;
 import com.kakao.kitkat.entities.GoodsPaging;
 import com.kakao.kitkat.entities.Goods_info;
+import com.kakao.kitkat.entities.Goods_qna;
 import com.kakao.kitkat.entities.Tb_cart;
 
 public interface GoodsDao {
+
+	public Goods_info goodsInfoOneSelectOne(int g_seq) throws Exception;
+
+	public ArrayList<Goods_qna> goodsQnaSelectAll(int g_seq) throws Exception;
+
+	public ArrayList<Goods_qna> goodsQnaAdminSelectAll() throws Exception;
+
+	public int goodsQnaInsertRow(Goods_qna goods_qna) throws Exception;
+
+	public int goodsAnswerInsertRow(Goods_qna goods_qna) throws Exception;
+
+	public int AnswerUpdateRow(Goods_qna goods_qna) throws Exception;
 
 	public Goods goodsSelectOne(int g_seq) throws Exception;
 
@@ -36,6 +49,8 @@ public interface GoodsDao {
 	public int cartUpdateRow(Tb_cart tb_cart) throws Exception;
 
 	public int myGoodsCartCount(String member_id) throws Exception;
+
+	public ArrayList<Goods_info> goodsInfoCartAllSelect(String member_id) throws Exception;
 
 	public ArrayList<Tb_cart> cartyb(String member_id) throws Exception;
 

@@ -27,18 +27,14 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.kakao.kitkat.dao.BoardDao;
 import com.kakao.kitkat.dao.GoodsDao;
 import com.kakao.kitkat.dao.OrdersDao;
-import com.kakao.kitkat.dao.Tb_professorDao;
-import com.kakao.kitkat.dao.Tb_studentDao;
 import com.kakao.kitkat.entities.Board;
 import com.kakao.kitkat.entities.CartList;
 import com.kakao.kitkat.entities.Goods;
 import com.kakao.kitkat.entities.GoodsPaging;
 import com.kakao.kitkat.entities.Goods_info;
+import com.kakao.kitkat.entities.Goods_qna;
 import com.kakao.kitkat.entities.Orders;
-import com.kakao.kitkat.entities.OrdersPaging;
 import com.kakao.kitkat.entities.Tb_cart;
-import com.kakao.kitkat.entities.Tb_professor;
-import com.kakao.kitkat.entities.Tb_student;
 
 @Controller
 public class GoodsController {
@@ -57,6 +53,36 @@ public class GoodsController {
 	@Autowired
 	Goods_info goods_info;
 
+	@Autowired
+	Goods_qna goods_qna;
+
+	@RequestMapping(value = "/QnaReplaceAjax")
+	public String QnaReplaceAjax(Model model, @RequestParam int g_seq) throws Exception {
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+		ArrayList<Goods_qna> Qnas = dao.goodsQnaSelectAll(g_seq);
+		model.addAttribute("qnas", Qnas);
+		return "goods/goods_detail2 :: #QnaAjaxReplace";
+	}
+
+	@RequestMapping(value = "/goodsQnaInsertSave", method = RequestMethod.POST)
+	@ResponseBody
+	public String goodsQnaInsertSave(Goods_qna goods_qna, HttpSession session) throws Exception {
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+		String member_id = (String) session.getAttribute("sessionMember_id");
+		if (member_id == null) {
+			return "login";
+		} else {
+			goods_qna.setMember_id(member_id);
+			SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd hh:mm");
+			Date date = new Date();
+			String today = df.format(date);
+			goods_qna.setDate(today);
+			dao.goodsQnaInsertRow(goods_qna);
+			return "filename";
+		}
+
+	}
+
 	ArrayList<byte[]> attachs = new ArrayList<byte[]>();
 
 	@RequestMapping(value = "/goodsWriteAttach", method = RequestMethod.POST)
@@ -73,6 +99,7 @@ public class GoodsController {
 		String path = "C:/Users/IT-5C/git/collegeProject/src/main/resources/static/uploadattachs/";
 		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
 		dao.goodsInsertRow(goods);
+		System.out.println(attachs.size());
 		int a = 0;
 		for (byte[] attach : attachs) {
 			String realpath = "uploadattachs/"; // server path
@@ -95,12 +122,10 @@ public class GoodsController {
 			}
 			a++;
 		}
+		attachs.clear();
 		return "redirect:manageGoodsList";
 	}
 
-
-	
-	
 	@RequestMapping(value = "/manageOrder", method = RequestMethod.GET)
 	public String manageOrder(Model model) throws Exception {
 		OrdersDao odao = sqlSession.getMapper(OrdersDao.class);
@@ -108,8 +133,7 @@ public class GoodsController {
 		model.addAttribute("orderses", orderses);
 		return "goods/manage_order";
 	}
-	
-	
+
 	@RequestMapping(value = "/qnaBoardWriteSave", method = RequestMethod.POST)
 	public String qnaBoardWriteSave(Model model, @ModelAttribute Board board,
 			@RequestParam("b_attachfile") MultipartFile b_attachfile, HttpServletRequest request) throws Exception {
@@ -156,7 +180,36 @@ public class GoodsController {
 
 	@RequestMapping(value = "/boardQna", method = RequestMethod.GET)
 	public String boardQna(Model model) throws Exception {
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+		ArrayList<Goods_qna> qnas = dao.goodsQnaAdminSelectAll();
+		model.addAttribute("qnas", qnas);
 		return "goods/board_qna";
+	}
+
+	@RequestMapping(value = "/goodsAnswerInsertSave", method = RequestMethod.POST)
+	@ResponseBody
+	public String goodsAnswerInsertSave(@RequestParam int g_seq, @RequestParam int seq,
+			@RequestParam String member_idcu, @RequestParam String qna_content, HttpSession session) throws Exception {
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+		String member_id = (String) session.getAttribute("sessionMember_id");
+		if (member_id == null) {
+			return "login";
+		} else {
+			goods_qna.setG_seq(g_seq);
+			goods_qna.setSeq(seq);
+			goods_qna.setQna_content(qna_content);
+			goods_qna.setMember_id(member_id);
+			SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd hh:mm");
+			Date date = new Date();
+			String today = df.format(date);
+			goods_qna.setDate(today);
+			System.out.println(goods_qna.getDate());
+			dao.goodsAnswerInsertRow(goods_qna);
+			goods_qna.setMember_id(member_idcu);
+			dao.AnswerUpdateRow(goods_qna);
+			return "filename";
+		}
+
 	}
 
 	@RequestMapping(value = "/manageCancel", method = RequestMethod.GET)
@@ -263,6 +316,7 @@ public class GoodsController {
 		return "goods/manage_goods";
 	}
 
+	@RequestMapping(value = "/myPage", method = RequestMethod.GET)
 	public String myPage(Model model) throws Exception {
 		return "goods/mypage";
 	}
@@ -303,10 +357,6 @@ public class GoodsController {
 		model.addAttribute("pages", pages);
 		ArrayList<Goods_info> attachs = dao.goodsInfoAllSelect();
 		model.addAttribute("attachs", attachs);
-		for (Goods_info attach : attachs) {
-			System.out.println(attach.getG_seq());
-			System.out.println(attach.getG_attach());
-		}
 		return "goods/goods_page_list";
 	}
 
@@ -316,7 +366,9 @@ public class GoodsController {
 		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
 		goods = dao.goodsSelectOne(g_seq);
 		goods.setG_qty(qty);
+		Goods_info attachs = dao.goodsInfoOneSelectOne(g_seq);
 		model.addAttribute("goods", goods);
+		model.addAttribute("attach", attachs);
 		return "goods/payment";
 	}
 
@@ -327,6 +379,8 @@ public class GoodsController {
 		ArrayList<Goods_info> attachs = dao.goodsInfoAllSelectOne(g_seq);
 		model.addAttribute("goods", goods);
 		model.addAttribute("attachs", attachs);
+		ArrayList<Goods_qna> Qnas = dao.goodsQnaSelectAll(g_seq);
+		model.addAttribute("qnas", Qnas);
 		return "goods/goods_detail2";
 	}
 
@@ -386,9 +440,11 @@ public class GoodsController {
 		} else {
 			int mycartcount = dao.myGoodsCartCount(member_id);
 			ArrayList<Tb_cart> myProducts = dao.myGoodsCartSelect(member_id);
+			ArrayList<Goods_info> attachs = dao.goodsInfoCartAllSelect(member_id);
 			Tb_cart cartprice = dao.myGoodsCartCheckedSelect(member_id);
 			model.addAttribute("mycartcount", mycartcount);
 			model.addAttribute("myProducts", myProducts);
+			model.addAttribute("attachs", attachs);
 			if (cartprice == null) {
 				tb_cart.setDeliveryTotalPrice(0);
 				tb_cart.setTotalprice(0);
@@ -412,7 +468,13 @@ public class GoodsController {
 			ArrayList<Tb_cart> cartPayments = dao.myGoodsCartCheckedPaymentSelect(member_id);
 			model.addAttribute("cartPayments", cartPayments);
 			Tb_cart cartprice = dao.myGoodsCartCheckedSelect(member_id);
+			ArrayList<Goods_info> attachs = dao.goodsInfoCartAllSelect(member_id);
 			model.addAttribute("cartprice", cartprice);
+			model.addAttribute("attachs", attachs);
+			for (Goods_info attach : attachs) {
+				System.out.println(attach.getG_seq());
+				System.out.println(attach.getG_attach());
+			}
 			return "goods/payment_cart";
 		}
 	}

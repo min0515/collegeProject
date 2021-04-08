@@ -57,8 +57,11 @@
 										id="checkmycart" checked> <label></label>
 								</div>
 							</td>
-							<td style="width: 20%;"><img th:src="${myProduct.g_attach}"
-								style="width: 90%; height: 120px;"></td>
+							<td style="width: 20%;" >
+								<a th:each="attach : ${attachs}">
+								<img th:src="${attach.g_attach}" th:if="${attach.g_seq}==${myProduct.g_seq}"
+									style="width: 90%; height: 120px;">
+									</a></td>
 							<td style="width: 20%;"><h3>
 									<span th:text="${myProduct.g_title}"></span>
 								</h3></td>

@@ -84,7 +84,19 @@ function zipcodeFindB() {
 	}).open();
 
 };
+function setThumbnail(event) { 
+for (var image of event.target.files) {
+var reader = new FileReader(); 
 
+reader.onload = function(event) {
+ var img = document.createElement("img"); 
+  img.setAttribute("width", "150px");
+  img.setAttribute("height", "150px");
+img.setAttribute("src", event.target.result);
+ document.querySelector("div#image").appendChild(img); 
+}; 
+console.log(image); reader.readAsDataURL(image); } 
+}
 
 $(document).ready(function() {
 
@@ -287,7 +299,6 @@ $(document).ready(function() {
 		$('#goodsqna').css('display', 'block');
 	});
 	$("#goodsordernewbtn").click(function() {
-		alert("1");
 		$('#goodsordernewbtn').attr('class', 'item active');
 		$('#goodsorderdepositbtn').attr('class', 'item');
 		$('#goodsorderpayokbtn').attr('class', 'item');
@@ -297,7 +308,6 @@ $(document).ready(function() {
 	});
 
 	$("#goodsorderdepositbtn").click(function() {
-		alert("2");
 		$('#goodsordernewbtn').attr('class', 'item');
 		$('#goodsorderdepositbtn').attr('class', 'item active');
 		$('#goodsorderpayokbtn').attr('class', 'item');
@@ -307,7 +317,6 @@ $(document).ready(function() {
 	});
 
 	$("#goodsorderpayokbtn").click(function() {
-		alert("3");
 		$('#goodsordernewbtn').attr('class', 'item');
 		$('#goodsorderdepositbtn').attr('class', 'item');
 		$('#goodsorderpayokbtn').attr('class', 'item active');
@@ -317,7 +326,6 @@ $(document).ready(function() {
 	});
 
 	$("#goodsorderdeliveryreadybtn").click(function() {
-		alert("4");
 		$('#goodsordernewbtn').attr('class', 'item');
 		$('#goodsorderdepositbtn').attr('class', 'item');
 		$('#goodsorderpayokbtn').attr('class', 'item');
@@ -327,7 +335,6 @@ $(document).ready(function() {
 	});
 
 	$("#goodsordershippingbtn").click(function() {
-		alert("5");
 		$('#goodsordernewbtn').attr('class', 'item');
 		$('#goodsorderdepositbtn').attr('class', 'item');
 		$('#goodsorderpayokbtn').attr('class', 'item');
@@ -337,7 +344,6 @@ $(document).ready(function() {
 	});
 
 	$("#goodsorderdeliverycompletebtn").click(function() {
-		alert("6");
 		$('#goodsordernewbtn').attr('class', 'item');
 		$('#goodsorderdepositbtn').attr('class', 'item');
 		$('#goodsorderpayokbtn').attr('class', 'item');
@@ -407,15 +413,15 @@ $(document).ready(function() {
 			}
 		});
 	});
-	
-	
+
+
 	$('.attachbtn').off().on('click', function() {
 		$('#g_attach').click();
 		$('#g_attach').off().change(function() {
 			var filename = $('#g_attach').val();
 			$('.g_attachname').attr('value', filename);
 			var formData = new FormData($('#uploadForm')[0]);
-			formData.append("file",$("input[type='file']")[0].files[0]);
+			formData.append("file", $("input[type='file']")[0].files[0]);
 			$.ajax({
 				type: 'POST',
 				data: formData,
@@ -432,147 +438,71 @@ $(document).ready(function() {
 		});
 	});
 
-	/*var objDragAndDrop = $(".dragAndDropDiv");
-
-	$(document).on("dragenter", ".dragAndDropDiv", function(e) {
-		e.stopPropagation();
-		e.preventDefault();
-		$(this).css('border', '2px solid #0B85A1');
-	});
-	
-	$(document).on("dragover", ".dragAndDropDiv", function(e) {
-		e.stopPropagation();
-		e.preventDefault();
-	});
-	
-	$(document).on("drop", ".dragAndDropDiv", function(e) {
-
-		$(this).css('border', '2px dotted #0B85A1');
-		e.preventDefault();
-		var files = e.originalEvent.dataTransfer.files;
-
-		handleFileUpload(files, objDragAndDrop);
-	});
-
-	$(document).on('dragenter', function(e) {
-		e.stopPropagation();
-		e.preventDefault();
-	});
-	
-	$(document).on('dragover', function(e) {
-		e.stopPropagation();
-		e.preventDefault();
-		objDragAndDrop.css('border', '2px dotted #0B85A1');
-	});
-	
-	$(document).on('drop', function(e) {
-		e.stopPropagation();
-		e.preventDefault();
-	});
-	
-	
-	
-	objDragAndDrop.off().on('click', function(e) {
-		$('input[type=file]').trigger('click');
-	});
-	
-	$('input[type=file]').off().on('change', function(e) {
-		var files = e.originalEvent.target.files;
-		handleFileUpload(files, objDragAndDrop);	
-		alert($('#fileUpload').val())
-		
-	});
-	
-	function handleFileUpload(files, obj) {
-		for (var i = 0; i < files.length; i++) {
-			var fd = new FormData();
-			fd.append('file', files[i]);
-			var status = new createStatusbar(obj); //Using this we can set progress.
-			status.setFileNameSize(files[i].name, files[i].size);
-			sendFileToServer(fd, status);
-
-		}
-	}
-
-	var rowCount = 0;
-	function createStatusbar(obj) {
-
-		rowCount++;
-		var row =  "odd";
-		if (rowCount % 2 == 0) row = "even";
-		this.statusbar = $("<div class='statusbar " + row + "'></div>");
-		this.filename = $("<div class='filename'></div>").appendTo(this.statusbar);
-		this.size = $("<div class='filesize'></div>").appendTo(this.statusbar);
-		this.progressBar = $("<div class='progressBar'><div></div></div>").appendTo(this.statusbar);
-		this.abort = $("<div class='abort'>중지</div>").appendTo(this.statusbar);
-		obj.after(this.statusbar);
-	
-		this.setFileNameSize = function(name, size) {
-			var sizeStr = "";
-			var sizeKB = size / 1024;
-			if (parseInt(sizeKB) > 1024) {
-				var sizeMB = sizeKB / 1024;
-				sizeStr = sizeMB.toFixed(2) + " MB";
-			} else {
-				sizeStr = sizeKB.toFixed(2) + " KB";
-			}
-
-			this.filename.html(name);
-			this.size.html(sizeStr);
-		}
-
-		this.setProgress = function(progress) {
-			var progressBarWidth = progress * this.progressBar.width() / 100;
-			this.progressBar.find('div').animate({ width: progressBarWidth }, 10).html(progress + "% ");
-			if (parseInt(progress) >= 100) {
-				this.abort.hide();
-			}
-		}
-
-		this.setAbort = function(jqxhr) {
-			var sb = this.statusbar;
-			this.abort.click(function() {
-				jqxhr.abort();
-				sb.hide();
-			});
-		}
-	}
-
-	function sendFileToServer(formData, status) {
-		var uploadURL = "/fileUpload/post"; //Upload URL
-		var extraData = {}; //Extra Data.
-		var jqXHR = $.ajax({
-			xhr: function() {
-				var xhrobj = $.ajaxSettings.xhr();
-				if (xhrobj.upload) {
-					xhrobj.upload.addEventListener('progress', function(event) {
-						var percent = 0;
-						var position = event.loaded || event.position;
-						var total = event.total;
-						if (event.lengthComputable) {
-							percent = Math.ceil(position / total * 100);
-						}
-						//Set progress
-						status.setProgress(percent);
-					}, false);
-				}
-				return xhrobj;
-			},
-			url: uploadURL,
-			type: "POST",
-			contentType: false,
-			processData: false,
-			cache: false,
-			data: formData,
+	$("#goodsQnaInsertSaveBtn").off().on('click', function() {
+		var goods_qna = $('#goodsQnaInsertSaveForm').serialize();
+		var g_seq = $('#hiddeng_seq').val();
+		$.ajax({
+			type: 'POST',
+			data: goods_qna,
+			datatype: 'json',
+			url: 'goodsQnaInsertSave',
 			success: function(data) {
-				status.setProgress(100);
-
-				//$("#status1").append("File upload Done<br>");           
+				if (data == 'login') {
+					location.href = "shoppingLogin";
+				} else {
+					$.ajax({
+						type: 'POST',
+						data: { g_seq: g_seq },
+						datatype: 'json',
+						url: 'QnaReplaceAjax',
+						/*cache : false*/
+					}).done(function(data1) {
+						$("#QnaAjaxReplace").replaceWith(data1);
+						$('#qna_content').val('');
+					});
+				}
+			},
+			error: function(xhr, status, error) {
+				alert('ajax error' + xhr.status);
 			}
 		});
 
-		status.setAbort(jqXHR);
-	}*/
-	
+
+	});
+
+	$("#answerListTable").off().on('click', '#answerGoBtn', 'td', function() {
+		var row = $(this).closest('tr');
+		var td = row.children();
+		var g_seq = td.eq(1).text();
+		var seq = td.eq(5).text();
+		var member_idcu = td.eq(0).text();
+		var btn = td.eq(4).children().eq(0);
+		var btn2 = td.eq(4).children().eq(1);
+		$('.ui.answer.modal').modal('show');
+		$("#answerInsertBtn").off().on('click', function() {
+			var qna_content = $("#qna_content").val();
+			$.ajax({
+				type: 'POST',
+				data: { g_seq: g_seq, seq: seq, qna_content: qna_content, member_idcu: member_idcu },
+				datatype: 'json',
+				url: 'goodsAnswerInsertSave',
+				success: function(data) {
+					if (data == 'login') {
+						location.href = "shoppingLogin";
+					} else {
+						$('.ui.answer.modal').modal('hide');
+						$(btn).css('display', 'none');
+						$(btn2).css('display', 'block');
+						$('#qna_content').val('');
+
+					}
+				},
+				error: function(xhr, status, error) {
+					alert('ajax error' + xhr.status);
+				}
+			});
+		});
+	});
+
 
 });
