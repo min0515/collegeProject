@@ -59,6 +59,20 @@ public class GoodsController {
 	@Autowired
 	Goods_qna goods_qna;
 
+	@RequestMapping(value = "/goodsMypageGo", method = RequestMethod.GET)
+	public String goodsMypageGo(Model model, HttpSession session) throws Exception {
+		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
+		String member_id = (String) session.getAttribute("sessionMember_id");
+		if (member_id == null) {
+			return "login/login2";
+		} else {
+			ArrayList<CartList> myOrders = dao.myOrdersSelectAll(member_id);
+			model.addAttribute("myOrders", myOrders);
+			return "goods/mypage";
+		}
+
+	}
+
 	@RequestMapping(value = "/QnaReplaceAjax")
 	public String QnaReplaceAjax(Model model, @RequestParam int g_seq) throws Exception {
 		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);

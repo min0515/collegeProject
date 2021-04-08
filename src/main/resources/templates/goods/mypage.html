@@ -13,19 +13,10 @@
 	src="https://cdn.tiny.cloud/1/1in9hzsqug5gwpl0vwku0rsdmw8w2equelp9j08kmfa49lxw/tinymce/5/tinymce.min.js"
 	referrerpolicy="origin"></script>
 </head>
-<body layout:fragment="content">
-	<div class="ui four column grid left aligned" style="background-color:#F5F6F7" >
+<body  layout:fragment="content">
+	<div class="ui four column grid center aligned" style="background-color:#F5F6F7; margin-bottom:100px;" >
 		<div class="one wide column" style="background-color:#F5F6F7">
 			<div> </div>
-		</div>
-		<div class="three wide column" style="margin-top:50px; background-color:#F5F6F7">
-			<div id=mypageMenu>주문조회</div>
-			<div id=mypageMenu>위시 리스트</div>
-			<div id=mypageMenu>취소/교환/반품</div>
-			<div id=mypageMenu>쿠폰</div>
-			<div id=mypageMenu>1:1 문의</div>
-			<div id=mypageMenu>정보 수정</div>
-			<div id=mypageMenu>회원탈퇴</div>
 		</div>
 		<div class="ten wide column" style="background-color:#F5F6F7; margin-top:50px;">
 			<div id="mypageInfoBox">
@@ -39,19 +30,56 @@
 							</div>
 						</div>
 					</div>
-						
-					<div>주문번호: 2021032205123 <button>주문서</button></div> 
+					<div th:each="myOrder : ${myOrders}">
+					<div>주문날짜: <span th:text="${myOrder.orders_date}"></span></div>
 					<div id="mypageListBox">
 						<div class="ui ten wide column grid left aligned">
 							<div class="ui four wide column grid left aligned">
 									
-							<div>사진 어쩌고</div>
+							<span>
+								<img style="width: 100px; height: 80px;" th:src="${myOrder.g_attach}">
+							</span>
+							<span th:text="${myOrder.g_title}" >
+								
+							</span>
 							</div>
 							<div class="ui five wide column grid left aligned">
 							</div>
 						</div>
 					</div>
-		
+					</div>
+					<table id="myCartTable" style="text-align: center;"
+					class="ui very basic table">
+					<thead>
+						<tr style="font-size: 15px;">
+							<th>item</th>
+							<th></th>
+							<th>수량</th>
+							<th>상품가격</th>
+							<th>결제금액</th>
+							<th>배송비</th>
+							<th>주문날짜</th>
+							<th>후기작성</th>
+						</tr>
+					</thead>
+					<tbody style="font-size: 18px;">
+						<tr th:each="myOrder : ${myOrders}">
+							<td>
+								<img style="width: 100px; height: 100px;" th:src="${myOrder.g_attach}">
+							</td>
+							<td th:text="${myOrder.g_title}"></td>
+							<td th:text="${myOrder.orders_qty}"></td>
+							<td th:text="${myOrder.g_price}"></td>
+							<td th:text="${myOrder.orders_total}"></td>
+							<td th:text="${myOrder.g_delivery}"></td>
+							<td th:text="${myOrder.orders_date}"></td>
+							<td>
+								<button class="ui black button">후기작성</button>
+							</td>
+							<td style="display:none" th:text="${myOrder.g_seq}"></td>
+						</tr>
+					</tbody>
+				</table>
 			
 		
 			

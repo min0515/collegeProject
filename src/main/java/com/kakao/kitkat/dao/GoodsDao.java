@@ -2,6 +2,7 @@ package com.kakao.kitkat.dao;
 
 import java.util.ArrayList;
 
+import com.kakao.kitkat.entities.CartList;
 import com.kakao.kitkat.entities.Goods;
 import com.kakao.kitkat.entities.GoodsPaging;
 import com.kakao.kitkat.entities.Goods_info;
@@ -9,6 +10,8 @@ import com.kakao.kitkat.entities.Goods_qna;
 import com.kakao.kitkat.entities.Tb_cart;
 
 public interface GoodsDao {
+
+	public ArrayList<CartList> myOrdersSelectAll(String member_id) throws Exception;
 
 	public Goods_info goodsInfoOneSelectOne(int g_seq) throws Exception;
 
