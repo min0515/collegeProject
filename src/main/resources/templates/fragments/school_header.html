@@ -48,9 +48,9 @@
 
 				<div th:if=" ${session.sessionMember_name} !=null" class="menu">
 					<div class="item" th:unless="${session.sessionlevel !='s'}"
-						onclick="location.href='schoolStudentInfoUpdate'">나의정보수정</div>
+						onclick="location.href='schoolStudentInfoUpdate'">나의정보조회</div>
 					<div class="item" th:unless="${session.sessionlevel !='p'}"
-						onclick="location.href='schoolProfessorInfoUpdate'">나의정보수정</div>
+						onclick="location.href='schoolProfessorInfoUpdate'">나의정보조회</div>
 					<div class="item" th:unless="${session.sessionlevel !='a'}"
 						onclick="location.href='studentList'">학생관리</div>
 				</div>

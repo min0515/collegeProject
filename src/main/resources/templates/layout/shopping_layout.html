@@ -12,7 +12,7 @@
 			style="text-align: left; display: left; margin: 0 auto;">
 			<button class="ui black button"
 				style=" margin-left: 10px; margin-top:3%"
-				onclick="location.href='manageGoodsList';">관리페이지</button>
+				onclick="location.href='manageGoodsList';" th:unless="${session.sessionlevel !='a'}">관리페이지</button>
 		</div>
 		<div class="ten wide column">
 			<img src="images/javacollegelogo (3).png" style="width: 200px;">
