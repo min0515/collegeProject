@@ -24,7 +24,7 @@
 
 				<div class="ui sixteen wide column grid left aligned">
 					<div class="ui four wide column grid left aligned">
-						<img src="images/123.png" style="margin-left: 20px; width: 170px">
+						<img src="images/default.png" style="margin-left: 20px; width: 170px">
 					</div>
 					<div class="ui ten wide column grid left aligned"
 						style="margin-top: 5%">
@@ -56,9 +56,9 @@
 									th:src="${myOrder.g_attach}"> <input type="hidden"
 									th:value="${myOrder.g_attach}"></td>
 								<td th:text="${myOrder.g_title}"></td>
-								<td th:text="${myOrder.orders_qty}+'개/'+${myOrder.g_price}+원"></td>
-								<td th:text="총+${myOrder.orders_total}+원"></td>
-								<td th:text="${myOrder.g_delivery}"></td>
+								<td th:text="${myOrder.orders_qty}+'개/'+${#numbers.formatDecimal(myOrder.g_price, 0, 'COMMA', 0, 'POINT')}+원"></td>
+								<td th:text="총+${#numbers.formatDecimal(myOrder.orders_total, 0, 'COMMA', 0, 'POINT')}+원"></td>
+								<td th:text="${#numbers.formatDecimal(myOrder.g_delivery, 0, 'COMMA', 0, 'POINT')}+원"></td>
 								<td>
 									<button class="ui black button" type="button" id="goodsReview">후기작성</button>
 								</td>

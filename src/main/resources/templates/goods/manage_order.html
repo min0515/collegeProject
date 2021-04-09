@@ -54,7 +54,7 @@
 							<tr class="block" th:each="orders : ${orderses}" style="text-align: center; height: 50px;">
 								<td th:text="${orders.orders_date}"></td>
 								<td th:text="${orders.orders_seq}"></td>
-								<td th:text="${orders.orders_total}"></td>
+								<td th:text="${#numbers.formatDecimal(orders.orders_total, 0, 'COMMA', 0, 'POINT')}"></td>
 								<td th:text="${orders.orders_qty}"></td>
 								<td>배송준비중</td>
 								<td><select class="ui dropdown">
@@ -63,7 +63,7 @@
 								</select></td>
 								<td>택배 무료</td>
 								<td th:text="${orders.orders_name}+${orders.orders_address}"></td>
-								<td th:text="${orders.orders_total}"></td>
+								<td th:text="${#numbers.formatDecimal(orders.orders_total, 0, 'COMMA', 0, 'POINT')}"></td>
 
 							</tr>
 						</tbody>

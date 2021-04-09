@@ -45,7 +45,8 @@
 							<td style="text-align: left"><img th:src="${goods.g_attach}"
 								style="width: 30px; text-align: left;"
 								th:text="${goods.g_title}"></td>
-							<td style="text-align: right" th:text="${goods.g_price}+'원'"></td>
+							<td style="text-align: right"
+								th:text="${#numbers.formatDecimal(goods.g_price, 0, 'COMMA', 0, 'POINT')}+원"></td>
 							<td style="text-align: left"><select class="ui dropdown">
 									<option value="1">판매중</option>
 									<option value="0">품절</option>
@@ -66,7 +67,7 @@
 										th:value="${find}"> <a href="#"
 										onclick="findListformname.submit()" style="padding: 10px;"><i
 										class="search icon"></i></a>
-								</div> 
+								</div>
 								<div class="ui right floated pagination menu">
 									<a class="icon item"> <i class="left chevron icon"></i>
 									</a> <span th:each="page : ${pages}"> <a

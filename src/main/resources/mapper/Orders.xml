@@ -20,9 +20,7 @@
 		orders where member_id=#{member_id}
 	</select>
 	<select id="myOrderstotalSum" resultType="Integer">
-		select sum(g_total)
-		from
-		orders where member_id=#{member_id}
+		select sum(orders_total) from orders where member_id=${member_id}
 	</select>
 	
 	<select id="selectproyo"

@@ -43,13 +43,13 @@
 				</div>
 				<div class="seven wide column"
 					style="padding-right: 8%; height: 550px; text-align: left;">
-					<div th:text="${goods.g_seq}"
-						style="font-size: 25px; font: bold; margin-bottom: 25px; margin-top: 50px;"></div>
+					<div th:text="${goods.g_seq}" 
+						style="font-size: 25px; font: bold; margin-bottom: 25px; margin-top: 50px; display:none;"></div>
 					<input type="hidden" name="g_seq" id="hiddeng_seq"
 						th:value="${goods.g_seq}">
 					<div th:text="${goods.g_title}" id="goodstitleDetail"
 						style="font-size: 25px; font: bold; margin-bottom: 25px; margin-top: 50px;"></div>
-					<div th:text="${goods.g_price}+원"
+					<div th:text="${#numbers.formatDecimal(goods.g_price, 0, 'COMMA', 0, 'POINT')}+원"
 						style="font-size: 18px; margin-bottom: 20px"></div>
 					<hr align="left">
 					<div th:text="${goods.g_content}"
