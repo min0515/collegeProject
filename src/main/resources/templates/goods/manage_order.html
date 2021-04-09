@@ -21,25 +21,18 @@
 				<div></div>
 			</div>
 			<div class="sixteen wide column"
-				style="background-color: #F5F6F7; margin-top: 50px;">
-				<div class="ui secondary pointing menu">
-					<a class="item active" id="goodsordernewbtn"> 신규주문 </a> <a
-						class="item" id="goodsorderdepositbtn"> 입금대기 </a> <a class="item"
-						id="goodsorderpayokbtn"> 결제완료 </a> <a class="item"
-						id="goodsorderdeliveryreadybtn"> 배송준비중 </a> <a class="item"
-						id="goodsordershippingbtn"> 배송중 </a> <a class="item"
-						id="goodsorderdeliverycompletebtn"> 배송완료 </a>
-					<div class="right menu"></div>
-				</div>
-				<div class="ui stacked segment">
+				style="background-color: #F5F6F7;">
+				<h2 class="ui  left aligned header">
+						<strong style="margin-left: 2%;">주문관리</strong>
+					</h2>
+					<div class="ui section divider" style="margin-top: 15px;"></div>
 
 
 
 					<table id="example" class="ui celled table" style="width: 100%">
 						<thead>
 							<tr>
-								<th class="single line" style="text-align: center;"><input
-									type="checkbox" name="example">주문번호/시각</th>
+								<th class="single line" style="text-align: center;">주문번호/시각</th>
 								<th style="text-align: center">주문상품</th>
 								<th style="text-align: right">상품금액</th>
 								<th style="width: 5px">수량</th>
@@ -75,12 +68,6 @@
 									<button class="ui button"
 										style="background-color: #000000; color: #FFFFFF;"
 										onclick="location.href='goodsWrite'">상품등록</button>
-									<div class="ui icon input">
-										<input type="text" name="find" placeholder="Search..."
-											th:value="${find}"> <a href="#"
-											onclick="findListformname.submit()" style="padding: 10px;"><i
-											class="search icon"></i></a>
-									</div> 
 									<div class="ui right floated pagination menu">
 										<a class="icon item"> <i class="left chevron icon"></i>
 										</a> <span th:each="page : ${pages}"> <a

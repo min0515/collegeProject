@@ -16,12 +16,12 @@
 <body>
 	<div layout:fragment="content">
 		<div class="ui sixteen wide grid center aligned"
-			style="background-color: #F3F3F3;">
+			style="background-color: #F5F6F7;">
 			<!-- 			<input type="hidden" name="b_seq" id="hidden_seq" -->
 			<!-- 				th:value="${board.b_seq}"> -->
-			<h2 style="margin-bottom: 40px; margin-top: 4%">상품관리게시판</h2>
+			<h2 style="margin-bottom: 40px; margin-top: 4%">상품관리</h2>
 		</div>
-		<div class="ui grid center aligned" style="background-color: #F3F3F3;">
+		<div class="ui grid center aligned" style="background-color: #F5F6F7;">
 			<div class="ui stacked segment"
 				style="width: 80%; margin-bottom: 50px">
 
@@ -29,8 +29,7 @@
 				<table class="ui orange padded table">
 					<thead>
 						<tr>
-							<th class="single line" style="text-align: center;"><input
-								type="checkbox" name="example">No</th>
+							<th class="single line" style="text-align: center;">No</th>
 							<th style="text-align: left">상품명</th>
 							<th style="text-align: right">판매가</th>
 							<th style="width: 5px">상태</th>
@@ -40,7 +39,7 @@
 					<tbody>
 						<tr class="block" th:each="goods : ${goodses}"
 							style="text-align: center; height: 50px;">
-							<td><input type="checkbox" name="example"><label
+							<td><label
 								th:text="${goods.g_seq}"></label></td>
 							<td style="text-align: left"><img th:src="${goods.g_attach}"
 								style="width: 30px; text-align: left;"
@@ -62,12 +61,6 @@
 								<button class="ui button"
 									style="background-color: #000000; color: #FFFFFF;"
 									onclick="location.href='goodsWrite'">상품등록</button>
-								<div class="ui icon input">
-									<input type="text" name="find" placeholder="Search..."
-										th:value="${find}"> <a href="#"
-										onclick="findListformname.submit()" style="padding: 10px;"><i
-										class="search icon"></i></a>
-								</div>
 								<div class="ui right floated pagination menu">
 									<a class="icon item"> <i class="left chevron icon"></i>
 									</a> <span th:each="page : ${pages}"> <a

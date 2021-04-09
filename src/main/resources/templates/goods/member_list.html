@@ -16,7 +16,7 @@
 			<div class="sixteen wide column">
 				<div class="block">
 					<div class="field center aligned" style="margin-top: 30px;">
-						<h3>사용자 목록</h3>
+					<h3>사용자 명단</h3>
 					</div>
 				</div>
 
@@ -37,7 +37,7 @@
 								<th>이름</th>
 								<th>주소</th>
 								<th>입학일</th>
-								<th>y/n</th>
+								<th>휴학여부</th>
 								<th>담당교수</th>
 								<th>수정</th>
 							</tr>
@@ -55,8 +55,7 @@
 								<td><i class="trash alternate outline icon red"
 									title="delete" id="studentdeletebtn"></i> <a
 									th:href="@{studentDetail(student_no=${student.student_no})}">
-										<i class="edit outline icon primary"
-										th:text="${student.student_no}"></i>
+										<i class="edit outline icon primary"></i>
 								</a></td>
 							</tr>
 						</tbody>

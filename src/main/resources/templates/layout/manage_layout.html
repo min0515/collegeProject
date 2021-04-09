@@ -10,24 +10,36 @@
 		style="background-color: #FFFFFF;">
 		<div class="three wide column"
 			style="text-align: left; display: left; margin: 0 auto;">
-			<button class="ui button"
-				style="background-color: #FFFFFF; margin-left: 20px;"
+			<button class="ui black button"
+				style=" margin-left: 10px; margin-top:3%"
 				onclick="location.href='manageGoodsList';">관리페이지</button>
 		</div>
 		<div class="ten wide column">
 			<img src="images/javacollegelogo (3).png" style="width: 200px;">
 		</div>
-		<div class="three wide right align column"
-			style="text-align: right; display: right; margin: 0 auto;">
-
-			<button class="ui button" th:if="${session.sessionMember_id==null}"
-				onclick="location.href='shoppingLogin';"
-				style="background-color: #FFFFFF;">로그인</button>
-			<button class="ui button"
-				th:unless="${session.sessionMember_id==null}"
-				onclick="location.href='logout';" style="background-color: #FFFFFF;">로그아웃</button>
-		</div>
-	</div>
+		<div class="three wide right align column" style="text-align:right"th:unless="${session.sessionMember_id==null}">
+				<div class="ui container" style="padding: 3% 2% 3% 2%;">
+					<div class="ui inline dropdown">
+						<h4 style="margin: 0px;"
+							th:if="${session.sessionMember_name} !=null"
+							th:text="${session.sessionMember_name}"></h4>
+						<div th:if=" ${session.sessionMember_name} !=null" class="menu">
+							<div class="item" th:unless="${session.sessionlevel !='s'}"
+								onclick="location.href='schoolStudentInfoUpdate'"><i class="edit icon"></i>나의정보수정</div>
+							<div class="item" th:unless="${session.sessionlevel !='p'}"
+								onclick="location.href='schoolProfessorInfoUpdate'"><i class="edit icon"></i>나의정보수정</div>
+							<div class="item" th:unless="${session.sessionlevel !='a'}"
+								onclick="location.href='studentList'"><i class="edit icon"></i>학생관리</div>
+							<div class="item" th:unless="${session.sessionlevel !='a'}"
+								onclick="location.href='goodsCartGo';"><i class="shopping cart icon"></i>장바구니</div>
+							</div>
+					</div>
+					<div style="margin-left:4%"class="ui black button" id="proclassUpdatePage"
+						onclick="location.href='logout'">logout</div>
+				</div>
+					
+				</div>
+			</div>
 
 	<!--메뉴바 -->
 	<div class="ui borderless main menu"

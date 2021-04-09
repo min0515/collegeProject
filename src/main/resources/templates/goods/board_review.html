@@ -19,14 +19,15 @@
 				<div></div>
 			</div>
 			<div class="sixteen wide column"
-				style="background-color: #F5F6F7; margin-top: 50px;">
-				<div class="field center aligned">
-					<h3>구매 후기</h3>
-				</div>
+				style="background-color: #F5F6F7;">
+				<h2 class="ui  left aligned header">
+					<strong style="margin-left: 2%;">구매후기</strong>
+				</h2>
+				<div class="ui section divider" style="margin-top: 15px;"></div>
 				<div class="fluid" style="text-align: right;">
 					<span><a href="boardWrite"
-						style="color: #000000; font-size: 8px">글 작성</a></span> 
-						<button type="button" id="buyReview">버튼</button>
+						style="color: #000000; font-size: 8px">글 작성</a></span>
+					<button type="button" id="buyReview">버튼</button>
 				</div>
 				<div class="field center aligned"
 					style="margin: 0 auto; margin-top: 10px;">
@@ -36,9 +37,9 @@
 								<th>글번호</th>
 								<th>E-mail</th>
 								<th>작성자</th>
-									<th>제목</th>
-									<th>첨부파일</th>
-									<th>조회수</th>
+								<th>제목</th>
+								<th>첨부파일</th>
+								<th>조회수</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -61,53 +62,67 @@
 					</table>
 					<div class="field" style="margin-top: 10px">
 						<div class="ui icon input">
-							<input type="text" name="find" placeholder="Search..."
-								th:value="${find}"> <a href="#"
-								onclick="findListformname.submit()" style="padding: 10px;"><i
-								class="search icon"></i></a>
+							<span th:each="page : ${pages}"> <a
+								th:href="@{boardPageSelect(page=${page})}">[<span
+									th:text="${page}"></span>]
+							</a>
+							</span>
 						</div>
-						<span th:each="page : ${pages}"> <a
-							th:href="@{boardPageSelect(page=${page})}">[<span
-								th:text="${page}"></span>]
-						</a>
-						</span>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="ui mini reviewmodal" style="display: none">
-		<div class="modal-header-text-center_add_review_wrap">
-			<h3 style="text-align: center; margin-top: 30px; margin-bottom: 30px">구매평
-				작성</h3>
-		</div>
-		<div class="modal-body_add_review_wrap">
-			<form id="review_form" method="post" action="goodsWritesave">
-				<div class="tabled full-width border-gray bright ">
-					<div class="table-cell vertical-middle width-2">
-						<img class="margin-right-xxl prod_img"
-							src="https://cdn.imweb.me/thumbnail/20210325/3a6c0df1f6976.png"
-							width="70" height="70" alt="상품 이미지">
-					</div>
-					<div class="table-cell vertical-middle">
-						<span class="text-15 prod_tit">The BODY</span>
-					</div>
+			<div class="ui mini reviewmodal" style="display: none">
+				<div class="modal-header-text-center_add_review_wrap">
+					<h3
+						style="text-align: center; margin-top: 30px; margin-bottom: 30px">구매평
+						작성</h3>
 				</div>
+				<div class="modal-body_add_review_wrap">
+					<form id="review_form" method="post" action="boardreviewsave">
+						<div class="tabled full-width border-gray bright ">
+							<div class="table-cell vertical-middle width-2">
+								<img class="margin-right-xxl prod_img"
+									src="https://cdn.imweb.me/thumbnail/20210325/3a6c0df1f6976.png"
+									width="70" height="70" alt="상품 이미지">
+							</div>
+							<div class="table-cell vertical-middle">
+								<span class="text-15 prod_tit">The BODY</span>
+							</div>
+						</div>
 
-				<div class="large-padding text-center">
-					<div class="text-18 margin-bottom-xxl" style="text-align: center;">
-						<strong>상품은 어떠셨나요?</strong>
-					</div>
-					<div style="text-align: center;">
-						<div class="ui massive star rating" data-rating="3"
-							data-max-rating="5" id="reviewstar"></div>
-					</div>
+						<div class="large-padding text-center">
+							<div class="text-18 margin-bottom-xxl"
+								style="text-align: center;">
+								<strong>상품은 어떠셨나요?</strong>
+							</div>
+							<div style="text-align: center;">
+								<div class="ui massive star rating" data-rating="3"
+									data-max-rating="5" id="reviewstar"></div>
+							</div>
+						</div>
+						<div class="ui form">
+							<div class="field">
+								<label>Text</label>
+								<textarea class="form-control border-gray bright" name="content"
+									rows="10" placeholder="어떤점이 좋으셨나요?"></textarea>
+							</div>
+						</div>
+						<div class="field">
+							<div class="ui labeled input">
+								<input type="file" id="b_attachfile" name="b_attachfile"
+									style="display: none"> <input type="text"
+									name="b_attachname" class="b_attachname" placeholder="첨부파일">
+							</div>
+						</div>
+						<div class="form-group margin-top-xxxxl clearfix">
+							<div class="review_image_wrap inline-blocked float_l"></div>
+						</div>
+					</form>
 				</div>
-				<div class="ui form">
-					<div class="field">
-						<label>Text</label>
-						<textarea class="form-control border-gray bright" name="content"
-							rows="10" placeholder="어떤점이 좋으셨나요?"></textarea>
-					</div>
+				<div class="modal-footer no-padding no-border">
+					<a class="btn btn-lg full-width btn_submit" href="javascript:;"
+						onclick="SITE_SHOP_REVIEW.submit(); return false;"> <strong>등록</strong>
+					</a>
 				</div>
 
 				<div class="field">
@@ -129,8 +144,5 @@
 			</a>
 		</div>
 	</div>
-	</div>
-		
-
 </body>
 </html>
