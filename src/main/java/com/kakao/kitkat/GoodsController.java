@@ -132,13 +132,13 @@ public class GoodsController {
 
 	@RequestMapping(value = "/goodsWriteSave", method = RequestMethod.POST)
 	public String goodsWriteSave(@ModelAttribute Goods_info goods_info, @ModelAttribute Goods goods) throws Exception {
-//		String path = "C:/Users/IT-5C/git/collegeProject/src/main/resources/static/uploadattachs/";
-		String path = "uploadattachs/";
+		String path = "C:/Users/IT-5C/git/collegeProject/src/main/resources/static/uploadattachs/";
+		String realpath = "uploadattachs/";
 		GoodsDao dao = sqlSession.getMapper(GoodsDao.class);
 		dao.goodsInsertRow(goods);
 		int a = 0;
+		System.out.println(goods.getG_qty());
 		for (byte[] attach : attachs) {
-			String realpath = "uploadattachs/"; // server path
 			int g_seq = dao.goodsSelectG_seqOne();
 			String filename = String.valueOf(g_seq + "-" + String.valueOf(a) + ".png");
 			if (!filename.equals("")) {

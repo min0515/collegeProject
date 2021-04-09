@@ -108,7 +108,7 @@
 		1) FROM goods
 		goods_alias),
 		#{g_title}, #{g_price},
-		10, #{g_delivery}
+		#{g_qty}, #{g_delivery}
 		)
 	</insert>
 
