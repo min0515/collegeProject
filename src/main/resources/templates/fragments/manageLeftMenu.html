@@ -3,31 +3,45 @@
 <head>
 </head>
 <body th:fragment="leftmenu">
-<div class="ui four column grid left aligned" >
-	<div class="ui two column grid left aligned" style="background-color: #F5F6F7">
-		<div class="ui vertical menu">
-  <div class="item">
-    <div class="header">사용자 관리</div>
-    <div class="menu">
-      <a class="item" onclick="location.href='studentList1'">사용자 목록</a>
-      <a class="item">메시지 보내기</a>
-    </div>
-  </div>
-  <div class="item">
-    <div class="header">쇼핑</div>
-    <div class="menu">
-      <a class="item active" id="goodsmanagebtn" onclick="location.href='manageGoodsList'" >상품관리</a>
-      <a class="item" id="goodsorderbtn" onclick="location.href='manageOrder'">주문관리</a>
-      <a class="item" id="goodscancelbtn" onclick="location.href='manageCancel'">취소관리</a>
-      <a class="item" id="goodsreviewbtn" onclick="location.href='boardReview'">리뷰관리</a>
-      <a class="item" id="goodsqnabtn" onclick="location.href='boardQna'">문의관리</a>
-      <a class="item">적립금관리</a>
-      <a class="item">쿠폰</a>
-    </div>
-  </div>
-</div>
-</div>
-			<div class="two wide column center aligned" ></div>
+	<div class="ui four column grid left aligned">
+		<div class="ui two column grid left aligned"
+			style="background-color: #F5F6F7">
+			<div class="ui vertical menu" >
+				<div class="item">
+					<div class="header">홈페이지 바로가기</div>
+					<div class="menu">
+						<a class="item" href="schoolMain">자바대학교</a>
+						<a class="item" href="shoppingAboutus">자바대학교 쇼핑몰</a>
+					</div>
+				</div>
+				<div class="item">
+					<div class="header">사용자 관리</div>
+					<div class="menu">
+						<a class="item" onclick="location.href='studentList1'">사용자 목록</a>
+					</div>
+				</div>
+				<div class="item">
+					<div class="header">쇼핑</div>
+					<div class="menu">
+						<a class="item active" id="goodsmanagebtn"
+							onclick="location.href='manageGoodsList'">상품관리</a> <a
+							class="item" id="goodsorderbtn"
+							onclick="location.href='manageOrder'">주문관리</a> <a class="item"
+							id="goodsreviewbtn" onclick="location.href='boardReview'">리뷰관리</a>
+						<a class="item" id="goodsqnabtn"
+							onclick="location.href='boardQna'">문의관리</a>
+					</div>
+				</div>
+					<div class="item">
+					<div class="header"></div>
+					<div class="ui text" style="line-height:150%">
+						<a style="color:black;">Copyright © JAVA National University All Rights Reserved.</a>
+					</div>
+				</div>
+
 			</div>
+		</div>
+		<div class="two wide column center aligned"></div>
+	</div>
 </body>
 </html>
