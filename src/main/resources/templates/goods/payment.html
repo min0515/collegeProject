@@ -21,7 +21,7 @@
 			<input type="hidden" name="g_seq" id="g_seq"
 				th:value="${goods.g_seq}">
 			<div class="ui one wide column grid center aligned"
-				style="margin-top: 15px;">
+				>
 				<div style="font-size: 30px; padding: 60px 0px;">결제하기</div>
 			</div>
 			<div class="ui sixteen wide column grid center aligned">
@@ -60,7 +60,7 @@
 									style="width: 245px" required="required"> <input
 									type="text" name="phone" id="phone1" placeholder="연락처"
 									style="width: 245px" value="0100101010" required="required"> <input
-									type="email" name="email" th:value=${session.sessionMember_id}  placeholder="이메일"
+									type="email" name="email" th:value=${session.sessionMember_id}+'@naver.com'  placeholder="이메일"
 									style="width: 495px; margin-top: 5px">
 							</div>
 						</form>
@@ -96,8 +96,8 @@
 							<div class="default text" style="width: 445px;">배송메모를
 								선택해주세요</div>
 							<div class="menu">
-								<div class="item" data-value="1">배송전에 어쩌고</div>
-								<div class="item" data-value="0">경비실 어쩌고</div>
+								<div class="item" data-value="1">배송전에 맡겨주세요</div>
+								<div class="item" data-value="0">경비실에 맡겨주세요</div>
 							</div>
 						</div>
 					</div>
@@ -138,11 +138,11 @@
 						</div>
 						<div class="ui checkbox" style="padding: 10px 6px;">
 							<input type="checkbox" class="chBox"> <label>개인정보
-								수집 및 어쩌고</label>
+								수집 및 동의</label>
 						</div>
 						<div class="ui checkbox" style="padding: 10px 6px;">
 							<input type="checkbox" class="chBox"> <label>구매조건확인
-								및 어쩌고</label>
+								및 동의</label>
 						</div>
 
 					</div>

@@ -13,7 +13,7 @@
 <body layout:fragment="content">
 
 	<div class="ui four column grid center aligned"
-		style="background-color: #F5F6F7;">
+		style="background-color: #F5F6F7;margin-bottom: 70px;">
 		<div class="one wide column" style="background-color: #F5F6F7">
 			<div></div>
 		</div>
@@ -37,7 +37,7 @@
 
 			</div>
 
-			<div id="mypageListBox" style="margin-bottom: 70px;">
+			<div id="mypageListBox" style="margin-bottom: 70px;overflow:auto; height:420px;">
 				<div style="padding: 10px;">
 					
 					<table id="myPageOrdersTable" th:each="myOrder : ${myOrders}"

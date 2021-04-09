@@ -19,13 +19,13 @@
 			action="cartPaymentGoYo" enctype="multipart/form-data"
 			data-parsley-validate="true" style="background-color: #F3F3F3">
 			<div class="ui one wide column grid center aligned"
-				style="margin-top: 15px;">
+				>
 				<div style="font-size: 30px; padding: 60px 0px;">결제하기</div>
 			</div>
 			<div class="ui sixteen wide column grid center aligned">
 				<div class="ui one wide column grid center aligned"></div>
-				<div class="ui six wide column grid left aligned">
-					<div id="box1" style="height: 300px;">
+				<div class="ui six wide column grid left aligned" >
+					<div id="box1" style="height: 300px;overflow:auto; height:420px;">
 						<div id="boxtitle">주문상품정보</div>
 						<div class="ui ten wide column grid left aligned"
 							style="padding: 2%;">
@@ -67,7 +67,7 @@
 									style="width: 245px" required="required"> <input
 									type="text" name="phone" value="010101101" id="phone1" placeholder="연락처"
 									style="width: 245px" required="required"> <input
-									type="email" name="email"  th:value=${session.sessionMember_id}  placeholder="이메일"
+									type="email" name="email"  th:value=${session.sessionMember_id}+'@naver.com'  placeholder="이메일"
 									style="width: 495px; margin-top: 5px">
 							</div>
 						</form>
@@ -104,8 +104,8 @@
 							<div class="default text" style="width: 445px;">배송메모를
 								선택해주세요</div>
 							<div class="menu">
-								<div class="item" data-value="1">배송전에 어쩌고</div>
-								<div class="item" data-value="0">경비실 어쩌고</div>
+								<div class="item" data-value="1">배송전에 연락주세요</div>
+								<div class="item" data-value="0">경비실에 맡겨주세요</div>
 							</div>
 						</div>
 					</div>
@@ -140,11 +140,11 @@
 						</div>
 						<div class="ui checkbox" style="padding: 10px 6px;">
 							<input type="checkbox" class="chBox"> <label>개인정보
-								수집 및 어쩌고</label>
+								수집 및 활용동의</label>
 						</div>
 						<div class="ui checkbox" style="padding: 10px 6px;">
 							<input type="checkbox" class="chBox"> <label>구매조건확인
-								및 어쩌고</label>
+								동의</label>
 						</div>
 
 					</div>
