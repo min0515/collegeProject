@@ -47,6 +47,7 @@ public class BoardController {
 
 	@RequestMapping(value = "/boardWrite", method = RequestMethod.GET)
 	public String boardWrite(Locale locale, Model model) {
+		System.out.println("success......");
 		return "board/board_write";
 	}
 
