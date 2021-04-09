@@ -162,7 +162,7 @@
             </div>
             <div class="ui comments" style="width: 70%; padding-left: 2%;" id="QnaAjaxReplace">
                <a th:each="qna : ${qnas}" >
-                  <div class="comment" th:if="${qna.ref}==0">
+                  <div class="comment"  th:if="${qna.ref}==0">
                      <a class="avatar"> <img src="/images/man.png">
                      </a>
                      <div class="content" style="text-align: left;">
@@ -177,7 +177,7 @@
                      </div>
                   </div>
 
-                  <div class="comments" style="margin-top: 10px;" th:unless="${qna.ref}==0">
+                  <div class="comments" style="margin-top: 10px;overflow: auto;height: 500px;" th:unless="${qna.ref}==0">
                      <div class="comment" style="width: 70%; padding-left: 10%;">
                         <a class="avatar"> <img src="/images/smile.png">
                         </a>
