@@ -13,76 +13,71 @@
 	src="https://cdn.tiny.cloud/1/1in9hzsqug5gwpl0vwku0rsdmw8w2equelp9j08kmfa49lxw/tinymce/5/tinymce.min.js"
 	referrerpolicy="origin"></script>
 </head>
-<body  layout:fragment="content">
-	<div class="ui four column grid center aligned" style="background-color:#F5F6F7; margin-bottom:100px;" >
-		<div class="one wide column" style="background-color:#F5F6F7">
-			<div> </div>
+<body layout:fragment="content">
+	<div class="ui four column grid center aligned"
+		style="background-color: #F5F6F7; margin-bottom: 100px; margin-top: 0px;">
+		<div class="one wide column" style="background-color: #F5F6F7">
+			<div></div>
 		</div>
-		<div class="ten wide column" style="background-color:#F5F6F7; margin-top:50px;">
+		<div class="ten wide column"
+			style="background-color: #F5F6F7; margin-top: 50px;">
+			<div id="boxtitle">주문상품정보</div>
 			<div id="mypageInfoBox">
-						<div id="boxtitle">주문상품정보</div>
-						<div class="ui ten wide column grid left aligned">
-							<div class="ui four wide column grid left aligned">
-								<div>누구누구님 안녕하세요</div>
-								<div>누적 구매금액: 0원</div>
-							</div>
-							<div class="ui five wide column grid left aligned">
-							</div>
-						</div>
+
+				<div class="ui sixteen wide column grid left aligned">
+					<div class="ui four wide column grid left aligned">
+						<img src="images/123.png" style="margin-left: 20px; width: 170px">
 					</div>
-					<div th:each="myOrder : ${myOrders}">
-					<div>주문날짜: <span th:text="${myOrder.orders_date}"></span></div>
-					<div id="mypageListBox">
-						<div class="ui ten wide column grid left aligned">
-							<div class="ui four wide column grid left aligned">
-									
-							<span>
-								<img style="width: 100px; height: 80px;" th:src="${myOrder.g_attach}">
-							</span>
-							<span th:text="${myOrder.g_title}" >
-								
-							</span>
-							</div>
-							<div class="ui five wide column grid left aligned">
-							</div>
-						</div>
+					<div class="ui ten wide column grid left aligned"
+						style="margin-top: 5%">
+						<div class="ui text" style="font-size: 26px"
+							th:text="${session.sessionMember_name}+'님 안녕하세요'" readonly></div>
+						<div style="margin-top: 3%;">누적 구매금액: 0원</div>
 					</div>
-					</div>
-					<table id="myCartTable" style="text-align: center;"
-					class="ui very basic table">
-					<thead>
-						<tr style="font-size: 15px;">
-							<th>item</th>
-							<th></th>
-							<th>수량</th>
-							<th>상품가격</th>
-							<th>결제금액</th>
-							<th>배송비</th>
-							<th>주문날짜</th>
-							<th>후기작성</th>
-						</tr>
-					</thead>
-					<tbody style="font-size: 18px;">
-						<tr th:each="myOrder : ${myOrders}">
-							<td>
-								<img style="width: 100px; height: 100px;" th:src="${myOrder.g_attach}">
-							</td>
-							<td th:text="${myOrder.g_title}"></td>
-							<td th:text="${myOrder.orders_qty}"></td>
-							<td th:text="${myOrder.g_price}"></td>
-							<td th:text="${myOrder.orders_total}"></td>
-							<td th:text="${myOrder.g_delivery}"></td>
-							<td th:text="${myOrder.orders_date}"></td>
-							<td>
+					
+				</div>
+				
+			</div>
+			
+			<div th:each="myOrder : ${myOrders}">
+			
+						<div class="row">
+							<div class="white column">
+							</div>
+							</div>
+				<div class="ui equal width sixteen wide column padded grid" style="height:20px">
+					<div class="row">
+							<div class="white left align column" style="text-align:left;">
+							주문번호 <span th:text="${myOrder.orders_date}"></span>
+							</div>
+							<div class="white column" style="text-align:right; margin-right:4%">
+							주문일자 <span th:text="${myOrder.orders_date}"></span>
+							</div>
+							</div>
+				</div>
+				
+				<div id="mypageListBox">
+					<div
+						class="ui equal width ten wide column center aligned padded grid">
+						<div class="row">
+							<div class="white column">
+								<img style="width: 50px; height: 50px"
+									th:src="${myOrder.g_attach}">
+							</div>
+							<div class="white left aligned column"
+								style="width: 60%; margin-top: 1%">
+								<div th:text="${myOrder.g_title}"></div>
+								<td th:text="${myOrder.orders_qty}"></td>개/
+								<td th:text="${myOrder.orders_total}"></td>원
+							</div>
+							<div class="white column" style="margin-top: 2%">배송중</div>
+							<div class="white column">
 								<button class="ui black button">후기작성</button>
-							</td>
-							<td style="display:none" th:text="${myOrder.g_seq}"></td>
-						</tr>
-					</tbody>
-				</table>
-			
-		
-			
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
